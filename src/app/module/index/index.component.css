@@ -1,0 +1,30 @@
+
+.edit-drawer{
+  width: 400px;
+}
+
+.mat-mdc-table {
+  table-layout: fixed;
+}
+
+.mat-mdc-cell {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.cdk-column-siteName {
+  flex: 0 0 400px;
+}
+
+.mat-column-id{
+  flex: 0 0 200px;
+}
+
+
+.mat-column-siteSubName {
+  flex: 0 0 200px;
+}
+
+
+

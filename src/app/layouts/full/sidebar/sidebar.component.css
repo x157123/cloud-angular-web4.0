@@ -1,0 +1,13 @@
+.mat-nav-list{
+  margin-left: 10px;
+}
+
+.menu-container {
+  height: 100%;
+  overflow: auto;
+  background-color: #ffffff;
+}
+
+.menu-container::-webkit-scrollbar {
+  width: 1px;
+}

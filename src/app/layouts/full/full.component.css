@@ -1,0 +1,43 @@
+.toolbar-top {
+  background-color: #1e88e5;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.page-content {
+  flex: 1;
+  background-color: #eee;
+}
+
+.page-content-menu {
+  min-width: 240px;
+  z-index: 2;
+  box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+}
+
+.page-drawer-content {
+  display: flex;
+  height: 100%;
+}
+
+.page-sidenav-content {
+  flex: 1;
+  margin: 10px;
+  background-color: #fff;
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar {
+  width: 0;
+}
+
+app-sidebar::-webkit-scrollbar {
+  width: 0;
+}

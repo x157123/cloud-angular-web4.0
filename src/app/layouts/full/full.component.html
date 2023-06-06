@@ -1,0 +1,46 @@
+<div class="main-container">
+  <mat-toolbar class="toolbar-top topbar">
+    <button mat-icon-button (click)="drawer.toggle()" class="example-icon"  aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="toolbar-spacer"></span>
+    <button mat-icon-button (click)="msg.toggle()" class="example-icon favorite-icon">
+      <mat-icon matBadge="15" matBadgeColor="warn">favorite</mat-icon>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon">
+      <mat-icon>share</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <span>Redial</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voice mail</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications_off</mat-icon>
+        <span>Disable alerts</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <mat-drawer-container class="page-content" autosize>
+    <mat-drawer #drawer class="page-content-menu" mode="side" opened>
+      <app-sidebar></app-sidebar>
+    </mat-drawer>
+    <mat-drawer #msg class="page-content-msg" mode="over" position="end">
+      <app-message></app-message>
+    </mat-drawer>
+
+    <mat-drawer-content class="page-drawer-content">
+      <div class="page-sidenav-content">
+        <router-outlet>
+          <app-spinner></app-spinner>
+        </router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
