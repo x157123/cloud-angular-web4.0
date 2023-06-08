@@ -25,3 +25,13 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+
+1、创建项目命令 ng new 项目名
+
+2、创建模块命令 ng g module 模块名
+
+3、创建组件命令 ng g component 组件名
+
+4、创建服务命令 ng g service

@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path: 'flex',
         loadChildren: () => import('./module/flex/flex.module').then(m => m.FlexModule)
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('./module/login/login.module').then(m => m.LoginModule)
       }
     ]
   }];

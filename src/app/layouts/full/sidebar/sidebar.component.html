@@ -7,7 +7,7 @@
           <span>{{ menuitem.name }}</span>
         </a>
       </mat-list-item>
-      <mat-expansion-panel *ngIf="menuitem.items &&  menuitem.items.length > 0" [expanded]="menuitem.state"  (opened)="openSp()" [class.mat-elevation-z0]="true">
+      <mat-expansion-panel *ngIf="menuitem.items &&  menuitem.items.length > 0" [expanded]="menuitem.state" [class.mat-elevation-z0]="true">
         <mat-expansion-panel-header>
           <mat-icon>{{ menuitem.icon }}</mat-icon>
           <span>{{ menuitem.name }}</span>
@@ -19,7 +19,7 @@
               <span>{{ menuitem.name }}</span>
             </a>
           </mat-list-item>
-          <mat-expansion-panel *ngIf="menuitem.items &&  menuitem.items.length > 0" [class.mat-elevation-z0]="true">
+          <mat-expansion-panel *ngIf="menuitem.items &&  menuitem.items.length > 0" [expanded]="menuitem.state"  [class.mat-elevation-z0]="true">
             <mat-expansion-panel-header>
               <mat-icon>{{ menuitem.icon }}</mat-icon>
               <span>{{ menuitem.name }}</span>
