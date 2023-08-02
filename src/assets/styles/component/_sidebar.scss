@@ -2,24 +2,31 @@
   padding: 0 0 3px 15px;
 }
 
-.mat-mdc-nav-list .mat-expansion-panel-header{
-  padding: 0px 6px 0px 0px;
-}
-
 .page-content-msg{
   width: 240px;
   padding-top: 0px;
-  box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 1px 0px 20px $shadow;
 }
 
 .mat-drawer-container .mat-drawer-backdrop .mat-drawer-shown {
   background-color: rgba(0,0,0,0);
 }
+.mat-mdc-nav-list {
+  mat-expansion-panel-header {
+    padding: 0px 6px 0px 0px;
+    color: $sidebar-text;
 
-mat-expansion-panel-header span{
-  display: flex;
-  align-items: center;
+    span {
+      display: flex;
+      align-items: center;
+    }
+
+    .mat-icon {
+      margin-right: 2px;
+    }
+  }
 }
-mat-expansion-panel-header .mat-icon{
-  margin-right: 4px;
+
+.mat-expansion-panel-header.mat-expanded {
+  height: 54px;
 }

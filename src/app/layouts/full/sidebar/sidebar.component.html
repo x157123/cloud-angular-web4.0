@@ -3,30 +3,30 @@
     <ng-container *ngFor="let menuitem of getMenuitem()">
       <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="menuitem.state" *ngIf="menuitem.items && menuitem.items.length <= 0" group="{{menuitem.key}}">
         <a appAccordionToggle [routerLink]="['/', menuitem.path]" *ngIf="menuitem.type === 'link'">
-          <mat-icon>{{ menuitem.icon }}</mat-icon>
+          <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
           <span>{{ menuitem.name }}</span>
         </a>
       </mat-list-item>
       <mat-expansion-panel *ngIf="menuitem.items &&  menuitem.items.length > 0" [expanded]="menuitem.state" [class.mat-elevation-z0]="true">
         <mat-expansion-panel-header>
-          <mat-icon>{{ menuitem.icon }}</mat-icon>
+          <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
           <span>{{ menuitem.name }}</span>
         </mat-expansion-panel-header>
         <ng-container *ngFor="let menuitem of menuitem.items">
           <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="menuitem.state" *ngIf="!menuitem.items || menuitem.items.length <= 0" group="{{menuitem.key}}">
             <a appAccordionToggle [routerLink]="['/', menuitem.path]" *ngIf="menuitem.type === 'link'">
-              <mat-icon>{{ menuitem.icon }}</mat-icon>
+              <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
               <span>{{ menuitem.name }}</span>
             </a>
           </mat-list-item>
           <mat-expansion-panel *ngIf="menuitem.items &&  menuitem.items.length > 0" [expanded]="menuitem.state"  [class.mat-elevation-z0]="true">
             <mat-expansion-panel-header>
-              <mat-icon>{{ menuitem.icon }}</mat-icon>
+              <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
               <span>{{ menuitem.name }}</span>
             </mat-expansion-panel-header>
             <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="menuitem.state" *ngFor="let menuitem of menuitem.items" group="{{menuitem.key}}">
               <a appAccordionToggle [routerLink]="['/', menuitem.path]" *ngIf="menuitem.type === 'link'">
-                <mat-icon>{{ menuitem.icon }}</mat-icon>
+                <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
                 <span>{{ menuitem.name }}</span>
               </a>
             </mat-list-item>
