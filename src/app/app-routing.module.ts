@@ -31,6 +31,10 @@ const routes: Routes = [
       {
         path: 'flowable',
         loadChildren: () => import('./module/flowable/flowable.module').then(m => m.FlowableModule)
+      },
+      {
+        path: 'deploy',
+        loadChildren: () => import('./module/sync/deploy/deploy.module').then(m => m.DeployModule)
       }
     ]
   }];

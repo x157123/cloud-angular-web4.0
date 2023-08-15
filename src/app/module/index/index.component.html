@@ -6,7 +6,7 @@
     <mat-toolbar>
       <input matInput placeholder="查询条件">
       <button mat-raised-button color="primary" (click)="queryData()">查询</button>
-      <button mat-icon-button color="primary" (click)="drawer.toggle()" aria-label="新增数据">
+      <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="新增数据">
         <mat-icon>add</mat-icon>
       </button>
     </mat-toolbar>
@@ -15,27 +15,55 @@
       <div class="tables-container">
         <div class="tables-container-content">
         <mat-table [dataSource]="dataSource">
-
           <ng-container matColumnDef="id" sticky >
-            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
             <mat-cell *matCellDef="let element;" > {{element.id}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="siteName">
-            <mat-header-cell mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.siteName}} </mat-cell>
+          <ng-container matColumnDef="type">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> type </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="loginBg">
-            <mat-header-cell mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.loginBg}} </mat-cell>
+          <ng-container matColumnDef="hostname">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> hostname </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.hostname}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="siteSubName">
-            <mat-header-cell mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.siteSubName}} </mat-cell>
+          <ng-container matColumnDef="user">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> user </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.user}} </mat-cell>
           </ng-container>
 
+          <ng-container matColumnDef="port">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> port </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.port}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="password">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> password </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.password}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="remark">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> remark </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.remark}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="operate">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <a mat-icon-button color="primary" (click)="openEditSidenav(element.id, true)"  title="查看">
+                <mat-icon>open_in_new</mat-icon>
+              </a>
+              <a mat-icon-button color="primary" (click)="openEditSidenav(element.id)"  title="修改">
+                <mat-icon>edit</mat-icon>
+              </a>
+              <a mat-icon-button color="accent" (click)="delById(element.id)"  title="删除">
+                <mat-icon>delete</mat-icon>
+              </a>
+            </mat-cell>
+          </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>

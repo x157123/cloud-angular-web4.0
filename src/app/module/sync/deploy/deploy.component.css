@@ -1,6 +1,6 @@
 
 .edit-drawer{
-  width: 400px;
+  width: 800px;
 }
 
 .mat-mdc-table {
@@ -12,6 +12,3 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
-
-
-

@@ -1,46 +1,88 @@
 <div class="edit-content">
   <div class="edit-content-header">
-    新增
+    <ng-container *ngIf="show">
+      查看
+    </ng-container>
+    <ng-container *ngIf="!show">
+      新增
+    </ng-container>
   </div>
   <hr>
-  <div class="edit-content-info">
-    <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
-      <mat-grid-tile colspan="2" class="title">名称:</mat-grid-tile>
-      <mat-grid-tile colspan="14" class="content">
-        <mat-form-field class="example-full-width">
-          <mat-label>名称属性</mat-label>
-          <input matInput [(ngModel)]="dataElement.siteName">
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="2" class="title">背景:</mat-grid-tile>
-      <mat-grid-tile colspan="14" class="content">
-        <mat-form-field class="example-full-width">
-          <mat-label>背景属性</mat-label>
-          <input matInput [(ngModel)]="dataElement.loginBg">
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="2" class="title">简称:</mat-grid-tile>
-      <mat-grid-tile colspan="14" class="content">
-        <mat-form-field class="example-full-width">
-          <mat-label>名称简称属性</mat-label>
-          <input matInput [(ngModel)]="dataElement.siteSubName">
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="2" class="title">路径:</mat-grid-tile>
-      <mat-grid-tile colspan="14" class="content">
-        <mat-form-field class="example-full-width">
-          <mat-label>路径属性</mat-label>
-          <input matInput [(ngModel)]="dataElement.sitePath">
-        </mat-form-field>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>
-  <hr>
-  <div class="edit-content-bottom">
-    <mat-card-actions align="start">
-      <button mat-button (click)="doSomething()">取消</button>
-      <button mat-button (click)="doSave()">保存</button>
-    </mat-card-actions>
-  </div>
-  <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>
+  <ng-container>
+    <div class="edit-content-info">
+      <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
+        <mat-grid-tile colspan="4" class="title">数据库类型:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field>
+          <mat-label>数据库类型</mat-label>
+          <mat-select [(ngModel)]="dataElement.type" [required]="show">
+            <mat-option [value]="option.value" *ngFor="let option of dataSource">{{ option.viewValue }}</mat-option>
+          </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">连接地址:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>连接地址</mat-label>
+            <input matInput [(ngModel)]="dataElement.hostname" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">端口:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>端口</mat-label>
+            <input matInput [(ngModel)]="dataElement.port" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">数据库:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>数据库</mat-label>
+            <input matInput [(ngModel)]="dataElement.databaseName" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">用户:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>用户</mat-label>
+            <input matInput [(ngModel)]="dataElement.user" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">密码:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>密码</mat-label>
+            <input matInput [(ngModel)]="dataElement.password" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">表前缀:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>表前缀</mat-label>
+            <input matInput [(ngModel)]="dataElement.tablePrefix" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">备注:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>备注</mat-label>
+            <input matInput [(ngModel)]="dataElement.remark" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <hr>
+    <div class="edit-content-bottom">
+      <mat-card-actions align="start">
+          <button mat-button (click)="doSomething()">关闭</button>
+          <button mat-button (click)="doTest()" *ngIf="!show">测试</button>
+          <button mat-button (click)="doSave()" *ngIf="!show">保存</button>
+      </mat-card-actions>
+    </div>
+    <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>
+  </ng-container>
 </div>

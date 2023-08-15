@@ -17,6 +17,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {FormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatSelectModule} from "@angular/material/select";
+import {MatListModule} from "@angular/material/list";
 
 
 @NgModule({
@@ -24,23 +26,25 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         IndexComponent,
         EditComponent
     ],
-    imports: [
-        CommonModule,
-        MatInputModule,
-        MatButtonModule,
-        MatPaginatorModule,
-        MatTableModule,
-        MatToolbarModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatSidenavModule,
-        RouterModule.forChild(IndexRoutes),
-        MatCardModule,
-        MatProgressBarModule,
-        MatGridListModule,
-        FormsModule,
-        MatTooltipModule,
-    ]
+  imports: [
+    CommonModule,
+    MatInputModule,
+    MatButtonModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatGridListModule,
+    FormsModule,
+    MatTooltipModule,
+    MatSelectModule,
+    MatListModule,
+    RouterModule.forChild(IndexRoutes),
+  ]
 })
 export class IndexModule {
 

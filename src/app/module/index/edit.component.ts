@@ -1,7 +1,12 @@
 import {Component} from '@angular/core';
-import {IndexComponent} from "./index.component";
+import {IndexComponent, PeriodicElement} from "./index.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@alert/alert.service";
+
+interface Dict {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-index-edit',
@@ -10,23 +15,32 @@ import {AlertService} from "@alert/alert.service";
 })
 export class EditComponent {
 
+
   visibilityEditData = { 'visibility': 'hidden'}
+
+  show: boolean = true;
+
+  dataSource: Dict[] = [
+    {value: '1', viewValue: 'mysql'},
+    {value: '2', viewValue: 'oracle'},
+    {value: '4', viewValue: 'pgsql'},
+  ]
 
   constructor(private parent: IndexComponent,private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
   }
 
   doSomething() {
-    this.parent.closeSidenav();
+    this.parent.closeEditSidenav();
+    this.parent.queryData()
     this.dataElement = {... this.defDataElement}
   }
 
   doSave(){
     this.showProgressBar();
-    this.httpGlobalTool.postBody("/api/site/save", this.dataElement).subscribe({
+    this.httpGlobalTool.postBody("/api/cloud-sync/connectConfig/save", this.dataElement).subscribe({
       next: (res) => {
-        this._alertService.success("成功")
-        this.dataElement = this.defDataElement
+        this._alertService.success("保存成功")
         this.doSomething();
       },
       error: (e) => {
@@ -35,7 +49,52 @@ export class EditComponent {
       },
       complete:()=>{
         this.hideProgressBar();
-        this.dataElement = JSON.parse(JSON.stringify(this.defDataElement));
+        this.clearData()
+      }
+    });
+  }
+
+  doTest(){
+    this.showProgressBar();
+    this.httpGlobalTool.postBody("/api/cloud-sync/connectConfig/test", this.dataElement).subscribe({
+      next: (res) => {
+        this._alertService.success("连接成功")
+      },
+      error: (e) => {
+        this._alertService.error(e.error.error)
+        this.hideProgressBar();
+      },
+      complete:()=>{
+        this.hideProgressBar();
+      }
+    });
+  }
+
+  clearData(show?:boolean){
+    if(show == null || !show){
+      this.show = false;
+    }else{
+      this.show = true;
+    }
+    this.dataElement = this.defDataElement
+  }
+
+  findById(id:Number,show?:boolean){
+    if(show == null || !show){
+      this.show = false;
+    }else{
+      this.show = true;
+    }
+    this.httpGlobalTool.get("/api/cloud-sync/connectConfig/findById?id="+id).subscribe({
+      next: (res) => {
+        this.dataElement = res.data
+      },
+      error: (e) => {
+        this._alertService.error(e.error.error)
+        this.hideProgressBar();
+      },
+      complete:()=>{
+        this.hideProgressBar();
       }
     });
   }
@@ -48,10 +107,15 @@ export class EditComponent {
   }
 
   defDataElement: DataElement = {
-    siteName: '',
-    loginBg: '',
-    siteSubName: '',
-    sitePath: ''
+    type: '',
+    hostname: '',
+    port: '',
+    databaseName: '',
+    user: '',
+    password: '',
+    tablePrefix: '',
+    remark: '',
+    version: ''
   };
 
   dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));
@@ -59,9 +123,14 @@ export class EditComponent {
 
 export interface DataElement {
   id?: number;
-  siteName: string;
-  loginBg: string;
-  siteSubName: string;
-  sitePath: string;
+  type: string;
+  hostname: string;
+  port: string;
+  databaseName: string;
+  user: string;
+  password: string;
+  tablePrefix: string;
+  remark: string;
+  version: string;
 }
 

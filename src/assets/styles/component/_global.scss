@@ -228,3 +228,6 @@ html body {
   box-sizing: content-box;
 }
 
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgb(255 255 255 / 60%);
+}

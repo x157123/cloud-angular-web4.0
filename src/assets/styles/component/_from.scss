@@ -1,13 +1,24 @@
-.edit-content-info .mat-grid-list .title .mat-grid-tile-content{
+.edit-content .mat-grid-list .title .mat-grid-tile-content{
   justify-content:right !important;
 }
-.edit-content-info .mat-grid-list .content .mat-grid-tile-content{
+.edit-content .mat-grid-list .content .mat-grid-tile-content{
   justify-content:left !important;
 }
 
-.edit-content-info .mat-grid-list .content .mat-mdc-form-field{
+.edit-content .mat-grid-list .content .mat-mdc-form-field{
   width:100%  !important;
 }
+
+.show-content-info tr td{
+  padding: 5px;
+}
+
+.show-content-info tr td:first-child{
+  width: 25%;
+  text-align: right;
+  vertical-align: top;
+}
+
 
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: white;
@@ -25,7 +36,7 @@
 }
 
 .edit-content .edit-content-info{
-  height: calc(100vh - 215px);
+  height: calc(100vh - 200px);
   overflow: auto;
   background-color: #ffffff;
   padding: 0px 2px 0 0px;
@@ -52,3 +63,24 @@
   background-color: #555; /* 设置悬停状态下滑块的背景颜色 */
 }
 
+
+
+.edit-content .mat-horizontal-content-container{
+  padding: 0 12px 0 12px !important;
+}
+
+
+.edit-content .mat-mdc-tab-group .mat-mdc-tab-label-container{
+  height: 0px;
+}
+
+
+.edit-content .fixed-button-container {
+  position: fixed;
+  bottom: 80px;
+  right: 80px;
+}
+
+.edit-content .mat-mdc-tab-body-content{
+  overflow: hidden !important;
+}

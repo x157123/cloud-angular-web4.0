@@ -32,7 +32,8 @@ const menuItems = [
     state: true, key: 'index22',path: 'index22', name: 'Indexssss', type: 'link', icon: 'home', items: [
       {
         state: true, key: 'index23',path: 'index23', name: 'index', type: 'link', icon: 'home', items: [
-          {state: true, key: 'index24',path: 'index', name: 'index222222222222222222222222222', type: 'link', icon: 'av_timer'},
+          {state: true, key: 'index24',path: 'index', name: '数据库配置', type: 'link', icon: 'av_timer'},
+          {state: false, key: 'deploy',path: 'deploy', name: '同步配置', type: 'link', icon: 'av_timer'},
           {state: false, key: 'login',path: 'login', name: 'login222222222222222222222222222', type: 'link', icon: ''},
           {state: false, key: 'flowable',path: 'flowable', name: 'flowable', type: 'link', icon: ''},
         ]

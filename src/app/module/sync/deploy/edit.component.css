@@ -1,10 +1,47 @@
+.edit-content .edit-deploy-content-info{
+  height: calc(100vh - 260px);
+  overflow: auto;
+  background-color: #ffffff;
+  padding: 2px;
+}
+
+.edit-content .edit-deploy-table-content-info{
+  height: calc(100vh - 260px);
+  overflow: auto;
+  background-color: #ffffff;
+  padding: 2px;
+}
+
+.edit-content edit-deploy-column-content-info{
+
+}
+
+.edit-content .edit-deploy-content-info::-webkit-scrollbar {
+  width: 1px;
+}
+
+/* 滚动条轨道 */
+.edit-content .edit-deploy-content-info::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* 设置轨道的背景颜色 */
+}
+
+/* 滚动条滑块 */
+.edit-content .edit-deploy-content-info::-webkit-scrollbar-thumb {
+  background-color: #888; /* 设置滑块的背景颜色 */
+  border-radius: 10px; /* 设置滑块的圆角 */
+}
+
+/* 鼠标悬停在滚动条上时的滑块 */
+.edit-content .edit-deploy-content-info::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* 设置悬停状态下滑块的背景颜色 */
+}
 
 
 /** table */
 .example-container {
-  width: calc(50% - 10px);
+  width: 350px;
   max-width: 100%;
-  margin: 0 5px 0px 5px;
+  margin: 0 15px 15px 0;
   display: inline-block;
   vertical-align: top;
 }
@@ -55,4 +92,3 @@
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
-

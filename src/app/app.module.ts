@@ -24,7 +24,7 @@ import {MatPaginatorIntl} from "@angular/material/paginator";
         FullComponent,
         AppComponent,
         AppSidebarComponent,
-        MessageComponent
+        MessageComponent,
     ],
     imports: [
         BrowserModule,

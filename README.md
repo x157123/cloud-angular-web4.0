@@ -30,8 +30,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 1、创建项目命令 ng new 项目名
 
-2、创建模块命令 ng g module 模块名
+2、创建模块路由命令 ng g m 模块名 --routing
 
-3、创建组件命令 ng g component 组件名
+3、创建组件命令 ng g c 组件名
 
 4、创建服务命令 ng g service
+
+## icon
+获取图标[icon](https://fonts.google.com/icons?hl=zh-cn).
+

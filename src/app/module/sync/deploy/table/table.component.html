@@ -1,0 +1,28 @@
+  <mat-accordion>
+    <mat-expansion-panel  (opened)="panelOpenState = true"
+                          (closed)="panelOpenState = false"
+                          *ngFor="let table of tables">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{table.readTable}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{table.name}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div>
+        <table>
+          <tr *ngFor="let col of table.columns; index as k">
+            <td>{{k+1}}</td>
+            <td>{{col.readColumn}}</td>
+            <td>{{col.writeColumn}}</td>
+          </tr>
+        </table>
+      </div>
+      <mat-action-row>
+        <button mat-button color="warn" (click)="del()">删除</button>
+        <button mat-button color="primary" (click)="edit()">修改</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+  </mat-accordion>

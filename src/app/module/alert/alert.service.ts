@@ -13,7 +13,7 @@ export class AlertService {
     this._snackBar.open(msg, '关闭', {
       horizontalPosition: 'end',
       verticalPosition: 'top',
-      duration: 50000,
+      duration: 5000,
       panelClass:['mat-mdc-snack-bar-container-success']
     })
   }
@@ -22,7 +22,7 @@ export class AlertService {
     this._snackBar.open(msg, '关闭', {
       horizontalPosition: 'end',
       verticalPosition: 'top',
-      duration: 50000,
+      duration: 5000,
       panelClass:['mat-mdc-snack-bar-container-error']
     })
   }
@@ -31,7 +31,7 @@ export class AlertService {
     this._snackBar.open(msg, '关闭', {
       horizontalPosition: 'end',
       verticalPosition: 'top',
-      duration: 50000,
+      duration: 5000,
       panelClass:['mat-mdc-snack-bar-container-error']
     })
   }

@@ -1,32 +1,31 @@
-import {Component, AfterViewInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {HttpGlobalTool} from "@http/HttpGlobalTool";
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {PageEvent} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
 import {MatDrawer} from "@angular/material/sidenav";
-import {EditComponent} from "./edit.component";
+import {EditComponent, TableConfig} from "./edit.component";
 import {AlertService} from "@alert/alert.service";
-
+import {HttpGlobalTool} from "@http/HttpGlobalTool";
 
 @Component({
-  selector: 'app-index',
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.css'],
+  selector: 'app-deploy',
+  templateUrl: './deploy.component.html',
+  styleUrls: ['./deploy.component.css']
 })
-export class IndexComponent implements AfterViewInit {
+export class DeployComponent implements AfterViewInit {
 
   pageEvent: PageEvent = new PageEvent();
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['type', 'hostname', 'port', 'user', 'password', 'remark', 'operate'];
-  dataSource = new MatTableDataSource<PeriodicElement>();
+  displayedColumns: string[] = ['name', 'readConnectId', 'writeConnectId', 'state', 'offSet'];
+  dataSource = new MatTableDataSource<SyncConfig>();
 
   visibilityListData = {'visibility': 'hidden'}
 
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
 
-  @ViewChild('appIndexEdit', {static: false}) appIndexEdit!: EditComponent;
+  @ViewChild('appDeployEdit', {static: false}) appDeployEdit!: EditComponent;
 
   constructor(private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
@@ -49,9 +48,9 @@ export class IndexComponent implements AfterViewInit {
     param.set('page', String(this.pageIndex + 1));
     param.set('rows', String(this.pageSize));
     this.showProgressBar()
-    this.httpGlobalTool.post("/api/cloud-sync/connectConfig/queryPage", param).subscribe({
+    this.httpGlobalTool.post("/api/cloud-sync/serve/queryPage", param).subscribe({
       next: (res) => {
-        this.dataSource = new MatTableDataSource<PeriodicElement>(res.data.records)
+        this.dataSource = new MatTableDataSource<SyncConfig>(res.data.records)
         this.dataLength = res.data.total
       },
       error: (e) => {
@@ -67,7 +66,7 @@ export class IndexComponent implements AfterViewInit {
     if(id != null && id>0){
       let param = new URLSearchParams();
       param.set('ids', String(id));
-      this.httpGlobalTool.post("/api/cloud-sync/connectConfig/removeByIds",param).subscribe({
+      this.httpGlobalTool.post("/api/cloud-sync/serve/removeByIds",param).subscribe({
         next: (res) => {
           this._alertService.success("删除成功")
           this.queryData()
@@ -90,9 +89,9 @@ export class IndexComponent implements AfterViewInit {
 
   openEditSidenav(id:number,show?:boolean) {
     if (this.drawer) {
-      this.appIndexEdit.clearData()
+      this.appDeployEdit.clearData()
       if(id != null && id>0){
-        this.appIndexEdit.findById(id,show);
+        this.appDeployEdit.findById(id,show);
       }
       this.drawer.open();
     }
@@ -106,12 +105,13 @@ export class IndexComponent implements AfterViewInit {
 
 }
 
-export interface PeriodicElement {
+export interface SyncConfig {
   id: number;
-  type: number;
-  hostname: string;
-  port: string;
-  user: string;
-  password: string;
-  remark: string;
+  name: string;
+  readConnectId: number;
+  writeConnectId: number;
+  version: number;
+  state: number;
+  offSet: string;
+  tableConfig?: TableConfig[];
 }
