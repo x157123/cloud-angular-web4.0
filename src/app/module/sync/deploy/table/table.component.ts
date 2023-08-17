@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {TableConfig} from "../edit.component";
 
 @Component({
@@ -12,19 +12,23 @@ export class TableComponent {
 
   tables: TableConfig[] = [];
 
-  add(tableConfig:TableConfig){
+  add(tableConfig: TableConfig) {
     this.tables.push(tableConfig)
   }
 
-  del(){
-
+  del(index: number) {
+    this.tables.splice(index, 1)
   }
 
-  edit(){
-
+  edit(index: number) {
+    this.tables[index]
   }
 
-  getData(){
+  getData() {
     return this.tables;
+  }
+
+  setData(tables: TableConfig[]) {
+    this.tables = tables
   }
 }

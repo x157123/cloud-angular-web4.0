@@ -17,7 +17,7 @@ export class DeployComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['name', 'readConnectId', 'writeConnectId', 'state', 'offSet'];
+  displayedColumns: string[] = ['name', 'readConnectId', 'writeConnectId', 'state', 'offSet', 'operate'];
   dataSource = new MatTableDataSource<SyncConfig>();
 
   visibilityListData = {'visibility': 'hidden'}
@@ -62,11 +62,16 @@ export class DeployComponent implements AfterViewInit {
       }
     });
   }
-  delById(id:number) {
-    if(id != null && id>0){
+
+  /**
+   * 删除
+   * @param id
+   */
+  delById(id: number) {
+    if (id != null && id > 0) {
       let param = new URLSearchParams();
       param.set('ids', String(id));
-      this.httpGlobalTool.post("/api/cloud-sync/serve/removeByIds",param).subscribe({
+      this.httpGlobalTool.post("/api/cloud-sync/serve/removeByIds", param).subscribe({
         next: (res) => {
           this._alertService.success("删除成功")
           this.queryData()
@@ -80,6 +85,51 @@ export class DeployComponent implements AfterViewInit {
     }
   }
 
+
+  /**
+   * 开启同步
+   * @param id
+   */
+  start(id: number) {
+    this.showProgressBar()
+    this.httpGlobalTool.get("/api/cloud-sync/begin?connectId=" + id).subscribe({
+      next: (res) => {
+        this.queryData()
+      },
+      error: (e) => {
+        this.hideProgressBar();
+        console.log('error:', e.error)
+      },
+      complete: () => {
+        this.hideProgressBar();
+      }
+    });
+  }
+
+  /**
+   * 结束同步
+   * @param id
+   */
+  end(id: number) {
+    this.showProgressBar()
+    this.httpGlobalTool.get("/api/cloud-sync/stop?connectId=" + id).subscribe({
+      next: (res) => {
+        this.queryData()
+      },
+      error: (e) => {
+        this.hideProgressBar();
+        console.log('error:', e.error)
+      },
+      complete: () => {
+        this.hideProgressBar();
+      }
+    });
+  }
+
+  findServeParamById(id: number){
+
+  }
+
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.pageSize = e.pageSize;
@@ -87,11 +137,11 @@ export class DeployComponent implements AfterViewInit {
     this.queryData();
   }
 
-  openEditSidenav(id:number,show?:boolean) {
+  openEditSidenav(id: number, show?: boolean) {
     if (this.drawer) {
       this.appDeployEdit.clearData()
-      if(id != null && id>0){
-        this.appDeployEdit.findById(id,show);
+      if (id != null && id > 0) {
+        this.appDeployEdit.findById(id, show);
       }
       this.drawer.open();
     }
@@ -106,7 +156,7 @@ export class DeployComponent implements AfterViewInit {
 }
 
 export interface SyncConfig {
-  id: number;
+  id?: number;
   name: string;
   readConnectId: number;
   writeConnectId: number;

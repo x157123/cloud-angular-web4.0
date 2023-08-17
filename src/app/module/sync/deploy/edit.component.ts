@@ -44,7 +44,6 @@ export class EditComponent {
   @ViewChild("appSyncTable", {static: false}) appSyncTable!: TableComponent;
 
   syncConfig : SyncConfig = {
-    id: 0,
     name: '',
     readConnectId: 0,
     writeConnectId: 0,
@@ -116,6 +115,30 @@ export class EditComponent {
     });
   }
 
+  /**
+   * 获取数据
+   * @param id
+   */
+  findById(id: Number, show?: boolean) {
+    if (show == null || !show) {
+      this.show = false;
+    } else {
+      this.show = true;
+    }
+    this.httpGlobalTool.get("/api/cloud-sync/serve/findServeParamById?id=" + id).subscribe({
+      next: (res) => {
+        this.syncConfig = res.data
+        this.appSyncTable.setData(res.data.tableConfig)
+      },
+      error: (e) => {
+        this._alertService.error(e.error.error)
+        this.hideProgressBar();
+      },
+      complete: () => {
+        this.hideProgressBar();
+      }
+    });
+  }
 
   doSomething() {
     this.parent.closeEditSidenav();
@@ -163,26 +186,6 @@ export class EditComponent {
       this.show = true;
     }
     this.dataElement = this.defDataElement
-  }
-
-  findById(id: Number, show?: boolean) {
-    if (show == null || !show) {
-      this.show = false;
-    } else {
-      this.show = true;
-    }
-    this.httpGlobalTool.get("/api/cloud-sync/serve/findById?id=" + id).subscribe({
-      next: (res) => {
-        this.dataElement = res.data
-      },
-      error: (e) => {
-        this._alertService.error(e.error.error)
-        this.hideProgressBar();
-      },
-      complete: () => {
-        this.hideProgressBar();
-      }
-    });
   }
 
   showProgressBar() {

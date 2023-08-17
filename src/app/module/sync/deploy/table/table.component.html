@@ -1,7 +1,7 @@
   <mat-accordion>
     <mat-expansion-panel  (opened)="panelOpenState = true"
                           (closed)="panelOpenState = false"
-                          *ngFor="let table of tables">
+                          *ngFor="let table of tables; index as i">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{table.readTable}}
@@ -20,8 +20,8 @@
         </table>
       </div>
       <mat-action-row>
-        <button mat-button color="warn" (click)="del()">删除</button>
-        <button mat-button color="primary" (click)="edit()">修改</button>
+        <button mat-button color="warn" (click)="del(i)">删除</button>
+        <button mat-button color="primary" (click)="edit(i)">修改</button>
       </mat-action-row>
     </mat-expansion-panel>
 

@@ -46,8 +46,8 @@ export class ColumnComponent {
     readTable: '',
     writeTable: '',
     keys: '',
-    read: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 74', 'Item 64', 'Item 54', 'Item 44', 'Item 34', 'Item 24', 'Item 14'],
-    write: ['Item 11', 'Item 21', 'Item 31', 'xxxxx'],
+    read: [],
+    write: [],
   }
 
   constructor(private httpGlobalTool: HttpGlobalTool) {
@@ -63,8 +63,8 @@ export class ColumnComponent {
       readTable: '',
       writeTable: '',
       keys: '',
-      read: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 74', 'Item 64', 'Item 54', 'Item 44', 'Item 34', 'Item 24', 'Item 14'],
-      write: ['Item 11', 'Item 21', 'Item 31', ''],
+      read: [],
+      write: [],
     }
   }
 

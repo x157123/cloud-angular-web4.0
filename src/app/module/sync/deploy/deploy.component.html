@@ -35,14 +35,14 @@
               <mat-cell *matCellDef="let element"> {{element.writeConnectId}} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="offSet">
-              <mat-header-cell mat-header-cell *matHeaderCellDef> 偏移量 </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.offSet}} </mat-cell>
-            </ng-container>
-
             <ng-container matColumnDef="state">
               <mat-header-cell mat-header-cell *matHeaderCellDef> 状态 </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.state}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="offSet">
+              <mat-header-cell mat-header-cell *matHeaderCellDef> 偏移量 </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.offSet}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="operate">
@@ -53,6 +53,12 @@
                 </a>
                 <a mat-icon-button color="primary" (click)="openEditSidenav(element.id)"  title="修改">
                   <mat-icon>edit</mat-icon>
+                </a>
+                <a mat-icon-button color="green" (click)="start(element.id)" *ngIf="element.state == null || element.state == 0"  title="启动">
+                  <mat-icon>play_circle</mat-icon>
+                </a>
+                <a mat-icon-button color="accent" (click)="end(element.id)" *ngIf="element.state == 1"  title="停止">
+                  <mat-icon>stop_circle</mat-icon>
                 </a>
                 <a mat-icon-button color="accent" (click)="delById(element.id)"  title="删除">
                   <mat-icon>delete</mat-icon>
