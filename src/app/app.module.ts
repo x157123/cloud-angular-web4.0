@@ -18,6 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatPaginatorIntlCN} from "@common/paginator.translate";
 import {MatPaginatorIntl} from "@angular/material/paginator";
 
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+
 @NgModule({
     declarations: [
         SpinnerComponent,
@@ -33,7 +36,9 @@ import {MatPaginatorIntl} from "@angular/material/paginator";
         MatInputModule,
         SharedModule,
         BrowserAnimationsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatSelectModule,
+        MatOptionModule
     ],
     providers: [{ provide: MatPaginatorIntl, useClass: MatPaginatorIntlCN }],
   exports: [

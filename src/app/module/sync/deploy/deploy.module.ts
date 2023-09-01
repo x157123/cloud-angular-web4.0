@@ -28,6 +28,8 @@ import {DragDropModule,CdkDropList,CdkDrag} from '@angular/cdk/drag-drop';
 import {NgFor} from '@angular/common';
 import {ColumnComponent} from "./column/column.component";
 import { TableComponent } from './table/table.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { TableComponent } from './table/table.component';
     NgFor,
     CdkDrag,
     RouterModule.forChild(DeployRoutes),
+    MatCheckboxModule,
+    MatAutocompleteModule,
   ]
 })
 export class DeployModule { }

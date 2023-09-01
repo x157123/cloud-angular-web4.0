@@ -2,27 +2,13 @@ import {Component, ViewChild} from '@angular/core';
 import {DeployComponent, SyncConfig} from "./deploy.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@alert/alert.service";
-import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper'
 import {MatTabGroup} from "@angular/material/tabs";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {ColumnComponent} from "./column/column.component";
 import {TableComponent} from "./table/table.component";
-
-
-export interface TableConfig {
-  name: string,
-  type: number,
-  readTable: string,
-  writeTable: string,
-  columns: ColumnConfig[];
-}
-
-export interface ColumnConfig{
-  readColumn: string,
-  writeColumn: string,
-  key: boolean,
-}
+import {MatStepper} from "@angular/material/stepper";
 
 
 @Component({
@@ -42,21 +28,76 @@ export class EditComponent {
   @ViewChild("appEditTable", {static: false}) appEditTable!: MatTabGroup;
   @ViewChild("appColumn", {static: false}) appColumn!: ColumnComponent;
   @ViewChild("appSyncTable", {static: false}) appSyncTable!: TableComponent;
+  @ViewChild('stepper', {static: false}) stepper!: MatStepper;
 
   syncConfig : SyncConfig = {
     name: '',
+    readConnectType: 1,
     readConnectId: 0,
+    readConnectName: '',
+    writeConnectType: 2,
     writeConnectId: 0,
+    writeConnectName: '',
     version: 1,
     state: 0,
     offSet: '',
     tableConfig: []
   }
 
+  sourceType: Dict[] = [
+    {value: '1', viewValue: 'mysql'},
+    {value: '2', viewValue: 'oracle'},
+    {value: '4', viewValue: 'postgresql'},
+  ]
+
+  readDb: DataBase[] = []
+
+  writeDb: DataBase[] = []
+
   constructor(private parent: DeployComponent, private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService, private _formBuilder: FormBuilder) {
   }
 
+  readList(ob: number,type:number) {
+    let param = new URLSearchParams();
+    param.set('type', String(ob));
+    this.httpGlobalTool.post("/api/cloud-sync/connectConfig/findByList",param).subscribe({
+      next: (res) => {
+        if(type == 1){
+          this.readDb = res.data
+        }else{
+          this.writeDb = res.data
+        }
+      },
+      error: (e) => {
+        this._alertService.error(e.error.error)
+      },
+      complete: () => {
+      }
+    });
+  }
+
+  reset() {
+    this.syncConfig = {
+      name: '',
+      readConnectType: 1,
+      readConnectId: 0,
+      readConnectName: '',
+      writeConnectType: 2,
+      writeConnectId: 0,
+      writeConnectName: '',
+      version: 1,
+      state: 0,
+      offSet: '',
+      tableConfig: []
+    }
+    this.readDb = []
+    this.writeDb = []
+    this.appSyncTable.reset()
+    this.appColumn.reset()
+    this.stepper.selectedIndex = 0
+    this.exitAddTable()
+  }
 
   /**
    * 打开新增同步表页面
@@ -64,6 +105,14 @@ export class EditComponent {
   showAddSync() {
     const tabGroup = this.appEditTable;
     if (!tabGroup || !(tabGroup instanceof MatTabGroup)) return;
+    this.appColumn.reset()
+    tabGroup.selectedIndex = 1;
+  }
+
+  showEditSync(tableConfig: TableConfig){
+    const tabGroup = this.appEditTable;
+    if (!tabGroup || !(tabGroup instanceof MatTabGroup)) return;
+    this.appColumn.setData(tableConfig);
     tabGroup.selectedIndex = 1;
   }
 
@@ -80,7 +129,6 @@ export class EditComponent {
    * 取消同步表页面
    */
   exitAddTable() {
-    this.appColumn.reset()
     const tabGroup = this.appEditTable;
     if (!tabGroup || !(tabGroup instanceof MatTabGroup)) return;
     tabGroup.selectedIndex = 0;
@@ -110,7 +158,7 @@ export class EditComponent {
       },
       complete: () => {
         this.hideProgressBar();
-        this.clearData()
+        this.reset()
       }
     });
   }
@@ -128,6 +176,9 @@ export class EditComponent {
     this.httpGlobalTool.get("/api/cloud-sync/serve/findServeParamById?id=" + id).subscribe({
       next: (res) => {
         this.syncConfig = res.data
+        console.log(this.syncConfig)
+        this.readList(this.syncConfig.readConnectType,1)
+        this.readList(this.syncConfig.writeConnectType,2)
         this.appSyncTable.setData(res.data.tableConfig)
       },
       error: (e) => {
@@ -140,10 +191,10 @@ export class EditComponent {
     });
   }
 
+
   doSomething() {
     this.parent.closeEditSidenav();
     this.parent.queryData()
-    this.dataElement = {...this.defDataElement}
   }
 
 
@@ -178,16 +229,6 @@ export class EditComponent {
   }
 
 
-
-  clearData(show?: boolean) {
-    if (show == null || !show) {
-      this.show = false;
-    } else {
-      this.show = true;
-    }
-    this.dataElement = this.defDataElement
-  }
-
   showProgressBar() {
     this.visibilityEditData = {'visibility': 'visible'}
   }
@@ -195,21 +236,30 @@ export class EditComponent {
   hideProgressBar() {
     this.visibilityEditData = {'visibility': 'hidden'}
   }
+}
 
-  defDataElement: DataElement = {
-    type: '',
-    hostname: '',
-    port: '',
-    databaseName: '',
-    user: '',
-    password: '',
-    tablePrefix: '',
-    remark: '',
-    version: ''
-  };
+export interface TableConfig {
+  name: string,
+  type: number,
+  readTable: string,
+  writeTable: string,
+  columns: ColumnConfig[];
+}
 
-  dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));
+export interface ColumnConfig{
+  readColumn: string,
+  writeColumn: string,
+  key: boolean,
+}
 
+export interface Dict {
+  value: string;
+  viewValue: string;
+}
+
+export interface DataBase {
+  id: number;
+  remark: string;
 }
 
 export interface DataElement {

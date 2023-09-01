@@ -27,12 +27,12 @@
 
             <ng-container matColumnDef="readConnectId">
               <mat-header-cell mat-header-cell *matHeaderCellDef> 采集数据源 </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.readConnectId}} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.readConnectName}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="writeConnectId">
               <mat-header-cell mat-header-cell *matHeaderCellDef> 写入数据源 </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.writeConnectId}} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.writeConnectName}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="state">
@@ -60,9 +60,9 @@
                 <a mat-icon-button color="accent" (click)="end(element.id)" *ngIf="element.state == 1"  title="停止">
                   <mat-icon>stop_circle</mat-icon>
                 </a>
-                <a mat-icon-button color="accent" (click)="delById(element.id)"  title="删除">
-                  <mat-icon>delete</mat-icon>
-                </a>
+<!--                <a mat-icon-button color="accent" (click)="delById(element.id)"  title="删除">-->
+<!--                  <mat-icon>delete</mat-icon>-->
+<!--                </a>-->
               </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>

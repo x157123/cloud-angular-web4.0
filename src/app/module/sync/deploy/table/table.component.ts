@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {TableConfig} from "../edit.component";
+import {EditComponent, TableConfig} from "../edit.component";
 
 @Component({
   selector: 'app-sync-table',
@@ -12,7 +12,21 @@ export class TableComponent {
 
   tables: TableConfig[] = [];
 
+  constructor(private parent: EditComponent){
+
+  }
+
+  reset() {
+    this.tables = []
+  }
+
   add(tableConfig: TableConfig) {
+    //删除数据
+    for (let i = 0;i<this.tables.length;i++){
+      if(this.tables[i].readTable === tableConfig.readTable){
+        this.del(i)
+      }
+    }
     this.tables.push(tableConfig)
   }
 
@@ -21,7 +35,8 @@ export class TableComponent {
   }
 
   edit(index: number) {
-    this.tables[index]
+    let tab = this.tables[index]
+    this.parent.showEditSync(tab)
   }
 
   getData() {

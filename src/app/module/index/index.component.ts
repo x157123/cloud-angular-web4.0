@@ -1,4 +1,4 @@
-import {Component, AfterViewInit, ViewChild} from '@angular/core';
+import {Component, AfterViewInit, ViewChild, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {PageEvent} from "@angular/material/paginator";
@@ -6,6 +6,11 @@ import {MatDrawer} from "@angular/material/sidenav";
 import {EditComponent} from "./edit.component";
 import {AlertService} from "@alert/alert.service";
 
+
+export interface Dict {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-index',
@@ -18,11 +23,16 @@ export class IndexComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['type', 'hostname', 'port', 'user', 'password', 'remark', 'operate'];
+  displayedColumns: string[] = ['typeStr', 'hostname', 'port', 'user', 'password', 'remark', 'operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   visibilityListData = {'visibility': 'hidden'}
 
+  sourceType: Dict[] = [
+    {value: '1', viewValue: 'mysql'},
+    {value: '2', viewValue: 'oracle'},
+    {value: '4', viewValue: 'postgresql'},
+  ]
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
 
@@ -34,6 +44,7 @@ export class IndexComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.queryData()
+    this.appIndexEdit.setSourceType(this.sourceType)
   }
 
   showProgressBar() {
@@ -109,6 +120,7 @@ export class IndexComponent implements AfterViewInit {
 export interface PeriodicElement {
   id: number;
   type: number;
+  typeStr: string;
   hostname: string;
   port: string;
   user: string;

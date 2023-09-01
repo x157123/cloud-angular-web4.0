@@ -20,33 +20,33 @@
             <mat-cell *matCellDef="let element;" > {{element.id}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="type">
-            <mat-header-cell mat-header-cell *matHeaderCellDef> type </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+          <ng-container matColumnDef="typeStr">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 数据库类型 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.typeStr}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="hostname">
-            <mat-header-cell mat-header-cell *matHeaderCellDef> hostname </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 连接地址 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hostname}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="user">
-            <mat-header-cell mat-header-cell *matHeaderCellDef> user </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.user}} </mat-cell>
-          </ng-container>
-
           <ng-container matColumnDef="port">
-            <mat-header-cell mat-header-cell *matHeaderCellDef> port </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 端口 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.port}} </mat-cell>
           </ng-container>
 
+          <ng-container matColumnDef="user">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 用户 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.user}} </mat-cell>
+          </ng-container>
+
           <ng-container matColumnDef="password">
-            <mat-header-cell mat-header-cell *matHeaderCellDef> password </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 密码 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.password}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="remark">
-            <mat-header-cell mat-header-cell *matHeaderCellDef> remark </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 备注 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.remark}} </mat-cell>
           </ng-container>
 

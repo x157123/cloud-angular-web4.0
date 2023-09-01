@@ -34,7 +34,7 @@ export class LoginComponent {
   }
 
   showItem() {
-    console.log(this.joinColumn)
+
   }
 
 

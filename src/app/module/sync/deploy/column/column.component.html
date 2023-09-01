@@ -27,9 +27,12 @@
     <mat-grid-tile colspan="12" class="content">
       <mat-form-field class="example-full-width">
         <mat-label>目标表</mat-label>
-        <mat-select [(ngModel)]="joinColumn.writeTable" (selectionChange)="writeTableSelect($event)">
-          <mat-option [value]="option.name" *ngFor="let option of writeTables">{{ option.name }}</mat-option>
-        </mat-select>
+        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="writeTableSelect($event)">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </mat-grid-tile>
   </mat-grid-list>
@@ -50,12 +53,24 @@
         <div
           cdkDropList
           [cdkDropListData]="joinColumn.write"
-          class="example-list"
+          class="example-list write-list"
           (cdkDropListDropped)="drop($event)">
           <div class="example-box" *ngFor="let item of joinColumn.write; index as i" cdkDrag>
             <input class="comInput" matInput [(ngModel)]="joinColumn.write[i]" />
+            <mat-checkbox class="small-button" (change)="handleCheckboxChange($event)" [value]="joinColumn.write[i]" [checked] = "checks[i]"></mat-checkbox>
+            <mat-icon class="small-icon" color="primary" aria-label="主键">key</mat-icon>
+            <mat-icon class="small-icon" color="primary" aria-label="数据转换">build_circle</mat-icon>
+            <mat-icon class="small-icon" color="primary" aria-label="数据加密">data_saver_on</mat-icon>
+            <button mat-icon-button class="small-icon-button" aria-label="添加操作项">
+              <mat-icon>more_vert</mat-icon>
+            </button>
           </div>
         </div>
+      </div>
+      <div class="example-add">
+          <button mat-icon-button color="primary" (click)="addItem()" class="small-icon-button">
+            <mat-icon>add</mat-icon>
+          </button>
       </div>
     </div>
   </mat-accordion>

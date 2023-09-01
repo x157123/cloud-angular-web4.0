@@ -126,9 +126,6 @@ export class DeployComponent implements AfterViewInit {
     });
   }
 
-  findServeParamById(id: number){
-
-  }
 
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
@@ -138,8 +135,8 @@ export class DeployComponent implements AfterViewInit {
   }
 
   openEditSidenav(id: number, show?: boolean) {
+    this.appDeployEdit.reset()
     if (this.drawer) {
-      this.appDeployEdit.clearData()
       if (id != null && id > 0) {
         this.appDeployEdit.findById(id, show);
       }
@@ -158,8 +155,12 @@ export class DeployComponent implements AfterViewInit {
 export interface SyncConfig {
   id?: number;
   name: string;
+  readConnectType: number,
   readConnectId: number;
+  readConnectName: string;
+  writeConnectType: number;
   writeConnectId: number;
+  writeConnectName: string;
   version: number;
   state: number;
   offSet: string;

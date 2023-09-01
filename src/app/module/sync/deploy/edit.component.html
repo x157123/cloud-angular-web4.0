@@ -22,29 +22,39 @@
               </mat-grid-tile>
               <mat-grid-tile colspan="2" class="title">读取数据源:</mat-grid-tile>
               <mat-grid-tile colspan="6" class="content">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="读取数据源" [(ngModel)]="syncConfig.readConnectId" required>
+                <mat-form-field>
+                  <mat-label>数据库类型</mat-label>
+                  <mat-select [required]="show" [(value)]="syncConfig.readConnectType" (selectionChange)="readList($event.value,1)">
+                    <mat-option [value]="option.value" *ngFor="let option of sourceType">{{ option.viewValue }}</mat-option>
+                  </mat-select>
                 </mat-form-field>
               </mat-grid-tile>
 
               <mat-grid-tile colspan="2" class="title">读取数据库:</mat-grid-tile>
               <mat-grid-tile colspan="6" class="content">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="读取数据库" [(ngModel)]="syncConfig.readConnectId" required>
+                  <mat-select [required]="show" [(ngModel)]="syncConfig.readConnectId">
+                    <mat-option [value]="option.id" *ngFor="let option of readDb">{{ option.remark }}</mat-option>
+                  </mat-select>
                 </mat-form-field>
               </mat-grid-tile>
 
               <mat-grid-tile colspan="2" class="title">写入数据源:</mat-grid-tile>
               <mat-grid-tile colspan="6" class="content">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="写入数据源" [(ngModel)]="syncConfig.writeConnectId" required>
+                <mat-form-field>
+                  <mat-label>数据库类型</mat-label>
+                  <mat-select [required]="show" [(ngModel)]="syncConfig.writeConnectType" (selectionChange)="readList($event.value,2)">
+                    <mat-option [value]="option.value" *ngFor="let option of sourceType">{{ option.viewValue }}</mat-option>
+                  </mat-select>
                 </mat-form-field>
               </mat-grid-tile>
 
               <mat-grid-tile colspan="2" class="title">写入数据库:</mat-grid-tile>
               <mat-grid-tile colspan="6" class="content">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="写入数据库" [(ngModel)]="syncConfig.writeConnectId" required>
+                  <mat-select [required]="show" [(ngModel)]="syncConfig.writeConnectId">
+                    <mat-option [value]="option.id" *ngFor="let option of writeDb">{{ option.remark }}</mat-option>
+                  </mat-select>
                 </mat-form-field>
               </mat-grid-tile>
 

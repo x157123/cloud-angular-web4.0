@@ -1,12 +1,9 @@
-import {Component} from '@angular/core';
-import {IndexComponent, PeriodicElement} from "./index.component";
+import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import {Dict, IndexComponent} from "./index.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@alert/alert.service";
 
-interface Dict {
-  value: string;
-  viewValue: string;
-}
+
 
 @Component({
   selector: 'app-index-edit',
@@ -20,14 +17,18 @@ export class EditComponent {
 
   show: boolean = true;
 
-  dataSource: Dict[] = [
-    {value: '1', viewValue: 'mysql'},
-    {value: '2', viewValue: 'oracle'},
-    {value: '4', viewValue: 'pgsql'},
-  ]
+  @ViewChild("sourceType")
+  sourceType: Dict[] = [];
+
+
 
   constructor(private parent: IndexComponent,private httpGlobalTool: HttpGlobalTool,
-              private _alertService: AlertService) {
+              private _alertService: AlertService,private cd: ChangeDetectorRef) {
+  }
+
+  setSourceType(sourceType: Dict[]){
+    this.sourceType = sourceType
+    this.cd.detectChanges()
   }
 
   doSomething() {

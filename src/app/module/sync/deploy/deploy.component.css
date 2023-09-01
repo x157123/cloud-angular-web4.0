@@ -1,14 +1,38 @@
 
+/**修改页面宽度*/
 .edit-drawer{
   width: 800px;
 }
 
-.mat-mdc-table {
-  table-layout: fixed;
-}
-
+/**文字不换行*/
 .mat-mdc-cell {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+
+.mat-column-name {
+  flex: 0 0 20%;
+  white-space: nowrap;
+}
+
+.mat-column-readConnectId {
+  flex: 0 0 180px;
+  white-space: nowrap;
+}
+
+.mat-column-writeConnectId {
+  flex: 0 0 180px;
+  white-space: nowrap;
+}
+
+.mat-column-state {
+  flex: 0 0 80px;
+  white-space: nowrap;
+}
+
+.mat-column-operate {
+  flex: 0 0 180px;
+  white-space: nowrap;
 }
