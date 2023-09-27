@@ -1,13 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
-import {ColumnConfig, TableConfig} from "../edit.component";
+import {ColumnConfig, Dict, TableConfig} from "../edit.component";
 import {MatSelectChange} from "@angular/material/select";
 import {MatCheckboxChange} from "@angular/material/checkbox";
 import {FormControl} from "@angular/forms";
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
+import {ConnectionPositionPair, Overlay, OverlayRef} from "@angular/cdk/overlay";
+import {TemplatePortal} from "@angular/cdk/portal";
 
 interface Table {
   name: string,
@@ -15,10 +17,10 @@ interface Table {
 }
 
 interface Column {
-  "name": string,
-  "uni": boolean,
-  "length": number,
-  "comment": string,
+  name: string,
+  uni: number,
+  length: number,
+  comment: string,
 }
 
 interface ColumnJoin {
@@ -28,7 +30,15 @@ interface ColumnJoin {
   writeTable: string,
   keys: string[],
   read: string[];
-  write: string[];
+  write: ColumnConfig[];
+}
+
+export interface ColumnConfigTmp {
+  index: number,
+  writeColumn: string,
+  key: number,
+  defaultValue: string,
+  convertFun: string,
 }
 
 @Component({
@@ -38,16 +48,27 @@ interface ColumnJoin {
 })
 export class ColumnComponent implements OnInit {
 
+
+  @ViewChild('overlayMenuList') overlayMenuList!: TemplateRef<any>;
+
+  overlayRef!: OverlayRef;
+
   readTables: Table[] = [];
   writeTables: Table[] = [];
   readTableMap: Map<string, Column[]> = new Map();
   writeTableMap: Map<string, Column[]> = new Map();
-  checks: boolean[] = [];
 
   myControl = new FormControl<string | Table>('');
 
-  // @ts-ignore
-  filteredOptions: Observable<Table[]>;
+  filteredOptions!: Observable<Table[]>;
+
+  columnConfigTmp: ColumnConfigTmp = {
+    index: -1,
+    writeColumn: '',
+    key: 0,
+    defaultValue: '',
+    convertFun: '',
+  }
 
   joinColumn: ColumnJoin = {
     name: '',
@@ -58,8 +79,13 @@ export class ColumnComponent implements OnInit {
     read: [],
     write: [],
   }
+  sourceType: Dict[] = [
+    {value: '1', viewValue: 'mysql'},
+    {value: '2', viewValue: 'oracle'},
+    {value: '4', viewValue: 'postgresql'},
+  ]
 
-  constructor(private httpGlobalTool: HttpGlobalTool) {
+  constructor(private httpGlobalTool: HttpGlobalTool, private overlay: Overlay, private viewContainerRef: ViewContainerRef) {
   }
 
   ngOnInit() {
@@ -91,7 +117,6 @@ export class ColumnComponent implements OnInit {
       read: [],
       write: [],
     }
-    this.checks = []
     this.myControl.setValue('')
   }
 
@@ -111,13 +136,27 @@ export class ColumnComponent implements OnInit {
     if (cols != null && cols.length > 0) {
       this.joinColumn.writeTable = ob.option.viewValue
       for (let col of cols) {
-        this.joinColumn.write.push(col.name)
+        const columnConfig: ColumnConfig = {
+          readColumn: '',
+          writeColumn: col.name,
+          key: col.uni,
+          defaultValue: '',
+          convertFun: '',
+        }
+        this.joinColumn.write.push(columnConfig)
       }
     } else {
       this.joinColumn.writeTable = 'newTableName'
       this.myControl.setValue(this.joinColumn.writeTable)
       for (let col of this.joinColumn.read) {
-        this.joinColumn.write.push(col)
+        const columnConfig: ColumnConfig = {
+          readColumn: '',
+          writeColumn: col,
+          key: 0,
+          defaultValue: '',
+          convertFun: '',
+        }
+        this.joinColumn.write.push(columnConfig)
       }
     }
   }
@@ -131,8 +170,14 @@ export class ColumnComponent implements OnInit {
     let i = 0;
     for (let col of tableConfig.columns) {
       this.joinColumn.read.push(col.readColumn)
-      this.joinColumn.write.push(col.writeColumn)
-      this.checks[i++] = col.key
+      const columnConfig: ColumnConfig = {
+        readColumn: '',
+        writeColumn: col.writeColumn,
+        key: col.key,
+        defaultValue: col.defaultValue,
+        convertFun: col.convertFun,
+      }
+      this.joinColumn.write.push(columnConfig)
       if (col.key) {
         this.joinColumn.keys.push(col.writeColumn)
       }
@@ -152,10 +197,11 @@ export class ColumnComponent implements OnInit {
     for (let i = 0; i < this.joinColumn.read.length; i++) {
       const columnConfig: ColumnConfig = {
         readColumn: this.joinColumn.read[i],
-        writeColumn: this.joinColumn.write.length < i ? '' : this.joinColumn.write[i],
-        key: false,
+        writeColumn: this.joinColumn.write.length < i ? '' : this.joinColumn.write[i].writeColumn,
+        key: this.joinColumn.write.length < i ? 0 : this.joinColumn.write[i].key,
+        defaultValue: this.joinColumn.write.length < i ? '' : this.joinColumn.write[i].defaultValue,
+        convertFun: this.joinColumn.write.length < i ? '' : this.joinColumn.write[i].convertFun,
       };
-      columnConfig.key = this.joinColumn.keys.indexOf(columnConfig.writeColumn) > -1 ? true : false
       tableConfig.columns.push(columnConfig)
     }
     tableConfig.name = this.joinColumn.name;
@@ -178,13 +224,68 @@ export class ColumnComponent implements OnInit {
 
   addItem() {
     this.joinColumn.read.push('');
-    this.joinColumn.write.push('');
+    const columnConfig: ColumnConfig = {
+      readColumn: '',
+      writeColumn: '',
+      key: 0,
+      defaultValue: '',
+      convertFun: '',
+    }
+    this.joinColumn.write.push(columnConfig);
   }
 
-  showItem() {
-
+  /**
+   * 打开配置框
+   * @param $event
+   */
+  displayMenu($event: MouseEvent, index: number) {
+    if (this.overlayRef && this.overlayRef.hasAttached()) {
+      this.overlayRef.detach();
+    } else {
+      this.columnConfigTmp.index = index;
+      this.columnConfigTmp.key = this.joinColumn.write[index].key
+      this.columnConfigTmp.convertFun = this.joinColumn.write[index].convertFun
+      this.columnConfigTmp.defaultValue = this.joinColumn.write[index].defaultValue
+      // 获取与 MouseEvent 关联的目标元素
+      const targetElement: HTMLElement = $event.target as HTMLElement;
+      // 使用 Renderer2 包装目标元素以获取 ElementRef
+      const elementRef: ElementRef = new ElementRef(targetElement);
+      const strategy = this.overlay
+        .position()
+        // .flexibleConnectedTo({ x: $event.x, y: $event.y })
+        .flexibleConnectedTo(elementRef)
+        .withPositions([
+          new ConnectionPositionPair({originX: 'start', originY: 'bottom'}, {overlayX: 'start', overlayY: 'top'}),
+          new ConnectionPositionPair({originX: 'start', originY: 'top'}, {overlayX: 'start', overlayY: 'bottom'}),
+          new ConnectionPositionPair({originX: 'end', originY: 'bottom'}, {overlayX: 'end', overlayY: 'top'}),
+          new ConnectionPositionPair({originX: 'start', originY: 'center'}, {overlayX: 'end', overlayY: 'center'})
+        ]);
+      this.overlayRef = this.overlay.create({
+        hasBackdrop: true,
+        backdropClass: 'cdk-overlay-transparent-backdrop',
+        positionStrategy: strategy
+      });
+      this.overlayRef.backdropClick().subscribe(() => {
+        this.overlayRef.detach();
+      });
+      this.overlayRef.attach(new TemplatePortal(this.overlayMenuList, this.viewContainerRef));
+    }
   }
 
+
+  keySelect(ob: MatSelectChange) {
+    this.joinColumn.write[this.columnConfigTmp.index].key = ob.value
+  }
+
+  convertSelect(ob: MatSelectChange) {
+    this.joinColumn.write[this.columnConfigTmp.index].convertFun = ob.value
+  }
+
+  defaultValueChange() {
+    this.joinColumn.write[this.columnConfigTmp.index].key = this.columnConfigTmp.key
+    this.joinColumn.write[this.columnConfigTmp.index].convertFun = this.columnConfigTmp.convertFun
+    this.joinColumn.write[this.columnConfigTmp.index].defaultValue = this.columnConfigTmp.defaultValue
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -197,6 +298,16 @@ export class ColumnComponent implements OnInit {
         event.currentIndex,
       );
     }
+  }
+
+  dropList(event: CdkDragDrop<{
+    readColumn: string;
+    writeColumn: string;
+    key: number;
+    defaultValue: string;
+    convertFun: string;
+  }[]>) {
+    moveItemInArray(this.joinColumn.write, event.previousIndex, event.currentIndex);
   }
 
   getTableData(readConnectId: number, writeConnectId: number) {
@@ -215,7 +326,6 @@ export class ColumnComponent implements OnInit {
       complete: () => {
       }
     });
-
 
     param.set('connectId', String(writeConnectId));
     this.httpGlobalTool.post("/api/cloud-sync/connectConfig/getTables?", param).subscribe({
@@ -237,5 +347,4 @@ export class ColumnComponent implements OnInit {
       }
     });
   }
-
 }

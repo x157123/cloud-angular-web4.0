@@ -30,6 +30,8 @@ import {ColumnComponent} from "./column/column.component";
 import { TableComponent } from './table/table.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatMenuModule} from "@angular/material/menu";
+import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
 
 @NgModule({
   declarations: [
@@ -72,6 +74,9 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     RouterModule.forChild(DeployRoutes),
     MatCheckboxModule,
     MatAutocompleteModule,
+    MatMenuModule,
+    CdkConnectedOverlay,
+    CdkOverlayOrigin,
   ]
 })
 export class DeployModule { }

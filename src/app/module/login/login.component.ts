@@ -1,14 +1,12 @@
 import {Component} from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {
+  CdkDragDrop,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
 
-interface ColumnJoin {
-  name: string,
-  type: number,
-  readTable: string,
-  writeTable: string,
-  keys: string,
-  read: string[];
-  write: string[];
+export interface ColumnConfig{
+  writeColumn: string,
+  key: boolean,
 }
 
 @Component({
@@ -16,38 +14,22 @@ interface ColumnJoin {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent{
 
-  joinColumn: ColumnJoin = {
-    name: '',
-    type: 0,
-    readTable: '',
-    writeTable: '',
-    keys: '',
-    read: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
-    write: ['Item 11', 'Item 21', 'Item 31', ''],
-  }
-
-
-  addItem() {
-    this.joinColumn.read.push('');
-  }
-
-  showItem() {
-
-  }
+  columns: ColumnConfig[] = [{
+    writeColumn: "A",
+    key: false,
+  },{
+    writeColumn: "B",
+    key: true,
+  },{
+    writeColumn: "C",
+    key: false,
+  }]
 
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
+
+  drop(event: CdkDragDrop<{writeColumn: string; key: boolean}[]>) {
+    moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
   }
 }

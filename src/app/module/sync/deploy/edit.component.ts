@@ -77,6 +77,9 @@ export class EditComponent {
     });
   }
 
+  /**
+   * 重置表单
+   */
   reset() {
     this.syncConfig = {
       name: '',
@@ -198,7 +201,6 @@ export class EditComponent {
   }
 
 
-
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
@@ -249,7 +251,9 @@ export interface TableConfig {
 export interface ColumnConfig{
   readColumn: string,
   writeColumn: string,
-  key: boolean,
+  key: number,
+  defaultValue: string,
+  convertFun: string,
 }
 
 export interface Dict {
@@ -261,17 +265,3 @@ export interface DataBase {
   id: number;
   remark: string;
 }
-
-export interface DataElement {
-  id?: number;
-  type: string;
-  hostname: string;
-  port: string;
-  databaseName: string;
-  user: string;
-  password: string;
-  tablePrefix: string;
-  remark: string;
-  version: string;
-}
-

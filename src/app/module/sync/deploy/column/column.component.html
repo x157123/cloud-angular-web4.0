@@ -54,14 +54,13 @@
           cdkDropList
           [cdkDropListData]="joinColumn.write"
           class="example-list write-list"
-          (cdkDropListDropped)="drop($event)">
+          (cdkDropListDropped)="dropList($event)">
           <div class="example-box" *ngFor="let item of joinColumn.write; index as i" cdkDrag>
-            <input class="comInput" matInput [(ngModel)]="joinColumn.write[i]" />
-            <mat-checkbox class="small-button" (change)="handleCheckboxChange($event)" [value]="joinColumn.write[i]" [checked] = "checks[i]"></mat-checkbox>
-            <mat-icon class="small-icon" color="primary" aria-label="主键">key</mat-icon>
-            <mat-icon class="small-icon" color="primary" aria-label="数据转换">build_circle</mat-icon>
-            <mat-icon class="small-icon" color="primary" aria-label="数据加密">data_saver_on</mat-icon>
-            <button mat-icon-button class="small-icon-button" aria-label="添加操作项">
+            <input class="comInput" matInput [(ngModel)]="joinColumn.write[i].writeColumn" />
+            <mat-icon class="small-icon" color="primary" aria-label="主键" *ngIf="joinColumn.write[i].key == 1">key</mat-icon>
+            <mat-icon class="small-icon" color="primary" aria-label="数据转换" *ngIf="joinColumn.write[i].convertFun !=null && joinColumn.write[i].convertFun.length>0">build_circle</mat-icon>
+            <mat-icon class="small-icon" color="primary" aria-label="数据加密" *ngIf="joinColumn.write[i].defaultValue !=null && joinColumn.write[i].defaultValue.length>0">data_saver_on</mat-icon>
+            <button mat-icon-button (click)="displayMenu($event, i)" class="small-icon-button" aria-label="添加操作项">
               <mat-icon>more_vert</mat-icon>
             </button>
           </div>
@@ -74,4 +73,37 @@
       </div>
     </div>
   </mat-accordion>
+  <ng-template #overlayMenuList>
+    <div class="fab-menu-panel">
+      <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
+        <mat-grid-tile colspan="4" class="title">主键:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>是否是主键</mat-label>
+            <mat-select [(ngModel)]="columnConfigTmp.key" (selectionChange)="keySelect($event)">
+              <mat-option value="0">否</mat-option>
+              <mat-option value="1">是</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">转换:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field>
+            <mat-label>数据转换</mat-label>
+            <mat-select [(ngModel)]="columnConfigTmp.convertFun" (selectionChange)="convertSelect($event)">
+              <mat-option>--</mat-option>
+              <mat-option [value]="option.value" *ngFor="let option of sourceType">{{ option.viewValue }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">默认值:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>数据默认值</mat-label>
+            <input matInput [(ngModel)]="columnConfigTmp.defaultValue" (ngModelChange)="defaultValueChange()">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </ng-template>
 </div>

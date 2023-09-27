@@ -126,6 +126,25 @@ export class DeployComponent implements AfterViewInit {
     });
   }
 
+  /**
+   * 重置采集
+   * @param id
+   */
+  repeat(id: number){
+    this.showProgressBar()
+    this.httpGlobalTool.get("/api/cloud-sync/repeat?connectId=" + id).subscribe({
+      next: (res) => {
+        this.queryData()
+      },
+      error: (e) => {
+        this.hideProgressBar();
+        console.log('error:', e.error)
+      },
+      complete: () => {
+        this.hideProgressBar();
+      }
+    });
+  }
 
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
