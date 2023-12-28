@@ -39,5 +39,6 @@ const menuItems = [
         ]
       }
     ]
-  }
+  },
+  {state: false, key: 'help',path: 'help', name: '帮助', type: 'link', icon: 'av_timer', items: []},
 ];

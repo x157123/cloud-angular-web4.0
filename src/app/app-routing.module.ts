@@ -35,6 +35,10 @@ const routes: Routes = [
       {
         path: 'deploy',
         loadChildren: () => import('./module/sync/deploy/deploy.module').then(m => m.DeployModule)
+      },
+      {
+        path: 'help',
+        loadChildren: () => import('./module/sync/deploy/deploy.module').then(m => m.DeployModule)
       }
     ]
   }];
