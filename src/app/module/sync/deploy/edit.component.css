@@ -1,12 +1,12 @@
 .edit-content .edit-deploy-content-info{
-  height: calc(100vh - 260px);
+  height: calc(100vh - 165px);
   overflow: auto;
   background-color: #ffffff;
   padding: 2px;
 }
 
 .edit-content .edit-deploy-table-content-info{
-  height: calc(100vh - 260px);
+  height: calc(100vh - 165px);
   overflow: auto;
   background-color: #ffffff;
   padding: 2px;

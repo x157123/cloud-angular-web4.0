@@ -1,5 +1,5 @@
 <mat-drawer-container autosize>
-  <mat-drawer #drawer mode="over" position="end" class="edit-drawer">
+  <mat-drawer #drawer mode="over"  position="end" class="edit-drawer">
     <app-flowableInitiateTask-edit #appFlowableInitiateTaskEdit></app-flowableInitiateTask-edit>
   </mat-drawer>
   <mat-drawer-content>
@@ -68,14 +68,8 @@
       </div>
       <mat-paginator [pageSizeOptions]="[10, 15, 20]" [length]="dataLength"
                      showFirstLastButtons
-                     firstPageLabel="firstPageLabel"
-                     itemsPerPageLabel="itemsPerPageLabel"
-                     lastPageLabel="lastPageLabel"
-                     nextPageLabel="nextPageLabel"
-                     previousPageLabel="previousPageLabel"
                      [pageIndex]="pageIndex"
-                     (page)="handlePageEvent($event)"
-                     aria-label="Select page of periodic elements">
+                     (page)="handlePageEvent($event)">
       </mat-paginator>
     </div>
   </mat-drawer-content>

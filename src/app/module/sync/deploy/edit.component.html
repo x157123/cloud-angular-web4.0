@@ -7,7 +7,7 @@
       新增
     </ng-container>
   </div>
-  <hr>
+  <mat-divider/>
   <ng-container>
     <mat-stepper #stepper>
       <mat-step [stepControl]="firstFormGroup">
@@ -60,7 +60,7 @@
 
             </mat-grid-list>
           </div>
-          <hr>
+          <mat-divider/>
           <div>
             <button mat-button matStepperNext (click)="initDataBase()">下一步</button>
           </div>
@@ -72,7 +72,7 @@
               <div class="edit-deploy-table-content-info">
                 <app-sync-table #appSyncTable></app-sync-table>
               </div>
-              <hr>
+              <mat-divider/>
               <div class="fixed-button-container">
                 <button mat-fab color="warn" (click)="showAddSync()">
                   <mat-icon>add</mat-icon>
@@ -87,7 +87,7 @@
               <div class="edit-deploy-column-content-info">
                 <app-column #appColumn></app-column>
               </div>
-              <hr>
+              <mat-divider/>
               <div>
                 <button mat-button (click)="exitAddTable()">取消</button>
                 <button mat-button (click)="addTable()">添加</button>
@@ -100,7 +100,7 @@
         <div class="edit-deploy-content-info">
         <p>You are now done.</p>
         </div>
-        <hr>
+        <mat-divider/>
         <div>
           <button mat-button matStepperPrevious>上一步</button>
           <button mat-button (click)="stepper.reset()">重置</button>

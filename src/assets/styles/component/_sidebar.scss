@@ -30,3 +30,7 @@
 .mat-expansion-panel-header.mat-expanded {
   height: 54px;
 }
+
+.mat-drawer.mat-drawer-side{
+  z-index: 0 !important;
+}
