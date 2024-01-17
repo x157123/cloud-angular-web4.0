@@ -1,0 +1,65 @@
+<div class="edit-content">
+  <div class="edit-content-header">
+    <ng-container *ngIf="show">
+      查看
+    </ng-container>
+    <ng-container *ngIf="!show">
+      新增
+    </ng-container>
+  </div>
+  <hr>
+  <ng-container>
+    <div class="edit-content-info">
+      <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
+
+        <mat-grid-tile colspan="4" class="title">菜单名称:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>菜单名称</mat-label>
+            <input matInput [(ngModel)]="dataElement.name" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">排序:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label >排序</mat-label>
+            <input matInput [(ngModel)]="dataElement.seq" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">父类id:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>父类id</mat-label>
+            <input matInput [(ngModel)]="dataElement.nodeId" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">地址:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>地址</mat-label>
+            <input matInput [(ngModel)]="dataElement.url" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">外部跳转地址:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>外部跳转地址</mat-label>
+            <input matInput [(ngModel)]="dataElement.externalUrl" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <hr>
+    <div class="edit-content-bottom">
+      <mat-card-actions align="start">
+          <button mat-button (click)="doSomething()">关闭</button>
+          <button mat-button (click)="doSave()" *ngIf="!show">保存</button>
+      </mat-card-actions>
+    </div>
+    <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>
+  </ng-container>
+</div>

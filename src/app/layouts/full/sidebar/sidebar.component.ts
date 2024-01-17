@@ -35,10 +35,16 @@ const menuItems = [
           {state: true, key: 'index24',path: 'index', name: '数据库配置', type: 'link', icon: 'av_timer'},
           {state: false, key: 'deploy',path: 'deploy', name: '同步配置', type: 'link', icon: 'av_timer'},
           {state: false, key: 'login',path: 'login', name: 'login', type: 'link', icon: ''},
-          {state: false, key: 'flowable',path: 'flowable', name: 'flowable', type: 'link', icon: ''},
         ]
       }
     ]
   },
   {state: false, key: 'help',path: 'help', name: '帮助', type: 'link', icon: 'av_timer', items: []},
+  {
+    state: true, key: 'flowable',path: 'flowable', name: 'flowable', type: 'link', icon: 'home', items: [
+      {state: false, key: 'flowableTask',path: 'flowableTask', name: '代办任务', type: 'link', icon: 'av_timer'},
+      {state: true, key: 'flowableInitiateTask',path: 'flowableInitiateTask', name: '我的发起', type: 'link', icon: 'av_timer'},
+      {state: false, key: 'flowableManage',path: 'flowableManage', name: '流程管理', type: 'link', icon: 'av_timer'},
+    ]
+  }
 ];

@@ -29,17 +29,21 @@ const routes: Routes = [
         loadChildren: () => import('./module/login/login.module').then(m => m.LoginModule)
       },
       {
-        path: 'flowable',
-        loadChildren: () => import('./module/flowable/flowable.module').then(m => m.FlowableModule)
-      },
-      {
         path: 'deploy',
         loadChildren: () => import('./module/sync/deploy/deploy.module').then(m => m.DeployModule)
       },
       {
-        path: 'help',
-        loadChildren: () => import('./module/sync/deploy/deploy.module').then(m => m.DeployModule)
-      }
+        path: 'flowableInitiateTask',
+        loadChildren: () => import('./module/flowable/flowableInitiateTask/flowableInitiateTask.module').then(m => m.FlowableInitiateTaskModule)
+      },
+      {
+        path: 'flowableManage',
+        loadChildren: () => import('./module/flowable/flowableManage/flowableManage.module').then(m => m.FlowableManageModule)
+      },
+      {
+        path: 'flowableTask',
+        loadChildren: () => import('./module/flowable/flowableTask/flowableTask.module').then(m => m.FlowableTaskModule)
+      },
     ]
   }];
 

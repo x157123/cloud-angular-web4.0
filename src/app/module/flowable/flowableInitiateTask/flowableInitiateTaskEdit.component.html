@@ -1,0 +1,60 @@
+<div class="edit-content">
+  <div class="edit-content-header">
+    <ng-container *ngIf="show">
+      查看
+    </ng-container>
+    <ng-container *ngIf="!show">
+      新增
+    </ng-container>
+  </div>
+  <hr>
+  <ng-container>
+    <div class="edit-content-info" *ngIf="!show">
+      <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
+
+        <mat-grid-tile colspan="4" class="title">请假天数:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>请假天数</mat-label>
+            <input matInput [(ngModel)]="dataElement.day">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">流程ID:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>流程ID</mat-label>
+            <input matInput [(ngModel)]="dataElement.flowKey">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">发起用户:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>发起用户</mat-label>
+            <input matInput [(ngModel)]="dataElement.userId">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">办理人:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>办理人</mat-label>
+            <input matInput [(ngModel)]="dataElement.assignee">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <div class="edit-content-info" *ngIf="show">
+      <img *ngIf="show" src="/api/flowable/genProcessDiagram?processId={{processId}}">
+    </div>
+    <hr>
+    <div class="edit-content-bottom">
+      <mat-card-actions align="start">
+          <button mat-button (click)="doSomething()">关闭</button>
+          <button mat-button (click)="doSave()" *ngIf="!show">保存</button>
+      </mat-card-actions>
+    </div>
+    <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>
+  </ng-container>
+</div>

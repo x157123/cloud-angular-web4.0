@@ -21,11 +21,11 @@
 
 
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: white;
+  background-color: white !important;
 }
 
 .mat-mdc-form-field-focus-overlay {
-  background-color: white;
+  background-color: white !important;
 }
 
 
@@ -83,4 +83,9 @@
 
 .edit-content .mat-mdc-tab-body-content{
   overflow: hidden !important;
+}
+
+//设置弹出层背景颜色
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgb(255 255 255 / 60%) !important;
 }
