@@ -13,9 +13,9 @@
     <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
     <div class="table-container">
       <div class="tables-container">
-        <div class="tables-container-content">
+        <div class="mat-drawer-content-content">
           <mat-table [dataSource]="dataSource">
-            <ng-container matColumnDef="id" sticky >
+            <ng-container matColumnDef="id">
               <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
               <mat-cell *matCellDef="let element;" > {{element.id}} </mat-cell>
             </ng-container>

@@ -5,10 +5,7 @@ import {Component, OnDestroy} from '@angular/core';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class AppSidebarComponent implements OnDestroy {
-
-  ngOnDestroy(): void {
-  }
+export class AppSidebarComponent  {
 
   getMenuitem(): Menu[] {
     return menuItems;
