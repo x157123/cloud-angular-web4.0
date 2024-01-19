@@ -20,7 +20,7 @@ export interface Dict {
 export class FlowableTaskComponent implements AfterViewInit {
 
   pageEvent: PageEvent = new PageEvent();
-  assignee: string = '';
+  assignee: string = 'user2';
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;

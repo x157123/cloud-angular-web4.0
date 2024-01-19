@@ -3,64 +3,63 @@
     <app-flowableTask-edit #appFlowableTaskEdit></app-flowableTask-edit>
   </mat-drawer>
   <mat-drawer-content>
-    <mat-toolbar>
-      <input matInput  [(ngModel)] ="assignee" placeholder="查询条件">
-      <button mat-raised-button color="primary" (click)="queryData()">查询</button>
-    </mat-toolbar>
-    <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
-    <div class="table-container">
-      <div class="tables-container">
-        <div class="tables-container-content">
-        <mat-table [dataSource]="dataSource">
-          <ng-container matColumnDef="id" >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> id </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
-          </ng-container>
+    <div class="mat-drawer-content-toolbar">
+      <mat-toolbar>
+        <input matInput  [(ngModel)] ="assignee" placeholder="查询条件">
+        <button mat-raised-button color="primary" (click)="queryData()">查询</button>
+      </mat-toolbar>
+      <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
+    </div>
+    <div class="mat-drawer-content-content">
+      <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <mat-header-cell mat-header-cell *matHeaderCellDef> id </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="taskName"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 任务名称 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.taskName}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="taskName"  >
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 任务名称 </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.taskName}} </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="processName"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 名称 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.processName}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="processName"  >
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 名称 </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.processName}} </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="status"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 状态 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.status}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="status"  >
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 状态 </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.status}} </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="startTime"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 开始时间 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.startTime}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="startTime"  >
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 开始时间 </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.startTime}} </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="processInstanceId"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 流程id </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.processInstanceId}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="processInstanceId"  >
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 流程id </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.processInstanceId}} </mat-cell>
+        </ng-container>
 
 
-          <ng-container matColumnDef="operate">
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <a mat-icon-button color="primary" (click)="openHandleSidenav(element.id, false)"  title="办理">
-                <mat-icon>open_in_new</mat-icon>
-              </a>
-            </mat-cell>
-          </ng-container>
-          <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-        </div>
-      </div>
+        <ng-container matColumnDef="operate">
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a mat-icon-button color="primary" (click)="openHandleSidenav(element.id, false)"  title="办理">
+              <mat-icon>open_in_new</mat-icon>
+            </a>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+    <div class="mat-drawer-content-footer">
       <mat-paginator [pageSizeOptions]="[10, 15, 20]" [length]="dataLength"
                      showFirstLastButtons
                      [pageIndex]="pageIndex"
-                     (page)="handlePageEvent($event)"
-                     aria-label="Select page of periodic elements">
+                     (page)="handlePageEvent($event)">
       </mat-paginator>
     </div>
   </mat-drawer-content>

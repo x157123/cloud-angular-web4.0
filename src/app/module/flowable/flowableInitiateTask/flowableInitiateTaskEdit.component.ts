@@ -86,9 +86,9 @@ export class FlowableInitiateTaskEditComponent {
 
   defDataElement: DataElement = {
     flowKey: '',
-    day: 0,
-    userId: '',
-    assignee: '',
+    day: 5,
+    userId: 'user1',
+    assignee: 'user2',
   };
 
   dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));

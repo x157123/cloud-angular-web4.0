@@ -19,7 +19,7 @@ export interface Dict {
 })
 export class FlowableInitiateTaskComponent implements AfterViewInit {
 
-  user: string = '';
+  user: string = 'user1';
   pageEvent: PageEvent = new PageEvent();
   dataLength: number = 0;
   pageIndex: number = 0;
@@ -68,23 +68,6 @@ export class FlowableInitiateTaskComponent implements AfterViewInit {
         this.hideProgressBar();
       }
     });
-  }
-  delById(id:number) {
-    if(id != null && id>0){
-      let param = new URLSearchParams();
-      param.set('ids', String(id));
-      this.httpGlobalTool.post("/api/tests/flowableInitiateTask/removeByIds",param).subscribe({
-        next: (res) => {
-          this._alertService.success("删除成功")
-          this.queryData()
-        },
-        error: (e) => {
-          this._alertService.error(e.error.error)
-        },
-        complete: () => {
-        }
-      });
-    }
   }
 
   handlePageEvent(e: PageEvent) {
