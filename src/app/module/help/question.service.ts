@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { DropdownQuestion } from './question-dropdown';
 import { QuestionBase } from './question-base';
-import { TextboxQuestion } from './question-textbox';
+import { TextBoxQuestion } from './question-textbox';
 import { of } from 'rxjs';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class QuestionService {
         order: 3,
       }),
 
-      new TextboxQuestion({
+      new TextBoxQuestion({
         key: 'firstName',
         label: 'First name',
         value: 'Bombasto',
@@ -30,7 +30,7 @@ export class QuestionService {
         order: 1,
       }),
 
-      new TextboxQuestion({
+      new TextBoxQuestion({
         key: 'firstNames',
         label: 'First name',
         value: 'Bombasto',
@@ -38,7 +38,7 @@ export class QuestionService {
         order: 4,
       }),
 
-      new TextboxQuestion({
+      new TextBoxQuestion({
         key: 'emailAddress',
         label: 'Email',
         type: 'email',

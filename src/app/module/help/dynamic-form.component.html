@@ -1,11 +1,20 @@
-<div>
+<div class="edit-content-info">
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
 
-    <div *ngFor="let question of questions" class="form-row">
-      <app-question [question]="question" [form]="form"></app-question>
-    </div>
+    <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px" >
+      <ng-container *ngFor="let question of questions">
+        <mat-grid-tile colspan="4" class="title">{{question.label}}:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content" [ngSwitch]="question.controlType">
+          <input *ngSwitchCase="'textBox'" [formControlName]="question.key"
+                 [id]="question.key" [type]="question.type">
 
-    <div class="form-row">
+          <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key">
+            <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+          </select>
+        </mat-grid-tile>
+      </ng-container>
+    </mat-grid-list>
+    <div class="form-row" style="padding-top: 400px">
       <button type="submit" [disabled]="!form.valid">Save</button>
     </div>
   </form>
@@ -14,10 +23,3 @@
     <strong>Saved the following values</strong><br>{{payLoad}}
   </div>
 </div>
-
-
-<!-- 
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
--->
