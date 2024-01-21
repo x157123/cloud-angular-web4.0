@@ -18,7 +18,6 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
 import {DynamicFormComponent} from "./dynamic-form.component";
-import {DynamicFormQuestionComponent} from "./dynamic-form-question.component";
 import {HelpComponent} from "./help.component";
 
 @NgModule({
@@ -43,7 +42,7 @@ import {HelpComponent} from "./help.component";
     RouterModule.forChild(HelpRoutes),
     ReactiveFormsModule,
   ],
-  declarations: [HelpComponent, DynamicFormComponent, DynamicFormQuestionComponent ],
+  declarations: [HelpComponent, DynamicFormComponent ],
 })
 export class HelpModule {
 
