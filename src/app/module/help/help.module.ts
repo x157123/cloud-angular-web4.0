@@ -19,6 +19,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
 import {DynamicFormComponent} from "./dynamic-form.component";
 import {HelpComponent} from "./help.component";
+import {MatCheckbox} from "@angular/material/checkbox";
+import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 
 @NgModule({
   imports: [
@@ -41,6 +43,9 @@ import {HelpComponent} from "./help.component";
     MatListModule,
     RouterModule.forChild(HelpRoutes),
     ReactiveFormsModule,
+    MatCheckbox,
+    MatRadioGroup,
+    MatRadioButton,
   ],
   declarations: [HelpComponent, DynamicFormComponent ],
 })

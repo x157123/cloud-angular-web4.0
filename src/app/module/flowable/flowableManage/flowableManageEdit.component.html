@@ -11,13 +11,16 @@
   <ng-container>
     <div class="edit-content-info">
       <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
+
         <mat-grid-tile colspan="4" class="title">流程:</mat-grid-tile>
         <mat-grid-tile colspan="12" class="content">
           <mat-form-field class="example-full-width">
             <mat-label>流程xml</mat-label>
-            <textarea matInput [(ngModel)]="dataElement.bpmnXmlStr" [readonly]="show"> </ textarea >
+            <textarea matInput [(ngModel)]="dataElement.bpmnXmlStr" [readonly]="show"> </textarea>
           </mat-form-field>
         </mat-grid-tile>
+
+
       </mat-grid-list>
     </div>
     <mat-divider/>

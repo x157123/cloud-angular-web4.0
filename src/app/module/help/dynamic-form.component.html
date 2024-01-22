@@ -10,14 +10,26 @@
           <ng-container *ngFor="let question of questions">
             <mat-grid-tile colspan="2" class="title">{{question.label}}:</mat-grid-tile>
             <mat-grid-tile colspan="6" class="content" [ngSwitch]="question.controlType">
-              <mat-form-field>
-                <input matInput *ngSwitchCase="'textBox'" required  [formControlName]="question.key"
+              <mat-form-field *ngSwitchCase="'textBox'">
+                <input matInput required [formControlName]="question.key"
                        [id]="question.key" [type]="question.type">
-
-                <select matNativeControl  [id]="question.key" required  *ngSwitchCase="'dropdown'" [formControlName]="question.key">
-                  <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
-                </select>
               </mat-form-field>
+              <mat-form-field *ngSwitchCase="'selectBox'">
+                <mat-select [id]="question.key" required [formControlName]="question.key">
+                  <mat-option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <section *ngSwitchCase="'radioBox'">
+                <mat-radio-group [formControlName]="question.key">
+                  <mat-radio-button [id]="question.key" *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</mat-radio-button>
+                </mat-radio-group>
+              </section>
+
+              <section  *ngSwitchCase="'checkBox'">
+                <mat-checkbox [id]="question.key" [formControlName]="question.key" *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</mat-checkbox>
+              </section>
+
             </mat-grid-tile>
           </ng-container>
         </mat-grid-list>

@@ -29,6 +29,8 @@ export class DynamicFormComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       this.payLoad = JSON.stringify(this.form.getRawValue());
+      // @ts-ignore
+      console.log(this.form.get('brave22').value)
     } else {
       this.payLoad = "数据错误";
     }
