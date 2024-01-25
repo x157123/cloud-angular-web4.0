@@ -48,7 +48,6 @@ export class QuestionService {
       new TextBoxQuestion({
         key: 'firstName',
         label: 'First name',
-        value: 'Bombasto',
         required: true,
         order: 1,
       }),
@@ -56,7 +55,6 @@ export class QuestionService {
       new TextBoxQuestion({
         key: 'firstNames',
         label: 'First name',
-        value: 'Bombasto',
         required: true,
         order: 4,
       }),
@@ -65,6 +63,7 @@ export class QuestionService {
         key: 'emailAddress',
         label: 'Email',
         type: 'email',
+        validator: 'email',
         order: 2,
       }),
     ];

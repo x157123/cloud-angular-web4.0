@@ -22,26 +22,13 @@ export class DynamicFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
-
-    this.form.addControl('emailAddress', new FormControl('', [Validators.required, this.emailValidator]));
   }
 
   onSubmit() {
     if (this.form.valid) {
       this.payLoad = JSON.stringify(this.form.getRawValue());
-      // @ts-ignore
-      console.log(this.form.get('brave22').value)
     } else {
       this.payLoad = "数据错误";
     }
-  }
-
-  emailValidator(control: AbstractControl): ValidationErrors | null {
-    if (!control.value.includes('@')) {
-      this.payLoad = "数据错误";
-      return { emailAddress: { message: '请输入有效的电子邮件地址' } };
-    }
-    this.payLoad = "数据错误";
-    return null;
   }
 }

@@ -11,8 +11,7 @@
             <mat-grid-tile colspan="2" class="title">{{question.label}}:</mat-grid-tile>
             <mat-grid-tile colspan="6" class="content" [ngSwitch]="question.controlType">
               <mat-form-field *ngSwitchCase="'textBox'">
-                <input matInput required [formControlName]="question.key"
-                       [id]="question.key" [type]="question.type">
+                <input matInput [formControlName]="question.key" [id]="question.key" [type]="question.type">
               </mat-form-field>
               <mat-form-field *ngSwitchCase="'selectBox'">
                 <mat-select [id]="question.key" required [formControlName]="question.key">
