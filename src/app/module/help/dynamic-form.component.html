@@ -6,27 +6,34 @@
   <ng-container>
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
       <div class="edit-content-info">
-        <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
+        <mat-grid-list cols="16" rowHeight="72px" gutterSize="5px">
           <ng-container *ngFor="let question of questions">
             <mat-grid-tile colspan="2" class="title">{{question.label}}:</mat-grid-tile>
             <mat-grid-tile colspan="6" class="content" [ngSwitch]="question.controlType">
+
               <mat-form-field *ngSwitchCase="'textBox'">
-                <input matInput [formControlName]="question.key" [id]="question.key" [type]="question.type">
+                <mat-label>{{question.label}}</mat-label>
+                <input matInput [formControlName]="question.key" [id]="question.key" [type]="question.type" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{question.label}}必填</mat-error>
               </mat-form-field>
+
               <mat-form-field *ngSwitchCase="'selectBox'">
                 <mat-select [id]="question.key" required [formControlName]="question.key">
                   <mat-option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</mat-option>
                 </mat-select>
+                <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{question.label}}必选</mat-error>
               </mat-form-field>
 
               <section *ngSwitchCase="'radioBox'">
                 <mat-radio-group [formControlName]="question.key">
                   <mat-radio-button [id]="question.key" *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</mat-radio-button>
                 </mat-radio-group>
+                <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{question.label}}必选</mat-error>
               </section>
 
               <section  *ngSwitchCase="'checkBox'">
                 <mat-checkbox [id]="question.key" [formControlName]="question.key" *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</mat-checkbox>
+                <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{question.label}}必选</mat-error>
               </section>
 
             </mat-grid-tile>

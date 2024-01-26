@@ -16,21 +16,22 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 @NgModule({
   declarations: [
-    UserComponent
+
   ],
-    imports: [
-        CommonModule,
-        MatCardModule,
-        MatButtonModule,
-        MatInputModule,
-        MatPaginatorModule,
-        MatTableModule,
-        MatToolbarModule,
-        MatFormFieldModule,
-        MatIconModule,
-        RouterModule.forChild(UserRoutes),
-        MatButtonToggleModule,
-    ]
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatIconModule,
+    RouterModule.forChild(UserRoutes),
+    MatButtonToggleModule,
+    UserComponent,
+  ]
 })
 export class UserModule {
 

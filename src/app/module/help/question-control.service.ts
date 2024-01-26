@@ -19,8 +19,9 @@ export class QuestionControlService {
         validator.push(Validators.required);
       }
       if(question.validator === 'email'){
-        validator.push(this.emailValidator);
+        validator.push(Validators.email);
       }
+      //添加验证
       group[question.key] = validator.length>0 ? new FormControl(question.value || '', validator)
                                               : new FormControl(question.value || '');
     });
@@ -30,10 +31,12 @@ export class QuestionControlService {
 
   emailValidator(control: AbstractControl): ValidationErrors | null {
     if (!control.value.includes('@')) {
-      return { control: { message: '请输入有效的电子邮件地址' } };
+      return { emailError : { message: '请输入有效的电子邮件地址' } };
     }
     return null;
   }
 }
+
+
 
 
