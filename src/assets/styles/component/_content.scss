@@ -13,8 +13,27 @@
   height: 100%;
 }
 
-.mat-drawer-container .mat-drawer-content mat-drawer-content-toolbar{
+.mat-drawer-container .mat-drawer-content .mat-drawer-content-toolbar {
   flex: 0 0 auto;
+}
+
+.mat-drawer-container .mat-drawer-content .mat-drawer-content-toolbar .mat-drawer-content-toolbar-form {
+  background-color: white;
+  padding: 5px 5px 0 5px;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+
+  mat-form-field {
+    margin-right: 20px;
+  }
+
+  .form-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .mat-drawer-container .mat-drawer-content .mat-drawer-content-content {
@@ -53,3 +72,14 @@
   background-color: #555; /* 设置悬停状态下滑块的背景颜色 */
 }
 
+
+.mat-drawer-container .mat-drawer-content .mat-drawer-content-content .mat-mdc-table {
+  table-layout: fixed;
+}
+
+/* 列表不跨行 */
+.mat-drawer-container .mat-drawer-content .mat-drawer-content-content .mat-mdc-cell {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

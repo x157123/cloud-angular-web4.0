@@ -44,6 +44,11 @@ const routes: Routes = [
         path: 'flowableTask',
         loadChildren: () => import('./module/flowable/flowableTask/flowableTask.module').then(m => m.FlowableTaskModule)
       },
+      {
+        path: 'help',
+        loadChildren: () => import('./module/help/help.module').then(m => m.HelpModule)
+      },
+
     ]
   }];
 

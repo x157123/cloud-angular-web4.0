@@ -1,21 +1,11 @@
-
-<div class="content">
-
-  <mat-table cdkDropList cdkDropListOrientation="horizontal"
-             [dataSource]="dataSource">
-
-    <ng-container *ngFor="let column of columns; let i = index" [matColumnDef]="column.name">
-
-      <mat-header-cell *matHeaderCellDef cdkDrag cdkDragLockAxis="x">
-        {{ column.title }}
-      </mat-header-cell>
-
-      <mat-cell *matCellDef="let element">{{ element[column.name] }}</mat-cell>
-
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns" class="tableHeaderRow" #tableHeaderRow></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-  </mat-table>
-</div>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+    @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+      <mat-error>Please enter a valid email address</mat-error>
+    }
+    @if (emailFormControl.hasError('required')) {
+      <mat-error>Email is required</mat-error>
+    }
+  </mat-form-field>
+</form>

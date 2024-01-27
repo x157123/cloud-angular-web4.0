@@ -64,7 +64,7 @@
     </div>
     <div class="mat-drawer-content-footer">
       <mat-paginator [pageSizeOptions]="[10, 15, 20]" [length]="dataLength"
-                     showFirstLastButtons
+                     [showFirstLastButtons]="true"
                      [pageIndex]="pageIndex"
                      (page)="handlePageEvent($event)">
       </mat-paginator>
