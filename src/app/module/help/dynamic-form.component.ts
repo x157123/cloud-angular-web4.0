@@ -10,7 +10,7 @@ import {
 
 import {QuestionBase} from './question-base';
 import {QuestionControlService} from './question-control.service';
-import {ErrorStateMatcher} from '@angular/material/core';
+import {TextBoxQuestion} from "./question-textbox";
 
 @Component({
   selector: 'app-dynamic-form',
@@ -28,7 +28,6 @@ export class DynamicFormComponent implements OnInit {
   constructor(private qcs: QuestionControlService) {
   }
 
-  matcher = new MyErrorStateMatcher();
 
   ngOnInit() {
     this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
@@ -41,12 +40,17 @@ export class DynamicFormComponent implements OnInit {
       this.payLoad = "数据错误";
     }
   }
-}
 
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  add(){
+    this.questions?.push(
+      new TextBoxQuestion({
+        key: 'phones',
+        label: '电话号码s',
+        validator: 'phone',
+        required: true,
+        order: 10,
+      }),
+    );
+    this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
   }
 }

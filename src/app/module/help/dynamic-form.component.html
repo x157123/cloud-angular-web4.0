@@ -13,8 +13,10 @@
 
               <mat-form-field *ngSwitchCase="'textBox'">
                 <mat-label>{{question.label}}</mat-label>
-                <input matInput [formControlName]="question.key" [id]="question.key" [type]="question.type" [errorStateMatcher]="matcher">
+                <input matInput [formControlName]="question.key" [id]="question.key" [type]="question.type">
                 <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{question.label}}必填</mat-error>
+                <mat-error *ngIf="form.get(question.key)?.hasError('phone')">{{ form.get(question.key)?.errors?.['message'] }}</mat-error>
+                <mat-error *ngIf="form.get(question.key)?.hasError('email')">请输入有效的邮箱地址</mat-error>
               </mat-form-field>
 
               <mat-form-field *ngSwitchCase="'selectBox'">
@@ -48,6 +50,7 @@
       <div class="edit-content-bottom">
         <mat-card-actions align="start">
           <button mat-button type="submit">提交</button>
+          <button mat-button (click)="add()">添加一个</button>
         </mat-card-actions>
       </div>
     </form>

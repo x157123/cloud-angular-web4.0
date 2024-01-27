@@ -66,6 +66,14 @@ export class QuestionService {
         required: true,
         order: 3,
       }),
+
+      new TextBoxQuestion({
+        key: 'phone',
+        label: '电话号码',
+        validator: 'phone',
+        required: true,
+        order: 3,
+      }),
     ];
 
     return of(questions.sort((a, b) => a.order - b.order));
