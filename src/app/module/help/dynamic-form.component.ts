@@ -1,12 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  FormGroupDirective, NgForm,
-  ValidationErrors,
-  Validators
-} from '@angular/forms';
+import {FormGroup,} from '@angular/forms';
 
 import {QuestionBase} from './question-base';
 import {QuestionControlService} from './question-control.service';
@@ -41,15 +34,9 @@ export class DynamicFormComponent implements OnInit {
     }
   }
 
-  add(){
+  add() {
     this.questions?.push(
-      new TextBoxQuestion({
-        key: 'phones',
-        label: '电话号码s',
-        validator: 'phone',
-        required: true,
-        order: 10,
-      }),
+      TextBoxQuestion.getInstance('phones','电话号码',10,false,'phone')
     );
     this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
   }

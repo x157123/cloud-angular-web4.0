@@ -45,35 +45,16 @@ export class QuestionService {
         ],
         order: 5,
       }),
-      new TextBoxQuestion({
-        key: 'firstName',
-        label: 'First name',
-        required: true,
-        order: 1,
-      }),
 
-      new TextBoxQuestion({
-        key: 'firstNames',
-        label: 'First name',
-        required: true,
-        order: 2,
-      }),
+      TextBoxQuestion.getInstance('name','姓名',1,true,''),
 
-      new TextBoxQuestion({
-        key: 'emailAddress',
-        label: 'Email',
-        validator: 'email',
-        required: true,
-        order: 3,
-      }),
 
-      new TextBoxQuestion({
-        key: 'phone',
-        label: '电话号码',
-        validator: 'phone',
-        required: true,
-        order: 3,
-      }),
+      TextBoxQuestion.getInstance('phones','电话号码',2,true,'phone'),
+
+
+      TextBoxQuestion.getInstance('email','电转邮箱',3,true,'email'),
+
+
     ];
 
     return of(questions.sort((a, b) => a.order - b.order));
