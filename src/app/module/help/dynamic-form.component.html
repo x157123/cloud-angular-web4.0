@@ -20,7 +20,7 @@
               </mat-form-field>
 
               <mat-form-field *ngSwitchCase="'selectBox'">
-                <mat-select [id]="question.key" required [formControlName]="question.key">
+                <mat-select [id]="question.key" [formControlName]="question.key">
                   <mat-option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{question.label}}必选</mat-error>

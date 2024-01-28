@@ -18,6 +18,8 @@ export class DynamicFormComponent implements OnInit {
   payLoad = '';
   visibilityEditData: { [p: string]: any } | null | undefined;
 
+  id = 1;
+
   constructor(private qcs: QuestionControlService) {
   }
 
@@ -35,9 +37,10 @@ export class DynamicFormComponent implements OnInit {
   }
 
   add() {
-    this.questions?.push(
-      TextBoxQuestion.getInstance('phones','电话号码',10,false,'phone')
-    );
-    this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
+    this.id +=1;
+    let textBox = TextBoxQuestion.getInstance('phones' + this.id, '电话号码' + this.id, 10, false, 'phone');
+    this.questions?.push(textBox);
+    this.qcs.addCustomValidator(this.form, textBox);
+    // this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
   }
 }
