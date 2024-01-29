@@ -4,9 +4,9 @@
   </div>
   <mat-divider/>
   <ng-container>
-    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <form (ngSubmit)="onSubmit()"  [formGroup]="form">
       <div class="edit-content-info">
-        <mat-grid-list cols="16" rowHeight="72px" gutterSize="5px">
+        <mat-grid-list cols="16" rowHeight="70px" gutterSize="5px">
           <ng-container *ngFor="let question of questions">
             <ng-container *ngIf="question.controlType === 'textBox'">
               <mat-grid-tile colspan="2" class="title">{{ question.label }}:</mat-grid-tile>
@@ -62,16 +62,27 @@
             </ng-container>
 
             <ng-container *ngIf="question.controlType === 'textareaBox'">
-              <mat-grid-tile colspan="2" class="title">{{ question.label }}:</mat-grid-tile>
-              <mat-grid-tile colspan="14" class="content">
+              <mat-grid-tile rowspan="2" colspan="2"  class="title">{{ question.label }}:</mat-grid-tile>
+              <mat-grid-tile rowspan="2" colspan="14" class="content">
                 <mat-form-field>
-                  <textarea matInput [id]="question.key" [formControlName]="question.key"
+                  <textarea style="height: 100px" maxlength="256" matInput [id]="question.key" [formControlName]="question.key"
                             placeholder="{{ question.label }}......"></textarea>
+                  <mat-hint align="end">{{ form.get(question.key)?.value?.length }} / 256</mat-hint>
                 </mat-form-field>
               </mat-grid-tile>
             </ng-container>
           </ng-container>
         </mat-grid-list>
+
+        <div class="flex-container">
+          <div class="flex-title">ming:</div>
+          <div class="flex-line">
+            <mat-form-field class="example-full-width">
+              <mat-label>Leave a comment</mat-label>
+              <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+          </div>
+        </div>
 
         <div *ngIf="payLoad" class="form-row">
           <strong>Saved the following values</strong><br>{{ payLoad }}
