@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup,} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
 
 import {QuestionBase} from './question-base';
 import {QuestionControlService} from './question-control.service';
@@ -20,7 +20,7 @@ export class DynamicFormComponent implements OnInit {
 
   id = 1;
 
-  constructor(private qcs: QuestionControlService) {
+  constructor(private qcs: QuestionControlService, private fb: FormBuilder) {
   }
 
 
@@ -41,6 +41,5 @@ export class DynamicFormComponent implements OnInit {
     let textBox = TextBoxQuestion.getInstance('phones' + this.id, '电话号码' + this.id, 10, false, 'phone');
     this.questions?.push(textBox);
     this.qcs.addCustomValidator(this.form, textBox);
-    // this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
   }
 }

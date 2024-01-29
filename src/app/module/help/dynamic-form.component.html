@@ -1,6 +1,6 @@
 <div class="edit-content">
   <div class="edit-content-header">
-      修改
+    修改
   </div>
   <mat-divider/>
   <ng-container>
@@ -8,42 +8,73 @@
       <div class="edit-content-info">
         <mat-grid-list cols="16" rowHeight="72px" gutterSize="5px">
           <ng-container *ngFor="let question of questions">
-            <mat-grid-tile colspan="2" class="title">{{question.label}}:</mat-grid-tile>
-            <mat-grid-tile colspan="6" class="content" [ngSwitch]="question.controlType">
+            <ng-container *ngIf="question.controlType === 'textBox'">
+              <mat-grid-tile colspan="2" class="title">{{ question.label }}:</mat-grid-tile>
+              <mat-grid-tile colspan="6" class="content">
+                <mat-form-field>
+                  <mat-label>{{ question.label }}</mat-label>
+                  <input matInput [formControlName]="question.key" [id]="question.key" [type]="question.type">
+                  <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{ question.label }}必填</mat-error>
+                  <mat-error
+                    *ngIf="form.get(question.key)?.hasError('phone')">{{ form.get(question.key)?.errors?.['message'] }}
+                  </mat-error>
+                  <mat-error *ngIf="form.get(question.key)?.hasError('email')">请输入有效的邮箱地址</mat-error>
+                </mat-form-field>
+              </mat-grid-tile>
+            </ng-container>
 
-              <mat-form-field *ngSwitchCase="'textBox'">
-                <mat-label>{{question.label}}</mat-label>
-                <input matInput [formControlName]="question.key" [id]="question.key" [type]="question.type">
-                <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{question.label}}必填</mat-error>
-                <mat-error *ngIf="form.get(question.key)?.hasError('phone')">{{ form.get(question.key)?.errors?.['message'] }}</mat-error>
-                <mat-error *ngIf="form.get(question.key)?.hasError('email')">请输入有效的邮箱地址</mat-error>
-              </mat-form-field>
+            <ng-container *ngIf="question.controlType === 'selectBox'">
+              <mat-grid-tile colspan="2" class="title">{{ question.label }}:</mat-grid-tile>
+              <mat-grid-tile colspan="6" class="content">
+                <mat-form-field>
+                  <mat-select [id]="question.key" [formControlName]="question.key">
+                    <mat-option *ngFor="let opt of question.options" [value]="opt.key">{{ opt.value }}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{ question.label }}必选</mat-error>
+                </mat-form-field>
+              </mat-grid-tile>
+            </ng-container>
 
-              <mat-form-field *ngSwitchCase="'selectBox'">
-                <mat-select [id]="question.key" [formControlName]="question.key">
-                  <mat-option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{question.label}}必选</mat-error>
-              </mat-form-field>
+            <ng-container *ngIf="question.controlType === 'radioBox'">
+              <mat-grid-tile colspan="2" class="title">{{ question.label }}:</mat-grid-tile>
+              <mat-grid-tile colspan="6" class="content">
+                <section>
+                  <mat-radio-group [formControlName]="question.key">
+                    <mat-radio-button [id]="question.key" *ngFor="let opt of question.options"
+                                      [value]="opt.key">{{ opt.value }}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                  <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{ question.label }}必选</mat-error>
+                </section>
+              </mat-grid-tile>
+            </ng-container>
 
-              <section *ngSwitchCase="'radioBox'">
-                <mat-radio-group [formControlName]="question.key">
-                  <mat-radio-button [id]="question.key" *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</mat-radio-button>
-                </mat-radio-group>
-                <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{question.label}}必选</mat-error>
-              </section>
+            <ng-container *ngIf="question.controlType === 'checkBox'">
+              <mat-grid-tile colspan="2" class="title">{{ question.label }}:</mat-grid-tile>
+              <mat-grid-tile colspan="6" class="content">
+                <section>
+                  <mat-checkbox [id]="question.key" [formControlName]="question.key"
+                                *ngFor="let opt of question.options" [value]="opt.key">{{ opt.value }}
+                  </mat-checkbox>
+                  <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{ question.label }}必选</mat-error>
+                </section>
+              </mat-grid-tile>
+            </ng-container>
 
-              <section  *ngSwitchCase="'checkBox'">
-                <mat-checkbox [id]="question.key" [formControlName]="question.key" *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</mat-checkbox>
-                <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{question.label}}必选</mat-error>
-              </section>
-
-            </mat-grid-tile>
+            <ng-container *ngIf="question.controlType === 'textareaBox'">
+              <mat-grid-tile colspan="2" class="title">{{ question.label }}:</mat-grid-tile>
+              <mat-grid-tile colspan="14" class="content">
+                <mat-form-field>
+                  <textarea matInput [id]="question.key" [formControlName]="question.key"
+                            placeholder="{{ question.label }}......"></textarea>
+                </mat-form-field>
+              </mat-grid-tile>
+            </ng-container>
           </ng-container>
         </mat-grid-list>
 
         <div *ngIf="payLoad" class="form-row">
-          <strong>Saved the following values</strong><br>{{payLoad}}
+          <strong>Saved the following values</strong><br>{{ payLoad }}
         </div>
       </div>
       <mat-divider/>

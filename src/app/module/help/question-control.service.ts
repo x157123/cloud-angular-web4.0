@@ -48,13 +48,7 @@ export class QuestionControlService {
   addCustomValidator(form: FormGroup, question: QuestionBase<string>) {
     // 添加自定义校验器
     let validator = this.getValidator(question);
-    console.log('1111111111111111', validator)
-    form.addControl(question.value || '', validator.length > 0 ? new FormControl(question.value || '', validator)
-      : new FormControl(question.value || ''));
-    console.log('2222222222222222222', form)
-    // 更新校验状态
-    form.updateValueAndValidity();
-    console.log('3333333333333333333')
+    form.addControl(question.key, new FormControl('', validator))
   }
 
   removeCustomValidator(form: FormGroup, question: QuestionBase<string>) {
