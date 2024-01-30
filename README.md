@@ -29,6 +29,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## 更新到最新版本
 ng update @angular/cdk @angular/cli @angular/core @angular/material --allow-dirty
 
+## 添加 tailwindcss  [官网](https://tailwindcss.com/docs/guides/angular)
+pm install -D tailwindcss postcss autoprefixer
+
 1、创建项目命令 ng new 项目名
 
 2、创建模块路由命令 ng g m 模块名 --routing

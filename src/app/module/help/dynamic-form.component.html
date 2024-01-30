@@ -66,7 +66,7 @@
               <mat-grid-tile rowspan="2" colspan="14" class="content">
                 <mat-form-field>
                   <textarea style="height: 100px" maxlength="256" matInput [id]="question.key" [formControlName]="question.key"
-                            placeholder="{{ question.label }}......"></textarea>
+                            placeholder="{{ question.label }}"></textarea>
                   <mat-hint align="end">{{ form.get(question.key)?.value?.length }} / 256</mat-hint>
                 </mat-form-field>
               </mat-grid-tile>
@@ -74,6 +74,50 @@
           </ng-container>
         </mat-grid-list>
 
+        <div class="grid grid-cols-4 gap-4">
+          <div class="">
+            <mat-form-field class="example-full-width">
+              <mat-label>Favorite food</mat-label>
+              <input matInput placeholder="Ex. Pizza" value="Sushi">
+            </mat-form-field>
+          </div>
+          <div class="">
+            <mat-form-field class="example-full-width">
+              <mat-label>Favorite food</mat-label>
+              <input matInput placeholder="Ex. Pizza" value="Sushi">
+            </mat-form-field>
+          </div>
+          <div class="col-span-2">
+            <mat-form-field class="example-full-width">
+              <mat-label>Favorite food</mat-label>
+              <input matInput placeholder="Ex. Pizza" value="Sushi">
+            </mat-form-field>
+          </div>
+          <div class="col-span-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Leave a comment</mat-label>
+              <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-span-2">
+            <mat-form-field class="example-full-width">
+              <mat-label>Favorite food</mat-label>
+              <input matInput placeholder="Ex. Pizza" value="Sushi">
+            </mat-form-field>
+          </div>
+          <div class="">
+            <mat-form-field class="example-full-width">
+              <mat-label>Favorite food</mat-label>
+              <input matInput placeholder="Ex. Pizza" value="Sushi">
+            </mat-form-field>
+          </div>
+          <div class="">
+            <mat-form-field class="example-full-width">
+              <mat-label>Favorite food</mat-label>
+              <input matInput placeholder="Ex. Pizza" value="Sushi">
+            </mat-form-field>
+          </div>
+        </div>
 
 
         <div *ngIf="payLoad" class="form-row">
