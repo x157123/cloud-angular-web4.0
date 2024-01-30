@@ -5,126 +5,92 @@
   <mat-divider/>
   <ng-container>
     <form (ngSubmit)="onSubmit()"  [formGroup]="form">
-      <div class="edit-content-info">
-        <mat-grid-list cols="16" rowHeight="70px" gutterSize="5px">
-          <ng-container *ngFor="let question of questions">
-            <ng-container *ngIf="question.controlType === 'textBox'">
-              <mat-grid-tile colspan="2" class="title">{{ question.label }}:</mat-grid-tile>
-              <mat-grid-tile colspan="6" class="content">
-                <mat-form-field>
-                  <mat-label>{{ question.label }}</mat-label>
-                  <input matInput [formControlName]="question.key" [id]="question.key" [type]="question.type">
-                  <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{ question.label }}必填</mat-error>
-                  <mat-error
-                    *ngIf="form.get(question.key)?.hasError('phone')">{{ form.get(question.key)?.errors?.['message'] }}
-                  </mat-error>
-                  <mat-error *ngIf="form.get(question.key)?.hasError('email')">请输入有效的邮箱地址</mat-error>
-                </mat-form-field>
-              </mat-grid-tile>
-            </ng-container>
-
-            <ng-container *ngIf="question.controlType === 'selectBox'">
-              <mat-grid-tile colspan="2" class="title">{{ question.label }}:</mat-grid-tile>
-              <mat-grid-tile colspan="6" class="content">
-                <mat-form-field>
-                  <mat-select [id]="question.key" [formControlName]="question.key">
-                    <mat-option *ngFor="let opt of question.options" [value]="opt.key">{{ opt.value }}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{ question.label }}必选</mat-error>
-                </mat-form-field>
-              </mat-grid-tile>
-            </ng-container>
-
-            <ng-container *ngIf="question.controlType === 'radioBox'">
-              <mat-grid-tile colspan="2" class="title">{{ question.label }}:</mat-grid-tile>
-              <mat-grid-tile colspan="6" class="content">
-                <section>
-                  <mat-radio-group [formControlName]="question.key">
-                    <mat-radio-button [id]="question.key" *ngFor="let opt of question.options"
-                                      [value]="opt.key">{{ opt.value }}
-                    </mat-radio-button>
-                  </mat-radio-group>
-                  <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{ question.label }}必选</mat-error>
-                </section>
-              </mat-grid-tile>
-            </ng-container>
-
-            <ng-container *ngIf="question.controlType === 'checkBox'">
-              <mat-grid-tile colspan="2" class="title">{{ question.label }}:</mat-grid-tile>
-              <mat-grid-tile colspan="6" class="content">
-                <section>
-                  <mat-checkbox [id]="question.key" [formControlName]="question.key"
-                                *ngFor="let opt of question.options" [value]="opt.key">{{ opt.value }}
-                  </mat-checkbox>
-                  <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{ question.label }}必选</mat-error>
-                </section>
-              </mat-grid-tile>
-            </ng-container>
-
-            <ng-container *ngIf="question.controlType === 'textareaBox'">
-              <mat-grid-tile rowspan="2" colspan="2"  class="title">{{ question.label }}:</mat-grid-tile>
-              <mat-grid-tile rowspan="2" colspan="14" class="content">
-                <mat-form-field>
-                  <textarea style="height: 100px" maxlength="256" matInput [id]="question.key" [formControlName]="question.key"
-                            placeholder="{{ question.label }}"></textarea>
-                  <mat-hint align="end">{{ form.get(question.key)?.value?.length }} / 256</mat-hint>
-                </mat-form-field>
-              </mat-grid-tile>
-            </ng-container>
-          </ng-container>
-        </mat-grid-list>
-
+      <div class="m-5">
         <div class="grid grid-cols-4 gap-4">
-          <div class="">
-            <mat-form-field class="example-full-width">
-              <mat-label>Favorite food</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="Sushi">
-            </mat-form-field>
-          </div>
-          <div class="">
-            <mat-form-field class="example-full-width">
-              <mat-label>Favorite food</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="Sushi">
-            </mat-form-field>
-          </div>
-          <div class="col-span-2">
-            <mat-form-field class="example-full-width">
-              <mat-label>Favorite food</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="Sushi">
-            </mat-form-field>
-          </div>
-          <div class="col-span-4">
-            <mat-form-field class="example-full-width">
-              <mat-label>Leave a comment</mat-label>
-              <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-            </mat-form-field>
-          </div>
-          <div class="col-span-2">
-            <mat-form-field class="example-full-width">
-              <mat-label>Favorite food</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="Sushi">
-            </mat-form-field>
-          </div>
-          <div class="">
-            <mat-form-field class="example-full-width">
-              <mat-label>Favorite food</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="Sushi">
-            </mat-form-field>
-          </div>
-          <div class="">
-            <mat-form-field class="example-full-width">
-              <mat-label>Favorite food</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="Sushi">
-            </mat-form-field>
-          </div>
+          <ng-container *ngFor="let question of questions">
+
+            <div class="col-span-2 m-1" *ngIf="question.controlType === 'textBox'">
+              <div class="flex">
+                <div class="w-20 h-14 flex items-center justify-end">{{ question.label }}：</div>
+                <div class="grow h-14">
+                  <mat-form-field class="mat-form-field-width">
+                    <mat-label>{{ question.label }}</mat-label>
+                    <input matInput [formControlName]="question.key" [id]="question.key" [type]="question.type">
+                    <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{ question.label }}必填</mat-error>
+                    <mat-error
+                      *ngIf="form.get(question.key)?.hasError('phone')">{{ form.get(question.key)?.errors?.['message'] }}
+                    </mat-error>
+                    <mat-error *ngIf="form.get(question.key)?.hasError('email')">请输入有效的邮箱地址</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-2 m-1" *ngIf="question.controlType === 'selectBox'">
+              <div class="flex">
+                <div class="w-20 h-14 flex items-center justify-end">{{ question.label }}：</div>
+                <div class="grow h-14">
+                  <mat-form-field class="mat-form-field-width">
+                    <mat-select [id]="question.key" [formControlName]="question.key">
+                      <mat-option *ngFor="let opt of question.options" [value]="opt.key">{{ opt.value }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{ question.label }}必选</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-2 m-1" *ngIf="question.controlType === 'radioBox'">
+              <div class="flex">
+                <div class="w-20 h-14 flex items-center justify-end">{{ question.label }}：</div>
+                <div class="grow h-14 flex items-center">
+                  <section>
+                    <mat-radio-group [formControlName]="question.key">
+                      <mat-radio-button [id]="question.key" *ngFor="let opt of question.options"
+                                        [value]="opt.key">{{ opt.value }}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                    <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{ question.label }}必选</mat-error>
+                  </section>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-2 m-1" *ngIf="question.controlType === 'checkBox'">
+              <div class="flex">
+                <div class="w-20 h-14 flex items-center justify-end">{{ question.label }}：</div>
+                <div class="grow h-14 flex items-center">
+                  <section>
+                    <mat-checkbox [id]="question.key" [formControlName]="question.key"
+                                  *ngFor="let opt of question.options" [value]="opt.key">{{ opt.value }}
+                    </mat-checkbox>
+                    <mat-error *ngIf="form.get(question.key)?.hasError('required')">{{ question.label }}必选</mat-error>
+                  </section>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-4 m-1" *ngIf="question.controlType === 'textareaBox'">
+              <div class="flex">
+                <div class="w-20 flex items-center justify-end">{{ question.label }}：</div>
+                <div class="grow">
+                  <mat-form-field class="mat-form-field-width">
+                    <textarea maxlength="256" matInput [id]="question.key" [formControlName]="question.key"
+                              placeholder="{{ question.label }}"></textarea>
+                    <mat-hint align="end">{{ form.get(question.key)?.value?.length }} / 256</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </ng-container>
         </div>
 
+        <mat-divider/>
 
         <div *ngIf="payLoad" class="form-row">
           <strong>Saved the following values</strong><br>{{ payLoad }}
         </div>
       </div>
-      <mat-divider/>
       <div class="edit-content-bottom">
         <mat-card-actions align="start">
           <button mat-button type="submit">提交</button>
