@@ -21,10 +21,10 @@ export class QuestionService {
       TextBoxQuestion.getInstance('phones', '电话号码', 2, true, 'phone', 0, 0),
 
 
-      TextBoxQuestion.getInstance('email', '电转邮箱', 3, true, 'email', 0, 0),
+      TextBoxQuestion.getInstance('email', '电转邮箱', 6, true, 'email', 0, 0),
 
 
-      TextareaBoxQuestion.getInstance('bak', '备注', 5, true, 10, 300),
+      TextareaBoxQuestion.getInstance('bak', '备注', 7, true, 10, 300),
 
       RadioBoxQuestion.getInstance('sex', '性别', 4, true, [
         {key: '男', value: '男'},

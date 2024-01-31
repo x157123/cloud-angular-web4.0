@@ -19,25 +19,6 @@
             <textarea matInput [(ngModel)]="dataElement.bpmnXmlStr" [readonly]="show"> </textarea>
           </mat-form-field>
         </mat-grid-tile>
-
-        <mat-grid-tile colspan="4" class="title">test:</mat-grid-tile>
-        <mat-grid-tile colspan="12" class="content">
-<!--          <section class="example-section">-->
-<!--            <mat-checkbox class="example-margin" [(ngModel)]="showArr[0]">Checked</mat-checkbox>-->
-<!--            <mat-checkbox class="example-margin" [(ngModel)]="showArr[1]">Indeterminate</mat-checkbox>-->
-<!--          </section>-->
-<!--          <mat-error  *ngIf="selectFormControl.hasError('required')">请勾选此复选框。</mat-error>-->
-
-          <mat-form-field [formControl]="selectFormControl">
-            <mat-checkbox class="hcs-full-width">
-              同意使用条款
-            </mat-checkbox>
-            <mat-error *ngIf="selectFormControl.hasError('required')">
-              请同意使用条款
-            </mat-error>
-          </mat-form-field>
-
-        </mat-grid-tile>
       </mat-grid-list>
     </div>
     <mat-divider/>
