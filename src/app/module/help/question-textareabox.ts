@@ -8,12 +8,14 @@ export class TextareaBoxQuestion extends QuestionBase<string> {
     super({});
   }
 
-  static getInstance(key: string, label: string, order: number, required: boolean): TextareaBoxQuestion {
+  static getInstance(key: string, label: string, order: number, required: boolean, minLength: number, maxLength: number): TextareaBoxQuestion {
     TextareaBoxQuestion.instance = new TextareaBoxQuestion();
     TextareaBoxQuestion.instance.controlType = 'textareaBox'
     TextareaBoxQuestion.instance.key = key;
     TextareaBoxQuestion.instance.label = label;
     TextareaBoxQuestion.instance.required = required;
+    TextareaBoxQuestion.instance.minLength = minLength;
+    TextareaBoxQuestion.instance.maxLength = maxLength;
     TextareaBoxQuestion.instance.order = order;
     return TextareaBoxQuestion.instance;
   }

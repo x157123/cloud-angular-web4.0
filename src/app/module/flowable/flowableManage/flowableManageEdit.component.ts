@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {Dict, FlowableManageComponent} from "./flowableManage.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@alert/alert.service";
+import {FormControl, Validators} from "@angular/forms";
 
 
 
@@ -16,6 +17,10 @@ export class FlowableManageEditComponent {
   visibilityEditData = { 'visibility': 'hidden'}
 
   show: boolean = true;
+
+  selectFormControl = new FormControl('', Validators.required);
+
+  showArr: boolean[] = [];
 
   constructor(private parent: FlowableManageComponent,private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService,private cd: ChangeDetectorRef) {

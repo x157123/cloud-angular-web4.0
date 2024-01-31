@@ -38,8 +38,13 @@ export class DynamicFormComponent implements OnInit {
 
   add() {
     this.id +=1;
-    let textBox = TextBoxQuestion.getInstance('phones' + this.id, '电话号码' + this.id, 10, false, 'phone');
+    let textBox = TextBoxQuestion.getInstance('phones' + this.id, '电话号码' + this.id, 10, false, 'phone',0,0);
     this.questions?.push(textBox);
     this.qcs.addCustomValidator(this.form, textBox);
+  }
+
+  getQuestionValueLength(key: string): number {
+    const control = this.form.get(key);
+    return control?.value ? control.value.length : 0;
   }
 }

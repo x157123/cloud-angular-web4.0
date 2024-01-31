@@ -1,0 +1,9 @@
+.mat-checkbox-wrapper {
+  position: relative;
+}
+
+.mat-error {
+  position: absolute;
+  bottom: -20px; /* 调整垂直方向的位置 */
+  color: red; /* 自定义错误消息的颜色 */
+}

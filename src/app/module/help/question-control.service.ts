@@ -33,6 +33,12 @@ export class QuestionControlService {
     if (question.validator === 'phone') {
       validator.push(this.phoneValidator);
     }
+    if (question.minLength > 0) {
+      validator.push(Validators.minLength(question.minLength));
+    }
+    if (question.maxLength > 0) {
+      validator.push(Validators.maxLength(question.maxLength));
+    }
     return validator;
   }
 

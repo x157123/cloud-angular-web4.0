@@ -7,6 +7,8 @@ export class QuestionBase<T> {
   controlType: string;
   type: string;
   validator: string;
+  minLength: number;
+  maxLength: number;
   options: {key: string, value: string}[];
 
   constructor(options: {
@@ -17,6 +19,8 @@ export class QuestionBase<T> {
       order?: number;
       controlType?: string;
       type?: string;
+      minLength?: number;
+      maxLength?: number;
       validator?: string;
       options?: {key: string, value: string}[];
     } = {}) {
@@ -27,6 +31,8 @@ export class QuestionBase<T> {
     this.order = options.order === undefined ? 1 : options.order;
     this.controlType = options.controlType || '';
     this.type = options.type || '';
+    this.minLength = options.minLength === undefined ? 0 : options.minLength;
+    this.maxLength = options.maxLength === undefined || options.maxLength == 0 ? 5000 : options.maxLength;
     this.validator = options.validator || '';
     this.options = options.options || [];
   }

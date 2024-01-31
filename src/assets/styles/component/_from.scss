@@ -116,3 +116,18 @@
 .mat-form-field-width{
   width: 100%;
 }
+
+
+/* 全局样式，修改所有 textarea 的滚动条 */
+textarea::-webkit-scrollbar {
+  width: 6px; /* 设置滚动条宽度 */
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: #888; /* 设置滚动条拖动手柄的背景色 */
+  border-radius: 6px; /* 设置滚动条拖动手柄的圆角 */
+}
+
+textarea::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* 设置滚动条轨道的背景色 */
+}

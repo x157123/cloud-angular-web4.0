@@ -15,10 +15,11 @@ import {FlowableManageEditComponent} from "./flowableManageEdit.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatGridListModule} from "@angular/material/grid-list";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
+import {MatCheckbox} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -44,6 +45,8 @@ import {MatListModule} from "@angular/material/list";
     MatSelectModule,
     MatListModule,
     RouterModule.forChild(FlowableManageRoutes),
+    MatCheckbox,
+    ReactiveFormsModule,
   ]
 })
 export class FlowableManageModule {
