@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {Dict, FlowableManageComponent} from "./flowableManage.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
-import {AlertService} from "@alert/alert.service";
+import {AlertService} from "@component/alert/alert.service";
 import {FormControl, Validators} from "@angular/forms";
 
 

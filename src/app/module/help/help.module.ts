@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from "@angular/router";
-import {HelpRoutes} from "./help.routing";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -17,10 +16,11 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
-import {HelpComponent} from "./help.component";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {DynamicFormComponent} from "@component/dynamic-form/dynamic-form.component";
+import {HelpComponent} from "./help.component";
+import {HelpRoutes} from "./help.routing";
 
 @NgModule({
   imports: [

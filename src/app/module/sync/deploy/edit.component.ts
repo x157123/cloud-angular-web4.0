@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {DeployComponent, SyncConfig} from "./deploy.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
-import {AlertService} from "@alert/alert.service";
+import {AlertService} from "@component/alert/alert.service";
 import {FormBuilder, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper'
 import {MatTabGroup} from "@angular/material/tabs";

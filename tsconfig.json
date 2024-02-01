@@ -22,7 +22,13 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@http/*": ["src/app/utils/*"],
+      "@component/*": ["src/app/component/*"],
+      "@alert/*": ["src/app/module/alert/*"],
+      "@common/*": ["src/app/common/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -30,12 +36,4 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "compilerOptions": {
-    "paths": {
-      "@http/*": ["src/app/utils/*"],
-      "@component/*": ["src/app/component/*"],
-      "@alert/*": ["src/app/module/alert/*"],
-      "@common/*": ["src/app/common/*"]
-    }
-  }
 }

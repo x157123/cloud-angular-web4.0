@@ -3,7 +3,7 @@ import {PageEvent} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDrawer} from "@angular/material/sidenav";
 import {EditComponent, TableConfig} from "./edit.component";
-import {AlertService} from "@alert/alert.service";
+import {AlertService} from "@component/alert/alert.service";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 
 @Component({

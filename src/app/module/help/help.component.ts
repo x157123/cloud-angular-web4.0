@@ -20,7 +20,7 @@ export class HelpComponent {
   @ViewChild(DynamicFormComponent) dynamicFormComponent!: DynamicFormComponent;
 
 
-  formList$: Observable<Base<string>[]>;
+  formList$: Observable<Base<any>[]>;
 
   constructor(service: DataService) {
     this.formList$ = service.getData();

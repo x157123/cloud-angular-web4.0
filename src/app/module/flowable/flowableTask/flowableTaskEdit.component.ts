@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {FlowableTaskComponent} from "./flowableTask.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
-import {AlertService} from "@alert/alert.service";
+import {AlertService} from "@component/alert/alert.service";
 
 
 

@@ -13,12 +13,12 @@ import {TextBox} from "./elements/textbox";
 })
 export class DynamicFormComponent implements OnInit {
 
+
   @Input() formList: Base<string>[] | null = [];
   @Output() handleButtonClick: EventEmitter<string> = new EventEmitter<string>();
-  form!: FormGroup;
-  visibilityEditData: { [p: string]: any } | null | undefined;
 
-  id = 1;
+  form!: FormGroup;
+  id: number = 1;
 
   constructor(private qcs: ControlService, private fb: FormBuilder) {
   }
@@ -39,8 +39,8 @@ export class DynamicFormComponent implements OnInit {
 
 
   add() {
-    this.id +=1;
-    let textBox = TextBox.getInstance('phones' + this.id, '电话号码' + this.id, 10, false, 'phone',0,0);
+    this.id += 1;
+    let textBox = TextBox.getInstance('phones' + this.id, '电话号码' + this.id, 10, false, 'phone', 0, 0);
     this.formList?.push(textBox);
     this.qcs.addCustomValidator(this.form, textBox);
   }

@@ -4,7 +4,7 @@ import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {PageEvent} from "@angular/material/paginator";
 import {MatDrawer} from "@angular/material/sidenav";
 import {FlowableManageEditComponent} from "./flowableManageEdit.component";
-import {AlertService} from "@alert/alert.service";
+import {AlertService} from "@component/alert/alert.service";
 
 
 export interface Dict {
