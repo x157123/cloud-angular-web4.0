@@ -33,6 +33,7 @@
   "compilerOptions": {
     "paths": {
       "@http/*": ["src/app/utils/*"],
+      "@component/*": ["src/app/component/*"],
       "@alert/*": ["src/app/module/alert/*"],
       "@common/*": ["src/app/common/*"]
     }

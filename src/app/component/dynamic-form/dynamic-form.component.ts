@@ -1,31 +1,31 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup,} from '@angular/forms';
 
-import {QuestionBase} from './question-base';
-import {QuestionControlService} from './question-control.service';
-import {TextBoxQuestion} from "./question-textbox";
+import {Base} from './elements/base';
+import {ControlService} from './elements/control.service';
+import {TextBox} from "./elements/textbox";
 
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.css'],
-  providers: [QuestionControlService]
+  providers: [ControlService]
 })
 export class DynamicFormComponent implements OnInit {
 
-  @Input() questions: QuestionBase<string>[] | null = [];
+  @Input() formList: Base<string>[] | null = [];
   form!: FormGroup;
   payLoad = '';
   visibilityEditData: { [p: string]: any } | null | undefined;
 
   id = 1;
 
-  constructor(private qcs: QuestionControlService, private fb: FormBuilder) {
+  constructor(private qcs: ControlService, private fb: FormBuilder) {
   }
 
 
   ngOnInit() {
-    this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
+    this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
   }
 
   onSubmit() {
@@ -38,12 +38,12 @@ export class DynamicFormComponent implements OnInit {
 
   add() {
     this.id +=1;
-    let textBox = TextBoxQuestion.getInstance('phones' + this.id, '电话号码' + this.id, 10, false, 'phone',0,0);
-    this.questions?.push(textBox);
+    let textBox = TextBox.getInstance('phones' + this.id, '电话号码' + this.id, 10, false, 'phone',0,0);
+    this.formList?.push(textBox);
     this.qcs.addCustomValidator(this.form, textBox);
   }
 
-  getQuestionValueLength(key: string): number {
+  getValueLength(key: string): number {
     const control = this.form.get(key);
     return control?.value ? control.value.length : 0;
   }

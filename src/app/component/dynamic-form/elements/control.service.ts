@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 
-import {QuestionBase} from './question-base';
+import {Base} from './base';
 
 /**
- * 数据校验
+ * 表单控制器
  */
 @Injectable()
-export class QuestionControlService {
+export class ControlService {
 
 
-  toFormGroup(questions: QuestionBase<string>[]) {
+  toFormGroup(questions: Base<string>[]) {
     const group: any = {};
 
     questions.forEach(question => {
@@ -22,7 +22,7 @@ export class QuestionControlService {
     return new FormGroup(group);
   }
 
-  private getValidator(question: QuestionBase<string>) {
+  private getValidator(question: Base<string>) {
     let validator = [];
     if (question.required) {
       validator.push(Validators.required);
@@ -43,21 +43,23 @@ export class QuestionControlService {
   }
 
   private phoneValidator(control: AbstractControl): ValidationErrors | null {
-    const PHONE_NUMBER_REGEXP = /^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\d{8}$/
-    if (!PHONE_NUMBER_REGEXP.test(control.value)) {
-      return {phone: true, message: '请输入有效的电话号码'};
+    if (control.value !== '') {
+      const PHONE_NUMBER_REGEXP = /^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\d{8}$/
+      if (!PHONE_NUMBER_REGEXP.test(control.value)) {
+        return {phone: true, message: '请输入有效的电话号码'};
+      }
     }
     return null;
   }
 
 
-  addCustomValidator(form: FormGroup, question: QuestionBase<string>) {
+  addCustomValidator(form: FormGroup, question: Base<string>) {
     // 添加自定义校验器
     let validator = this.getValidator(question);
     form.addControl(question.key, new FormControl('', validator))
   }
 
-  removeCustomValidator(form: FormGroup, question: QuestionBase<string>) {
+  removeCustomValidator(form: FormGroup, question: Base<string>) {
     // 移除自定义校验器
     const control = form.get(question.key);
     if (control != null) {
