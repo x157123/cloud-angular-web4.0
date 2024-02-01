@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup,} from '@angular/forms';
 
 import {Base} from './elements/base';
@@ -14,8 +14,8 @@ import {TextBox} from "./elements/textbox";
 export class DynamicFormComponent implements OnInit {
 
   @Input() formList: Base<string>[] | null = [];
+  @Output() handleButtonClick: EventEmitter<string> = new EventEmitter<string>();
   form!: FormGroup;
-  payLoad = '';
   visibilityEditData: { [p: string]: any } | null | undefined;
 
   id = 1;
@@ -29,12 +29,14 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSubmit() {
+    //校验数据
+    this.form.markAllAsTouched();
     if (this.form.valid) {
-      this.payLoad = JSON.stringify(this.form.getRawValue());
-    } else {
-      this.payLoad = "数据错误";
+      let payLoad = JSON.stringify(this.form.getRawValue());
+      this.handleButtonClick.emit(payLoad);
     }
   }
+
 
   add() {
     this.id +=1;

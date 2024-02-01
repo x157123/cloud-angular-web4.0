@@ -17,10 +17,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
-import {DynamicFormComponent} from "@component/dynamic-form/dynamic-form.component";
 import {HelpComponent} from "./help.component";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
+import {DynamicFormComponent} from "@component/dynamic-form/dynamic-form.component";
 
 @NgModule({
   imports: [
@@ -47,7 +47,7 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
     MatRadioGroup,
     MatRadioButton,
   ],
-  declarations: [HelpComponent, DynamicFormComponent ],
+  declarations: [HelpComponent, DynamicFormComponent],
 })
 export class HelpModule {
 
