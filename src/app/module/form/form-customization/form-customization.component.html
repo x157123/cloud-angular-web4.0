@@ -1,0 +1,27 @@
+<mat-drawer-container>
+  <mat-drawer-content>
+    <div class="mat-drawer-content-content">
+      <div class="flex h-full">
+        <div class="w-1/2 p-4 flex flex-col">
+          <div class="flex-grow p-4">
+            <div
+              cdkDropList
+              [cdkDropListData]="formList"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of formList; index as i" cdkDrag>
+                {{formList[i].label}}
+              </div>
+            </div>
+          </div>
+          <div class="h-96 bg-green-500 p-4">
+            <app-dynamic-form [formList]="formList$ | async"></app-dynamic-form>
+          </div>
+        </div>
+        <div class="w-1/2 p-4">
+          右侧内容
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

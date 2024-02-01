@@ -1,15 +1,42 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup,} from '@angular/forms';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule,} from '@angular/forms';
+
 
 import {Base} from './elements/base';
 import {ControlService} from './elements/control.service';
 import {TextBox} from "./elements/textbox";
+import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatOption, MatSelect} from "@angular/material/select";
+import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
+import {MatCheckbox} from "@angular/material/checkbox";
+import {MatCardActions} from "@angular/material/card";
+import {MatButton} from "@angular/material/button";
+import {MatInput} from "@angular/material/input";
+import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.css'],
-  providers: [ControlService]
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatLabel,
+    MatError,
+    MatFormField,
+    MatSelect,
+    MatRadioButton,
+    MatRadioGroup,
+    MatOption,
+    MatCheckbox,
+    MatCardActions,
+    MatButton,
+    MatInput,
+    NgIf,
+    NgForOf
+  ],
+  providers: [ControlService],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DynamicFormComponent implements OnInit {
 

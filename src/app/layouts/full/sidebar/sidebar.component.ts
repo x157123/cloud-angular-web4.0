@@ -37,6 +37,7 @@ const menuItems = [
     ]
   },
   {state: false, key: 'help',path: 'help', name: '帮助', type: 'link', icon: 'av_timer', items: []},
+  {state: false, key: 'form',path: 'form', name: '表单自定义', type: 'link', icon: 'av_timer', items: []},
   {
     state: true, key: 'flowable',path: 'flowable', name: 'flowable', type: 'link', icon: 'home', items: [
       {state: false, key: 'flowableTask',path: 'flowableTask', name: '代办任务', type: 'link', icon: 'av_timer'},

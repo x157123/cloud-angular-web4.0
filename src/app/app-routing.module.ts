@@ -46,7 +46,11 @@ const routes: Routes = [
       },
       {
         path: 'help',
-        loadChildren: () => import('./module/help/help.module').then(m => m.HelpModule)
+        loadChildren: () => import('./module/test/test.module').then(m => m.TestModule)
+      },
+      {
+        path: 'form',
+        loadChildren: () => import('./module/form/form-customization/form-customization.module').then(m => m.FormCustomizationModule)
       },
 
     ]
