@@ -43,8 +43,16 @@ export class FormCustomizationComponent {
     this.setFormList();
   }
 
+  constructor() {
+    this.formList = this.getData();
+    this.setFormList()
+  }
+
   setFormList(){
-    this.formList$ = this.getData();
+    for (let i = 0; i < this.formList.length; i++) {
+      this.formList[i].order = i;
+    }
+    this.formList$ = of(this.formList.sort((a, b) => a.order - b.order));
   }
 
   getData() {
@@ -78,7 +86,6 @@ export class FormCustomizationComponent {
       ]),
 
     ];
-
-    return of(questions.sort((a, b) => a.order - b.order));
+    return questions;
   }
 }
