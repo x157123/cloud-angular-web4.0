@@ -12,7 +12,7 @@ import {MatCheckbox} from "@angular/material/checkbox";
 import {MatCardActions} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-dynamic-form',
@@ -33,7 +33,8 @@ import {NgForOf, NgIf} from "@angular/common";
     MatButton,
     MatInput,
     NgIf,
-    NgForOf
+    NgForOf,
+    NgClass
   ],
   providers: [ControlService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -67,7 +68,7 @@ export class DynamicFormComponent implements OnInit {
 
   add() {
     this.id += 1;
-    let textBox = TextBox.getInstance('phones' + this.id, '电话号码' + this.id, 10, false, 'phone', 0, 0);
+    let textBox = TextBox.getInstance('phones' + this.id, '电话号码' + this.id, 10, false, false, 'phone', 0, 0);
     this.formList?.push(textBox);
     this.qcs.addCustomValidator(this.form, textBox);
   }

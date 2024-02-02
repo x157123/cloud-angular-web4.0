@@ -4,20 +4,106 @@
       <div class="flex h-full">
         <div class="w-1/2 p-4 flex flex-col">
           <div class="flex-grow p-4">
-            <div
-              cdkDropList
-              [cdkDropListData]="formList"
-              class="example-list"
-              (cdkDropListDropped)="drop($event)">
-              <div class="example-box" *ngFor="let item of formList; index as i" cdkDrag>
-                {{formList[i].label}}
-              </div>
-            </div>
-          </div>
-          <div class="h-96 bg-green-500 p-4">
+            <mat-accordion cdkDropList
+                            [cdkDropListData]="formList"
+                            class="example-list"
+                            (cdkDropListDropped)="drop($event)">
+              <mat-expansion-panel *ngFor="let item of formList; index as i" cdkDrag (opened)="panelOpenState = true"
+                                   (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{formList[i].label}}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="grid grid-cols-4 gap-4">
+                  <div class="col-span-2 m-1 flex">
+                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">名称：</div>
+                    <div class="grow h-14">
+                      <mat-form-field class="mat-form-field-width">
+                        <input matInput [(ngModel)]="formList[i].label">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-4 gap-4">
+                    <div class="col-span-2 m-1 flex">
+                      <div class="w-12 shrink-0 h-14 flex items-center justify-end">主键：</div>
+                      <div class="grow h-14">
+                        <mat-form-field class="mat-form-field-width">
+                          <input matInput [(ngModel)]="formList[i].key">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-span-2 m-1 flex">
+                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">类型：</div>
+                    <div class="grow h-14">
+                      <mat-form-field>
+                        <mat-select matNativeControl [(ngModel)]="formList[i].controlType">
+                          <mat-option value="textBox">文本框</mat-option>
+                          <mat-option value="selectBox">下拉选择框</mat-option>
+                          <mat-option value="checkBox">多选框</mat-option>
+                          <mat-option value="radioBox">单选框</mat-option>
+                          <mat-option value="textareaBox">文本域</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-span-2 m-1 flex">
+                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">行宽：</div>
+                    <div class="grow h-14">
+                      <mat-form-field class="mat-form-field-width">
+                        <mat-select matNativeControl [(ngModel)]="formList[i].phonetics" [compareWith]="compareWith">
+                          <mat-option value="false">整行一半显示</mat-option>
+                          <mat-option value="true">整行显示</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-span-2 m-1 flex">
+                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">必填：</div>
+                    <div class="grow h-14">
+                      <mat-form-field class="mat-form-field-width">
+                        <mat-select matNativeControl [(ngModel)]="formList[i].required" [compareWith]="compareWith">
+                          <mat-option value="false">不必填</mat-option>
+                          <mat-option value="true">必填</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-span-2 m-1 flex">
+                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">验证：</div>
+                    <div class="grow h-14">
+                      <mat-form-field>
+                        <mat-select matNativeControl [(ngModel)]="formList[i].validator">
+                          <mat-option value="">不验证</mat-option>
+                          <mat-option value="email">邮箱</mat-option>
+                          <mat-option value="phone">电话号码</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-span-2 m-1 flex">
+                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">字数：</div>
+                    <div class="grow h-14">
+                      <mat-form-field class="mat-form-field-width">
+                        <input matInput [(ngModel)]="formList[i].minLength">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-span-2 m-1 flex">
+                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">字数：</div>
+                    <div class="grow h-14">
+                      <mat-form-field class="mat-form-field-width">
+                        <input matInput [(ngModel)]="formList[i].maxLength">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
           </div>
         </div>
-        <div class="w-1/2 p-4">
+        <div class="w-1/2 p-4 bg-white">
           <app-dynamic-form [formList]="formList$ | async"></app-dynamic-form>
         </div>
       </div>

@@ -8,7 +8,7 @@ export class TextareaBox extends Base<string> {
     super({});
   }
 
-  static getInstance(key: string, label: string, order: number, required: boolean, minLength: number, maxLength: number): TextareaBox {
+  static getInstance(key: string, label: string, order: number, required: boolean, phonetics: boolean, minLength: number, maxLength: number): TextareaBox {
     TextareaBox.instance = new TextareaBox();
     TextareaBox.instance.controlType = 'textareaBox'
     TextareaBox.instance.key = key;
@@ -17,6 +17,7 @@ export class TextareaBox extends Base<string> {
     TextareaBox.instance.minLength = minLength;
     TextareaBox.instance.maxLength = maxLength;
     TextareaBox.instance.order = order;
+    TextareaBox.instance.phonetics = phonetics;
     return TextareaBox.instance;
   }
 }

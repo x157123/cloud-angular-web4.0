@@ -1,104 +1,102 @@
-<div class="edit-content">
-  <ng-container>
-    <form (ngSubmit)="onSubmit()" [formGroup]="form">
-      <div class="m-5">
-        <div class="grid grid-cols-4 gap-4">
-          <ng-container *ngFor="let formObj of formList">
+<ng-container>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="m-5">
+      <div class="grid grid-cols-4 gap-4">
+        <ng-container *ngFor="let formObj of formList">
 
-            <div class="col-span-2 m-1 flex" *ngIf="formObj.controlType === 'textBox'">
-              <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
-              <div class="grow h-14">
-                <mat-form-field class="mat-form-field-width">
-                  <mat-label>{{ formObj.label }}</mat-label>
-                  <input matInput [formControlName]="formObj.key" [id]="formObj.key" [type]="formObj.type">
-                  <mat-error *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必填</mat-error>
-                  <mat-error *ngIf="form.get(formObj.key)?.hasError('minlength')">{{ formObj.label }}
-                    长度不能少于{{ formObj.minLength }}位
-                  </mat-error>
-                  <mat-error *ngIf="form.get(formObj.key)?.hasError('maxlength')">{{ formObj.label }}
-                    长度不能超过{{ formObj.maxLength }}位
-                  </mat-error>
-                  <mat-error
-                    *ngIf="form.get(formObj.key)?.hasError('phone')">{{ form.get(formObj.key)?.errors?.['message'] }}
-                  </mat-error>
-                  <mat-error *ngIf="form.get(formObj.key)?.hasError('email')">请输入有效的邮箱地址</mat-error>
-                </mat-form-field>
+          <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex" *ngIf="formObj.controlType === 'textBox'">
+            <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
+            <div class="grow h-14">
+              <mat-form-field class="mat-form-field-width">
+                <mat-label>{{ formObj.label }}</mat-label>
+                <input matInput [formControlName]="formObj.key" [id]="formObj.key" [type]="formObj.type">
+                <mat-error *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必填</mat-error>
+                <mat-error *ngIf="form.get(formObj.key)?.hasError('minlength')">{{ formObj.label }}
+                  长度不能少于{{ formObj.minLength }}位
+                </mat-error>
+                <mat-error *ngIf="form.get(formObj.key)?.hasError('maxlength')">{{ formObj.label }}
+                  长度不能超过{{ formObj.maxLength }}位
+                </mat-error>
+                <mat-error
+                  *ngIf="form.get(formObj.key)?.hasError('phone')">{{ form.get(formObj.key)?.errors?.['message'] }}
+                </mat-error>
+                <mat-error *ngIf="form.get(formObj.key)?.hasError('email')">请输入有效的邮箱地址</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex" *ngIf="formObj.controlType === 'selectBox'">
+            <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
+            <div class="grow h-14">
+              <mat-form-field class="mat-form-field-width">
+                <mat-select [id]="formObj.key" [formControlName]="formObj.key">
+                  <mat-option *ngFor="let opt of formObj.options" [value]="opt.key">{{ opt.value }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必选</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex" style="height: 56px;" *ngIf="formObj.controlType === 'radioBox'">
+            <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
+            <div class="grow">
+              <div class="flex items-center" style="height: 56px;">
+                <mat-radio-group [formControlName]="formObj.key">
+                  <mat-radio-button [id]="formObj.key" *ngFor="let opt of formObj.options" [value]="opt.key">{{ opt.value }}</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="errorClass" style="height: 21px;">
+                <mat-error class="mat-mdc-form-field-subscript-wrapper float-left ml-4"
+                           *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必选</mat-error>
               </div>
             </div>
+          </div>
 
-            <div class="col-span-2 m-1 flex" *ngIf="formObj.controlType === 'selectBox'">
-              <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
-              <div class="grow h-14">
-                <mat-form-field class="mat-form-field-width">
-                  <mat-select [id]="formObj.key" [formControlName]="formObj.key">
-                    <mat-option *ngFor="let opt of formObj.options" [value]="opt.key">{{ opt.value }}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必选</mat-error>
-                </mat-form-field>
+          <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex" style="height: 56px;" *ngIf="formObj.controlType === 'checkBox'">
+            <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
+            <div class="grow">
+              <div class="flex items-center" style="height: 56px;">
+                <mat-checkbox [id]="formObj.key" [formControlName]="formObj.key"
+                              *ngFor="let opt of formObj.options" [value]="opt.key">{{ opt.value }}
+                </mat-checkbox>
+              </div>
+              <div class="" style="height: 21px;">
+                <mat-error class="mat-mdc-form-field-subscript-wrapper float-left ml-4"
+                           *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必选
+                </mat-error>
               </div>
             </div>
+          </div>
 
-            <div class="col-span-2 m-1 flex " style="height: 56px;" *ngIf="formObj.controlType === 'radioBox'">
-              <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
-              <div class="grow">
-                <div class="flex items-center" style="height: 56px;">
-                  <mat-radio-group [formControlName]="formObj.key">
-                    <mat-radio-button [id]="formObj.key" *ngFor="let opt of formObj.options" [value]="opt.key">{{ opt.value }}</mat-radio-button>
-                  </mat-radio-group>
-                </div>
-                <div class="errorClass" style="height: 21px;">
-                  <mat-error class="mat-mdc-form-field-subscript-wrapper float-left ml-4"
-                             *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必选</mat-error>
-                </div>
-              </div>
+          <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex" *ngIf="formObj.controlType === 'textareaBox'">
+            <div class="w-20 shrink-0 flex items-center justify-end">{{ formObj.label }}：</div>
+            <div class="grow">
+              <mat-form-field class="mat-form-field-width">
+                  <textarea matInput [id]="formObj.key" [formControlName]="formObj.key"
+                            placeholder="{{ formObj.label }}"></textarea>
+                <mat-error *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必填</mat-error>
+                <mat-error *ngIf="form.get(formObj.key)?.hasError('minlength')">{{ formObj.label }}
+                  不能少于{{ formObj.minLength }}位
+                </mat-error>
+                <mat-error *ngIf="form.get(formObj.key)?.hasError('maxlength')">{{ formObj.label }}
+                  不能超过{{ formObj.maxLength }}位
+                </mat-error>
+                <mat-hint align="end">{{ getValueLength(formObj.key) }}
+                  / {{ formObj.maxLength }}
+                </mat-hint>
+              </mat-form-field>
             </div>
+          </div>
 
-            <div class="col-span-2 m-1 flex" style="height: 56px;" *ngIf="formObj.controlType === 'checkBox'">
-              <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
-              <div class="grow">
-                <div class="flex items-center" style="height: 56px;">
-                  <mat-checkbox [id]="formObj.key" [formControlName]="formObj.key"
-                                *ngFor="let opt of formObj.options" [value]="opt.key">{{ opt.value }}
-                  </mat-checkbox>
-                </div>
-                <div class="" style="height: 21px;">
-                  <mat-error class="mat-mdc-form-field-subscript-wrapper float-left ml-4"
-                             *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必选
-                  </mat-error>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-span-4 m-1 flex" *ngIf="formObj.controlType === 'textareaBox'">
-              <div class="w-20 shrink-0 flex items-center justify-end">{{ formObj.label }}：</div>
-              <div class="grow">
-                <mat-form-field class="mat-form-field-width">
-                    <textarea matInput [id]="formObj.key" [formControlName]="formObj.key"
-                              placeholder="{{ formObj.label }}"></textarea>
-                  <mat-error *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必填</mat-error>
-                  <mat-error *ngIf="form.get(formObj.key)?.hasError('minlength')">{{ formObj.label }}
-                    不能少于{{ formObj.minLength }}位
-                  </mat-error>
-                  <mat-error *ngIf="form.get(formObj.key)?.hasError('maxlength')">{{ formObj.label }}
-                    不能超过{{ formObj.maxLength }}位
-                  </mat-error>
-                  <mat-hint align="end">{{ getValueLength(formObj.key) }}
-                    / {{ formObj.maxLength }}
-                  </mat-hint>
-                </mat-form-field>
-              </div>
-            </div>
-
-          </ng-container>
-        </div>
+        </ng-container>
       </div>
+    </div>
 
-      <div class="edit-content-bottom">
-        <mat-card-actions align="start">
-          <button mat-button type="submit">提交验证</button>
-          <button mat-button (click)="add()">添加一个</button>
-        </mat-card-actions>
-      </div>
-    </form>
-  </ng-container>
-</div>
+    <div class="edit-content-bottom">
+      <mat-card-actions align="start">
+        <button mat-button type="submit">提交验证</button>
+        <button mat-button (click)="add()">添加一个</button>
+      </mat-card-actions>
+    </div>
+  </form>
+</ng-container>
