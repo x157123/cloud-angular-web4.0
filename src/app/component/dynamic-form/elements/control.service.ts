@@ -2,6 +2,11 @@ import {Injectable} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 
 import {Base} from './base';
+import {TextBox} from "@component/dynamic-form/elements/textbox";
+import {TextareaBox} from "@component/dynamic-form/elements/textareabox";
+import {RadioBox} from "@component/dynamic-form/elements/radiobox";
+import {CheckBox} from "@component/dynamic-form/elements/checkbok";
+import {SelectBox} from "@component/dynamic-form/elements/selectbox";
 
 /**
  * 表单控制器
@@ -64,8 +69,31 @@ export class ControlService {
     const control = form.get(question.key);
     if (control != null) {
       control.clearValidators();
-      control.updateValueAndValidity(); // 更新校验状态
+      control.updateValueAndValidity();
     }
+  }
+
+
+  json2list(jsonList: string) {
+    let list = JSON.parse(jsonList);
+    const tmp: Base<string>[] = [];
+
+    for (let i = 0; i < list.length; i++) {
+      let question = list[i];
+      question.key
+      if (question.controlType === 'textBox') {
+        tmp.push(TextBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.validator, question.minLength, question.maxLength));
+      } else if (question.controlType === 'textareaBox') {
+        tmp.push(TextareaBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics,question.minLength, question.maxLength));
+      }else if (question.controlType === 'radioBox') {
+        tmp.push(RadioBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics, question.options));
+      }else if (question.controlType === 'checkBox') {
+        tmp.push(CheckBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.options));
+      }else if (question.controlType === 'selectBox') {
+        tmp.push(SelectBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics,question.options));
+      }
+    }
+    return tmp;
   }
 }
 

@@ -52,9 +52,9 @@
                     <div class="w-12 shrink-0 h-14 flex items-center justify-end">行宽：</div>
                     <div class="grow h-14">
                       <mat-form-field class="mat-form-field-width">
-                        <mat-select matNativeControl [(ngModel)]="formList[i].phonetics" [compareWith]="compareWith">
-                          <mat-option value="false">整行一半显示</mat-option>
-                          <mat-option value="true">整行显示</mat-option>
+                        <mat-select matNativeControl [(ngModel)]="formList[i].phonetics">
+                          <mat-option [value]="false">整行一半显示</mat-option>
+                          <mat-option [value]="true">整行显示</mat-option>
                         </mat-select>
                       </mat-form-field>
                     </div>
@@ -63,9 +63,9 @@
                     <div class="w-12 shrink-0 h-14 flex items-center justify-end">必填：</div>
                     <div class="grow h-14">
                       <mat-form-field class="mat-form-field-width">
-                        <mat-select matNativeControl [(ngModel)]="formList[i].required" [compareWith]="compareWith">
-                          <mat-option value="false">不必填</mat-option>
-                          <mat-option value="true">必填</mat-option>
+                        <mat-select matNativeControl [(ngModel)]="formList[i].required">
+                          <mat-option [value]="false">不必填</mat-option>
+                          <mat-option [value]="true">必填</mat-option>
                         </mat-select>
                       </mat-form-field>
                     </div>
@@ -104,7 +104,16 @@
           </div>
         </div>
         <div class="w-1/2 p-4 bg-white">
-          <app-dynamic-form [formList]="formList$ | async"></app-dynamic-form>
+          <app-dynamic-form [formList]="formList$ | async" (handleButtonClick)="handleButtonClick($event)"></app-dynamic-form>
+
+          <div class="edit-content-bottom">
+            <mat-card-actions align="start">
+              <button mat-button (click)="onSubmit()">提交验证</button>
+              <button mat-button (click)="refreshForm()">刷新表单</button>
+              <button mat-button (click)="addForm()">添加一个</button>
+              <button mat-button (click)="saveForm()">保持表单</button>
+            </mat-card-actions>
+          </div>
         </div>
       </div>
     </div>

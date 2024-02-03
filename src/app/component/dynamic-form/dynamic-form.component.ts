@@ -1,4 +1,14 @@
-import {Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule,} from '@angular/forms';
 
 
@@ -39,7 +49,7 @@ import {NgClass, NgForOf, NgIf} from "@angular/common";
   providers: [ControlService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class DynamicFormComponent implements OnInit {
+export class DynamicFormComponent implements OnInit ,OnChanges {
 
 
   @Input() formList: Base<string>[] | null = [];
@@ -51,6 +61,12 @@ export class DynamicFormComponent implements OnInit {
   constructor(private qcs: ControlService, private fb: FormBuilder) {
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('formList has changed');
+    if (changes['formList']) {
+      console.log('formList has changed');
+    }
+  }
 
   ngOnInit() {
     this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
@@ -65,10 +81,15 @@ export class DynamicFormComponent implements OnInit {
     }
   }
 
+  refreshForm(){
+    this.form.clearValidators();
+    this.ngOnInit()
+  }
+
 
   add() {
     this.id += 1;
-    let textBox = TextBox.getInstance('phones' + this.id, '电话号码' + this.id, 10, false, false, 'phone', 0, 0);
+    let textBox = TextBox.getInstance('phones' + this.id, '电话号码' + this.id, 10, true, false, 'phone', 0, 0);
     this.formList?.push(textBox);
     this.qcs.addCustomValidator(this.form, textBox);
   }

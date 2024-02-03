@@ -1,4 +1,4 @@
-import {Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, ViewChild} from '@angular/core';
 import {MatDrawerContainer, MatDrawerContent} from "@angular/material/sidenav";
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
 import {MatFormField, MatInput} from "@angular/material/input";
@@ -16,6 +16,9 @@ import {SelectBox} from "@component/dynamic-form/elements/selectbox";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
+import {MatButton} from "@angular/material/button";
+import {MatCardActions} from "@angular/material/card";
+import {ControlService} from "@component/dynamic-form/elements/control.service";
 @Component({
   selector: 'app-form-customization',
   standalone: true,
@@ -36,12 +39,17 @@ import {MatSelect} from "@angular/material/select";
     MatFormField,
     MatOption,
     MatSelect,
+    MatButton,
+    MatCardActions,
   ],
+  providers: [ControlService],
   templateUrl: './form-customization.component.html',
   styleUrl: './form-customization.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class FormCustomizationComponent {
+export class FormCustomizationComponent{
+
+  @ViewChild(DynamicFormComponent) dynamicFormComponent!: DynamicFormComponent;
 
   formList$: Observable<Base<any>[]> | undefined;
 
@@ -50,16 +58,12 @@ export class FormCustomizationComponent {
 
   panelOpenState: boolean = false;
 
-  compareWith(a: any, b: any) {
-    return a === b || (a === 'true' && b === true) || (a === 'false' && b === false);
-  }
-
   drop($event: CdkDragDrop<Base<any>[], any>) {
     moveItemInArray(this.formList, $event.previousIndex, $event.currentIndex);
     this.setFormList();
   }
 
-  constructor() {
+  constructor(private qcs: ControlService) {
     this.formList = this.getData();
     this.setFormList()
   }
@@ -69,39 +73,47 @@ export class FormCustomizationComponent {
       this.formList[i].order = i;
     }
     this.formList$ = of(this.formList.sort((a, b) => a.order - b.order));
+    if (this.dynamicFormComponent) {
+      this.dynamicFormComponent.refreshForm();
+    }
+  }
+
+  onSubmit(){
+    if (this.dynamicFormComponent) {
+      this.dynamicFormComponent.onSubmit();
+    }
+  }
+
+  addForm() {
+    if (this.dynamicFormComponent) {
+      this.dynamicFormComponent.add();
+    }
+  }
+  refreshForm(){
+    if (this.dynamicFormComponent) {
+      this.dynamicFormComponent.refreshForm();
+    }
+  }
+
+  saveForm(){
+    if (this.dynamicFormComponent) {
+      console.log(JSON.stringify(this.formList));
+    }
+  }
+
+  handleButtonClick(message: string): void {
+    console.log('receivedMessage2:', message);
   }
 
   getData() {
-    const questions: Base<string>[] = [
 
-      TextBox.getInstance('name', '姓名', 1, true,false, '', 2, 20),
+    let jsonList = "[{\"key\":\"name\",\"label\":\"姓名\",\"required\":true,\"order\":0,\"controlType\":\"textBox\",\"type\":\"\",\"minLength\":2,\"maxLength\":20,\"validator\":\"\",\"phonetics\":false,\"options\":[]},{\"key\":\"phones\",\"label\":\"电话号码\",\"required\":true,\"order\":1,\"controlType\":\"textBox\",\"type\":\"\",\"minLength\":0,\"maxLength\":0,\"validator\":\"phone\",\"phonetics\":false,\"options\":[]},{\"key\":\"email\",\"label\":\"电转邮箱\",\"required\":true,\"order\":2,\"controlType\":\"textBox\",\"type\":\"\",\"minLength\":0,\"maxLength\":0,\"validator\":\"email\",\"phonetics\":false,\"options\":[]},{\"key\":\"bak\",\"label\":\"备注\",\"required\":true,\"order\":3,\"controlType\":\"textareaBox\",\"type\":\"\",\"minLength\":10,\"maxLength\":300,\"validator\":\"\",\"phonetics\":true,\"options\":[]},{\"key\":\"sex\",\"label\":\"性别\",\"required\":true,\"order\":4,\"controlType\":\"radioBox\",\"type\":\"\",\"minLength\":0,\"maxLength\":5000,\"validator\":\"\",\"phonetics\":false,\"options\":[{\"key\":\"男\",\"value\":\"男\"},{\"key\":\"女\",\"value\":\"女\"}]},{\"key\":\"love\",\"label\":\"爱好\",\"required\":true,\"order\":5,\"controlType\":\"checkBox\",\"type\":\"\",\"minLength\":0,\"maxLength\":5000,\"validator\":\"\",\"phonetics\":false,\"options\":[{\"key\":\"1\",\"value\":\"游泳\"},{\"key\":\"2\",\"value\":\"跑步\"},{\"key\":\"3\",\"value\":\"购物\"},{\"key\":\"4\",\"value\":\"打游戏\"}]},{\"key\":\"brave2\",\"label\":\"民族\",\"required\":true,\"order\":6,\"controlType\":\"selectBox\",\"type\":\"\",\"minLength\":0,\"maxLength\":5000,\"validator\":\"\",\"phonetics\":false,\"options\":[{\"key\":\"1\",\"value\":\"汉\"},{\"key\":\"2\",\"value\":\"汉2\"},{\"key\":\"3\",\"value\":\"汉3\"},{\"key\":\"4\",\"value\":\"汉4\"}]}]";
 
-      TextBox.getInstance('phones', '电话号码', 2, true, false,'phone', 0, 0),
+    const questions: Base<string>[] = this.qcs.json2list(jsonList);
 
-      TextBox.getInstance('email', '电转邮箱', 6, true, false,'email', 0, 0),
+    console.log(questions);
 
-      TextareaBox.getInstance('bak', '备注', 7, true, true,10, 300),
-
-      RadioBox.getInstance('sex', '性别', 4, true, false,[
-        {key: '男', value: '男'},
-        {key: '女', value: '女'},
-      ]),
-
-      CheckBox.getInstance('love', '爱好', 4, true,false, [
-        {key: '1', value: '游泳'},
-        {key: '2', value: '跑步'},
-        {key: '3', value: '购物'},
-        {key: '4', value: '打游戏'},
-      ]),
-
-      SelectBox.getInstance('brave2', '民族', 4, true, false,[
-        {key: '1', value: '汉'},
-        {key: '2', value: '汉2'},
-        {key: '3', value: '汉3'},
-        {key: '4', value: '汉4'},
-      ]),
-
-    ];
+    ;
     return questions;
   }
 }
