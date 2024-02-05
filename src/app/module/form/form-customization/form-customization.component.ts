@@ -2,7 +2,7 @@ import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, ViewChild} from '@angular/cor
 import {MatDrawerContainer, MatDrawerContent} from "@angular/material/sidenav";
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
 import {MatFormField, MatInput} from "@angular/material/input";
-import {AsyncPipe, NgForOf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Base} from "@component/dynamic-form/elements/base";
 
@@ -19,6 +19,8 @@ import {MatSelect} from "@angular/material/select";
 import {MatButton} from "@angular/material/button";
 import {MatCardActions} from "@angular/material/card";
 import {ControlService} from "@component/dynamic-form/elements/control.service";
+import {MatList, MatListItem} from "@angular/material/list";
+import {MatDivider} from "@angular/material/divider";
 @Component({
   selector: 'app-form-customization',
   standalone: true,
@@ -41,6 +43,10 @@ import {ControlService} from "@component/dynamic-form/elements/control.service";
     MatSelect,
     MatButton,
     MatCardActions,
+    NgIf,
+    MatList,
+    MatListItem,
+    MatDivider,
   ],
   providers: [ControlService],
   templateUrl: './form-customization.component.html',

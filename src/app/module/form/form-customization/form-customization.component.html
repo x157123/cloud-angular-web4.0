@@ -59,6 +59,16 @@
                       </mat-form-field>
                     </div>
                   </div>
+                  <div class="col-span-4 m-1 " *ngIf="formList[i].controlType == 'selectBox' || formList[i].controlType == 'checkBox' || formList[i].controlType == 'radioBox'">
+                    <div class="flex">
+                      <div class="w-12 shrink-0 h-14 flex items-center justify-end">选项：</div>
+                      <div class="grow h-14">
+                        <mat-form-field class="mat-form-field-width">
+                          <input matInput [(ngModel)]="formList[i].options">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
                   <div class="col-span-2 m-1 flex">
                     <div class="w-12 shrink-0 h-14 flex items-center justify-end">必填：</div>
                     <div class="grow h-14">
