@@ -16,11 +16,12 @@ import {SelectBox} from "@component/dynamic-form/elements/selectbox";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatCardActions} from "@angular/material/card";
 import {ControlService} from "@component/dynamic-form/elements/control.service";
 import {MatList, MatListItem} from "@angular/material/list";
 import {MatDivider} from "@angular/material/divider";
+import {MatIcon} from "@angular/material/icon";
 @Component({
   selector: 'app-form-customization',
   standalone: true,
@@ -47,6 +48,8 @@ import {MatDivider} from "@angular/material/divider";
     MatList,
     MatListItem,
     MatDivider,
+    MatIconButton,
+    MatIcon,
   ],
   providers: [ControlService],
   templateUrl: './form-customization.component.html',
@@ -121,5 +124,23 @@ export class FormCustomizationComponent{
 
     ;
     return questions;
+  }
+
+  // 删除选项
+  removeOption(i:number, k: number) {
+    this.formList[i].options.splice(k, 1);
+  }
+
+  addOption(i: number, k: number) {
+    //在当前选项后面添加一个新选项
+    this.formList[i].options.splice(k + 1, 0, {key: '选项key', value: '选项value'});
+  }
+
+  //更改类型
+  onSelectionChange(i:number) {
+    console.log(this.formList[i].controlType);
+    if(this.formList[i].options.length === 0 && (this.formList[i].controlType === 'selectBox' || this.formList[i].controlType === 'radioBox' || this.formList[i].controlType === 'checkBox')){
+      this.formList[i].options = [{key: '选项key', value: '选项value'}];
+    }
   }
 }
