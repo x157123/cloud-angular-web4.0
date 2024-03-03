@@ -63,9 +63,12 @@
             <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
             <div class="grow">
               <div class="flex items-center" style="height: 56px;">
-                <mat-checkbox [id]="formObj.key" [formControlName]="formObj.key"
-                              *ngFor="let opt of formObj.options" [value]="opt.key">{{ opt.value }}
-                </mat-checkbox>
+                <div *ngFor="let opt of formObj.options; let i = index">
+                  <mat-checkbox [formControlName]="formObj.key" [value]="opt.key">{{ opt.value }}</mat-checkbox>
+                </div>
+<!--                <mat-checkbox [id]="formObj.key" [formControlName]="formObj.key"-->
+<!--                              *ngFor="let opt of formObj.options" [value]="opt.key">{{ opt.value }}-->
+<!--                </mat-checkbox>-->
               </div>
               <div class="" style="height: 21px;">
                 <mat-error class="mat-mdc-form-field-subscript-wrapper float-left ml-4"

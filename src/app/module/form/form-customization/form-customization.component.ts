@@ -8,11 +8,6 @@ import {Base} from "@component/dynamic-form/elements/base";
 
 import {Observable, of} from "rxjs";
 import {DynamicFormComponent} from "@component/dynamic-form/dynamic-form.component";
-import {TextBox} from "@component/dynamic-form/elements/textbox";
-import {TextareaBox} from "@component/dynamic-form/elements/textareabox";
-import {RadioBox} from "@component/dynamic-form/elements/radiobox";
-import {CheckBox} from "@component/dynamic-form/elements/checkbok";
-import {SelectBox} from "@component/dynamic-form/elements/selectbox";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";

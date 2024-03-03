@@ -139,7 +139,7 @@ export class ColumnComponent implements OnInit {
         const columnConfig: ColumnConfig = {
           readColumn: '',
           writeColumn: col.name,
-          key: col.uni,
+          key: col.uni ? 1 : 0,
           defaultValue: '',
           convertFun: '',
         }
