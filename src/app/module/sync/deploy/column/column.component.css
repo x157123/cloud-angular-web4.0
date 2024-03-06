@@ -1,8 +1,6 @@
-.edit-content .edit-deploy-column-content-info{
-  height: calc(100vh - 385px);
-  overflow: auto;
-  background-color: #ffffff;
-  padding: 2px;
+
+.appSyncTableContainer{
+  height: calc(100vh - 175px);
 }
 
 /** table */

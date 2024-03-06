@@ -1,5 +1,5 @@
-<div class="edit-content">
-  <div class="edit-content-header">
+<div class="flex flex-col h-screen edit-content">
+  <div class="h-12">
     <ng-container *ngIf="show">
       查看
     </ng-container>
@@ -8,106 +8,109 @@
     </ng-container>
   </div>
   <mat-divider/>
-  <ng-container>
-    <mat-stepper #stepper>
-      <mat-step [stepControl]="firstFormGroup">
-          <ng-template matStepLabel>数据源配置</ng-template>
-          <div class="edit-deploy-content-info">
-            <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
-              <mat-grid-tile colspan="2" class="title">名称:</mat-grid-tile>
-              <mat-grid-tile colspan="14" class="content">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="任务名称" [(ngModel)]="syncConfig.name" required>
-                </mat-form-field>
-              </mat-grid-tile>
-              <mat-grid-tile colspan="2" class="title">读取数据源:</mat-grid-tile>
-              <mat-grid-tile colspan="6" class="content">
-                <mat-form-field>
-                  <mat-label>数据库类型</mat-label>
-                  <mat-select [required]="show" [(value)]="syncConfig.readConnectType" (selectionChange)="readList($event.value,1)">
-                    <mat-option [value]="option.value" *ngFor="let option of sourceType">{{ option.viewValue }}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </mat-grid-tile>
+  <mat-stepper class="overflow-auto" #stepper>
+    <mat-step [stepControl]="firstFormGroup" label="数据源配置">
+      <div class="stepperContainer flex flex-col h-screen">
+        <div class="flex-1">
+          <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
+            <mat-grid-tile colspan="2" class="title">名称:</mat-grid-tile>
+            <mat-grid-tile colspan="14" class="content">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="任务名称" [(ngModel)]="syncConfig.name" required>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2" class="title">读取数据源:</mat-grid-tile>
+            <mat-grid-tile colspan="6" class="content">
+              <mat-form-field>
+                <mat-label>数据库类型</mat-label>
+                <mat-select [required]="show" [(value)]="syncConfig.readConnectType" (selectionChange)="readList($event.value,1)">
+                  <mat-option [value]="option.value" *ngFor="let option of sourceType">{{ option.viewValue }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
 
-              <mat-grid-tile colspan="2" class="title">读取数据库:</mat-grid-tile>
-              <mat-grid-tile colspan="6" class="content">
-                <mat-form-field class="example-full-width">
-                  <mat-select [required]="show" [(ngModel)]="syncConfig.readConnectId">
-                    <mat-option [value]="option.id" *ngFor="let option of readDb">{{ option.remark }}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </mat-grid-tile>
+            <mat-grid-tile colspan="2" class="title">读取数据库:</mat-grid-tile>
+            <mat-grid-tile colspan="6" class="content">
+              <mat-form-field class="example-full-width">
+                <mat-select [required]="show" [(ngModel)]="syncConfig.readConnectId">
+                  <mat-option [value]="option.id" *ngFor="let option of readDb">{{ option.remark }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
 
-              <mat-grid-tile colspan="2" class="title">写入数据源:</mat-grid-tile>
-              <mat-grid-tile colspan="6" class="content">
-                <mat-form-field>
-                  <mat-label>数据库类型</mat-label>
-                  <mat-select [required]="show" [(ngModel)]="syncConfig.writeConnectType" (selectionChange)="readList($event.value,2)">
-                    <mat-option [value]="option.value" *ngFor="let option of sourceType">{{ option.viewValue }}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </mat-grid-tile>
+            <mat-grid-tile colspan="2" class="title">写入数据源:</mat-grid-tile>
+            <mat-grid-tile colspan="6" class="content">
+              <mat-form-field>
+                <mat-label>数据库类型</mat-label>
+                <mat-select [required]="show" [(ngModel)]="syncConfig.writeConnectType" (selectionChange)="readList($event.value,2)">
+                  <mat-option [value]="option.value" *ngFor="let option of sourceType">{{ option.viewValue }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
 
-              <mat-grid-tile colspan="2" class="title">写入数据库:</mat-grid-tile>
-              <mat-grid-tile colspan="6" class="content">
-                <mat-form-field class="example-full-width">
-                  <mat-select [required]="show" [(ngModel)]="syncConfig.writeConnectId">
-                    <mat-option [value]="option.id" *ngFor="let option of writeDb">{{ option.remark }}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </mat-grid-tile>
+            <mat-grid-tile colspan="2" class="title">写入数据库:</mat-grid-tile>
+            <mat-grid-tile colspan="6" class="content">
+              <mat-form-field class="example-full-width">
+                <mat-select [required]="show" [(ngModel)]="syncConfig.writeConnectId">
+                  <mat-option [value]="option.id" *ngFor="let option of writeDb">{{ option.remark }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
 
-            </mat-grid-list>
-          </div>
-          <mat-divider/>
-          <div>
-            <button mat-button matStepperNext (click)="initDataBase()">下一步</button>
-          </div>
-      </mat-step>
-      <mat-step [stepControl]="secondFormGroup">
-          <ng-template matStepLabel>表配置</ng-template>
-          <mat-tab-group #appEditTable>
-            <mat-tab label="list">
-              <div class="edit-deploy-table-content-info">
-                <app-sync-table #appSyncTable></app-sync-table>
-              </div>
-              <mat-divider/>
-              <div class="fixed-button-container">
-                <button mat-fab color="warn" (click)="showAddSync()">
-                  <mat-icon>add</mat-icon>
-                </button>
-              </div>
-              <div>
-                <button mat-button matStepperPrevious>上一步</button>
-                <button mat-button matStepperNext>下一步</button>
-              </div>
-            </mat-tab>
-            <mat-tab label="edit">
-              <div class="edit-deploy-column-content-info">
-                <app-column #appColumn></app-column>
-              </div>
-              <mat-divider/>
-              <div>
-                <button mat-button (click)="exitAddTable()">取消</button>
-                <button mat-button (click)="addTable()">添加</button>
-              </div>
-            </mat-tab>
-          </mat-tab-group>
-      </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>预览</ng-template>
-        <div class="edit-deploy-content-info">
-        <p>You are now done.</p>
+          </mat-grid-list>
         </div>
         <mat-divider/>
-        <div>
+        <div class="h-12">
+          <button mat-button matStepperNext (click)="initDataBase()">下一步</button>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="表配置">
+      <mat-tab-group #appEditTable>
+        <mat-tab label="list">
+          <div class="stepperContainer flex flex-col h-screen">
+            <div class="flex-1">
+              <app-sync-table #appSyncTable></app-sync-table>
+            </div>
+            <mat-divider/>
+            <div class="fixed-button-container">
+              <button mat-fab color="warn" (click)="showAddSync()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            <div class="h-12">
+              <button mat-button matStepperPrevious>上一步</button>
+              <button mat-button matStepperNext>下一步</button>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="edit">
+          <div class="stepperContainer flex flex-col h-screen">
+            <div class="flex-1">
+              <app-column #appColumn></app-column>
+            </div>
+            <mat-divider/>
+            <div class="h-12">
+              <button mat-button (click)="exitAddTable()">取消</button>
+              <button mat-button (click)="addTable()">添加</button>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-step>
+    <mat-step label="预览">
+      <div class="stepperContainer flex flex-col h-screen">
+        <div class="flex-1">
+          <p>You are now done.</p>
+        </div>
+        <mat-divider/>
+        <div class="h-12">
           <button mat-button matStepperPrevious>上一步</button>
           <button mat-button (click)="stepper.reset()">重置</button>
           <button mat-button (click)="doSave()">保存</button>
         </div>
-      </mat-step>
-    </mat-stepper>
-    <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>
-  </ng-container>
+      </div>
+    </mat-step>
+  </mat-stepper>
+  <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>
 </div>

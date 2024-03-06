@@ -1,7 +1,5 @@
 .edit-content{
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+
 }
 
 .edit-content .edit-content-header {
@@ -130,4 +128,42 @@ textarea::-webkit-scrollbar-thumb {
 
 textarea::-webkit-scrollbar-track {
   background-color: #f0f0f0; /* 设置滚动条轨道的背景色 */
+}
+
+.mat-horizontal-content-container {
+  padding: 0 0 0 0 !important;
+}
+
+
+
+
+
+
+/**设置滚动条**/
+
+.edit-content-info-scrollbar{
+  overflow: auto;
+  background-color: #ffffff;
+  padding: 2px;
+}
+
+
+.edit-content-info-scrollbar::-webkit-scrollbar {
+  width: 1px;
+}
+
+/* 滚动条轨道 */
+.edit-content-info-scrollbar::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* 设置轨道的背景颜色 */
+}
+
+/* 滚动条滑块 */
+.edit-content-info-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #888; /* 设置滑块的背景颜色 */
+  border-radius: 10px; /* 设置滑块的圆角 */
+}
+
+/* 鼠标悬停在滚动条上时的滑块 */
+.edit-content-info-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* 设置悬停状态下滑块的背景颜色 */
 }

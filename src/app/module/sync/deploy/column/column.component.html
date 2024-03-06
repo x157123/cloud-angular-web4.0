@@ -1,5 +1,6 @@
-<div class="edit-content">
-  <mat-grid-list cols="32" rowHeight="60px" gutterSize="5px">
+<div class="appSyncTableContainer flex flex-col h-screen">
+  <div >
+    <mat-grid-list cols="32" rowHeight="60px" gutterSize="5px">
     <mat-grid-tile colspan="3" class="title">名称:</mat-grid-tile>
     <mat-grid-tile colspan="19" class="content">
       <mat-form-field class="example-full-width">
@@ -36,7 +37,9 @@
       </mat-form-field>
     </mat-grid-tile>
   </mat-grid-list>
-  <mat-accordion>
+  </div>
+  <div class="flex-1 edit-content-info-scrollbar">
+    <mat-accordion>
     <div class="edit-deploy-column-content-info">
       <div class="example-container">
         <div
@@ -73,6 +76,7 @@
       </div>
     </div>
   </mat-accordion>
+  </div>
   <ng-template #overlayMenuList>
     <div class="fab-menu-panel">
       <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
