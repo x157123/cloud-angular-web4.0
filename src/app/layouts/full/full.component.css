@@ -24,20 +24,7 @@
   width: 0;
 }
 
-/** 内容部门 不能添加滚动条 不允许页面外部出现滚动条*/
-.page-drawer-content {
-  display: flex;
-  height: 100%;
-}
 
-.page-sidenav-content {
-  flex: 1;
-  margin: 10px;
-  background-color: #fff;
-  overflow: auto;
+.page-drawer-content{
+  height: calc(100vh - 64px);
 }
-
-.page-sidenav-content::-webkit-scrollbar {
-  width: 0;
-}
-

@@ -1,85 +1,8 @@
 
 .mat-drawer-content mat-toolbar{
-  background-color: white;
+  background-color: $white;
 }
 
-.mat-drawer-container{
-  height: 100%;
-}
-
-.mat-drawer-container .mat-drawer-content{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.mat-drawer-container .mat-drawer-content .mat-drawer-content-toolbar {
-  flex: 0 0 auto;
-}
-
-.mat-drawer-container .mat-drawer-content .mat-drawer-content-toolbar .mat-drawer-content-toolbar-form {
-  background-color: white;
-  padding: 5px 5px 0 5px;
-
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-
-  mat-form-field {
-    margin-right: 20px;
-  }
-
-  .form-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-.mat-drawer-container .mat-drawer-content .mat-drawer-content-content {
-  flex: 1 1 auto;
-  overflow-y: auto;
-}
-
-.mat-drawer-container .mat-drawer-content mat-drawer-content-footer{
-  flex: 0 0 auto;
-}
-
-
-/* 鼠标移入时显示滚动条 */
-.mat-drawer-container .mat-drawer-content .mat-drawer-content-content:hover {
-  overflow: overlay;
-}
-
-.mat-drawer-container .mat-drawer-content .mat-drawer-content-content::-webkit-scrollbar {
-  width: 1px;
-  height: 10px;
-}
-
-/* 滚动条轨道 */
-.mat-drawer-container .mat-drawer-content .mat-drawer-content-content::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* 设置轨道的背景颜色 */
-}
-
-/* 滚动条滑块 */
-.mat-drawer-container .mat-drawer-content .mat-drawer-content-content::-webkit-scrollbar-thumb {
-  background-color: #888; /* 设置滑块的背景颜色 */
-  border-radius: 1px; /* 设置滑块的圆角 */
-}
-
-/* 鼠标悬停在滚动条上时的滑块 */
-.mat-drawer-container .mat-drawer-content .mat-drawer-content-content::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* 设置悬停状态下滑块的背景颜色 */
-}
-
-
-.mat-drawer-container .mat-drawer-content .mat-drawer-content-content .mat-mdc-table {
-  table-layout: fixed;
-}
-
-/* 列表不跨行 */
-.mat-drawer-container .mat-drawer-content .mat-drawer-content-content .mat-mdc-cell {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+.mat-drawer-containers {
+  height: calc(100vh - 64px);
 }
