@@ -13,3 +13,7 @@
   overflow: hidden;
 }
 
+.mat-column-operate {
+  flex: 0 0 120px;
+  white-space: nowrap;
+}
