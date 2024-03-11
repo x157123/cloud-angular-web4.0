@@ -3,49 +3,46 @@
     <app-flowableManage-edit #appFlowableManageEdit></app-flowableManage-edit>
   </mat-drawer>
   <mat-drawer-content>
-    <div class="mat-drawer-content-toolbar">
-      <mat-toolbar>
-        <input matInput placeholder="查询条件">
-        <button mat-raised-button color="primary" (click)="queryData()">查询</button>
-        <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="新增数据">
-          <mat-icon>add</mat-icon>
-        </button>
-      </mat-toolbar>
-      <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
-    </div>
-    <div class="mat-drawer-content-content">
+    <mat-toolbar>
+      <input matInput placeholder="查询条件">
+      <button mat-raised-button color="primary" (click)="queryData()">查询</button>
+      <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="新增数据">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
+    <div class="flex-1 edit-content-info-scrollbar">
       <mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="id">
-          <mat-header-cell mat-header-cell *matHeaderCellDef> id </mat-header-cell>
-          <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
+          <mat-header-cell mat-header-cell *matHeaderCellDef> id</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.id }}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="processName"  >
-          <mat-header-cell mat-header-cell *matHeaderCellDef> 流程名称 </mat-header-cell>
-          <mat-cell *matCellDef="let element" > {{element.processName}} </mat-cell>
+        <ng-container matColumnDef="processName">
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 流程名称</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.processName }}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="key"  >
-          <mat-header-cell mat-header-cell *matHeaderCellDef> 任务key </mat-header-cell>
-          <mat-cell *matCellDef="let element" > {{element.key}} </mat-cell>
+        <ng-container matColumnDef="key">
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 任务key</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.key }}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="createTime"  >
-          <mat-header-cell mat-header-cell *matHeaderCellDef> 时间 </mat-header-cell>
-          <mat-cell *matCellDef="let element" > {{element.createTime}} </mat-cell>
+        <ng-container matColumnDef="createTime">
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 时间</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.createTime }}</mat-cell>
         </ng-container>
-
 
         <ng-container matColumnDef="operate">
-          <mat-header-cell mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 操作</mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <a mat-icon-button color="primary" (click)="openEditSidenav(element.id, true)"  title="查看">
+            <a mat-icon-button color="primary" (click)="openEditSidenav(element.id, true)" title="查看">
               <mat-icon>open_in_new</mat-icon>
             </a>
-            <a mat-icon-button color="primary" (click)="openEditSidenav(element.id)"  title="修改">
+            <a mat-icon-button color="primary" (click)="openEditSidenav(element.id)" title="修改">
               <mat-icon>edit</mat-icon>
             </a>
-            <a mat-icon-button color="accent" (click)="delById(element.id)"  title="删除">
+            <a mat-icon-button color="accent" (click)="delById(element.id)" title="删除">
               <mat-icon>delete</mat-icon>
             </a>
           </mat-cell>
@@ -54,12 +51,10 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
     </div>
-    <div class="mat-drawer-content-footer">
-      <mat-paginator [pageSizeOptions]="[10, 15, 20]" [length]="dataLength"
-                     [showFirstLastButtons]="true"
-                     [pageIndex]="pageIndex"
-                     (page)="handlePageEvent($event)">
-      </mat-paginator>
-    </div>
-  </mat-drawer-content>
+    <mat-paginator [pageSizeOptions]="[10, 15, 20]" [length]="dataLength"
+                   [showFirstLastButtons]="true"
+                   [pageIndex]="pageIndex"
+                   (page)="handlePageEvent($event)">
+    </mat-paginator>
+  </mat-drawer-content>>
 </mat-drawer-container>

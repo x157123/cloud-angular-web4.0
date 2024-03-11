@@ -2,8 +2,7 @@
   <mat-drawer #drawer mode="over" position="end" class="edit-drawer">
     <app-flowableInitiateTask-edit #appFlowableInitiateTaskEdit></app-flowableInitiateTask-edit>
   </mat-drawer>
-  <mat-drawer-content>
-    <div class="mat-drawer-content-toolbar">
+  <div class="mat-drawer-containers flex flex-col h-screen">
       <mat-toolbar>
         <input matInput [(ngModel)] ="user" placeholder="查询条件">
         <button mat-raised-button color="primary" (click)="queryData()">查询</button>
@@ -12,8 +11,7 @@
         </button>
       </mat-toolbar>
       <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
-    </div>
-    <div class="mat-drawer-content-content">
+    <div class="flex-1 edit-content-info-scrollbar">
       <mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="id">
           <mat-header-cell mat-header-cell *matHeaderCellDef> id </mat-header-cell>
@@ -62,12 +60,10 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
     </div>
-    <div class="mat-drawer-content-footer">
-      <mat-paginator [pageSizeOptions]="[10, 15, 20]" [length]="dataLength"
-                     [showFirstLastButtons]="true"
-                     [pageIndex]="pageIndex"
-                     (page)="handlePageEvent($event)">
-      </mat-paginator>
-    </div>
-  </mat-drawer-content>
+    <mat-paginator [pageSizeOptions]="[10, 15, 20]" [length]="dataLength"
+                   [showFirstLastButtons]="true"
+                   [pageIndex]="pageIndex"
+                   (page)="handlePageEvent($event)">
+    </mat-paginator>
+  </div>
 </mat-drawer-container>
