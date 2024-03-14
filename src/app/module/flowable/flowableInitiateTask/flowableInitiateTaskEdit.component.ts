@@ -1,9 +1,7 @@
-import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
-import {Dict, FlowableInitiateTaskComponent} from "./flowableInitiateTask.component";
+import {AfterViewInit, ChangeDetectorRef, Component} from '@angular/core';
+import {FlowableInitiateTaskComponent} from "./flowableInitiateTask.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
-import {HttpParams, HttpParamsOptions} from "@angular/common/http";
-
 
 
 @Component({
@@ -11,7 +9,7 @@ import {HttpParams, HttpParamsOptions} from "@angular/common/http";
   templateUrl: './flowableInitiateTaskEdit.component.html',
   styleUrls: ['./flowableInitiateTaskEdit.component.css'],
 })
-export class FlowableInitiateTaskEditComponent {
+export class FlowableInitiateTaskEditComponent implements AfterViewInit {
 
 
   visibilityEditData = { 'visibility': 'hidden'}
@@ -20,14 +18,36 @@ export class FlowableInitiateTaskEditComponent {
 
   processId: string = '';
 
+  flowable: FlowableDict[] = [];
+
+
   constructor(private parent: FlowableInitiateTaskComponent,private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService,private cd: ChangeDetectorRef) {
+  }
+
+  ngAfterViewInit(): void {
+    this.getFlowable();
   }
 
   doSomething() {
     this.parent.closeEditSidenav();
     this.parent.queryData()
     this.dataElement = {... this.defDataElement}
+  }
+
+  getFlowable(){
+    this.httpGlobalTool.post("/api/flowable/getDeploymentList", null).subscribe({
+      next: (res) => {
+        this.flowable = res.data
+      },
+      error: (e) => {
+        this.hideProgressBar();
+        console.log('error:', e.error)
+      },
+      complete: () => {
+        this.hideProgressBar();
+      }
+    });
   }
 
   doSave(){
@@ -101,3 +121,8 @@ export interface DataElement {
   assignee: string;
 }
 
+
+export interface FlowableDict {
+  key: string;
+  processName: string;
+}

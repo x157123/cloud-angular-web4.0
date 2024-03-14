@@ -23,7 +23,9 @@
         <mat-grid-tile colspan="12" class="content">
           <mat-form-field class="example-full-width">
             <mat-label>流程Key</mat-label>
-            <input matInput [(ngModel)]="dataElement.flowKey">
+            <mat-select [(ngModel)]="dataElement.flowKey">
+              <mat-option [value]="option.key" *ngFor="let option of flowable">{{ option.processName }}</mat-option>
+            </mat-select>
           </mat-form-field>
         </mat-grid-tile>
 
