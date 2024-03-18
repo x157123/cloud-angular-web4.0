@@ -82,7 +82,7 @@ export class FlowableInitiateTaskEditComponent implements AfterViewInit {
     }else{
       this.show = true;
     }
-    this.dataElement = this.defDataElement
+    this.dataElement = {... this.defDataElement}
   }
 
   findById(id:string,show?:boolean) {
@@ -94,6 +94,7 @@ export class FlowableInitiateTaskEditComponent implements AfterViewInit {
     if (id) {
       this.processId = id;
     }
+    this.dataElement = {... this.defDataElement}
     this.hideProgressBar();
   }
 
