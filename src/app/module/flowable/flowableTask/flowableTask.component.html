@@ -44,11 +44,6 @@
           <mat-cell *matCellDef="let element"> {{ element.processName }}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="status">
-          <mat-header-cell mat-header-cell *matHeaderCellDef> 状态</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.status }}</mat-cell>
-        </ng-container>
-
         <ng-container matColumnDef="startTime">
           <mat-header-cell mat-header-cell *matHeaderCellDef> 开始时间</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{ element.startTime }}</mat-cell>

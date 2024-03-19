@@ -51,13 +51,13 @@
         <ng-container matColumnDef="operate">
           <mat-header-cell mat-header-cell *matHeaderCellDef> 操作</mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <a mat-icon-button class="icon-button" color="primary" (click)="openEditSidenav(element.id, true)" title="查看">
+            <a mat-icon-button color="primary" (click)="openEditSidenav(element.id, true)" title="查看">
               <mat-icon>open_in_new</mat-icon>
             </a>
-            <a mat-icon-button class="icon-button" color="primary" (click)="openEditSidenav(element.id)" title="修改">
+            <a mat-icon-button color="primary" (click)="openEditSidenav(element.id)" title="修改">
               <mat-icon>edit</mat-icon>
             </a>
-            <a mat-icon-button class="icon-button" color="accent" (click)="delById(element.id)" title="删除">
+            <a mat-icon-button color="accent" (click)="delById(element.id)" title="删除">
               <mat-icon>delete</mat-icon>
             </a>
           </mat-cell>

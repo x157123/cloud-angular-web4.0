@@ -24,7 +24,7 @@ export class FlowableTaskComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','taskName','processName','status','startTime','processInstanceId','operate'];
+  displayedColumns: string[] = ['id','taskName','processName','startTime','processInstanceId','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   visibilityListData = {'visibility': 'hidden'}

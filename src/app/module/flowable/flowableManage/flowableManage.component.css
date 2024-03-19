@@ -1,24 +1,4 @@
-
-.edit-drawer{
-  width: 400px;
-}
-
-.mat-mdc-table {
-  table-layout: fixed;
-}
-
-.mat-mdc-cell {
+.mat-column-operate {
+  flex: 0 0 160px;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.mat-drawer-container{
-  height: calc(100vh - 64px);
-}
-
-.mat-drawer-container .mat-drawer-content {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
