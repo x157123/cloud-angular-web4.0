@@ -5,6 +5,7 @@ import {PageEvent} from "@angular/material/paginator";
 import {MatDrawer} from "@angular/material/sidenav";
 import {FlowableManageEditComponent} from "./flowableManageEdit.component";
 import {AlertService} from "@component/alert/alert.service";
+import { ActivatedRoute } from '@angular/router';
 
 
 export interface Dict {
@@ -25,7 +26,7 @@ export class FlowableManageComponent implements AfterViewInit {
   pageSize: number = 10;
   displayedColumns: string[] = ['id','processName','key','createTime','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
-
+  keyword: string = '';
   visibilityListData = {'visibility': 'hidden'}
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
@@ -33,10 +34,14 @@ export class FlowableManageComponent implements AfterViewInit {
   @ViewChild('appFlowableManageEdit', {static: false}) appFlowableManageEdit!: FlowableManageEditComponent;
 
   constructor(private httpGlobalTool: HttpGlobalTool,
-              private _alertService: AlertService) {
+              private _alertService: AlertService,
+              private route: ActivatedRoute) {
   }
 
   ngAfterViewInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.keyword = params['keyword'];
+    });
     this.queryData()
   }
 

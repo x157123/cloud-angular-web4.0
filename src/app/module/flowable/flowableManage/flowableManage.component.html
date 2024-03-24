@@ -4,7 +4,7 @@
   </mat-drawer>
   <mat-drawer-content>
     <mat-toolbar>
-      <input matInput placeholder="查询条件">
+      <input matInput ngModel="{{keyword}}" placeholder="查询条件">
       <button mat-raised-button color="primary" (click)="queryData()">查询</button>
       <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="新增数据">
         <mat-icon>add</mat-icon>

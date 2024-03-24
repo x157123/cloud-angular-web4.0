@@ -10,20 +10,20 @@ import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { MessageComponent } from "./layouts/full/msg/message.component";
 
 import { SharedModule } from './shared/shared.module';
-import { SpinnerComponent } from './shared/spinner.component';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 
 //自定义分页样式
-import {MatPaginatorIntlCN} from "@common/paginator.translate";
+import {MatPaginatorIntlCN} from "@common/i18n/paginator.translate";
 import {MatPaginatorIntl} from "@angular/material/paginator";
 
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {AuthInterceptor} from "@common/http/auth.Interceptor";
 
 @NgModule({
     declarations: [
-        SpinnerComponent,
         FullComponent,
         AppComponent,
         AppSidebarComponent,
@@ -40,9 +40,11 @@ import { MatOptionModule } from '@angular/material/core';
         MatSelectModule,
         MatOptionModule
     ],
-    providers: [{ provide: MatPaginatorIntl, useClass: MatPaginatorIntlCN }],
+    providers: [
+      { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCN },
+      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    ],
   exports: [
-    SpinnerComponent,
     AppSidebarComponent
   ],
     bootstrap: [AppComponent]

@@ -4,8 +4,8 @@
 
 .page-content-msg{
   width: 240px;
-  padding-top: 0px;
-  box-shadow: 1px 0px 20px $shadow;
+  padding-top: 0;
+  box-shadow: 1px 0 20px $shadow;
 }
 
 .mat-drawer-container .mat-drawer-backdrop .mat-drawer-shown {
@@ -13,7 +13,7 @@
 }
 .mat-mdc-nav-list {
   mat-expansion-panel-header {
-    padding: 0px 6px 0px 0px;
+    padding: 0 6px 0 0;
     color: $sidebar-text;
 
     span {
@@ -28,7 +28,7 @@
 }
 
 .mat-expansion-panel-header.mat-expanded {
-  height: 54px;
+  height: 54px !important;
 }
 
 .mat-drawer.mat-drawer-side{

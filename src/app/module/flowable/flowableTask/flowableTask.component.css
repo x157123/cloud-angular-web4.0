@@ -1,4 +1,8 @@
 
+.edit-drawer{
+  width: 400px;
+}
+
 .mat-column-operate {
   flex: 0 0 160px;
   white-space: nowrap;

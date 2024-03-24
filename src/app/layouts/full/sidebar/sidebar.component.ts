@@ -40,9 +40,9 @@ const menuItems = [
   {state: false, key: 'form',path: 'form', name: '表单自定义', type: 'link', icon: 'av_timer', items: []},
   {
     state: true, key: 'flowable',path: 'flowable', name: 'flowable', type: 'link', icon: 'home', items: [
-      {state: false, key: 'flowableTask',path: 'flowableTask', name: '代办任务', type: 'link', icon: 'av_timer'},
-      {state: true, key: 'flowableInitiateTask',path: 'flowableInitiateTask', name: '我的发起', type: 'link', icon: 'av_timer'},
-      {state: false, key: 'flowableManage',path: 'flowableManage', name: '流程管理', type: 'link', icon: 'av_timer'},
+      {state: false, key: 'flowableTask',path: 'flowable/flowableTask', name: '代办任务', type: 'link', icon: 'av_timer'},
+      {state: true, key: 'flowableInitiateTask',path: 'flowable/flowableInitiateTask', name: '我的发起', type: 'link', icon: 'av_timer'},
+      {state: false, key: 'flowableManage',path: 'flowable/flowableManage', name: '流程管理', type: 'link', icon: 'av_timer'},
     ]
   }
 ];

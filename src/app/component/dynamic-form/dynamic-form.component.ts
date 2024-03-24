@@ -9,7 +9,7 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule,} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule,} from '@angular/forms';
 
 
 import {Base} from './elements/base';
@@ -49,49 +49,80 @@ import {NgClass, NgForOf, NgIf} from "@angular/common";
   providers: [ControlService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class DynamicFormComponent implements OnInit ,OnChanges {
+export class DynamicFormComponent implements OnInit {
 
 
   @Input() formList: Base<string>[] | null = [];
+  @Input() jsonData: string = "";
   @Output() handleButtonClick: EventEmitter<string> = new EventEmitter<string>();
 
   form!: FormGroup;
   id: number = 1;
+  checkboxMap: Map<string, Array<string>> = new Map();
 
   constructor(private qcs: ControlService, private fb: FormBuilder) {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('formList has changed');
-    if (changes['formList']) {
-      console.log('formList has changed');
-    }
-  }
-
   ngOnInit() {
     this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
+    console.log('form', this.jsonData)
+    const data = JSON.parse(this.jsonData);
+    this.form.setValue(data);
+
   }
 
   onSubmit() {
     //校验数据
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      let payLoad = JSON.stringify(this.form.getRawValue());
+      const json = this.form.getRawValue();
+      this.checkboxMap.forEach((value, key) => {
+        json[key] = value;
+      });
+      let payLoad = JSON.stringify(json);
       this.handleButtonClick.emit(payLoad);
     }
   }
 
-  refreshForm(){
+  refreshForm() {
     this.form.clearValidators();
     this.ngOnInit()
   }
 
 
-  add() {
+  add(index: number) {
     this.id += 1;
     let textBox = TextBox.getInstance('phones' + this.id, '电话号码' + this.id, 10, true, false, 'phone', 0, 0);
-    this.formList?.push(textBox);
+    if (index === -1) {
+      this.formList?.push(textBox);
+    } else {
+      //添加到指定位置index
+      this.formList?.splice(index + 1, 0, textBox);
+    }
     this.qcs.addCustomValidator(this.form, textBox);
+  }
+
+  delForm(index: number) {
+    this.formList?.splice(index, 1);
+    this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
+  }
+
+  onCheckboxChange(event: any, key: string, value: string) {
+    if (event.checked) {
+      let arrs: string[] | undefined = this.checkboxMap.get(key);
+      if (arrs) {
+        arrs.push(value);
+      } else {
+        this.checkboxMap.set(key, [value]);
+      }
+    } else {
+      let arrs: string[] | undefined = this.checkboxMap.get(key);
+      if (arrs) {
+        arrs.splice(arrs.indexOf(value), 1);
+      } else {
+        this.checkboxMap.set(key, []);
+      }
+    }
   }
 
   getValueLength(key: string): number {

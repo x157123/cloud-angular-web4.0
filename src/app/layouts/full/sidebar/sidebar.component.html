@@ -2,7 +2,7 @@
   <mat-nav-list class="mat-nav-list" appAccordion>
     <ng-container *ngFor="let menuitem of getMenuitem()">
       <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="menuitem.state" *ngIf="menuitem.items && menuitem.items.length <= 0" group="{{menuitem.key}}">
-        <a appAccordionToggle [routerLink]="['/', menuitem.path]" *ngIf="menuitem.type === 'link'">
+        <a appAccordionToggle [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
           <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
           <span>{{ menuitem.name }}</span>
         </a>
@@ -14,7 +14,7 @@
         </mat-expansion-panel-header>
         <ng-container *ngFor="let menuitem of menuitem.items">
           <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="menuitem.state" *ngIf="!menuitem.items || menuitem.items.length <= 0" group="{{menuitem.key}}">
-            <a appAccordionToggle [routerLink]="['/', menuitem.path]" *ngIf="menuitem.type === 'link'">
+            <a appAccordionToggle [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
               <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
               <span>{{ menuitem.name }}</span>
             </a>
@@ -25,7 +25,7 @@
               <span>{{ menuitem.name }}</span>
             </mat-expansion-panel-header>
             <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="menuitem.state" *ngFor="let menuitem of menuitem.items" group="{{menuitem.key}}">
-              <a appAccordionToggle [routerLink]="['/', menuitem.path]" *ngIf="menuitem.type === 'link'">
+              <a appAccordionToggle [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
                 <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
                 <span>{{ menuitem.name }}</span>
               </a>
