@@ -57,7 +57,7 @@ export class FormCustomizationComponent{
 
   formList$: Observable<Base<any>[]> | undefined;
 
-  jsonData$: string = "{\"name\":\"123\",\"phones\":\"15222223332\",\"email\":\"123@12\",\"bak\":\"12333333333333332\",\"sex\":\"女\",\"love\":[\"2\",\"1\"],\"brave2\":\"2\"}";
+  jsonData$: string = "{\"name\":\"123\",\"phones\":\"15222223332\",\"email\":\"123@12\",\"bak\":\"12333333333333332\",\"sex\":\"女\",\"love\":[],\"brave2\":\"2\"}";
 
   formList: Base<any> [] = [];
 

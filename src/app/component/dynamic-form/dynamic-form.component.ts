@@ -64,23 +64,26 @@ export class DynamicFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    let data = JSON.parse(this.jsonData);
-    this.formList?.forEach((value) => {
-      if(value.controlType === 'checkBox') {
-        data[value.key]?.forEach((v: string) => {
-          this.onCheckboxChange({checked: true}, value.key, v);
-          value.options.forEach((option) => {
-            if(option.key === v) {
-              option.checked = true;
-            }
+    if (this.jsonData != null && this.jsonData.length > 0) {
+      let data = JSON.parse(this.jsonData);
+      this.formList?.forEach((value) => {
+        if (value.controlType === 'checkBox') {
+          data[value.key]?.forEach((v: string) => {
+            this.onCheckboxChange({checked: true}, value.key, v);
+            value.options.forEach((option) => {
+              if (option.key === v) {
+                option.checked = true;
+              }
+            })
           })
-        })
-        data[value.key] = null;
-      }
-    });
-    console.log(this.formList)
-    this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
-    this.form.setValue(data);
+        }
+      });
+      console.log(this.formList)
+      this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
+      this.form.setValue(data);
+    } else {
+      this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
+    }
   }
 
   onSubmit() {
@@ -121,19 +124,27 @@ export class DynamicFormComponent implements OnInit {
 
   onCheckboxChange(event: any, key: string, value: string) {
     if (event.checked) {
-      let arrs: string[] | undefined = this.checkboxMap.get(key);
-      if (arrs) {
-        arrs.push(value);
+      let datas: string[] | undefined = this.checkboxMap.get(key);
+      if (datas) {
+        datas.push(value);
       } else {
         this.checkboxMap.set(key, [value]);
       }
     } else {
-      let arrs: string[] | undefined = this.checkboxMap.get(key);
-      if (arrs) {
-        arrs.splice(arrs.indexOf(value), 1);
+      let datas: string[] | undefined = this.checkboxMap.get(key);
+      if (datas) {
+        datas.splice(datas.indexOf(value), 1);
+        if (datas.length === 0) {
+        }
       } else {
         this.checkboxMap.set(key, []);
       }
+    }
+    let datas: string[] | undefined = this.checkboxMap.get(key);
+    if (datas && datas.length>0) {
+      this.form.get(key)?.setValue("1");
+    }else{
+      this.form.get(key)?.setValue(null);
     }
   }
 
