@@ -1,6 +1,6 @@
 <div class="menu-container">
   <mat-nav-list class="mat-nav-list" appAccordion>
-    <ng-container *ngFor="let menuitem of getMenuitem()">
+    <ng-container *ngFor="let menuitem of menus">
       <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="menuitem.state" *ngIf="menuitem.items && menuitem.items.length <= 0" group="{{menuitem.key}}">
         <a appAccordionToggle [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
           <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>

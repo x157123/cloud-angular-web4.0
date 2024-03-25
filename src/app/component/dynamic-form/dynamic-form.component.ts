@@ -64,11 +64,23 @@ export class DynamicFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    let data = JSON.parse(this.jsonData);
+    this.formList?.forEach((value) => {
+      if(value.controlType === 'checkBox') {
+        data[value.key]?.forEach((v: string) => {
+          this.onCheckboxChange({checked: true}, value.key, v);
+          value.options.forEach((option) => {
+            if(option.key === v) {
+              option.checked = true;
+            }
+          })
+        })
+        data[value.key] = null;
+      }
+    });
+    console.log(this.formList)
     this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
-    console.log('form', this.jsonData)
-    const data = JSON.parse(this.jsonData);
     this.form.setValue(data);
-
   }
 
   onSubmit() {

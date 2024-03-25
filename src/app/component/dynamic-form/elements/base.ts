@@ -21,7 +21,7 @@ export class Base<T> {
   //占用一行
   phonetics: boolean;
   //多选 选项
-  options: {key: string, value: string}[];
+  options: {key: string, value: string, checked?: boolean}[];
 
   constructor(options: {
       value?: T;
@@ -35,7 +35,7 @@ export class Base<T> {
       maxLength?: number;
       phonetics?: boolean;
       validator?: string;
-      options?: {key: string, value: string}[];
+      options?: {key: string, value: string, checked?: boolean}[];
     } = {}) {
     this.value = options.value;
     this.key = options.key || '';

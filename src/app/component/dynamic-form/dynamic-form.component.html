@@ -64,7 +64,7 @@
             <div class="grow">
               <div class="flex items-center" style="height: 56px;">
                 <div *ngFor="let opt of formObj.options; let i = index">
-                  <mat-checkbox [formControlName]="formObj.key"  (change)="onCheckboxChange($event, formObj.key, opt.key)" [value]="opt.key">
+                  <mat-checkbox [formControlName]="formObj.key" [checked]="true" (change)="onCheckboxChange($event, formObj.key, opt.key)" [value]="opt.key">
                     {{ opt.value }}
                   </mat-checkbox>
                 </div>
