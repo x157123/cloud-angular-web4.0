@@ -38,11 +38,20 @@ export class ControlService {
     if (question.validator === 'phone') {
       validator.push(this.phoneValidator);
     }
-    if (question.minLength > 0) {
-      validator.push(Validators.minLength(question.minLength));
-    }
-    if (question.maxLength > 0) {
-      validator.push(Validators.maxLength(question.maxLength));
+    if(question.controlType === 'numberBox') {
+      if (question.minLength > 0) {
+        validator.push(Validators.min(question.minLength));
+      }
+      if (question.maxLength > 0) {
+        validator.push(Validators.max(question.maxLength));
+      }
+    } else {
+      if (question.minLength > 0) {
+        validator.push(Validators.minLength(question.minLength));
+      }
+      if (question.maxLength > 0) {
+        validator.push(Validators.maxLength(question.maxLength));
+      }
     }
     return validator;
   }
@@ -77,11 +86,12 @@ export class ControlService {
   json2list(jsonList: string) {
     let list = JSON.parse(jsonList);
     const tmp: Base<string>[] = [];
-
     for (let i = 0; i < list.length; i++) {
       let question = list[i];
       question.key
       if (question.controlType === 'textBox') {
+        tmp.push(TextBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.validator, question.minLength, question.maxLength));
+      } else if (question.controlType === 'numberBox') {
         tmp.push(TextBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.validator, question.minLength, question.maxLength));
       } else if (question.controlType === 'textareaBox') {
         tmp.push(TextareaBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics,question.minLength, question.maxLength));

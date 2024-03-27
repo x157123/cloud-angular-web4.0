@@ -1,10 +1,8 @@
 import {Component} from '@angular/core';
-import BpmnModeler from 'bpmn-js/lib/Modeler';
 import {MatButton} from "@angular/material/button";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
-import {AlertService} from "@component/alert/alert.service";
-
-
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
 
 /** @title Input with a custom ErrorStateMatcher */
 @Component({
@@ -12,13 +10,15 @@ import {AlertService} from "@component/alert/alert.service";
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.css'],
     standalone: true,
-    imports: [
-        MatButton
-    ]
+  imports: [
+    MatButton,
+    MatLabel,
+    MatFormField,
+    MatInput
+  ]
 })
 
 export class UserComponent {
-
   constructor(private httpGlobalTool: HttpGlobalTool) {
   }
 

@@ -5,6 +5,24 @@
         <ng-container *ngFor="let formObj of formList">
 
           <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex"
+               *ngIf="formObj.controlType === 'numberBox'">
+            <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
+            <div class="grow h-14">
+              <mat-form-field class="mat-form-field-width">
+                <mat-label>{{ formObj.label }}</mat-label>
+                <input matInput [formControlName]="formObj.key" [id]="formObj.key" [type]="formObj.type">
+                <mat-error *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.type }}必填</mat-error>
+                <mat-error *ngIf="form.get(formObj.key)?.hasError('min')">{{ formObj.label }}
+                  长度不能少于{{ formObj.minLength }}
+                </mat-error>
+                <mat-error *ngIf="form.get(formObj.key)?.hasError('max')">{{ formObj.label }}
+                  长度不能大于{{ formObj.maxLength }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex"
                *ngIf="formObj.controlType === 'textBox'">
             <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
             <div class="grow h-14">

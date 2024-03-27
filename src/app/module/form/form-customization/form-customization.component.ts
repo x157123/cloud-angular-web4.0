@@ -6,7 +6,7 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Base} from "@component/dynamic-form/elements/base";
 
-import {Observable, of} from "rxjs";
+import {elementAt, Observable, of} from "rxjs";
 import {DynamicFormComponent} from "@component/dynamic-form/dynamic-form.component";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
 import {MatOption} from "@angular/material/autocomplete";
@@ -57,7 +57,7 @@ export class FormCustomizationComponent{
 
   formList$: Observable<Base<any>[]> | undefined;
 
-  jsonData$: string = "{\"name\":\"123\",\"phones\":\"15222223332\",\"email\":\"123@12\",\"bak\":\"12333333333333332\",\"sex\":\"女\",\"love\":[],\"brave2\":\"2\"}";
+  jsonData$: string = "{\"name\":\"123\",\"phones\":\"15222223332\",\"email\":\"123@12\",\"bak\":\"12333333333333332\",\"sex\":\"女\",\"love\":[\"1\",\"2\"],\"brave2\":\"2\"}";
 
   formList: Base<any> [] = [];
 
@@ -141,6 +141,11 @@ export class FormCustomizationComponent{
     console.log(this.formList[i].controlType);
     if(this.formList[i].options.length === 0 && (this.formList[i].controlType === 'selectBox' || this.formList[i].controlType === 'radioBox' || this.formList[i].controlType === 'checkBox')){
       this.formList[i].options = [{key: '选项key', value: '选项value'}];
+    }
+    if(this.formList[i].controlType === 'numberBox'){
+      this.formList[i].type = 'number';
+    } else {
+      this.formList[i].type = '';
     }
   }
 }

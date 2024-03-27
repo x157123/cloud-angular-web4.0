@@ -78,7 +78,6 @@ export class DynamicFormComponent implements OnInit {
           })
         }
       });
-      console.log(this.formList)
       this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
       this.form.setValue(data);
     } else {
@@ -142,9 +141,9 @@ export class DynamicFormComponent implements OnInit {
     }
     let datas: string[] | undefined = this.checkboxMap.get(key);
     if (datas && datas.length>0) {
-      this.form.get(key)?.setValue("1");
+      this.form?.get(key)?.setValue("1");
     }else{
-      this.form.get(key)?.setValue(null);
+      this.form?.get(key)?.setValue(null);
     }
   }
 
