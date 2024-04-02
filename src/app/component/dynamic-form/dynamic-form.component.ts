@@ -76,9 +76,14 @@ export class DynamicFormComponent implements OnInit {
               }
             })
           })
+        } else {
+          if(!data[value.key]){
+            data[value.key] = '';
+          }
         }
       });
       this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
+      console.log(data);
       this.form.setValue(data);
     } else {
       this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
@@ -106,7 +111,7 @@ export class DynamicFormComponent implements OnInit {
 
   add(index: number) {
     this.id += 1;
-    let textBox = TextBox.getInstance('phones' + this.id, '电话号码' + this.id, 10, true, false, 'phone', 0, 0);
+    let textBox = TextBox.getInstance('param' + this.id, '参数' + this.id, index +1, false, false, '', 0, 0);
     if (index === -1) {
       this.formList?.push(textBox);
     } else {
