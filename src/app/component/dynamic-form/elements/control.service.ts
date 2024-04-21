@@ -38,7 +38,7 @@ export class ControlService {
     if (question.validator === 'phone') {
       validator.push(this.phoneValidator);
     }
-    if(question.controlType === 'numberBox') {
+    if (question.controlType === 'numberBox') {
       if (question.minLength > 0) {
         validator.push(Validators.min(question.minLength));
       }
@@ -90,17 +90,17 @@ export class ControlService {
       let question = list[i];
       question.key
       if (question.controlType === 'textBox') {
-        tmp.push(TextBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.validator, question.minLength, question.maxLength, question.associationKey, question.associationValue));
+        tmp.push(TextBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics, question.validator, question.minLength, question.maxLength, question.associationKey, question.associationValue));
       } else if (question.controlType === 'numberBox') {
-        tmp.push(TextBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.validator, question.minLength, question.maxLength, question.associationKey, question.associationValue));
+        tmp.push(TextBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics, question.validator, question.minLength, question.maxLength, question.associationKey, question.associationValue));
       } else if (question.controlType === 'textareaBox') {
-        tmp.push(TextareaBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics,question.minLength, question.maxLength, question.associationKey, question.associationValue));
-      }else if (question.controlType === 'radioBox') {
+        tmp.push(TextareaBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics, question.minLength, question.maxLength, question.associationKey, question.associationValue));
+      } else if (question.controlType === 'radioBox') {
         tmp.push(RadioBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics, question.options, question.associationKey, question.associationValue));
-      }else if (question.controlType === 'checkBox') {
-        tmp.push(CheckBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.options, question.associationKey, question.associationValue));
-      }else if (question.controlType === 'selectBox') {
-        tmp.push(SelectBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics,question.options, question.associationKey, question.associationValue));
+      } else if (question.controlType === 'checkBox') {
+        tmp.push(CheckBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics, question.options, question.associationKey, question.associationValue));
+      } else if (question.controlType === 'selectBox') {
+        tmp.push(SelectBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics, question.options, question.associationKey, question.associationValue));
       }
     }
     return tmp;

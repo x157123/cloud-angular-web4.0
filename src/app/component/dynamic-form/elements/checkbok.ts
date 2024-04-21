@@ -1,9 +1,12 @@
-import { Base } from './base';
+import {Base} from './base';
 
 export class CheckBox extends Base<string> {
   private static instance: any;
 
-  static getInstance(key: string, label: string, order: number, required: boolean, phonetics: boolean, options: {key: string, value: string}[],associationKey: string, associationValue: string): CheckBox {
+  static getInstance(key: string, label: string, order: number, required: boolean, phonetics: boolean, options: {
+    key: string,
+    value: string
+  }[], associationKey: string, associationValue: string): CheckBox {
     CheckBox.instance = new CheckBox();
     CheckBox.instance.controlType = 'checkBox'
     CheckBox.instance.key = key;

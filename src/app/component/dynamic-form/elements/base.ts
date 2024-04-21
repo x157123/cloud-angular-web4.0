@@ -1,5 +1,5 @@
 export class Base<T> {
-  value: T|undefined;
+  value: T | undefined;
   //键
   key: string;
   //标签
@@ -21,28 +21,28 @@ export class Base<T> {
   //占用一行
   phonetics: boolean;
   //多选 选项
-  options: {key: string, value: string, checked?: boolean}[];
+  options: { key: string, value: string, checked?: boolean }[];
   //关联key
   associationKey: string;
   //关联选项
   associationValue: string;
 
   constructor(options: {
-      value?: T;
-      key?: string;
-      label?: string;
-      required?: boolean;
-      order?: number;
-      controlType?: string;
-      type?: string;
-      minLength?: number;
-      maxLength?: number;
-      phonetics?: boolean;
-      validator?: string;
-      options?: {key: string, value: string, checked?: boolean}[];
-      associationKey?: string;
-      associationValue?: string;
-    } = {}) {
+    value?: T;
+    key?: string;
+    label?: string;
+    required?: boolean;
+    order?: number;
+    controlType?: string;
+    type?: string;
+    minLength?: number;
+    maxLength?: number;
+    phonetics?: boolean;
+    validator?: string;
+    options?: { key: string, value: string, checked?: boolean }[];
+    associationKey?: string;
+    associationValue?: string;
+  } = {}) {
     this.value = options.value;
     this.key = options.key || '';
     this.label = options.label || '';

@@ -8,7 +8,7 @@ export class NumberBox extends Base<string> {
     super({});
   }
 
-  static getInstance(key: string, label: string, order: number, required: boolean, phonetics: boolean, validator: string, minLength: number, maxLength: number,associationKey: string, associationValue: string): NumberBox {
+  static getInstance(key: string, label: string, order: number, required: boolean, phonetics: boolean, validator: string, minLength: number, maxLength: number, associationKey: string, associationValue: string): NumberBox {
     NumberBox.instance = new NumberBox();
     NumberBox.instance.controlType = 'numberBox'
     NumberBox.instance.key = key;

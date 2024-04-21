@@ -83,7 +83,7 @@ export class DynamicFormComponent implements OnInit {
     this.setDate();
   }
 
-  setDate(){
+  setDate() {
     if (this.jsonData != null && this.jsonData.length > 0) {
       let data = JSON.parse(this.jsonData);
       this.formList?.forEach((value) => {
@@ -97,7 +97,7 @@ export class DynamicFormComponent implements OnInit {
             })
           })
         } else {
-          if(!data[value.key]){
+          if (!data[value.key]) {
             data[value.key] = '';
           }
         }
@@ -123,7 +123,7 @@ export class DynamicFormComponent implements OnInit {
     this.checkboxMap.forEach((value, key) => {
       json[key] = value;
     });
-    this.jsonData =  JSON.stringify(json);
+    this.jsonData = JSON.stringify(json);
     return this.jsonData;
   }
 
@@ -135,7 +135,7 @@ export class DynamicFormComponent implements OnInit {
 
   add(index: number) {
     this.id += 1;
-    let textBox = TextBox.getInstance('param' + this.id, '参数' + this.id, index +1, false, false, '', 0, 0,'','');
+    let textBox = TextBox.getInstance('param' + this.id, '参数' + this.id, index + 1, false, false, '', 0, 0, '', '');
     if (index === -1) {
       this.formList?.push(textBox);
     } else {
@@ -169,9 +169,9 @@ export class DynamicFormComponent implements OnInit {
       }
     }
     let datas: string[] | undefined = this.checkboxMap.get(key);
-    if (datas && datas.length>0) {
+    if (datas && datas.length > 0) {
       this.form?.get(key)?.setValue("1");
-    }else{
+    } else {
       this.form?.get(key)?.setValue(null);
     }
   }
