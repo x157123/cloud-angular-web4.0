@@ -84,21 +84,25 @@ export class FormCustomizationComponent{
   }
 
   onSubmit(){
+    console.log('666666666666666666');
     if (this.dynamicFormComponent) {
       this.dynamicFormComponent.onSubmit();
     }
   }
 
   addForm(index : number) {
+    console.log('555555555555555555');
     if (this.dynamicFormComponent) {
       this.dynamicFormComponent.add(index);
     }
   }
   delForm(index : number){
+    console.log('333333333333333333', index);
     this.dynamicFormComponent.delForm(index);
   }
 
   refreshForm(){
+    console.log('444444444444444444444444444');
     if (this.dynamicFormComponent) {
       this.dynamicFormComponent.refreshForm();
     }
@@ -120,19 +124,20 @@ export class FormCustomizationComponent{
 
     const questions: Base<string>[] = this.qcs.json2list(jsonList);
 
-    console.log(questions);
+    console.log('xxxxxxxxx1111111111', questions);
 
-    ;
     return questions;
   }
 
   // 删除选项
   removeOption(i:number, k: number) {
+    console.log('111111111111', k);
     this.formList[i].options.splice(k, 1);
   }
 
   addOption(i: number, k: number) {
     //在当前选项后面添加一个新选项
+    console.log('222222222222', k);
     this.formList[i].options.splice(k + 1, 0, {key: '选项key', value: '选项value'});
   }
 
@@ -147,5 +152,12 @@ export class FormCustomizationComponent{
     } else {
       this.formList[i].type = '';
     }
+  }
+  onSelectionAssociationKey(i:number){
+
+  }
+
+  onSelectionAssociationValue(i:number) {
+
   }
 }

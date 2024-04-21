@@ -17,7 +17,7 @@
                 </mat-expansion-panel-header>
                 <div class="grid grid-cols-4 gap-4">
                   <div class="col-span-2 m-1 flex">
-                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">名称：</div>
+                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">名称：</div>
                     <div class="grow h-14">
                       <mat-form-field class="mat-form-field-width">
                         <input matInput [(ngModel)]="formList[i].label">
@@ -25,7 +25,7 @@
                     </div>
                   </div>
                   <div class="col-span-2 m-1 flex">
-                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">主键：</div>
+                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">主键：</div>
                     <div class="grow h-14">
                       <mat-form-field class="mat-form-field-width">
                         <input matInput [(ngModel)]="formList[i].key">
@@ -33,7 +33,29 @@
                     </div>
                   </div>
                   <div class="col-span-2 m-1 flex">
-                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">类型：</div>
+                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">关联项：</div>
+                    <div class="grow h-14">
+                      <mat-form-field class="mat-form-field-width">
+                        <mat-select [(ngModel)]="formList[i].associationKey" (selectionChange)="onSelectionAssociationKey(i)">
+                          <ng-container *ngFor="let itme_t of formList; index as j">
+                            <mat-option [value]="itme_t.key" *ngIf="itme_t.key != formList[i].key && (itme_t.controlType === 'selectBox' || itme_t.controlType === 'radioBox' || itme_t.controlType === 'checkBox')">{{formList[j].label}}</mat-option>
+                          </ng-container>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-span-2 m-1 flex">
+                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">关联值：</div>
+                    <div class="grow h-14">
+                      <mat-form-field class="mat-form-field-width">
+                        <mat-select [(ngModel)]="formList[i].associationValue" (selectionChange)="onSelectionAssociationValue(i)">
+                          <mat-option [value]="item.key" *ngFor="let item of formList; index as j">{{formList[j].label}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-span-2 m-1 flex">
+                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">类型：</div>
                     <div class="grow h-14">
                       <mat-form-field class="mat-form-field-width">
                         <mat-select [(ngModel)]="formList[i].controlType" (selectionChange)="onSelectionChange(i)">
@@ -48,7 +70,7 @@
                     </div>
                   </div>
                   <div class="col-span-2 m-1 flex">
-                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">行宽：</div>
+                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">行宽：</div>
                     <div class="grow h-14">
                       <mat-form-field class="mat-form-field-width">
                         <mat-select [(ngModel)]="formList[i].phonetics">
@@ -59,21 +81,23 @@
                     </div>
                   </div>
                   <div class="col-span-4 m-1 " *ngIf="formList[i].controlType == 'selectBox' || formList[i].controlType == 'checkBox' || formList[i].controlType == 'radioBox'">
-                    <div *ngFor="let item of formList[i].options; index as k" class="flex">
-                      <div class="w-2/5 mr-4 flex items-center">
-                        <input matInput [(ngModel)]="item.value">
-                      </div>
-                      <div class="w-2/5 mr-4 flex items-center">
-                        <input matInput [(ngModel)]="item.key">
-                      </div>
-                      <div class="w-1/5 mr-4 flex items-center">
-                        <mat-icon class="small-icon" (click)="removeOption(i,k)">delete</mat-icon>
-                        <mat-icon class="small-icon" (click)="addOption(i,k)">add</mat-icon>
+                    <div class="pl-16">
+                      <div *ngFor="let item of formList[i].options; index as k" class="flex">
+                        <div class="w-2/5 flex items-center">
+                          <input matInput [(ngModel)]="item.value">
+                        </div>
+                        <div class="w-2/5 flex items-center">
+                          <input matInput [(ngModel)]="item.key">
+                        </div>
+                        <div class="w-1/5 flex items-center">
+                          <mat-icon class="small-icon cursor-pointer" (click)="removeOption(i,k)">delete</mat-icon>
+                          <mat-icon class="small-icon cursor-pointer" (click)="addOption(i,k)">add</mat-icon>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-span-2 m-1 flex">
-                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">必填：</div>
+                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">必填：</div>
                     <div class="grow h-14">
                       <mat-form-field class="mat-form-field-width">
                         <mat-select [(ngModel)]="formList[i].required">
@@ -84,7 +108,7 @@
                     </div>
                   </div>
                   <div class="col-span-2 m-1 flex">
-                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">验证：</div>
+                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">验证：</div>
                     <div class="grow h-14">
                       <mat-form-field class="mat-form-field-width">
                         <mat-select [(ngModel)]="formList[i].validator">
@@ -96,7 +120,7 @@
                     </div>
                   </div>
                   <div class="col-span-2 m-1 flex">
-                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">字数：</div>
+                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">字数：</div>
                     <div class="grow h-14">
                       <mat-form-field class="mat-form-field-width">
                         <input matInput [(ngModel)]="formList[i].minLength">
@@ -104,7 +128,7 @@
                     </div>
                   </div>
                   <div class="col-span-2 m-1 flex">
-                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">字数：</div>
+                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">字数：</div>
                     <div class="grow h-14">
                       <mat-form-field class="mat-form-field-width">
                         <input matInput [(ngModel)]="formList[i].maxLength">
