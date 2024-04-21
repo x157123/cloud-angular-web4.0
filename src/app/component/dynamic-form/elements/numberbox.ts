@@ -8,7 +8,7 @@ export class NumberBox extends Base<string> {
     super({});
   }
 
-  static getInstance(key: string, label: string, order: number, required: boolean, phonetics: boolean, validator: string, minLength: number, maxLength: number): NumberBox {
+  static getInstance(key: string, label: string, order: number, required: boolean, phonetics: boolean, validator: string, minLength: number, maxLength: number,associationKey: string, associationValue: string): NumberBox {
     NumberBox.instance = new NumberBox();
     NumberBox.instance.controlType = 'numberBox'
     NumberBox.instance.key = key;
@@ -20,6 +20,8 @@ export class NumberBox extends Base<string> {
     NumberBox.instance.order = order;
     NumberBox.instance.type = 'number';
     NumberBox.instance.phonetics = phonetics;
+    NumberBox.instance.associationKey = associationKey;
+    NumberBox.instance.associationValue = associationValue;
     return NumberBox.instance;
   }
 }

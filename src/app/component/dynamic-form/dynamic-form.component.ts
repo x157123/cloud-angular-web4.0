@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
+  CUSTOM_ELEMENTS_SCHEMA, DoCheck,
   EventEmitter,
   Input,
   OnChanges,
@@ -23,6 +23,7 @@ import {MatCardActions} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-dynamic-form',
@@ -52,8 +53,19 @@ import {NgClass, NgForOf, NgIf} from "@angular/common";
 export class DynamicFormComponent implements OnInit {
 
 
-  @Input() formList: Base<string>[] | null = [];
+  @Input()
+  set formList(value: Base<string>[] | null) {
+    this._formList.next(value || []);
+  }
+
+  get formList() {
+    return this._formList.getValue();
+  }
+
+  private _formList = new BehaviorSubject<Base<string>[]>([]);
+
   @Input() jsonData: string = "";
+
   @Output() handleButtonClick: EventEmitter<string> = new EventEmitter<string>();
 
   form!: FormGroup;
@@ -64,6 +76,14 @@ export class DynamicFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._formList.subscribe(formList => {
+      // 当formList变化时执行的逻辑
+      console.log('formList has changed:', formList);
+    });
+    this.setDate();
+  }
+
+  setDate(){
     if (this.jsonData != null && this.jsonData.length > 0) {
       let data = JSON.parse(this.jsonData);
       this.formList?.forEach((value) => {
@@ -83,7 +103,6 @@ export class DynamicFormComponent implements OnInit {
         }
       });
       this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
-      console.log(data);
       this.form.setValue(data);
     } else {
       this.form = this.qcs.toFormGroup(this.formList as Base<string>[]);
@@ -94,13 +113,18 @@ export class DynamicFormComponent implements OnInit {
     //校验数据
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      const json = this.form.getRawValue();
-      this.checkboxMap.forEach((value, key) => {
-        json[key] = value;
-      });
-      let payLoad = JSON.stringify(json);
-      this.handleButtonClick.emit(payLoad);
+      this.getJsonData();
+      this.handleButtonClick.emit(this.jsonData);
     }
+  }
+
+  getJsonData() {
+    const json = this.form.getRawValue();
+    this.checkboxMap.forEach((value, key) => {
+      json[key] = value;
+    });
+    this.jsonData =  JSON.stringify(json);
+    return this.jsonData;
   }
 
   refreshForm() {
@@ -111,7 +135,7 @@ export class DynamicFormComponent implements OnInit {
 
   add(index: number) {
     this.id += 1;
-    let textBox = TextBox.getInstance('param' + this.id, '参数' + this.id, index +1, false, false, '', 0, 0);
+    let textBox = TextBox.getInstance('param' + this.id, '参数' + this.id, index +1, false, false, '', 0, 0,'','');
     if (index === -1) {
       this.formList?.push(textBox);
     } else {
@@ -129,7 +153,7 @@ export class DynamicFormComponent implements OnInit {
   onCheckboxChange(event: any, key: string, value: string) {
     if (event.checked) {
       let datas: string[] | undefined = this.checkboxMap.get(key);
-      if (datas) {
+      if (datas && datas.indexOf(value) === -1) {
         datas.push(value);
       } else {
         this.checkboxMap.set(key, [value]);
@@ -156,4 +180,5 @@ export class DynamicFormComponent implements OnInit {
     const control = this.form.get(key);
     return control?.value ? control.value.length : 0;
   }
+
 }

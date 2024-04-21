@@ -24,20 +24,18 @@
                       </mat-form-field>
                     </div>
                   </div>
-                  <div class="grid grid-cols-4 gap-4">
-                    <div class="col-span-2 m-1 flex">
-                      <div class="w-12 shrink-0 h-14 flex items-center justify-end">主键：</div>
-                      <div class="grow h-14">
-                        <mat-form-field class="mat-form-field-width">
-                          <input matInput [(ngModel)]="formList[i].key">
-                        </mat-form-field>
-                      </div>
+                  <div class="col-span-2 m-1 flex">
+                    <div class="w-12 shrink-0 h-14 flex items-center justify-end">主键：</div>
+                    <div class="grow h-14">
+                      <mat-form-field class="mat-form-field-width">
+                        <input matInput [(ngModel)]="formList[i].key">
+                      </mat-form-field>
                     </div>
                   </div>
                   <div class="col-span-2 m-1 flex">
                     <div class="w-12 shrink-0 h-14 flex items-center justify-end">类型：</div>
                     <div class="grow h-14">
-                      <mat-form-field>
+                      <mat-form-field class="mat-form-field-width">
                         <mat-select [(ngModel)]="formList[i].controlType" (selectionChange)="onSelectionChange(i)">
                           <mat-option value="textBox">文本框</mat-option>
                           <mat-option value="numberBox">数字框</mat-option>
@@ -88,7 +86,7 @@
                   <div class="col-span-2 m-1 flex">
                     <div class="w-12 shrink-0 h-14 flex items-center justify-end">验证：</div>
                     <div class="grow h-14">
-                      <mat-form-field>
+                      <mat-form-field class="mat-form-field-width">
                         <mat-select [(ngModel)]="formList[i].validator">
                           <mat-option value="">不验证</mat-option>
                           <mat-option value="email">邮箱</mat-option>

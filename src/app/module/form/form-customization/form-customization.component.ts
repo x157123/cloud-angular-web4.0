@@ -6,7 +6,7 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Base} from "@component/dynamic-form/elements/base";
 
-import {elementAt, Observable, of} from "rxjs";
+import {Observable, of} from "rxjs";
 import {DynamicFormComponent} from "@component/dynamic-form/dynamic-form.component";
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelHeader} from "@angular/material/expansion";
 import {MatOption} from "@angular/material/autocomplete";

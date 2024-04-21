@@ -90,17 +90,17 @@ export class ControlService {
       let question = list[i];
       question.key
       if (question.controlType === 'textBox') {
-        tmp.push(TextBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.validator, question.minLength, question.maxLength));
+        tmp.push(TextBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.validator, question.minLength, question.maxLength, question.associationKey, question.associationValue));
       } else if (question.controlType === 'numberBox') {
-        tmp.push(TextBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.validator, question.minLength, question.maxLength));
+        tmp.push(TextBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.validator, question.minLength, question.maxLength, question.associationKey, question.associationValue));
       } else if (question.controlType === 'textareaBox') {
-        tmp.push(TextareaBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics,question.minLength, question.maxLength));
+        tmp.push(TextareaBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics,question.minLength, question.maxLength, question.associationKey, question.associationValue));
       }else if (question.controlType === 'radioBox') {
-        tmp.push(RadioBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics, question.options));
+        tmp.push(RadioBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics, question.options, question.associationKey, question.associationValue));
       }else if (question.controlType === 'checkBox') {
-        tmp.push(CheckBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.options));
+        tmp.push(CheckBox.getInstance(question.key, question.label, question.order, question.required,question.phonetics, question.options, question.associationKey, question.associationValue));
       }else if (question.controlType === 'selectBox') {
-        tmp.push(SelectBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics,question.options));
+        tmp.push(SelectBox.getInstance(question.key, question.label, question.order, question.required, question.phonetics,question.options, question.associationKey, question.associationValue));
       }
     }
     return tmp;

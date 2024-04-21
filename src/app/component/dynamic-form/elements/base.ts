@@ -14,14 +14,18 @@ export class Base<T> {
   type: string;
   //验证器
   validator: string;
-  //文字最短
+  //文字最短、数字最小值
   minLength: number;
-  //文字最长
+  //文字最长、数字最大值
   maxLength: number;
   //占用一行
   phonetics: boolean;
   //多选 选项
   options: {key: string, value: string, checked?: boolean}[];
+  //关联key
+  associationKey: string;
+  //关联选项
+  associationValue: string;
 
   constructor(options: {
       value?: T;
@@ -36,6 +40,8 @@ export class Base<T> {
       phonetics?: boolean;
       validator?: string;
       options?: {key: string, value: string, checked?: boolean}[];
+      associationKey?: string;
+      associationValue?: string;
     } = {}) {
     this.value = options.value;
     this.key = options.key || '';
@@ -49,6 +55,8 @@ export class Base<T> {
     this.validator = options.validator || '';
     this.phonetics = !!options.phonetics;
     this.options = options.options || [];
+    this.associationKey = options.associationKey || '';
+    this.associationValue = options.associationValue || '';
   }
 }
 

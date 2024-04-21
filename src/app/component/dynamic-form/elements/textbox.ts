@@ -8,7 +8,7 @@ export class TextBox extends Base<string> {
     super({});
   }
 
-  static getInstance(key: string, label: string, order: number, required: boolean, phonetics: boolean, validator: string, minLength: number, maxLength: number): TextBox {
+  static getInstance(key: string, label: string, order: number, required: boolean, phonetics: boolean, validator: string, minLength: number, maxLength: number,associationKey: string, associationValue: string): TextBox {
     TextBox.instance = new TextBox();
     TextBox.instance.controlType = 'textBox'
     TextBox.instance.key = key;
@@ -19,6 +19,8 @@ export class TextBox extends Base<string> {
     TextBox.instance.maxLength = maxLength;
     TextBox.instance.order = order;
     TextBox.instance.phonetics = phonetics;
+    TextBox.instance.associationKey = associationKey;
+    TextBox.instance.associationValue = associationValue;
     return TextBox.instance;
   }
 }
