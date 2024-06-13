@@ -11,7 +11,7 @@ import { MessageComponent } from "./layouts/full/msg/message.component";
 
 import { SharedModule } from './shared/shared.module';
 import { MatInputModule } from '@angular/material/input';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 //自定义分页样式
 import {MatPaginatorIntlCN} from "@common/i18n/paginator.translate";
@@ -22,31 +22,25 @@ import { MatOptionModule } from '@angular/material/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {AuthInterceptor} from "@common/http/auth.Interceptor";
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         FullComponent,
         AppComponent,
         AppSidebarComponent,
         MessageComponent,
     ],
-    imports: [
-        BrowserModule,
+    exports: [
+        AppSidebarComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         MaterialModule,
         MatInputModule,
         SharedModule,
         BrowserAnimationsModule,
-        HttpClientModule,
         MatSelectModule,
-        MatOptionModule
-    ],
-    providers: [
-      { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCN },
-      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
-    ],
-  exports: [
-    AppSidebarComponent
-  ],
-    bootstrap: [AppComponent]
-})
+        MatOptionModule], providers: [
+        { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCN },
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
