@@ -1,4 +1,4 @@
-import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, ViewChild} from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild} from '@angular/core';
 import {MatDrawerContainer, MatDrawerContent} from "@angular/material/sidenav";
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
 import {MatFormField, MatInput} from "@angular/material/input";

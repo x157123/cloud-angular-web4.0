@@ -53,6 +53,10 @@ const routes: Routes = [
         path: 'form',
         loadChildren: () => import('./module/form/form-customization/form-customization.module').then(m => m.FormCustomizationModule),
       },
+      {
+        path: 'code',
+        loadChildren: () => import('./module/code/code.module').then(m => m.CodeModule),
+      },
 
     ]
   },
