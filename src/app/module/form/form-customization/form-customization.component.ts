@@ -84,8 +84,8 @@ export class FormCustomizationComponent{
   }
 
   onSubmit(){
-    console.log('666666666666666666');
     if (this.dynamicFormComponent) {
+      console.log('666666666666666666');
       this.dynamicFormComponent.onSubmit();
     }
   }
