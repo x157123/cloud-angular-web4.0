@@ -19,10 +19,10 @@
         </div>
       </div>
       <div class="col-span-2 m-1 flex">
-        <div class="w-16 shrink-0 h-14 flex items-center justify-end">主键：</div>
+        <div class="w-16 shrink-0 h-14 flex items-center justify-end">包路径：</div>
         <div class="grow h-14">
           <mat-form-field class="mat-form-field-width">
-            <input matInput [(ngModel)]="tableList[i].name">
+            <input matInput [(ngModel)]="tableList[i].pack">
           </mat-form-field>
         </div>
       </div>
@@ -38,7 +38,34 @@
         </div>
       </div>
       <div class="col-span-4 m-1 flex">
-
+        <table>
+          <thead>
+          <tr>
+            <th>列</th>
+            <th>查询显示</th>
+            <th>列表显示</th>
+            <th>详情显示</th>
+            <th>添加显示</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of tableList[i].collate; index as k">
+            <td>{{item.nameShow}}</td>
+            <td>
+              <input type="checkbox" [(ngModel)]="tableList[i].collate[k].queryShow" (change)="changeCheckedChild(item)" />
+            </td>
+            <td>
+              <input type="checkbox" [(ngModel)]="tableList[i].collate[k].tableShow" (change)="changeCheckedChild(item)" />
+            </td>
+            <td>
+              <input type="checkbox" [(ngModel)]="tableList[i].collate[k].detailShow" (change)="changeCheckedChild(item)" />
+            </td>
+            <td>
+              <input type="checkbox" [(ngModel)]="tableList[i].collate[k].addShow" (change)="changeCheckedChild(item)" />
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </mat-expansion-panel>

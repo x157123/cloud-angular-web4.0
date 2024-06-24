@@ -70,7 +70,7 @@ export class CodeComponent implements AfterViewInit {
         label: '名称',
         key: 'name',
         style: 1,
-        maxLength: '255',
+        pack: 'com.xxx',
         collate: [{
           nameShow: 'id',
           queryShow: true,
@@ -95,6 +95,10 @@ export class CodeComponent implements AfterViewInit {
   drop($event: CdkDragDrop<Table[], any>) {
     moveItemInArray(this.tableList, $event.previousIndex, $event.currentIndex);
   }
+
+  changeCheckedChild(item: Collate) {
+
+  }
 }
 
 export interface Table {
@@ -102,8 +106,8 @@ export interface Table {
   className: string;
   label: string;
   key: string;
+  pack: string;
   style: number;
-  maxLength: string;
   collate: Collate[];
 }
 
