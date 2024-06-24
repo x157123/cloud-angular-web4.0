@@ -1,15 +1,12 @@
 import {
-  ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA, DoCheck,
+  CUSTOM_ELEMENTS_SCHEMA,
   EventEmitter,
   Input,
-  OnChanges,
   OnInit,
   Output,
-  SimpleChanges
 } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule,} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule,} from '@angular/forms';
 
 
 import {Base} from './elements/base';
@@ -115,6 +112,8 @@ export class DynamicFormComponent implements OnInit {
     if (this.form.valid) {
       this.getJsonData();
       this.handleButtonClick.emit(this.jsonData);
+    }else{
+      console.log("校验错误");
     }
   }
 
@@ -152,24 +151,24 @@ export class DynamicFormComponent implements OnInit {
 
   onCheckboxChange(event: any, key: string, value: string) {
     if (event.checked) {
-      let datas: string[] | undefined = this.checkboxMap.get(key);
-      if (datas && datas.indexOf(value) === -1) {
-        datas.push(value);
+      let data: string[] | undefined = this.checkboxMap.get(key);
+      if (data && data.indexOf(value) === -1) {
+        data.push(value);
       } else {
         this.checkboxMap.set(key, [value]);
       }
     } else {
-      let datas: string[] | undefined = this.checkboxMap.get(key);
-      if (datas) {
-        datas.splice(datas.indexOf(value), 1);
-        if (datas.length === 0) {
+      let data: string[] | undefined = this.checkboxMap.get(key);
+      if (data) {
+        data.splice(data.indexOf(value), 1);
+        if (data.length === 0) {
         }
       } else {
         this.checkboxMap.set(key, []);
       }
     }
-    let datas: string[] | undefined = this.checkboxMap.get(key);
-    if (datas && datas.length > 0) {
+    let data: string[] | undefined = this.checkboxMap.get(key);
+    if (data && data.length > 0) {
       this.form?.get(key)?.setValue("1");
     } else {
       this.form?.get(key)?.setValue(null);

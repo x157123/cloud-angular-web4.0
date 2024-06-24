@@ -148,7 +148,7 @@
           <app-dynamic-form [jsonData]="jsonData$" [formList]="formList$ | async" (handleButtonClick)="handleButtonClick($event)"></app-dynamic-form>
           <div class="edit-content-bottom">
             <mat-card-actions align="start">
-              <button mat-button (click)="onSubmit()">提交验证</button>
+              <button mat-button (click)="onSubmit()">验证并提交</button>
               <button mat-button (click)="refreshForm()">刷新表单</button>
               <button mat-button (click)="addForm(-1)">添加一个</button>
               <button mat-button (click)="saveForm()">保存表单</button>
