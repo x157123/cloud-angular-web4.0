@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {MatDrawerContainer, MatDrawerContent} from "@angular/material/sidenav";
-import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
 import {MatFormField, MatInput} from "@angular/material/input";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -15,7 +14,15 @@ import {ControlService} from "@component/dynamic-form/elements/control.service";
 import {MatList, MatListItem} from "@angular/material/list";
 import {MatDivider} from "@angular/material/divider";
 import {MatIcon} from "@angular/material/icon";
-import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatTable} from "@angular/material/table";
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatTable
+} from "@angular/material/table";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatSort} from "@angular/material/sort";
 
@@ -25,8 +32,6 @@ import {MatSort} from "@angular/material/sort";
   imports: [
     MatDrawerContainer,
     MatDrawerContent,
-    CdkDropList,
-    CdkDrag,
     MatInput,
     NgForOf,
     ReactiveFormsModule,
@@ -55,6 +60,10 @@ import {MatSort} from "@angular/material/sort";
     MatHeaderCellDef,
     MatColumnDef,
     MatSort,
+    MatHeaderRow,
+    MatRow,
+    MatRowDef,
+    MatHeaderRowDef,
   ],
   providers: [ControlService],
   templateUrl: './code.component.html',
@@ -76,28 +85,51 @@ export class CodeComponent implements AfterViewInit {
           queryShow: true,
           tableShow: true,
           detailShow: true,
-          addShow: true
+          addShow: true,
+          keyword: true
         }, {
           nameShow: 'name',
           queryShow: true,
           tableShow: true,
+          detailShow: false,
+          addShow: true,
+          keyword: true
+        }]
+      },
+      {
+        name: 'name11',
+        className: 'form-control',
+        label: '名称11',
+        key: 'name11',
+        style: 1,
+        pack: 'com.xxss',
+        collate: [{
+          nameShow: 'id2',
+          queryShow: true,
+          tableShow: true,
           detailShow: true,
-          addShow: true
+          addShow: true,
+          keyword: true
+        }, {
+          nameShow: 'name33',
+          queryShow: true,
+          tableShow: false,
+          detailShow: false,
+          addShow: false,
+          keyword: false
         }]
       }
     ];
   }
 
+  displayedColumns: string[] = ['nameShow', 'queryShow', 'tableShow', 'detailShow', 'addShow', 'keyword'];
+
   tableList: Table[] = [];
 
   panelOpenState: boolean = false;
 
-  drop($event: CdkDragDrop<Table[], any>) {
-    moveItemInArray(this.tableList, $event.previousIndex, $event.currentIndex);
-  }
-
-  changeCheckedChild(item: Collate) {
-
+  create() {
+    console.log("--->" + JSON.stringify(this.tableList));
   }
 }
 
@@ -117,4 +149,5 @@ export interface Collate {
   tableShow: boolean;
   detailShow: boolean;
   addShow: boolean;
+  keyword: boolean;
 }
