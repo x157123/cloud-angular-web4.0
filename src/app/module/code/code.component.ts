@@ -82,6 +82,7 @@ export class CodeComponent implements AfterViewInit {
         pack: 'com.xxx',
         collate: [{
           nameShow: 'id',
+          required: false,
           queryShow: true,
           tableShow: true,
           detailShow: true,
@@ -89,6 +90,7 @@ export class CodeComponent implements AfterViewInit {
           keyword: true
         }, {
           nameShow: 'name',
+          required: true,
           queryShow: true,
           tableShow: true,
           detailShow: false,
@@ -105,6 +107,7 @@ export class CodeComponent implements AfterViewInit {
         pack: 'com.xxss',
         collate: [{
           nameShow: 'id2',
+          required: true,
           queryShow: true,
           tableShow: true,
           detailShow: true,
@@ -112,6 +115,7 @@ export class CodeComponent implements AfterViewInit {
           keyword: true
         }, {
           nameShow: 'name33',
+          required: true,
           queryShow: true,
           tableShow: false,
           detailShow: false,
@@ -145,6 +149,7 @@ export interface Table {
 
 export interface Collate {
   nameShow: string;
+  required: boolean;
   queryShow: boolean;
   tableShow: boolean;
   detailShow: boolean;
