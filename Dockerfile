@@ -22,6 +22,9 @@ FROM nginx:alpine
 # 复制 Angular 构建输出到 Nginx 的默认目录
 COPY --from=build /app/dist/cloud-angular-web4.0 /usr/share/nginx/html
 
+# 将Nginx的配置文件拷贝到容器中，解决Angular路由404的问题
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+
 # 暴露 Nginx 默认端口
 EXPOSE 80
 
