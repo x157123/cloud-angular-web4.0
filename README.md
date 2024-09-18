@@ -37,7 +37,7 @@ ng update @angular/cdk @angular/cli @angular/core @angular/material --allow-dirt
 
 
 ## 添加 tailwindcss  [官网](https://tailwindcss.com/docs/guides/angular)
-pm install -D tailwindcss postcss autoprefixer
+npm install -D tailwindcss postcss autoprefixer
 
 1、创建项目命令 ng new 项目名
 
