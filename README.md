@@ -29,6 +29,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## 更新到最新版本
 ng update @angular/cdk @angular/cli @angular/core @angular/material --allow-dirty
 
+1、删除 node_modules 文件夹： rm -rf node_modules
+
+2、清除可能存在的问题缓存： npm cache clean --force
+
+3、重新安装依赖项： npm install
+
+
 ## 添加 tailwindcss  [官网](https://tailwindcss.com/docs/guides/angular)
 pm install -D tailwindcss postcss autoprefixer
 
