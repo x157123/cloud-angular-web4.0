@@ -1,8 +1,9 @@
+@use 'variable';
 
 .page-content-menu {
   width: 240px;
   padding-top: 0px;
-  box-shadow: 1px 0px 20px $shadow;
+  box-shadow: 1px 0px 20px variable.$shadow;
   .mat-nav-list .mdc-list-item {
     padding-left: 0px;
     padding-right: 0px;
@@ -16,7 +17,7 @@
       &:hover {
         background: none;
         > a {
-          color: $themecolor;
+          color: variable.$themecolor;
         }
       }
     }
@@ -28,22 +29,22 @@
       display: flex;
       font-size: 15px;
       white-space: nowrap;
-      color: $sidebar-text;
+      color: variable.$sidebar-text;
       mat-icon{
         margin-right: 2px;
       }
       mat-icon:not(:empty) {
-        color: $sidebar-icons;
+        color: variable.$sidebar-icons;
         flex: 0 0 24px;
       }
     }
 
     &.selected > span > span > a {
-      background: $themecolor-alt;
-      border-radius: $radius;
-      color: $white;
+      background: variable.$themecolor-alt;
+      border-radius: variable.$radius;
+      color: variable.$white;
       mat-icon {
-        color: $white;
+        color: variable.$white;
       }
     }
   }

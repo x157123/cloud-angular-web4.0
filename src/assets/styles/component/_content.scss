@@ -1,6 +1,7 @@
+@use 'variable';
 
 .mat-drawer-content mat-toolbar{
-  background-color: $white;
+  background-color: variable.$white;
 }
 
 .mat-drawer-containers {

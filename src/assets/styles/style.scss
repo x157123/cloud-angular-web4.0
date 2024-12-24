@@ -1,13 +1,13 @@
-@import 'variable';
+@use 'variable';
 /**左侧菜单*/
-@import 'component/menu';
+@use 'component/menu';
 /**头部*/
-@import 'component/header';
-@import 'component/sidebar';
+@use 'component/header';
+@use 'component/sidebar';
 
-@import 'component/global';
+@use 'component/global';
 
-@import 'component/from';
-@import 'component/content';
-@import 'component/table';
-@import 'component/alert';
+@use 'component/from';
+@use 'component/content';
+@use 'component/table';
+@use 'component/alert';

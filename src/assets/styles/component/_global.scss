@@ -1,23 +1,25 @@
 // global
 
+@use 'variable';
+
 * {
   outline: none;
   box-sizing: border-box;
 }
 
 body {
-  font-family: $bodyfont;
+  font-family: variable.$bodyfont;
   margin: 0;
   overflow-x: hidden;
-  color: $bodytext;
+  color: variable.$bodytext;
   font-weight: 300;
-  background: $inverse;
+  background: variable.$inverse;
 }
 
 html {
   position: relative;
   min-height: 100%;
-  background: $white;
+  background: variable.$white;
 }
 
 .main-container {
@@ -32,7 +34,7 @@ html {
 }
 
 .mat-drawer-container {
-  background: $bodycolor;
+  background: variable.$bodycolor;
 }
 
 html .page-wrapper {
@@ -54,12 +56,12 @@ a {
 }
 
 a.link {
-  color: $headingtext;
+  color: variable.$headingtext;
   text-decoration: none;
 
   &:hover,
   &:focus {
-    color: $themecolor;
+    color: variable.$themecolor;
   }
 }
 
@@ -72,7 +74,7 @@ a.link {
 hr {
   border: 0px;
   height: 1px;
-  background: $border;
+  background: variable.$border;
 }
 
 html body .mdi:before,
@@ -83,13 +85,13 @@ html body .mdi-set {
 code {
   padding: 0.2rem 0.4rem;
   font-size: 90%;
-  color: $danger;
-  background-color: $light-danger;
+  color: variable.$danger;
+  background-color: variable.$light-danger;
   border-radius: 0.25rem;
 }
 
 .box {
-  border-radius: $radius;
+  border-radius: variable.$radius;
   padding: 10px;
 }
 
@@ -146,7 +148,7 @@ html body {
   }
 
   .rounded {
-    border-radius: $radius;
+    border-radius: variable.$radius;
   }
 
   //   flex
@@ -179,7 +181,7 @@ html body {
   }
 
   .radius {
-    border-radius: $radius;
+    border-radius: variable.$radius;
   }
 
   .no-shadow {
@@ -218,23 +220,23 @@ html body {
   }
 
   .b-r {
-    border-right: 1px solid $border;
+    border-right: 1px solid variable.$border;
   }
 
   .b-l {
-    border-left: 1px solid $border;
+    border-left: 1px solid variable.$border;
   }
 
   .b-b {
-    border-bottom: 1px solid $border;
+    border-bottom: 1px solid variable.$border;
   }
 
   .b-t {
-    border-top: 1px solid $border;
+    border-top: 1px solid variable.$border;
   }
 
   .b-all {
-    border: 1px solid $border;
+    border: 1px solid variable.$border;
   }
 }
 
