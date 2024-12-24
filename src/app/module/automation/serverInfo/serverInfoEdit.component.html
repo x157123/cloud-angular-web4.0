@@ -1,0 +1,135 @@
+<div class="edit-content flex flex-col h-full">
+  <div class="h-12 edit-content-header border-b">
+    <ng-container *ngIf="show">
+      查看
+    </ng-container>
+    <ng-container *ngIf="!show">
+      新增
+    </ng-container>
+  </div>
+  <div class="flex-1 overflow-y-auto bg-white border-b">
+    <div class="p-4">
+      <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
+        <mat-grid-tile colspan="4" class="title">服务器名称:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>服务器名称</mat-label>
+            <input matInput [(ngModel)]="dataElement.name" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">IP地址（支持IPv4和IPv6）:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>IP地址（支持IPv4和IPv6）</mat-label>
+            <input matInput [(ngModel)]="dataElement.ipAddress" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">服务器用户名:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>服务器用户名</mat-label>
+            <input matInput [(ngModel)]="dataElement.username" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">服务器密码（建议加密存储）:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>服务器密码（建议加密存储）</mat-label>
+            <input matInput [(ngModel)]="dataElement.password" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">操作系统:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>操作系统</mat-label>
+            <input matInput [(ngModel)]="dataElement.os" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">CPU使用率（百分比，例如：85.50）:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>CPU使用率（百分比，例如：85.50）</mat-label>
+            <input matInput [(ngModel)]="dataElement.cpuUsage" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">内存总大小（例如：16GB）:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>内存总大小（例如：16GB）</mat-label>
+            <input matInput [(ngModel)]="dataElement.memorySize" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">内存可用大小（例如：8GB）:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>内存可用大小（例如：8GB）</mat-label>
+            <input matInput [(ngModel)]="dataElement.memoryAvailable" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">磁盘总大小（例如：500GB）:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>磁盘总大小（例如：500GB）</mat-label>
+            <input matInput [(ngModel)]="dataElement.diskSize" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">磁盘可用大小（例如：200GB）:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>磁盘可用大小（例如：200GB）</mat-label>
+            <input matInput [(ngModel)]="dataElement.diskAvailable" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">服务器位置（例如：机房名称、城市）:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>服务器位置（例如：机房名称、城市）</mat-label>
+            <input matInput [(ngModel)]="dataElement.location" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">到期时间:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>到期时间</mat-label>
+            <input matInput [(ngModel)]="dataElement.expiryDate" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">服务器状态:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>服务器状态</mat-label>
+            <input matInput [(ngModel)]="dataElement.status" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">记录更新时间:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>记录更新时间</mat-label>
+            <input matInput [(ngModel)]="dataElement.updatedAt" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+    </div>
+  </div>
+  <div class="h-12">
+    <mat-card-actions align="start">
+      <button mat-button (click)="doSomething()">关闭</button>
+      <button mat-button (click)="doSave()" *ngIf="!show">保存</button>
+    </mat-card-actions>
+  </div>
+  <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>
+</div>

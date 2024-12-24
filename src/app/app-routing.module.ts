@@ -57,7 +57,30 @@ const routes: Routes = [
         path: 'code',
         loadChildren: () => import('./module/code/code.module').then(m => m.CodeModule),
       },
-
+      {
+        path: 'automation/accountInfo',
+        loadChildren: () => import('./module/automation/accountInfo/accountInfo.module').then(m => m.AccountInfoModule)
+      },
+      {
+        path: 'automation/applicationInfo',
+        loadChildren: () => import('./module/automation/applicationInfo/applicationInfo.module').then(m => m.ApplicationInfoModule)
+      },
+      {
+        path: 'automation/applicationLog',
+        loadChildren: () => import('./module/automation/applicationLog/applicationLog.module').then(m => m.ApplicationLogModule)
+      },
+      {
+        path: 'automation/emailInfo',
+        loadChildren: () => import('./module/automation/emailInfo/emailInfo.module').then(m => m.EmailInfoModule)
+      },
+      {
+        path: 'automation/gpuInfo',
+        loadChildren: () => import('./module/automation/gpuInfo/gpuInfo.module').then(m => m.GpuInfoModule)
+      },
+      {
+        path: 'automation/serverInfo',
+        loadChildren: () => import('./module/automation/serverInfo/serverInfo.module').then(m => m.ServerInfoModule)
+      },
     ]
   },
   {

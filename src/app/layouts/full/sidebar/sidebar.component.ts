@@ -52,5 +52,15 @@ const menuItems = [
       {state: false, key: 'flowableInitiateTask',path: 'flowable/flowableInitiateTask', name: '我的发起', type: 'link', icon: 'av_timer'},
       {state: false, key: 'flowableManage',path: 'flowable/flowableManage', name: '流程管理', type: 'link', icon: 'av_timer'},
     ]
+  },
+  {
+    state: false, key: 'automation',path: 'automation', name: 'automation', type: 'link', icon: 'home', items: [
+      {state: false, key: 'serverInfo',path: 'automation/serverInfo', name: '服务器信息', type: 'link', icon: 'av_timer'},
+      {state: false, key: 'accountInfo',path: 'automation/accountInfo', name: '账号管理', type: 'link', icon: 'av_timer'},
+      {state: false, key: 'applicationInfo',path: 'automation/applicationInfo', name: '应用', type: 'link', icon: 'av_timer'},
+      {state: false, key: 'applicationLog',path: 'automation/applicationLog', name: '操作记录表', type: 'link', icon: 'av_timer'},
+      {state: false, key: 'emailInfo',path: 'automation/emailInfo', name: '邮箱管理', type: 'link', icon: 'av_timer'},
+      {state: false, key: 'gpuInfo',path: 'automation/gpuInfo', name: '显卡信息', type: 'link', icon: 'av_timer'},
+    ]
   }
 ];

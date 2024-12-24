@@ -1,0 +1,71 @@
+<div class="edit-content flex flex-col h-full">
+  <div class="h-12 edit-content-header border-b">
+    <ng-container *ngIf="show">
+      查看
+    </ng-container>
+    <ng-container *ngIf="!show">
+      新增
+    </ng-container>
+  </div>
+  <div class="flex-1 overflow-y-auto bg-white border-b">
+    <div class="p-4">
+      <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
+                <mat-grid-tile colspan="4" class="title">邮箱用户名:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>邮箱用户名</mat-label>
+            <input matInput [(ngModel)]="dataElement.name" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">邮箱账号密码:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>邮箱账号密码</mat-label>
+            <input matInput [(ngModel)]="dataElement.password" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">邮箱服务器地址:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>邮箱服务器地址</mat-label>
+            <input matInput [(ngModel)]="dataElement.emailServerAddress" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">邮箱类型（google126等）:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>邮箱类型（google126等）</mat-label>
+            <input matInput [(ngModel)]="dataElement.emailType" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">是否有效（1：有效，0：无效）:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>是否有效（1：有效，0：无效）</mat-label>
+            <input matInput [(ngModel)]="dataElement.isActive" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">备注:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>备注</mat-label>
+            <input matInput [(ngModel)]="dataElement.remarks" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+    </div>
+  </div>
+  <div class="h-12">
+    <mat-card-actions align="start">
+      <button mat-button (click)="doSomething()">关闭</button>
+      <button mat-button (click)="doSave()" *ngIf="!show">保存</button>
+    </mat-card-actions>
+  </div>
+  <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>
+</div>

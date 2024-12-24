@@ -1,0 +1,76 @@
+<mat-drawer-container autosize>
+  <mat-drawer #drawer mode="over" position="end" class="edit-drawer">
+    <app-applicationInfo-edit #appApplicationInfoEdit></app-applicationInfo-edit>
+  </mat-drawer>
+  <div class="mat-drawer-containers flex flex-col h-screen">
+    <mat-toolbar>
+      <input matInput placeholder="查询条件">
+      <button mat-raised-button color="primary" (click)="queryData()">查询</button>
+      <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="新增数据">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
+    <div class="flex-1 edit-content-info-scrollbar">
+        <mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="id" sticky >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 应用ID </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="name"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 应用名称 </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="script"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 脚本命令 </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.script}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="scriptUrl"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 脚本地址（存储脚本文件的位置） </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.scriptUrl}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="iconUrl"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 图标地址（存储应用图标的位置） </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.iconUrl}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="createdAt"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 创建时间 </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.createdAt}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="updatedAt"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 更新时间 </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.updatedAt}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="operate">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <a mat-icon-button color="primary" (click)="openEditSidenav(element.id, true)" title="查看">
+                <mat-icon>open_in_new</mat-icon>
+              </a>
+              <a mat-icon-button color="primary" (click)="openEditSidenav(element.id)" title="修改">
+                <mat-icon>edit</mat-icon>
+              </a>
+              <a mat-icon-button color="accent" (click)="delById(element.id)" title="删除">
+                <mat-icon>delete</mat-icon>
+              </a>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 15, 20]" [length]="dataLength"
+                   [pageIndex]="pageIndex"
+                   (page)="handlePageEvent($event)"
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+</mat-drawer-container>
