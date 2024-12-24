@@ -42,9 +42,10 @@ export interface ColumnConfigTmp {
 }
 
 @Component({
-  selector: 'app-column',
-  templateUrl: './column.component.html',
-  styleUrls: ['./column.component.css']
+    selector: 'app-column',
+    templateUrl: './column.component.html',
+    styleUrls: ['./column.component.css'],
+    standalone: false
 })
 export class ColumnComponent implements OnInit {
 

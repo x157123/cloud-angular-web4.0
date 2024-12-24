@@ -10,14 +10,13 @@ import {CheckBox} from "@component/dynamic-form/elements/checkbok";
 import {SelectBox} from "@component/dynamic-form/elements/selectbox";
 
 @Component({
-  selector: 'app-test',
-  standalone: true,
-  imports: [
-    DynamicFormComponent,
-    AsyncPipe
-  ],
-  templateUrl: './test.component.html',
-  styleUrl: './test.component.css'
+    selector: 'app-test',
+    imports: [
+        DynamicFormComponent,
+        AsyncPipe
+    ],
+    templateUrl: './test.component.html',
+    styleUrl: './test.component.css'
 })
 export class TestComponent {
 

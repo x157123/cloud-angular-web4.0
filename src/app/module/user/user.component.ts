@@ -9,13 +9,12 @@ import {MatInput} from "@angular/material/input";
     selector: 'input-error-state-matcher-example',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.css'],
-    standalone: true,
-  imports: [
-    MatButton,
-    MatLabel,
-    MatFormField,
-    MatInput
-  ]
+    imports: [
+        MatButton,
+        MatLabel,
+        MatFormField,
+        MatInput
+    ]
 })
 
 export class UserComponent {

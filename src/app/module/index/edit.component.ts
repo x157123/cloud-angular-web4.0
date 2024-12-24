@@ -6,9 +6,10 @@ import {AlertService} from "@component/alert/alert.service";
 
 
 @Component({
-  selector: 'app-index-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css'],
+    selector: 'app-index-edit',
+    templateUrl: './edit.component.html',
+    styleUrls: ['./edit.component.css'],
+    standalone: false
 })
 export class EditComponent {
 

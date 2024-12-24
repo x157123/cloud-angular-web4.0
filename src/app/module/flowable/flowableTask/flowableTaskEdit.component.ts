@@ -6,9 +6,10 @@ import {AlertService} from "@component/alert/alert.service";
 
 
 @Component({
-  selector: 'app-flowableTask-edit',
-  templateUrl: './flowableTaskEdit.component.html',
-  styleUrls: ['./flowableTaskEdit.component.css'],
+    selector: 'app-flowableTask-edit',
+    templateUrl: './flowableTaskEdit.component.html',
+    styleUrls: ['./flowableTaskEdit.component.css'],
+    standalone: false
 })
 export class FlowableTaskEditComponent {
 

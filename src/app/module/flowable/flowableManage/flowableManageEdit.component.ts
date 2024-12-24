@@ -7,9 +7,10 @@ import {FormControl, Validators} from "@angular/forms";
 
 
 @Component({
-  selector: 'app-flowableManage-edit',
-  templateUrl: './flowableManageEdit.component.html',
-  styleUrls: ['./flowableManageEdit.component.css'],
+    selector: 'app-flowableManage-edit',
+    templateUrl: './flowableManageEdit.component.html',
+    styleUrls: ['./flowableManageEdit.component.css'],
+    standalone: false
 })
 export class FlowableManageEditComponent {
 

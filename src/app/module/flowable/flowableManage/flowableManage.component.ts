@@ -14,9 +14,10 @@ export interface Dict {
 }
 
 @Component({
-  selector: 'app-flowableManage',
-  templateUrl: './flowableManage.component.html',
-  styleUrls: ['./flowableManage.component.css'],
+    selector: 'app-flowableManage',
+    templateUrl: './flowableManage.component.html',
+    styleUrls: ['./flowableManage.component.css'],
+    standalone: false
 })
 export class FlowableManageComponent implements AfterViewInit {
 

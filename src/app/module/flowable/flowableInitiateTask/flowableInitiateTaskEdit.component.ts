@@ -5,9 +5,10 @@ import {AlertService} from "@component/alert/alert.service";
 
 
 @Component({
-  selector: 'app-flowableInitiateTask-edit',
-  templateUrl: './flowableInitiateTaskEdit.component.html',
-  styleUrls: ['./flowableInitiateTaskEdit.component.css'],
+    selector: 'app-flowableInitiateTask-edit',
+    templateUrl: './flowableInitiateTaskEdit.component.html',
+    styleUrls: ['./flowableInitiateTaskEdit.component.css'],
+    standalone: false
 })
 export class FlowableInitiateTaskEditComponent implements AfterViewInit {
 

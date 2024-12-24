@@ -1,9 +1,10 @@
 import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 
 @Component({
-  selector: 'app-message',
-  templateUrl: './message.component.html',
-  styleUrls: ['./message.component.css']
+    selector: 'app-message',
+    templateUrl: './message.component.html',
+    styleUrls: ['./message.component.css'],
+    standalone: false
 })
 export class MessageComponent implements OnDestroy {
   ngOnDestroy(): void {

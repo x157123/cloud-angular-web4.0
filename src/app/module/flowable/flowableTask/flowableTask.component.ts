@@ -13,9 +13,10 @@ export interface Dict {
 }
 
 @Component({
-  selector: 'app-flowableTask',
-  templateUrl: './flowableTask.component.html',
-  styleUrls: ['./flowableTask.component.css'],
+    selector: 'app-flowableTask',
+    templateUrl: './flowableTask.component.html',
+    styleUrls: ['./flowableTask.component.css'],
+    standalone: false
 })
 export class FlowableTaskComponent implements AfterViewInit {
 

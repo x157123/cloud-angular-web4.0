@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'app-flex',
-  templateUrl: './flex.component.html',
-  styleUrls: ['./flex.component.css']
+    selector: 'app-flex',
+    templateUrl: './flex.component.html',
+    styleUrls: ['./flex.component.css'],
+    standalone: false
 })
 export class FlexComponent {
   colors = [

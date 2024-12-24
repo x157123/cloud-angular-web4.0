@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {EditComponent, TableConfig} from "../edit.component";
 
 @Component({
-  selector: 'app-sync-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+    selector: 'app-sync-table',
+    templateUrl: './table.component.html',
+    styleUrls: ['./table.component.css'],
+    standalone: false
 })
 export class TableComponent {
 

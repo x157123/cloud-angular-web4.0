@@ -23,29 +23,28 @@ import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {BehaviorSubject} from "rxjs";
 
 @Component({
-  selector: 'app-dynamic-form',
-  templateUrl: './dynamic-form.component.html',
-  styleUrls: ['./dynamic-form.component.css'],
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatLabel,
-    MatError,
-    MatFormField,
-    MatSelect,
-    MatRadioButton,
-    MatRadioGroup,
-    MatOption,
-    MatCheckbox,
-    MatCardActions,
-    MatButton,
-    MatInput,
-    NgIf,
-    NgForOf,
-    NgClass
-  ],
-  providers: [ControlService],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    selector: 'app-dynamic-form',
+    templateUrl: './dynamic-form.component.html',
+    styleUrls: ['./dynamic-form.component.css'],
+    imports: [
+        ReactiveFormsModule,
+        MatLabel,
+        MatError,
+        MatFormField,
+        MatSelect,
+        MatRadioButton,
+        MatRadioGroup,
+        MatOption,
+        MatCheckbox,
+        MatCardActions,
+        MatButton,
+        MatInput,
+        NgIf,
+        NgForOf,
+        NgClass
+    ],
+    providers: [ControlService],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DynamicFormComponent implements OnInit {
 

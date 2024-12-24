@@ -3,9 +3,10 @@ import {ChangeDetectorRef, Component, OnDestroy, AfterViewInit} from '@angular/c
 
 /** @title Responsive sidenav */
 @Component({
-  selector: 'app-full-layout',
-  templateUrl: 'full.component.html',
-  styleUrls: ['./full.component.css']
+    selector: 'app-full-layout',
+    templateUrl: 'full.component.html',
+    styleUrls: ['./full.component.css'],
+    standalone: false
 })
 export class FullComponent implements OnDestroy, AfterViewInit {
 

@@ -7,9 +7,10 @@ import {AlertService} from "@component/alert/alert.service";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 
 @Component({
-  selector: 'app-deploy',
-  templateUrl: './deploy.component.html',
-  styleUrls: ['./deploy.component.css']
+    selector: 'app-deploy',
+    templateUrl: './deploy.component.html',
+    styleUrls: ['./deploy.component.css'],
+    standalone: false
 })
 export class DeployComponent implements AfterViewInit {
 

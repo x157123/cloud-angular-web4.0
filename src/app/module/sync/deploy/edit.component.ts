@@ -12,15 +12,16 @@ import {MatStepper} from "@angular/material/stepper";
 
 
 @Component({
-  selector: 'app-deploy-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css'],
-  providers: [
-    {
-      provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: {showError: true},
-    },
-  ],
+    selector: 'app-deploy-edit',
+    templateUrl: './edit.component.html',
+    styleUrls: ['./edit.component.css'],
+    providers: [
+        {
+            provide: STEPPER_GLOBAL_OPTIONS,
+            useValue: { showError: true },
+        },
+    ],
+    standalone: false
 })
 export class EditComponent {
 
