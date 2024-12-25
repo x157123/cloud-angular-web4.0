@@ -13,6 +13,21 @@
     <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
     <div class="flex-1 edit-content-info-scrollbar">
         <mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="id" sticky >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器ID </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="company"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 公司 </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.company}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="sourceAccount"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 来源账号 </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.sourceAccount}} </mat-cell>
+          </ng-container>
+
           <ng-container matColumnDef="name"  >
             <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器名称 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.name}} </mat-cell>

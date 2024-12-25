@@ -1,17 +1,17 @@
 import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
-import {Dict, ServerInfoComponent} from "./serverInfo.component";
+import {ServerInfoComponent} from "./serverInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 
 
 
 @Component({
-  selector: 'app-serverInfo-edit',
-  templateUrl: './serverInfoEdit.component.html',
-  styleUrls: ['./serverInfoEdit.component.css'],
+  selector: 'app-serverInfo-view',
+  templateUrl: './serverInfoView.component.html',
+  styleUrls: ['./serverInfoView.component.css'],
   standalone: false
 })
-export class ServerInfoEditComponent {
+export class ServerInfoViewComponent {
 
   visibilityEditData = { 'visibility': 'hidden'}
 
