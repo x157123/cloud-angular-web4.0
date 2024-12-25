@@ -114,4 +114,5 @@ export class GpuInfoComponent implements AfterViewInit {
 export interface PeriodicElement {
   id: string;
   gpuInfo: string;
+  version: string;
 }

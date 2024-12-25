@@ -92,6 +92,7 @@ export class AccountInfoEditComponent {
     isActive: '',
     remarks: '',
     email: '',
+    version: '',
   };
 
   dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));
@@ -109,7 +110,6 @@ export interface DataElement {
   isActive: string;
   remarks: string;
   email: string;
-  createTime: string;
-  updateTime: string;
+  version: string;
 }
 

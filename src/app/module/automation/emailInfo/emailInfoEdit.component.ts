@@ -89,6 +89,7 @@ export class EmailInfoEditComponent {
     emailType: '',
     isActive: '',
     remarks: '',
+    version: '',
   };
 
   dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));
@@ -103,7 +104,6 @@ export interface DataElement {
   emailType: string;
   isActive: string;
   remarks: string;
-  createTime: string;
-  updateTime: string;
+  version: string;
 }
 

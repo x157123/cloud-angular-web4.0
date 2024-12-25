@@ -88,6 +88,7 @@ export class ApplicationInfoEditComponent {
     scriptUrl: '',
     scriptPath: '',
     icon: '',
+    version: '',
   };
 
   dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));
@@ -101,7 +102,6 @@ export interface DataElement {
   scriptUrl: string;
   scriptPath: string;
   icon: string;
-  createTime: string;
-  updateTime: string;
+  version: string;
 }
 

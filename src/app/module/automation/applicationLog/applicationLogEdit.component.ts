@@ -87,6 +87,7 @@ export class ApplicationLogEditComponent {
     applicationId: '',
     operationType: '',
     description: '',
+    version: '',
   };
 
   dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));
@@ -99,6 +100,6 @@ export interface DataElement {
   applicationId: string;
   operationType: string;
   description: string;
-  createTime: string;
+  version: string;
 }
 

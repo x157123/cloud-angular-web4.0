@@ -84,6 +84,7 @@ export class GpuInfoEditComponent {
   defDataElement: DataElement = {
     id: '',
     gpuInfo: '',
+    version: '',
   };
 
   dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));
@@ -93,5 +94,6 @@ export interface DataElement {
 
   id?: string;
   gpuInfo: string;
+  version: string;
 }
 

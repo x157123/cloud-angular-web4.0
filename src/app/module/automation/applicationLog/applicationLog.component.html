@@ -13,6 +13,11 @@
     <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
     <div class="flex-1 edit-content-info-scrollbar">
         <mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="id" sticky >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作记录唯一标识 </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
+          </ng-container>
+
           <ng-container matColumnDef="serverId"  >
             <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器id </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.serverId}} </mat-cell>

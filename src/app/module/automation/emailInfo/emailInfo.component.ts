@@ -24,7 +24,7 @@ export class EmailInfoComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','name','password','emailServerAddress','emailType','isActive','remarks','createTime','updateTime','operate'];
+  displayedColumns: string[] = ['id','name','password','emailServerAddress','emailType','isActive','remarks','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   visibilityListData = {'visibility': 'hidden'}
@@ -119,4 +119,5 @@ export interface PeriodicElement {
   emailType: string;
   isActive: string;
   remarks: string;
+  version: string;
 }
