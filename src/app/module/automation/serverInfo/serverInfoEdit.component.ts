@@ -96,6 +96,7 @@ export class ServerInfoEditComponent {
     location: '',
     expiryDate: '',
     status: '',
+    version: '',
   };
 
   dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));
@@ -117,7 +118,6 @@ export interface DataElement {
   location: string;
   expiryDate: string;
   status: string;
-  createTime: string;
-  updateTime: string;
+  version: string;
 }
 
