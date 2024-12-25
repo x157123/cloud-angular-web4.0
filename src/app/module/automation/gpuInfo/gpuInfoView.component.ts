@@ -1,23 +1,23 @@
 import {Component} from '@angular/core';
-import {ServerInfoComponent} from "./serverInfo.component";
+import {GpuInfoComponent} from "./gpuInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 
 
 
 @Component({
-  selector: 'app-serverInfo-view',
-  templateUrl: './serverInfoView.component.html',
-  styleUrls: ['./serverInfoView.component.css'],
+  selector: 'app-gpuInfo-view',
+  templateUrl: './gpuInfoView.component.html',
+  styleUrls: ['./gpuInfoView.component.css'],
   standalone: false
 })
-export class ServerInfoViewComponent {
+export class GpuInfoViewComponent {
 
   visibilityEditData = { 'visibility': 'hidden'}
 
   show: boolean = true;
 
-  constructor(private parent: ServerInfoComponent,private httpGlobalTool: HttpGlobalTool,
+  constructor(private parent: GpuInfoComponent,private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
   }
 
@@ -31,7 +31,7 @@ export class ServerInfoViewComponent {
   }
 
   findById(id:Number){
-    this.httpGlobalTool.get("/api/cloud-automation/serverInfo/findById?id="+id).subscribe({
+    this.httpGlobalTool.get("/api/cloud-automation/gpuInfo/findById?id="+id).subscribe({
       next: (res) => {
         this.dataElement = res.data
       },
@@ -54,21 +54,7 @@ export class ServerInfoViewComponent {
 
   defDataElement: DataElement = {
     id: '',
-    company: '',
-    sourceAccount: '',
-    name: '',
-    ipAddress: '',
-    username: '',
-    password: '',
-    os: '',
-    cpuUsage: '',
-    memorySize: '',
-    memoryAvailable: '',
-    diskSize: '',
-    diskAvailable: '',
-    location: '',
-    expiryDate: '',
-    status: '',
+    gpuInfo: '',
     version: '',
   };
 
@@ -78,21 +64,7 @@ export class ServerInfoViewComponent {
 export interface DataElement {
 
   id?: string;
-  company: string;
-  sourceAccount: string;
-  name: string;
-  ipAddress: string;
-  username: string;
-  password: string;
-  os: string;
-  cpuUsage: string;
-  memorySize: string;
-  memoryAvailable: string;
-  diskSize: string;
-  diskAvailable: string;
-  location: string;
-  expiryDate: string;
-  status: string;
+  gpuInfo: string;
   version: string;
 }
 

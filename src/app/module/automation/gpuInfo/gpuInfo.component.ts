@@ -4,6 +4,7 @@ import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {PageEvent} from "@angular/material/paginator";
 import {MatDrawer} from "@angular/material/sidenav";
 import {GpuInfoEditComponent} from "./gpuInfoEdit.component";
+import {GpuInfoViewComponent} from "./gpuInfoView.component";
 import {AlertService} from "@component/alert/alert.service";
 
 
@@ -30,8 +31,10 @@ export class GpuInfoComponent implements AfterViewInit {
   visibilityListData = {'visibility': 'hidden'}
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
+  @ViewChild('drawerView', {static: false}) drawerView!: MatDrawer;
 
   @ViewChild('appGpuInfoEdit', {static: false}) appGpuInfoEdit!: GpuInfoEditComponent;
+  @ViewChild('appGpuInfoView', {static: false}) appGpuInfoView!: GpuInfoViewComponent;
 
   constructor(private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
@@ -93,19 +96,29 @@ export class GpuInfoComponent implements AfterViewInit {
     this.queryData();
   }
 
-  openEditSidenav(id:number,show?:boolean) {
+  openEditSidenav(id:number) {
     if (this.drawer) {
       this.appGpuInfoEdit.clearData()
       if(id != null && id>0){
-        this.appGpuInfoEdit.findById(id,show);
+        this.appGpuInfoEdit.findById(id);
       }
       this.drawer.open();
+    }
+  }
+
+  openViewSidenav(id:number) {
+    if (this.drawerView && id != null && id>0) {
+      this.appGpuInfoView.findById(id);
+      this.drawerView.open();
     }
   }
 
   closeEditSidenav() {
     if (this.drawer) {
       this.drawer.close();
+    }
+    if (this.drawerView) {
+      this.drawerView.close();
     }
   }
 

@@ -4,6 +4,7 @@ import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {PageEvent} from "@angular/material/paginator";
 import {MatDrawer} from "@angular/material/sidenav";
 import {EmailInfoEditComponent} from "./emailInfoEdit.component";
+import {EmailInfoViewComponent} from "./emailInfoView.component";
 import {AlertService} from "@component/alert/alert.service";
 
 
@@ -30,8 +31,10 @@ export class EmailInfoComponent implements AfterViewInit {
   visibilityListData = {'visibility': 'hidden'}
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
+  @ViewChild('drawerView', {static: false}) drawerView!: MatDrawer;
 
   @ViewChild('appEmailInfoEdit', {static: false}) appEmailInfoEdit!: EmailInfoEditComponent;
+  @ViewChild('appEmailInfoView', {static: false}) appEmailInfoView!: EmailInfoViewComponent;
 
   constructor(private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
@@ -93,19 +96,29 @@ export class EmailInfoComponent implements AfterViewInit {
     this.queryData();
   }
 
-  openEditSidenav(id:number,show?:boolean) {
+  openEditSidenav(id:number) {
     if (this.drawer) {
       this.appEmailInfoEdit.clearData()
       if(id != null && id>0){
-        this.appEmailInfoEdit.findById(id,show);
+        this.appEmailInfoEdit.findById(id);
       }
       this.drawer.open();
+    }
+  }
+
+  openViewSidenav(id:number) {
+    if (this.drawerView && id != null && id>0) {
+      this.appEmailInfoView.findById(id);
+      this.drawerView.open();
     }
   }
 
   closeEditSidenav() {
     if (this.drawer) {
       this.drawer.close();
+    }
+    if (this.drawerView) {
+      this.drawerView.close();
     }
   }
 

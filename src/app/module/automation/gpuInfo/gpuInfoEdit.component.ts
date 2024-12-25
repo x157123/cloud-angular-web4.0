@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
-import {Dict, GpuInfoComponent} from "./gpuInfo.component";
+import {ChangeDetectorRef, Component} from '@angular/core';
+import {GpuInfoComponent} from "./gpuInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 

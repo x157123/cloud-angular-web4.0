@@ -1,18 +1,23 @@
 .edit-drawer{
-width: 500px;
+  width: 500px;
 }
 
+.view-drawer{
+  width: 600px;
+}
+
+
 .mat-mdc-table {
-table-layout: fixed;
+  table-layout: fixed;
 }
 
 .mat-mdc-cell {
-white-space: nowrap;
-text-overflow: ellipsis;
-overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .mat-column-operate {
-flex: 0 0 120px;
-white-space: nowrap;
+  flex: 0 0 120px;
+  white-space: nowrap;
 }

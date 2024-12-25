@@ -2,6 +2,9 @@
   <mat-drawer #drawer mode="over" position="end" class="edit-drawer">
     <app-applicationInfo-edit #appApplicationInfoEdit></app-applicationInfo-edit>
   </mat-drawer>
+  <mat-drawer #drawerView mode="over" position="end" class="view-drawer">
+    <app-applicationInfo-view #appApplicationInfoView></app-applicationInfo-view>
+  </mat-drawer>
   <div class="mat-drawer-containers flex flex-col h-screen">
     <mat-toolbar>
       <input matInput placeholder="查询条件">
@@ -47,7 +50,7 @@
           <ng-container matColumnDef="operate">
             <mat-header-cell mat-header-cell *matHeaderCellDef> 操作</mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <a mat-icon-button color="primary" (click)="openEditSidenav(element.id, true)" title="查看">
+              <a mat-icon-button color="primary" (click)="openViewSidenav(element.id)" title="查看">
                 <mat-icon>open_in_new</mat-icon>
               </a>
               <a mat-icon-button color="primary" (click)="openEditSidenav(element.id)" title="修改">

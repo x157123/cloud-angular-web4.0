@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {EmailInfoComponent} from "./emailInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
@@ -6,60 +6,31 @@ import {AlertService} from "@component/alert/alert.service";
 
 
 @Component({
-  selector: 'app-emailInfo-edit',
-  templateUrl: './emailInfoEdit.component.html',
-  styleUrls: ['./emailInfoEdit.component.css'],
+  selector: 'app-emailInfo-view',
+  templateUrl: './emailInfoView.component.html',
+  styleUrls: ['./emailInfoView.component.css'],
   standalone: false
 })
-export class EmailInfoEditComponent {
+export class EmailInfoViewComponent {
 
   visibilityEditData = { 'visibility': 'hidden'}
 
   show: boolean = true;
 
   constructor(private parent: EmailInfoComponent,private httpGlobalTool: HttpGlobalTool,
-              private _alertService: AlertService,private cd: ChangeDetectorRef) {
+              private _alertService: AlertService) {
   }
 
   doSomething() {
     this.parent.closeEditSidenav();
-    this.parent.queryData()
     this.dataElement = {... this.defDataElement}
   }
 
-  doSave(){
-    this.showProgressBar();
-    this.httpGlobalTool.postBody("/api/cloud-automation/emailInfo/save", this.dataElement).subscribe({
-      next: (res) => {
-        this._alertService.success("保存成功")
-        this.doSomething();
-      },
-      error: (e) => {
-        this._alertService.error(e.error.error)
-        this.hideProgressBar();
-      },
-      complete:()=>{
-        this.hideProgressBar();
-        this.clearData()
-      }
-    });
-  }
-
   clearData(show?:boolean){
-    if(show == null || !show){
-      this.show = false;
-    }else{
-      this.show = true;
-    }
     this.dataElement = this.defDataElement
   }
 
-  findById(id:Number,show?:boolean){
-    if(show == null || !show){
-      this.show = false;
-    }else{
-      this.show = true;
-    }
+  findById(id:Number){
     this.httpGlobalTool.get("/api/cloud-automation/emailInfo/findById?id="+id).subscribe({
       next: (res) => {
         this.dataElement = res.data

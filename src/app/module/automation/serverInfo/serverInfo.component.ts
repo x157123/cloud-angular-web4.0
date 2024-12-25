@@ -4,6 +4,7 @@ import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {PageEvent} from "@angular/material/paginator";
 import {MatDrawer} from "@angular/material/sidenav";
 import {ServerInfoEditComponent} from "./serverInfoEdit.component";
+import {ServerInfoViewComponent} from "./serverInfoView.component";
 import {AlertService} from "@component/alert/alert.service";
 
 
@@ -24,14 +25,16 @@ export class ServerInfoComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','ipAddress','username','expiryDate','status','operate'];
+  displayedColumns: string[] = ['id','company','sourceAccount','name','ipAddress','username','password','os','cpuUsage','memorySize','memoryAvailable','diskSize','diskAvailable','location','expiryDate','status','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   visibilityListData = {'visibility': 'hidden'}
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
+  @ViewChild('drawerView', {static: false}) drawerView!: MatDrawer;
 
   @ViewChild('appServerInfoEdit', {static: false}) appServerInfoEdit!: ServerInfoEditComponent;
+  @ViewChild('appServerInfoView', {static: false}) appServerInfoView!: ServerInfoViewComponent;
 
   constructor(private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
@@ -93,19 +96,29 @@ export class ServerInfoComponent implements AfterViewInit {
     this.queryData();
   }
 
-  openEditSidenav(id:number,show?:boolean) {
+  openEditSidenav(id:number) {
     if (this.drawer) {
       this.appServerInfoEdit.clearData()
       if(id != null && id>0){
-        this.appServerInfoEdit.findById(id,show);
+        this.appServerInfoEdit.findById(id);
       }
       this.drawer.open();
+    }
+  }
+
+  openViewSidenav(id:number) {
+    if (this.drawerView && id != null && id>0) {
+      this.appServerInfoView.findById(id);
+      this.drawerView.open();
     }
   }
 
   closeEditSidenav() {
     if (this.drawer) {
       this.drawer.close();
+    }
+    if (this.drawerView) {
+      this.drawerView.close();
     }
   }
 

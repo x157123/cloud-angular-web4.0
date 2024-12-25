@@ -4,6 +4,7 @@ import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {PageEvent} from "@angular/material/paginator";
 import {MatDrawer} from "@angular/material/sidenav";
 import {AccountInfoEditComponent} from "./accountInfoEdit.component";
+import {AccountInfoViewComponent} from "./accountInfoView.component";
 import {AlertService} from "@component/alert/alert.service";
 
 
@@ -30,8 +31,10 @@ export class AccountInfoComponent implements AfterViewInit {
   visibilityListData = {'visibility': 'hidden'}
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
+  @ViewChild('drawerView', {static: false}) drawerView!: MatDrawer;
 
   @ViewChild('appAccountInfoEdit', {static: false}) appAccountInfoEdit!: AccountInfoEditComponent;
+  @ViewChild('appAccountInfoView', {static: false}) appAccountInfoView!: AccountInfoViewComponent;
 
   constructor(private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
@@ -93,19 +96,29 @@ export class AccountInfoComponent implements AfterViewInit {
     this.queryData();
   }
 
-  openEditSidenav(id:number,show?:boolean) {
+  openEditSidenav(id:number) {
     if (this.drawer) {
       this.appAccountInfoEdit.clearData()
       if(id != null && id>0){
-        this.appAccountInfoEdit.findById(id,show);
+        this.appAccountInfoEdit.findById(id);
       }
       this.drawer.open();
+    }
+  }
+
+  openViewSidenav(id:number) {
+    if (this.drawerView && id != null && id>0) {
+      this.appAccountInfoView.findById(id);
+      this.drawerView.open();
     }
   }
 
   closeEditSidenav() {
     if (this.drawer) {
       this.drawer.close();
+    }
+    if (this.drawerView) {
+      this.drawerView.close();
     }
   }
 

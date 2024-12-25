@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
-import {Dict, ServerInfoComponent} from "./serverInfo.component";
+import {ChangeDetectorRef, Component} from '@angular/core';
+import {ServerInfoComponent} from "./serverInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 

@@ -1,0 +1,35 @@
+<div class="edit-content flex flex-col h-full">
+  <div class="h-12 edit-content-header border-b">
+      查看
+  </div>
+  <div class="flex-1 overflow-y-auto bg-white border-b">
+    <div class="p-4">
+      <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
+                <mat-grid-tile colspan="4" class="title">邮箱用户名:</mat-grid-tile>
+        <mat-grid-tile colspan="12">{{ dataElement.name }}</mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">邮箱账号密码:</mat-grid-tile>
+        <mat-grid-tile colspan="12">{{ dataElement.password }}</mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">邮箱服务器地址:</mat-grid-tile>
+        <mat-grid-tile colspan="12">{{ dataElement.emailServerAddress }}</mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">邮箱类型:</mat-grid-tile>
+        <mat-grid-tile colspan="12">{{ dataElement.emailType }}</mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">是否有效:</mat-grid-tile>
+        <mat-grid-tile colspan="12">{{ dataElement.isActive }}</mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">备注:</mat-grid-tile>
+        <mat-grid-tile colspan="12">{{ dataElement.remarks }}</mat-grid-tile>
+
+      </mat-grid-list>
+    </div>
+  </div>
+  <div class="h-12">
+    <mat-card-actions align="start">
+      <button mat-button (click)="doSomething()">关闭</button>
+    </mat-card-actions>
+  </div>
+  <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>
+</div>

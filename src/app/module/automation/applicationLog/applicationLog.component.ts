@@ -4,6 +4,7 @@ import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {PageEvent} from "@angular/material/paginator";
 import {MatDrawer} from "@angular/material/sidenav";
 import {ApplicationLogEditComponent} from "./applicationLogEdit.component";
+import {ApplicationLogViewComponent} from "./applicationLogView.component";
 import {AlertService} from "@component/alert/alert.service";
 
 
@@ -30,8 +31,10 @@ export class ApplicationLogComponent implements AfterViewInit {
   visibilityListData = {'visibility': 'hidden'}
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
+  @ViewChild('drawerView', {static: false}) drawerView!: MatDrawer;
 
   @ViewChild('appApplicationLogEdit', {static: false}) appApplicationLogEdit!: ApplicationLogEditComponent;
+  @ViewChild('appApplicationLogView', {static: false}) appApplicationLogView!: ApplicationLogViewComponent;
 
   constructor(private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
@@ -93,19 +96,29 @@ export class ApplicationLogComponent implements AfterViewInit {
     this.queryData();
   }
 
-  openEditSidenav(id:number,show?:boolean) {
+  openEditSidenav(id:number) {
     if (this.drawer) {
       this.appApplicationLogEdit.clearData()
       if(id != null && id>0){
-        this.appApplicationLogEdit.findById(id,show);
+        this.appApplicationLogEdit.findById(id);
       }
       this.drawer.open();
+    }
+  }
+
+  openViewSidenav(id:number) {
+    if (this.drawerView && id != null && id>0) {
+      this.appApplicationLogView.findById(id);
+      this.drawerView.open();
     }
   }
 
   closeEditSidenav() {
     if (this.drawer) {
       this.drawer.close();
+    }
+    if (this.drawerView) {
+      this.drawerView.close();
     }
   }
 

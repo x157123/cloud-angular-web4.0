@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
-import {Dict, ApplicationLogComponent} from "./applicationLog.component";
+import {ChangeDetectorRef, Component} from '@angular/core';
+import {ApplicationLogComponent} from "./applicationLog.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 

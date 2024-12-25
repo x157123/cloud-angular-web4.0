@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {ApplicationInfoComponent} from "./applicationInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
@@ -6,60 +6,31 @@ import {AlertService} from "@component/alert/alert.service";
 
 
 @Component({
-  selector: 'app-applicationInfo-edit',
-  templateUrl: './applicationInfoEdit.component.html',
-  styleUrls: ['./applicationInfoEdit.component.css'],
+  selector: 'app-applicationInfo-view',
+  templateUrl: './applicationInfoView.component.html',
+  styleUrls: ['./applicationInfoView.component.css'],
   standalone: false
 })
-export class ApplicationInfoEditComponent {
+export class ApplicationInfoViewComponent {
 
   visibilityEditData = { 'visibility': 'hidden'}
 
   show: boolean = true;
 
   constructor(private parent: ApplicationInfoComponent,private httpGlobalTool: HttpGlobalTool,
-              private _alertService: AlertService,private cd: ChangeDetectorRef) {
+              private _alertService: AlertService) {
   }
 
   doSomething() {
     this.parent.closeEditSidenav();
-    this.parent.queryData()
     this.dataElement = {... this.defDataElement}
   }
 
-  doSave(){
-    this.showProgressBar();
-    this.httpGlobalTool.postBody("/api/cloud-automation/applicationInfo/save", this.dataElement).subscribe({
-      next: (res) => {
-        this._alertService.success("保存成功")
-        this.doSomething();
-      },
-      error: (e) => {
-        this._alertService.error(e.error.error)
-        this.hideProgressBar();
-      },
-      complete:()=>{
-        this.hideProgressBar();
-        this.clearData()
-      }
-    });
-  }
-
   clearData(show?:boolean){
-    if(show == null || !show){
-      this.show = false;
-    }else{
-      this.show = true;
-    }
     this.dataElement = this.defDataElement
   }
 
-  findById(id:Number,show?:boolean){
-    if(show == null || !show){
-      this.show = false;
-    }else{
-      this.show = true;
-    }
+  findById(id:Number){
     this.httpGlobalTool.get("/api/cloud-automation/applicationInfo/findById?id="+id).subscribe({
       next: (res) => {
         this.dataElement = res.data

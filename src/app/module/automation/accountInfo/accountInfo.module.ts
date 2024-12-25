@@ -12,6 +12,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {AccountInfoEditComponent} from "./accountInfoEdit.component";
+import {AccountInfoViewComponent} from "./accountInfoView.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatGridListModule} from "@angular/material/grid-list";
@@ -23,8 +24,9 @@ import {MatListModule} from "@angular/material/list";
 
 @NgModule({
     declarations: [
-        AccountInfoComponent,
-        AccountInfoEditComponent
+      AccountInfoComponent,
+      AccountInfoEditComponent,
+      AccountInfoViewComponent
     ],
   imports: [
     CommonModule,
