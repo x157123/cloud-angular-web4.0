@@ -82,6 +82,7 @@ export class ServerInfoEditComponent {
   }
 
   defDataElement: DataElement = {
+    id: '',
     name: '',
     ipAddress: '',
     username: '',
@@ -95,7 +96,6 @@ export class ServerInfoEditComponent {
     location: '',
     expiryDate: '',
     status: '',
-    updatedAt: '',
   };
 
   dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));
@@ -117,6 +117,7 @@ export interface DataElement {
   location: string;
   expiryDate: string;
   status: string;
-  updatedAt: string;
+  createTime: string;
+  updateTime: string;
 }
 

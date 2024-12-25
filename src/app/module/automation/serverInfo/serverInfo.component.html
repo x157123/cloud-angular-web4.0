@@ -13,18 +13,13 @@
     <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
     <div class="flex-1 edit-content-info-scrollbar">
         <mat-table [dataSource]="dataSource">
-          <ng-container matColumnDef="id" sticky >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器ID </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
-          </ng-container>
-
           <ng-container matColumnDef="name"  >
             <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器名称 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.name}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="ipAddress"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> IP地址（支持IPv4和IPv6） </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> IP地址 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.ipAddress}} </mat-cell>
           </ng-container>
 
@@ -34,7 +29,7 @@
           </ng-container>
 
           <ng-container matColumnDef="password"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器密码（建议加密存储） </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器密码 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.password}} </mat-cell>
           </ng-container>
 
@@ -44,32 +39,32 @@
           </ng-container>
 
           <ng-container matColumnDef="cpuUsage"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> CPU使用率（百分比，例如：85.50） </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> CPU使用率 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.cpuUsage}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="memorySize"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 内存总大小（例如：16GB） </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 内存总大小 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.memorySize}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="memoryAvailable"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 内存可用大小（例如：8GB） </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 内存可用大小 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.memoryAvailable}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="diskSize"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 磁盘总大小（例如：500GB） </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 磁盘总大小 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.diskSize}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="diskAvailable"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 磁盘可用大小（例如：200GB） </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 磁盘可用大小 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.diskAvailable}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="location"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器位置（例如：机房名称、城市） </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器位置 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.location}} </mat-cell>
           </ng-container>
 
@@ -81,11 +76,6 @@
           <ng-container matColumnDef="status"  >
             <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器状态 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.status}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="updatedAt"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 记录更新时间 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.updatedAt}} </mat-cell>
           </ng-container>
 
 

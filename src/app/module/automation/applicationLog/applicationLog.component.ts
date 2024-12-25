@@ -24,7 +24,7 @@ export class ApplicationLogComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','serverId','applicationId','operationType','description','operationTime','operate'];
+  displayedColumns: string[] = ['id','serverId','applicationId','operationType','description','createTime','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   visibilityListData = {'visibility': 'hidden'}
@@ -117,5 +117,4 @@ export interface PeriodicElement {
   applicationId: string;
   operationType: string;
   description: string;
-  operationTime: string;
 }

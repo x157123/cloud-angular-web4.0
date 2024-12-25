@@ -13,11 +13,6 @@
     <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
     <div class="flex-1 edit-content-info-scrollbar">
         <mat-table [dataSource]="dataSource">
-          <ng-container matColumnDef="id" sticky >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 邮箱ID </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
-          </ng-container>
-
           <ng-container matColumnDef="name"  >
             <mat-header-cell mat-header-cell *matHeaderCellDef> 邮箱用户名 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.name}} </mat-cell>
@@ -34,12 +29,12 @@
           </ng-container>
 
           <ng-container matColumnDef="emailType"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 邮箱类型（google126等） </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 邮箱类型 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.emailType}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="isActive"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 是否有效（1：有效，0：无效） </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 是否有效 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.isActive}} </mat-cell>
           </ng-container>
 

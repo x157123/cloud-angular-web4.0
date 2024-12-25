@@ -82,11 +82,11 @@ export class ApplicationLogEditComponent {
   }
 
   defDataElement: DataElement = {
+    id: '',
     serverId: '',
     applicationId: '',
     operationType: '',
     description: '',
-    operationTime: '',
   };
 
   dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));
@@ -99,6 +99,6 @@ export interface DataElement {
   applicationId: string;
   operationType: string;
   description: string;
-  operationTime: string;
+  createTime: string;
 }
 

@@ -82,6 +82,7 @@ export class GpuInfoEditComponent {
   }
 
   defDataElement: DataElement = {
+    id: '',
     gpuInfo: '',
   };
 

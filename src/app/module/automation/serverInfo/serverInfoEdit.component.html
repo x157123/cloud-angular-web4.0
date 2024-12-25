@@ -10,7 +10,7 @@
   <div class="flex-1 overflow-y-auto bg-white border-b">
     <div class="p-4">
       <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
-        <mat-grid-tile colspan="4" class="title">服务器名称:</mat-grid-tile>
+                <mat-grid-tile colspan="4" class="title">服务器名称:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>服务器名称</mat-label>
@@ -18,7 +18,7 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="4" class="title">IP地址（支持IPv4和IPv6）:</mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">IP地址:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>IP地址（支持IPv4和IPv6）</mat-label>
@@ -34,7 +34,7 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="4" class="title">服务器密码（建议加密存储）:</mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">服务器密码:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>服务器密码（建议加密存储）</mat-label>
@@ -50,7 +50,7 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="4" class="title">CPU使用率（百分比，例如：85.50）:</mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">CPU使用率:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>CPU使用率（百分比，例如：85.50）</mat-label>
@@ -58,7 +58,7 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="4" class="title">内存总大小（例如：16GB）:</mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">内存总大小:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>内存总大小（例如：16GB）</mat-label>
@@ -66,7 +66,7 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="4" class="title">内存可用大小（例如：8GB）:</mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">内存可用大小:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>内存可用大小（例如：8GB）</mat-label>
@@ -74,7 +74,7 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="4" class="title">磁盘总大小（例如：500GB）:</mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">磁盘总大小:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>磁盘总大小（例如：500GB）</mat-label>
@@ -82,7 +82,7 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="4" class="title">磁盘可用大小（例如：200GB）:</mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">磁盘可用大小:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>磁盘可用大小（例如：200GB）</mat-label>
@@ -90,7 +90,7 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="4" class="title">服务器位置（例如：机房名称、城市）:</mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">服务器位置:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>服务器位置（例如：机房名称、城市）</mat-label>
@@ -109,16 +109,8 @@
         <mat-grid-tile colspan="4" class="title">服务器状态:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
-            <mat-label>服务器状态</mat-label>
+            <mat-label>服务器状态（0：在线，1：离线）</mat-label>
             <input matInput [(ngModel)]="dataElement.status" [readonly]="show">
-          </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile colspan="4" class="title">记录更新时间:</mat-grid-tile>
-        <mat-grid-tile colspan="12">
-          <mat-form-field>
-            <mat-label>记录更新时间</mat-label>
-            <input matInput [(ngModel)]="dataElement.updatedAt" [readonly]="show">
           </mat-form-field>
         </mat-grid-tile>
 

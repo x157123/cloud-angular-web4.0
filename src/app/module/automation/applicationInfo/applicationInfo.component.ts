@@ -24,7 +24,7 @@ export class ApplicationInfoComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','name','script','scriptUrl','iconUrl','createdAt','updatedAt','operate'];
+  displayedColumns: string[] = ['id','name','script','scriptUrl','scriptPath','icon','createTime','updateTime','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   visibilityListData = {'visibility': 'hidden'}
@@ -116,7 +116,6 @@ export interface PeriodicElement {
   name: string;
   script: string;
   scriptUrl: string;
-  iconUrl: string;
-  createdAt: string;
-  updatedAt: string;
+  scriptPath: string;
+  icon: string;
 }

@@ -24,7 +24,7 @@ export class ServerInfoComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','name','ipAddress','username','password','os','cpuUsage','memorySize','memoryAvailable','diskSize','diskAvailable','location','expiryDate','status','updatedAt','operate'];
+  displayedColumns: string[] = ['id','name','ipAddress','username','password','os','cpuUsage','memorySize','memoryAvailable','diskSize','diskAvailable','location','expiryDate','status','createTime','updateTime','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   visibilityListData = {'visibility': 'hidden'}
@@ -126,5 +126,4 @@ export interface PeriodicElement {
   location: string;
   expiryDate: string;
   status: string;
-  updatedAt: string;
 }

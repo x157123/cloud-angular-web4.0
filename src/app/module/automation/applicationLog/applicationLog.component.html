@@ -13,11 +13,6 @@
     <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
     <div class="flex-1 edit-content-info-scrollbar">
         <mat-table [dataSource]="dataSource">
-          <ng-container matColumnDef="id" sticky >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作记录唯一标识 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
-          </ng-container>
-
           <ng-container matColumnDef="serverId"  >
             <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器id </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.serverId}} </mat-cell>
@@ -29,18 +24,13 @@
           </ng-container>
 
           <ng-container matColumnDef="operationType"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作类型1开始，2允许，3结束 </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作类型 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.operationType}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="description"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作类型，例如"开始"、"完成第一个任务"、"结束任务" </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作类型 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.description}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="operationTime"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作发生的时间 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.operationTime}} </mat-cell>
           </ng-container>
 
 

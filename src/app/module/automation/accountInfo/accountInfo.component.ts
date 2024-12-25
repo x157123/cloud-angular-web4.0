@@ -24,7 +24,7 @@ export class AccountInfoComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','username','account','password','key','region','accountType','isActive','remarks','email','operate'];
+  displayedColumns: string[] = ['id','username','account','password','key','region','accountType','isActive','remarks','email','createTime','updateTime','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   visibilityListData = {'visibility': 'hidden'}

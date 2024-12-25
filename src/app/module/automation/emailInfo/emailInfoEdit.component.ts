@@ -82,6 +82,7 @@ export class EmailInfoEditComponent {
   }
 
   defDataElement: DataElement = {
+    id: '',
     name: '',
     password: '',
     emailServerAddress: '',
@@ -102,5 +103,7 @@ export interface DataElement {
   emailType: string;
   isActive: string;
   remarks: string;
+  createTime: string;
+  updateTime: string;
 }
 
