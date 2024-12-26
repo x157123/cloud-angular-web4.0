@@ -53,75 +53,28 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="4" class="title">操作系统:</mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">关联用户:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
-            <mat-label>操作系统</mat-label>
-            <input matInput [(ngModel)]="dataElement.os">
+            <mat-label>关联用户</mat-label>
+            <mat-select [(ngModel)]="dataElement.users" multiple>
+              @for (topping of userList; track topping) {
+                <mat-option [value]="topping">{{topping}}</mat-option>
+              }
+            </mat-select>
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="4" class="title">CPU使用率:</mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">关联应用:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
-            <mat-label>CPU使用率（百分比，例如：85.50）</mat-label>
-            <input matInput [(ngModel)]="dataElement.cpuUsage">
-          </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile colspan="4" class="title">内存总大小:</mat-grid-tile>
-        <mat-grid-tile colspan="12">
-          <mat-form-field>
-            <mat-label>内存总大小（例如：16GB）</mat-label>
-            <input matInput [(ngModel)]="dataElement.memorySize">
-          </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile colspan="4" class="title">内存可用大小:</mat-grid-tile>
-        <mat-grid-tile colspan="12">
-          <mat-form-field>
-            <mat-label>内存可用大小（例如：8GB）</mat-label>
-            <input matInput [(ngModel)]="dataElement.memoryAvailable">
-          </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile colspan="4" class="title">磁盘总大小:</mat-grid-tile>
-        <mat-grid-tile colspan="12">
-          <mat-form-field>
-            <mat-label>磁盘总大小（例如：500GB）</mat-label>
-            <input matInput [(ngModel)]="dataElement.diskSize">
-          </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile colspan="4" class="title">磁盘可用大小:</mat-grid-tile>
-        <mat-grid-tile colspan="12">
-          <mat-form-field>
-            <mat-label>磁盘可用大小（例如：200GB）</mat-label>
-            <input matInput [(ngModel)]="dataElement.diskAvailable">
-          </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile colspan="4" class="title">服务器位置:</mat-grid-tile>
-        <mat-grid-tile colspan="12">
-          <mat-form-field>
-            <mat-label>服务器位置（例如：机房名称、城市）</mat-label>
-            <input matInput [(ngModel)]="dataElement.location">
-          </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile colspan="4" class="title">到期时间:</mat-grid-tile>
-        <mat-grid-tile colspan="12">
-          <mat-form-field>
-            <mat-label>到期时间</mat-label>
-            <input matInput [(ngModel)]="dataElement.expiryDate">
-          </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile colspan="4" class="title">服务器状态:</mat-grid-tile>
-        <mat-grid-tile colspan="12">
-          <mat-form-field>
-            <mat-label>服务器状态（0：在线，1：离线）</mat-label>
-            <input matInput [(ngModel)]="dataElement.status">
+            <mat-label>关联应用</mat-label>
+            <mat-select [(ngModel)]="dataElement.apps" multiple>
+              @for (topping of appList; track topping) {
+                <mat-option [value]="topping">{{topping}}</mat-option>
+              }
+            </mat-select>
           </mat-form-field>
         </mat-grid-tile>
 

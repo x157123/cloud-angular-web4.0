@@ -13,6 +13,9 @@ export class ServerInfoEditComponent {
 
   visibilityEditData = { 'visibility': 'hidden'}
 
+  userList: string[] = ['user1', 'user2', 'user3', 'user4', 'user5'];
+  appList: string[] = ['app1', 'app2', 'app3', 'app4', 'app5'];
+
   constructor(private parent: ServerInfoComponent,private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
   }
@@ -85,6 +88,8 @@ export class ServerInfoEditComponent {
     expiryDate: '',
     status: '',
     version: '',
+    users: '',
+    apps: '',
   };
 
   dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));
@@ -108,5 +113,7 @@ export interface DataElement {
   expiryDate: string;
   status: string;
   version: string;
+  users: string;
+  apps: string;
 }
 
