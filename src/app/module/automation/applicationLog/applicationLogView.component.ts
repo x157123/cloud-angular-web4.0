@@ -3,8 +3,6 @@ import {ApplicationLogComponent} from "./applicationLog.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 
-
-
 @Component({
   selector: 'app-applicationLog-view',
   templateUrl: './applicationLogView.component.html',
@@ -65,7 +63,6 @@ export class ApplicationLogViewComponent {
 }
 
 export interface DataElement {
-
   id?: string;
   serverId: string;
   applicationId: string;

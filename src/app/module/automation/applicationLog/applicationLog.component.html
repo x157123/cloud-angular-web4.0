@@ -1,9 +1,7 @@
 <mat-drawer-container autosize>
   <mat-drawer #drawer mode="over" position="end" class="edit-drawer">
-    <app-applicationLog-edit #appApplicationLogEdit></app-applicationLog-edit>
-  </mat-drawer>
-  <mat-drawer #drawerView mode="over" position="end" class="view-drawer">
-    <app-applicationLog-view #appApplicationLogView></app-applicationLog-view>
+    <app-applicationLog-edit #appApplicationLogEdit [hidden]="!isEditMode"></app-applicationLog-edit>
+    <app-applicationLog-view #appApplicationLogView [hidden]="isEditMode"></app-applicationLog-view>
   </mat-drawer>
   <div class="mat-drawer-containers flex flex-col h-screen">
     <mat-toolbar>

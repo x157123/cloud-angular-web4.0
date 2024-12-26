@@ -27,11 +27,11 @@ export class EmailInfoComponent implements AfterViewInit {
   pageSize: number = 10;
   displayedColumns: string[] = ['id','name','password','emailServerAddress','emailType','isActive','remarks','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
+  isEditMode = true;
 
   visibilityListData = {'visibility': 'hidden'}
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
-  @ViewChild('drawerView', {static: false}) drawerView!: MatDrawer;
 
   @ViewChild('appEmailInfoEdit', {static: false}) appEmailInfoEdit!: EmailInfoEditComponent;
   @ViewChild('appEmailInfoView', {static: false}) appEmailInfoView!: EmailInfoViewComponent;
@@ -97,28 +97,34 @@ export class EmailInfoComponent implements AfterViewInit {
   }
 
   openEditSidenav(id:number) {
+    this.isEditMode = true;
     if (this.drawer) {
       this.appEmailInfoEdit.clearData()
       if(id != null && id>0){
         this.appEmailInfoEdit.findById(id);
       }
-      this.drawer.open();
+      this.drawer.open().catch((error) => {
+        console.error('打开抽屉出错：', error);
+      });
     }
   }
 
   openViewSidenav(id:number) {
-    if (this.drawerView && id != null && id>0) {
+    this.isEditMode = false;
+    this.appEmailInfoView.clearData();
+    if (this.drawer && id != null && id>0) {
       this.appEmailInfoView.findById(id);
-      this.drawerView.open();
+      this.drawer.open().catch((error) => {
+        console.error('打开抽屉出错：', error);
+      });
     }
   }
 
   closeEditSidenav() {
     if (this.drawer) {
-      this.drawer.close();
-    }
-    if (this.drawerView) {
-      this.drawerView.close();
+      this.drawer.close().catch((error) => {
+        console.error('关闭抽屉出错：', error);
+      });
     }
   }
 

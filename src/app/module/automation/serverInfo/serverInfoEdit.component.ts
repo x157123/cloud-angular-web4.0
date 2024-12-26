@@ -3,8 +3,6 @@ import {ServerInfoComponent} from "./serverInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 
-
-
 @Component({
   selector: 'app-serverInfo-edit',
   templateUrl: './serverInfoEdit.component.html',
@@ -18,7 +16,7 @@ export class ServerInfoEditComponent {
   show: boolean = true;
 
   constructor(private parent: ServerInfoComponent,private httpGlobalTool: HttpGlobalTool,
-              private _alertService: AlertService,private cd: ChangeDetectorRef) {
+              private _alertService: AlertService) {
   }
 
   doSomething() {
@@ -45,21 +43,11 @@ export class ServerInfoEditComponent {
     });
   }
 
-  clearData(show?:boolean){
-    if(show == null || !show){
-      this.show = false;
-    }else{
-      this.show = true;
-    }
+  clearData(){
     this.dataElement = this.defDataElement
   }
 
-  findById(id:Number,show?:boolean){
-    if(show == null || !show){
-      this.show = false;
-    }else{
-      this.show = true;
-    }
+  findById(id:Number){
     this.httpGlobalTool.get("/api/cloud-automation/serverInfo/findById?id="+id).subscribe({
       next: (res) => {
         this.dataElement = res.data
@@ -105,7 +93,6 @@ export class ServerInfoEditComponent {
 }
 
 export interface DataElement {
-
   id?: string;
   company: string;
   sourceAccount: string;

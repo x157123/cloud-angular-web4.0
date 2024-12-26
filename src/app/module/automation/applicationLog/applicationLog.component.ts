@@ -27,11 +27,11 @@ export class ApplicationLogComponent implements AfterViewInit {
   pageSize: number = 10;
   displayedColumns: string[] = ['id','serverId','applicationId','operationType','description','updateTime','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
+  isEditMode = true;
 
   visibilityListData = {'visibility': 'hidden'}
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
-  @ViewChild('drawerView', {static: false}) drawerView!: MatDrawer;
 
   @ViewChild('appApplicationLogEdit', {static: false}) appApplicationLogEdit!: ApplicationLogEditComponent;
   @ViewChild('appApplicationLogView', {static: false}) appApplicationLogView!: ApplicationLogViewComponent;
@@ -97,28 +97,34 @@ export class ApplicationLogComponent implements AfterViewInit {
   }
 
   openEditSidenav(id:number) {
+    this.isEditMode = true;
     if (this.drawer) {
       this.appApplicationLogEdit.clearData()
       if(id != null && id>0){
         this.appApplicationLogEdit.findById(id);
       }
-      this.drawer.open();
+      this.drawer.open().catch((error) => {
+        console.error('打开抽屉出错：', error);
+      });
     }
   }
 
   openViewSidenav(id:number) {
-    if (this.drawerView && id != null && id>0) {
+    this.isEditMode = false;
+    this.appApplicationLogView.clearData();
+    if (this.drawer && id != null && id>0) {
       this.appApplicationLogView.findById(id);
-      this.drawerView.open();
+      this.drawer.open().catch((error) => {
+        console.error('打开抽屉出错：', error);
+      });
     }
   }
 
   closeEditSidenav() {
     if (this.drawer) {
-      this.drawer.close();
-    }
-    if (this.drawerView) {
-      this.drawerView.close();
+      this.drawer.close().catch((error) => {
+        console.error('关闭抽屉出错：', error);
+      });
     }
   }
 

@@ -3,8 +3,6 @@ import {ApplicationInfoComponent} from "./applicationInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 
-
-
 @Component({
   selector: 'app-applicationInfo-view',
   templateUrl: './applicationInfoView.component.html',
@@ -66,7 +64,6 @@ export class ApplicationInfoViewComponent {
 }
 
 export interface DataElement {
-
   id?: string;
   name: string;
   script: string;

@@ -27,11 +27,11 @@ export class AccountInfoComponent implements AfterViewInit {
   pageSize: number = 10;
   displayedColumns: string[] = ['id','username','account','password','key','region','accountType','isActive','remarks','email','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
+  isEditMode = true;
 
   visibilityListData = {'visibility': 'hidden'}
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
-  @ViewChild('drawerView', {static: false}) drawerView!: MatDrawer;
 
   @ViewChild('appAccountInfoEdit', {static: false}) appAccountInfoEdit!: AccountInfoEditComponent;
   @ViewChild('appAccountInfoView', {static: false}) appAccountInfoView!: AccountInfoViewComponent;
@@ -97,28 +97,34 @@ export class AccountInfoComponent implements AfterViewInit {
   }
 
   openEditSidenav(id:number) {
+    this.isEditMode = true;
     if (this.drawer) {
       this.appAccountInfoEdit.clearData()
       if(id != null && id>0){
         this.appAccountInfoEdit.findById(id);
       }
-      this.drawer.open();
+      this.drawer.open().catch((error) => {
+        console.error('打开抽屉出错：', error);
+      });
     }
   }
 
   openViewSidenav(id:number) {
-    if (this.drawerView && id != null && id>0) {
+    this.isEditMode = false;
+    this.appAccountInfoView.clearData();
+    if (this.drawer && id != null && id>0) {
       this.appAccountInfoView.findById(id);
-      this.drawerView.open();
+      this.drawer.open().catch((error) => {
+        console.error('打开抽屉出错：', error);
+      });
     }
   }
 
   closeEditSidenav() {
     if (this.drawer) {
-      this.drawer.close();
-    }
-    if (this.drawerView) {
-      this.drawerView.close();
+      this.drawer.close().catch((error) => {
+        console.error('关闭抽屉出错：', error);
+      });
     }
   }
 

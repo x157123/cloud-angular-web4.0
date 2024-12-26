@@ -3,8 +3,6 @@ import {ServerInfoComponent} from "./serverInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 
-
-
 @Component({
   selector: 'app-serverInfo-view',
   templateUrl: './serverInfoView.component.html',
@@ -76,7 +74,6 @@ export class ServerInfoViewComponent {
 }
 
 export interface DataElement {
-
   id?: string;
   company: string;
   sourceAccount: string;

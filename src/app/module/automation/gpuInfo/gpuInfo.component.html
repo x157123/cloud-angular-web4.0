@@ -1,9 +1,7 @@
 <mat-drawer-container autosize>
   <mat-drawer #drawer mode="over" position="end" class="edit-drawer">
-    <app-gpuInfo-edit #appGpuInfoEdit></app-gpuInfo-edit>
-  </mat-drawer>
-  <mat-drawer #drawerView mode="over" position="end" class="view-drawer">
-    <app-gpuInfo-view #appGpuInfoView></app-gpuInfo-view>
+    <app-gpuInfo-edit #appGpuInfoEdit [hidden]="!isEditMode"></app-gpuInfo-edit>
+    <app-gpuInfo-view #appGpuInfoView [hidden]="isEditMode"></app-gpuInfo-view>
   </mat-drawer>
   <div class="mat-drawer-containers flex flex-col h-screen">
     <mat-toolbar>

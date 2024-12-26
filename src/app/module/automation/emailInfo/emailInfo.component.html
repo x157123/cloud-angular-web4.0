@@ -1,9 +1,7 @@
 <mat-drawer-container autosize>
   <mat-drawer #drawer mode="over" position="end" class="edit-drawer">
-    <app-emailInfo-edit #appEmailInfoEdit></app-emailInfo-edit>
-  </mat-drawer>
-  <mat-drawer #drawerView mode="over" position="end" class="view-drawer">
-    <app-emailInfo-view #appEmailInfoView></app-emailInfo-view>
+    <app-emailInfo-edit #appEmailInfoEdit [hidden]="!isEditMode"></app-emailInfo-edit>
+    <app-emailInfo-view #appEmailInfoView [hidden]="isEditMode"></app-emailInfo-view>
   </mat-drawer>
   <div class="mat-drawer-containers flex flex-col h-screen">
     <mat-toolbar>

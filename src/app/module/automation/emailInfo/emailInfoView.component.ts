@@ -3,8 +3,6 @@ import {EmailInfoComponent} from "./emailInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 
-
-
 @Component({
   selector: 'app-emailInfo-view',
   templateUrl: './emailInfoView.component.html',
@@ -67,7 +65,6 @@ export class EmailInfoViewComponent {
 }
 
 export interface DataElement {
-
   id?: string;
   name: string;
   password: string;

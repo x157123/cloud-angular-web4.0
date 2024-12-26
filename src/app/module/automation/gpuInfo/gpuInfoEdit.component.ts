@@ -3,8 +3,6 @@ import {GpuInfoComponent} from "./gpuInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 
-
-
 @Component({
   selector: 'app-gpuInfo-edit',
   templateUrl: './gpuInfoEdit.component.html',
@@ -18,7 +16,7 @@ export class GpuInfoEditComponent {
   show: boolean = true;
 
   constructor(private parent: GpuInfoComponent,private httpGlobalTool: HttpGlobalTool,
-              private _alertService: AlertService,private cd: ChangeDetectorRef) {
+              private _alertService: AlertService) {
   }
 
   doSomething() {
@@ -45,21 +43,11 @@ export class GpuInfoEditComponent {
     });
   }
 
-  clearData(show?:boolean){
-    if(show == null || !show){
-      this.show = false;
-    }else{
-      this.show = true;
-    }
+  clearData(){
     this.dataElement = this.defDataElement
   }
 
-  findById(id:Number,show?:boolean){
-    if(show == null || !show){
-      this.show = false;
-    }else{
-      this.show = true;
-    }
+  findById(id:Number){
     this.httpGlobalTool.get("/api/cloud-automation/gpuInfo/findById?id="+id).subscribe({
       next: (res) => {
         this.dataElement = res.data
@@ -91,7 +79,6 @@ export class GpuInfoEditComponent {
 }
 
 export interface DataElement {
-
   id?: string;
   gpuInfo: string;
   version: string;

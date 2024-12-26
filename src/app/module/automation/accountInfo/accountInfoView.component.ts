@@ -3,8 +3,6 @@ import {AccountInfoComponent} from "./accountInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 
-
-
 @Component({
   selector: 'app-accountInfo-view',
   templateUrl: './accountInfoView.component.html',
@@ -70,7 +68,6 @@ export class AccountInfoViewComponent {
 }
 
 export interface DataElement {
-
   id?: string;
   username: string;
   account: string;

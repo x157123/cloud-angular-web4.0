@@ -3,8 +3,6 @@ import {ApplicationLogComponent} from "./applicationLog.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 
-
-
 @Component({
   selector: 'app-applicationLog-edit',
   templateUrl: './applicationLogEdit.component.html',
@@ -18,7 +16,7 @@ export class ApplicationLogEditComponent {
   show: boolean = true;
 
   constructor(private parent: ApplicationLogComponent,private httpGlobalTool: HttpGlobalTool,
-              private _alertService: AlertService,private cd: ChangeDetectorRef) {
+              private _alertService: AlertService) {
   }
 
   doSomething() {
@@ -45,21 +43,11 @@ export class ApplicationLogEditComponent {
     });
   }
 
-  clearData(show?:boolean){
-    if(show == null || !show){
-      this.show = false;
-    }else{
-      this.show = true;
-    }
+  clearData(){
     this.dataElement = this.defDataElement
   }
 
-  findById(id:Number,show?:boolean){
-    if(show == null || !show){
-      this.show = false;
-    }else{
-      this.show = true;
-    }
+  findById(id:Number){
     this.httpGlobalTool.get("/api/cloud-automation/applicationLog/findById?id="+id).subscribe({
       next: (res) => {
         this.dataElement = res.data
@@ -94,7 +82,6 @@ export class ApplicationLogEditComponent {
 }
 
 export interface DataElement {
-
   id?: string;
   serverId: string;
   applicationId: string;

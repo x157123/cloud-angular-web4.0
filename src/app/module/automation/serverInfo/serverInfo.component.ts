@@ -27,11 +27,11 @@ export class ServerInfoComponent implements AfterViewInit {
   pageSize: number = 10;
   displayedColumns: string[] = ['id','company','sourceAccount','name','ipAddress','username','password','os','cpuUsage','memorySize','memoryAvailable','diskSize','diskAvailable','location','expiryDate','status','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
+  isEditMode = true;
 
   visibilityListData = {'visibility': 'hidden'}
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
-  @ViewChild('drawerView', {static: false}) drawerView!: MatDrawer;
 
   @ViewChild('appServerInfoEdit', {static: false}) appServerInfoEdit!: ServerInfoEditComponent;
   @ViewChild('appServerInfoView', {static: false}) appServerInfoView!: ServerInfoViewComponent;
@@ -97,28 +97,34 @@ export class ServerInfoComponent implements AfterViewInit {
   }
 
   openEditSidenav(id:number) {
+    this.isEditMode = true;
     if (this.drawer) {
       this.appServerInfoEdit.clearData()
       if(id != null && id>0){
         this.appServerInfoEdit.findById(id);
       }
-      this.drawer.open();
+      this.drawer.open().catch((error) => {
+        console.error('打开抽屉出错：', error);
+      });
     }
   }
 
   openViewSidenav(id:number) {
-    if (this.drawerView && id != null && id>0) {
+    this.isEditMode = false;
+    this.appServerInfoView.clearData();
+    if (this.drawer && id != null && id>0) {
       this.appServerInfoView.findById(id);
-      this.drawerView.open();
+      this.drawer.open().catch((error) => {
+        console.error('打开抽屉出错：', error);
+      });
     }
   }
 
   closeEditSidenav() {
     if (this.drawer) {
-      this.drawer.close();
-    }
-    if (this.drawerView) {
-      this.drawerView.close();
+      this.drawer.close().catch((error) => {
+        console.error('关闭抽屉出错：', error);
+      });
     }
   }
 

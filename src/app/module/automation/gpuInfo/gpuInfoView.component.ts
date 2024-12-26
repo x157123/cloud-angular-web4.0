@@ -3,8 +3,6 @@ import {GpuInfoComponent} from "./gpuInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 
-
-
 @Component({
   selector: 'app-gpuInfo-view',
   templateUrl: './gpuInfoView.component.html',
@@ -62,7 +60,6 @@ export class GpuInfoViewComponent {
 }
 
 export interface DataElement {
-
   id?: string;
   gpuInfo: string;
   version: string;
