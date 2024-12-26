@@ -21,7 +21,7 @@
 .edit-content .edit-content-bottom{
   height: 50px;
 }
-
+/* 设置标题和内容的对齐方式  */
 .edit-content .mat-grid-list .title .mat-grid-tile-content{
   justify-content:right !important;
 }
@@ -58,7 +58,7 @@
 }
 
 .edit-content .mat-mdc-tab-group .mat-mdc-tab-label-container{
-  height: 0px;
+  height: 0 !important;
 }
 
 .edit-content .fixed-button-container {

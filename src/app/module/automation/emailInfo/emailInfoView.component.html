@@ -4,24 +4,24 @@
   </div>
   <div class="flex-1 overflow-y-auto bg-white border-b">
     <div class="p-4">
-      <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
-                <mat-grid-tile colspan="4" class="title">邮箱用户名:</mat-grid-tile>
-        <mat-grid-tile colspan="12">{{ dataElement.name }}</mat-grid-tile>
+      <mat-grid-list cols="16" rowHeight="30px" gutterSize="3px">
+        <mat-grid-tile colspan="4" class="title">邮箱用户名:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">{{ dataElement.name }}</mat-grid-tile>
 
         <mat-grid-tile colspan="4" class="title">邮箱账号密码:</mat-grid-tile>
-        <mat-grid-tile colspan="12">{{ dataElement.password }}</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">{{ dataElement.password }}</mat-grid-tile>
 
         <mat-grid-tile colspan="4" class="title">邮箱服务器地址:</mat-grid-tile>
-        <mat-grid-tile colspan="12">{{ dataElement.emailServerAddress }}</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">{{ dataElement.emailServerAddress }}</mat-grid-tile>
 
         <mat-grid-tile colspan="4" class="title">邮箱类型:</mat-grid-tile>
-        <mat-grid-tile colspan="12">{{ dataElement.emailType }}</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">{{ dataElement.emailType }}</mat-grid-tile>
 
         <mat-grid-tile colspan="4" class="title">是否有效:</mat-grid-tile>
-        <mat-grid-tile colspan="12">{{ dataElement.isActive }}</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">{{ dataElement.isActive }}</mat-grid-tile>
 
         <mat-grid-tile colspan="4" class="title">备注:</mat-grid-tile>
-        <mat-grid-tile colspan="12">{{ dataElement.remarks }}</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">{{ dataElement.remarks }}</mat-grid-tile>
 
       </mat-grid-list>
     </div>
