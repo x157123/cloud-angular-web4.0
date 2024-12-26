@@ -13,8 +13,6 @@ export class ApplicationLogEditComponent {
 
   visibilityEditData = { 'visibility': 'hidden'}
 
-  show: boolean = true;
-
   constructor(private parent: ApplicationLogComponent,private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
   }

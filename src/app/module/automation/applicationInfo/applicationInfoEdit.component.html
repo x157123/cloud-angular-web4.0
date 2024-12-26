@@ -1,11 +1,6 @@
 <div class="edit-content flex flex-col h-full">
   <div class="h-12 edit-content-header border-b">
-    <ng-container *ngIf="show">
-      查看
-    </ng-container>
-    <ng-container *ngIf="!show">
-      新增
-    </ng-container>
+      编辑
   </div>
   <div class="flex-1 overflow-y-auto bg-white border-b">
     <div class="p-4">
@@ -14,7 +9,7 @@
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>应用名称</mat-label>
-            <input matInput [(ngModel)]="dataElement.name" [readonly]="show">
+            <input matInput [(ngModel)]="dataElement.name">
           </mat-form-field>
         </mat-grid-tile>
 
@@ -22,7 +17,7 @@
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>脚本命令</mat-label>
-            <input matInput [(ngModel)]="dataElement.script" [readonly]="show">
+            <input matInput [(ngModel)]="dataElement.script">
           </mat-form-field>
         </mat-grid-tile>
 
@@ -30,7 +25,7 @@
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>脚本地址（脚本下载路径）</mat-label>
-            <input matInput [(ngModel)]="dataElement.scriptUrl" [readonly]="show">
+            <input matInput [(ngModel)]="dataElement.scriptUrl">
           </mat-form-field>
         </mat-grid-tile>
 
@@ -38,7 +33,7 @@
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>脚本地址（服务器存储脚本文件的位置）</mat-label>
-            <input matInput [(ngModel)]="dataElement.scriptPath" [readonly]="show">
+            <input matInput [(ngModel)]="dataElement.scriptPath">
           </mat-form-field>
         </mat-grid-tile>
 
@@ -46,7 +41,7 @@
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>图标</mat-label>
-            <input matInput [(ngModel)]="dataElement.icon" [readonly]="show">
+            <input matInput [(ngModel)]="dataElement.icon">
           </mat-form-field>
         </mat-grid-tile>
 
@@ -56,7 +51,7 @@
   <div class="h-12">
     <mat-card-actions align="start">
       <button mat-button (click)="doSomething()">关闭</button>
-      <button mat-button (click)="doSave()" *ngIf="!show">保存</button>
+      <button mat-button (click)="doSave()">保存</button>
     </mat-card-actions>
   </div>
   <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>

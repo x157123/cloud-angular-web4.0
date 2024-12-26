@@ -13,8 +13,6 @@ export class GpuInfoEditComponent {
 
   visibilityEditData = { 'visibility': 'hidden'}
 
-  show: boolean = true;
-
   constructor(private parent: GpuInfoComponent,private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
   }

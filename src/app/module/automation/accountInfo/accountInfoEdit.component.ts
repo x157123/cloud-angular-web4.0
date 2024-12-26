@@ -13,8 +13,6 @@ export class AccountInfoEditComponent {
 
   visibilityEditData = { 'visibility': 'hidden'}
 
-  show: boolean = true;
-
   constructor(private parent: AccountInfoComponent,private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
   }

@@ -13,8 +13,6 @@ export class EmailInfoEditComponent {
 
   visibilityEditData = { 'visibility': 'hidden'}
 
-  show: boolean = true;
-
   constructor(private parent: EmailInfoComponent,private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
   }

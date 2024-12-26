@@ -1,11 +1,6 @@
 <div class="edit-content flex flex-col h-full">
   <div class="h-12 edit-content-header border-b">
-    <ng-container *ngIf="show">
-      查看
-    </ng-container>
-    <ng-container *ngIf="!show">
-      新增
-    </ng-container>
+      编辑
   </div>
   <div class="flex-1 overflow-y-auto bg-white border-b">
     <div class="p-4">
@@ -14,7 +9,7 @@
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>服务器id</mat-label>
-            <input matInput [(ngModel)]="dataElement.serverId" [readonly]="show">
+            <input matInput [(ngModel)]="dataElement.serverId">
           </mat-form-field>
         </mat-grid-tile>
 
@@ -22,7 +17,7 @@
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>应用id</mat-label>
-            <input matInput [(ngModel)]="dataElement.applicationId" [readonly]="show">
+            <input matInput [(ngModel)]="dataElement.applicationId">
           </mat-form-field>
         </mat-grid-tile>
 
@@ -30,7 +25,7 @@
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>操作类型（1开始，2运行，3结束）</mat-label>
-            <input matInput [(ngModel)]="dataElement.operationType" [readonly]="show">
+            <input matInput [(ngModel)]="dataElement.operationType">
           </mat-form-field>
         </mat-grid-tile>
 
@@ -38,7 +33,7 @@
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>操作类型（例如开始、完成第一个任务、结束任务）</mat-label>
-            <input matInput [(ngModel)]="dataElement.description" [readonly]="show">
+            <input matInput [(ngModel)]="dataElement.description">
           </mat-form-field>
         </mat-grid-tile>
 
@@ -48,7 +43,7 @@
   <div class="h-12">
     <mat-card-actions align="start">
       <button mat-button (click)="doSomething()">关闭</button>
-      <button mat-button (click)="doSave()" *ngIf="!show">保存</button>
+      <button mat-button (click)="doSave()">保存</button>
     </mat-card-actions>
   </div>
   <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>

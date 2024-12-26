@@ -13,8 +13,6 @@ export class ServerInfoEditComponent {
 
   visibilityEditData = { 'visibility': 'hidden'}
 
-  show: boolean = true;
-
   constructor(private parent: ServerInfoComponent,private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
   }
