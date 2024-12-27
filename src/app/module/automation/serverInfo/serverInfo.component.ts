@@ -25,7 +25,7 @@ export class ServerInfoComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','company','sourceAccount','name','ipAddress','username','password','os','cpuUsage','memorySize','memoryAvailable','diskSize','diskAvailable','location','expiryDate','status','operate'];
+  displayedColumns: string[] = ['id','company','sourceAccount','name','ipAddress','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
   isEditMode = true;
 

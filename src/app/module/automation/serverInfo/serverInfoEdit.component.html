@@ -57,10 +57,10 @@
         <mat-grid-tile colspan="4" class="title">关联用户:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
-            <mat-label>关联用户</mat-label>
-            <mat-select [(ngModel)]="dataElement.users" multiple>
-              @for (topping of userList; track topping) {
-                <mat-option [value]="topping">{{topping}}</mat-option>
+            <mat-label>关联账号</mat-label>
+            <mat-select [(ngModel)]="dataElement.accountInfoIds" multiple>
+              @for (user of accountList; track user) {
+                <mat-option [value]="user.id">{{user.username}}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -70,9 +70,9 @@
         <mat-grid-tile colspan="12">
           <mat-form-field>
             <mat-label>关联应用</mat-label>
-            <mat-select [(ngModel)]="dataElement.apps" multiple>
-              @for (topping of appList; track topping) {
-                <mat-option [value]="topping">{{topping}}</mat-option>
+            <mat-select [(ngModel)]="dataElement.applicationInfoIds" multiple>
+              @for (app of appList; track app) {
+                <mat-option [value]="app.id">{{app.name}}</mat-option>
               }
             </mat-select>
           </mat-form-field>

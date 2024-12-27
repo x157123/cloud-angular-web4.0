@@ -135,7 +135,7 @@ export interface PeriodicElement {
   username: string;
   account: string;
   password: string;
-  key: string;
+  secretKey: string;
   region: string;
   accountType: string;
   isActive: string;

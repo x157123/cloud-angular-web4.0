@@ -55,7 +55,7 @@ export class AccountInfoViewComponent {
     username: '',
     account: '',
     password: '',
-    key: '',
+    secretKey: '',
     region: '',
     accountType: '',
     isActive: '',
@@ -72,7 +72,7 @@ export interface DataElement {
   username: string;
   account: string;
   password: string;
-  key: string;
+  secretKey: string;
   region: string;
   accountType: string;
   isActive: string;

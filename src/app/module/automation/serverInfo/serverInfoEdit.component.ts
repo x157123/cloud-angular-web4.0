@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {ServerInfoComponent} from "./serverInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
@@ -11,22 +11,44 @@ import {AlertService} from "@component/alert/alert.service";
 })
 export class ServerInfoEditComponent {
 
-  visibilityEditData = { 'visibility': 'hidden'}
+  visibilityEditData = {'visibility': 'hidden'}
 
-  userList: string[] = ['user1', 'user2', 'user3', 'user4', 'user5'];
-  appList: string[] = ['app1', 'app2', 'app3', 'app4', 'app5'];
+  accountList: { id: number; username: string }[] = []; // 存储用户列表
+  appList: { id: number; name: string }[] = []; // 存储用户列表
 
-  constructor(private parent: ServerInfoComponent,private httpGlobalTool: HttpGlobalTool,
+  constructor(private parent: ServerInfoComponent, private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
+  }
+
+  // 调用接口获取用户列表
+  fetchUserList(): void {
+    let param = new URLSearchParams();
+    param.set('binding', "0");
+    this.httpGlobalTool.post("/api/cloud-automation/accountInfo/queryPage", param).subscribe({
+      next: (res) => {
+        this.accountList = res.data.records
+      }
+    });
+  }
+
+
+  fetchAppList() {
+    let param = new URLSearchParams();
+    param.set('binding', "0");
+    this.httpGlobalTool.post("/api/cloud-automation/applicationInfo/queryPage", param).subscribe({
+      next: (res) => {
+        this.appList = res.data.records
+      },
+    });
   }
 
   doSomething() {
     this.parent.closeEditSidenav();
     this.parent.queryData()
-    this.dataElement = {... this.defDataElement}
+    this.dataElement = {...this.defDataElement}
   }
 
-  doSave(){
+  doSave() {
     this.showProgressBar();
     this.httpGlobalTool.postBody("/api/cloud-automation/serverInfo/save", this.dataElement).subscribe({
       next: (res) => {
@@ -37,19 +59,21 @@ export class ServerInfoEditComponent {
         this._alertService.error(e.error.error)
         this.hideProgressBar();
       },
-      complete:()=>{
+      complete: () => {
         this.hideProgressBar();
         this.clearData()
       }
     });
   }
 
-  clearData(){
+  clearData() {
+    this.fetchUserList();
+    this.fetchAppList();
     this.dataElement = this.defDataElement
   }
 
-  findById(id:Number){
-    this.httpGlobalTool.get("/api/cloud-automation/serverInfo/findById?id="+id).subscribe({
+  findById(id: Number) {
+    this.httpGlobalTool.get("/api/cloud-automation/serverInfo/findById?id=" + id).subscribe({
       next: (res) => {
         this.dataElement = res.data
       },
@@ -57,17 +81,18 @@ export class ServerInfoEditComponent {
         this._alertService.error(e.error.error)
         this.hideProgressBar();
       },
-      complete:()=>{
+      complete: () => {
         this.hideProgressBar();
       }
     });
   }
 
-  showProgressBar(){
-    this.visibilityEditData = { 'visibility': 'visible'}
+  showProgressBar() {
+    this.visibilityEditData = {'visibility': 'visible'}
   }
-  hideProgressBar(){
-    this.visibilityEditData = { 'visibility': 'hidden'}
+
+  hideProgressBar() {
+    this.visibilityEditData = {'visibility': 'hidden'}
   }
 
   defDataElement: DataElement = {
@@ -88,8 +113,8 @@ export class ServerInfoEditComponent {
     expiryDate: '',
     status: '',
     version: '',
-    users: '',
-    apps: '',
+    accountInfoIds: '',
+    applicationInfoIds: '',
   };
 
   dataElement: DataElement = JSON.parse(JSON.stringify(this.defDataElement));
@@ -113,7 +138,7 @@ export interface DataElement {
   expiryDate: string;
   status: string;
   version: string;
-  users: string;
-  apps: string;
+  accountInfoIds: string;
+  applicationInfoIds: string;
 }
 
