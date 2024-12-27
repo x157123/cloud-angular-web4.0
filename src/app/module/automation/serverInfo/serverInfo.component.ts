@@ -100,6 +100,7 @@ export class ServerInfoComponent implements AfterViewInit {
     this.isEditMode = true;
     if (this.drawer) {
       this.appServerInfoEdit.clearData()
+      this.appServerInfoEdit.initData(id);
       if(id != null && id>0){
         this.appServerInfoEdit.findById(id);
       }

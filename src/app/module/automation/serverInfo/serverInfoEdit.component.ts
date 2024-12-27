@@ -14,14 +14,14 @@ export class ServerInfoEditComponent {
   visibilityEditData = {'visibility': 'hidden'}
 
   accountList: { id: number; username: string }[] = []; // 存储用户列表
-  appList: { id: number; name: string }[] = []; // 存储用户列表
+  appList: { id: number; name: string }[] = []; // 应用用户列表
 
   constructor(private parent: ServerInfoComponent, private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
   }
 
   // 调用接口获取用户列表
-  fetchUserList(): void {
+  fetchUserList(id?: Number): void {
     let param = new URLSearchParams();
     param.set('binding', "0");
     this.httpGlobalTool.post("/api/cloud-automation/accountInfo/queryPage", param).subscribe({
@@ -32,9 +32,12 @@ export class ServerInfoEditComponent {
   }
 
 
-  fetchAppList() {
+  fetchAppList(id?: Number) {
     let param = new URLSearchParams();
     param.set('binding', "0");
+    if(id){
+      param.set('serverId', String(id));
+    }
     this.httpGlobalTool.post("/api/cloud-automation/applicationInfo/queryPage", param).subscribe({
       next: (res) => {
         this.appList = res.data.records
@@ -67,9 +70,12 @@ export class ServerInfoEditComponent {
   }
 
   clearData() {
-    this.fetchUserList();
-    this.fetchAppList();
     this.dataElement = this.defDataElement
+  }
+
+  initData(id?: Number){
+    this.fetchUserList(id);
+    this.fetchAppList(id);
   }
 
   findById(id: Number) {
