@@ -25,7 +25,7 @@ export class ServerInfoComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','company','sourceAccount','name','ipAddress','operate'];
+  displayedColumns: string[] = ['id', 'company', 'sourceAccount', 'name', 'ipAddress', 'operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
   isEditMode = true;
 
@@ -71,11 +71,12 @@ export class ServerInfoComponent implements AfterViewInit {
       }
     });
   }
-  delById(id:number) {
-    if(id != null && id>0){
+
+  delById(id: number) {
+    if (id != null && id > 0) {
       let param = new URLSearchParams();
       param.set('ids', String(id));
-      this.httpGlobalTool.post("/api/cloud-automation/serverInfo/removeByIds",param).subscribe({
+      this.httpGlobalTool.post("/api/cloud-automation/serverInfo/removeByIds", param).subscribe({
         next: (res) => {
           this._alertService.success("删除成功")
           this.queryData()
@@ -89,6 +90,27 @@ export class ServerInfoComponent implements AfterViewInit {
     }
   }
 
+
+  executionApp(id: string, appId: string) {
+    if (id != null) {
+      let param = new URLSearchParams();
+      param.set('id', id);
+      param.set('appId', appId);
+      this.httpGlobalTool.post("/api/cloud-automation/serverInfo/execution", param).subscribe({
+        next: (res) => {
+          this._alertService.success("执行成功")
+          this.queryData()
+        },
+        error: (e) => {
+          this._alertService.error(e.error.error)
+        },
+        complete: () => {
+        }
+      });
+    }
+  }
+
+
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.pageSize = e.pageSize;
@@ -96,12 +118,12 @@ export class ServerInfoComponent implements AfterViewInit {
     this.queryData();
   }
 
-  openEditSidenav(id:number) {
+  openEditSidenav(id: number) {
     this.isEditMode = true;
     if (this.drawer) {
       this.appServerInfoEdit.clearData()
       this.appServerInfoEdit.initData(id);
-      if(id != null && id>0){
+      if (id != null && id > 0) {
         this.appServerInfoEdit.findById(id);
       }
       this.drawer.open().catch((error) => {
@@ -110,10 +132,10 @@ export class ServerInfoComponent implements AfterViewInit {
     }
   }
 
-  openViewSidenav(id:number) {
+  openViewSidenav(id: number) {
     this.isEditMode = false;
     this.appServerInfoView.clearData();
-    if (this.drawer && id != null && id>0) {
+    if (this.drawer && id != null && id > 0) {
       this.appServerInfoView.findById(id);
       this.drawer.open().catch((error) => {
         console.error('打开抽屉出错：', error);
@@ -149,4 +171,16 @@ export interface PeriodicElement {
   expiryDate: string;
   status: string;
   version: string;
+  applicationInfoVoList: ApplicationInfo[];
+}
+
+export interface ApplicationInfo {
+  id: string;
+  name: string;
+  script: string;
+  scriptUrl: string;
+  scriptPath: string;
+  icon: string;
+  version: string;
+  isActive: boolean;
 }

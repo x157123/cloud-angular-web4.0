@@ -10,6 +10,12 @@
       <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="新增数据">
         <mat-icon>add</mat-icon>
       </button>
+      <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="批量执行">
+        <mat-icon>add_task</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="批量添加任务">
+        <mat-icon>app_registration</mat-icon>
+      </button>
     </mat-toolbar>
     <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
     <div class="flex-1 edit-content-info-scrollbar">
@@ -107,6 +113,11 @@
               <a mat-icon-button color="accent" (click)="delById(element.id)" title="删除">
                 <mat-icon>delete</mat-icon>
               </a>
+              <div *ngFor="let app of element.applicationInfoVoList">
+                <a mat-icon-button color="primary" (click)="executionApp(element.id, app.id)" [title]="app.name">
+                  <mat-icon>{{ app.icon }}</mat-icon>
+                </a>
+              </div>
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
