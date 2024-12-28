@@ -1,7 +1,8 @@
 <mat-drawer-container autosize>
   <mat-drawer #drawer mode="over" position="end" class="edit-drawer">
     <app-serverInfo-edit #appServerInfoEdit [hidden]="!isEditMode"></app-serverInfo-edit>
-    <app-serverInfo-view #appServerInfoView [hidden]="isEditMode"></app-serverInfo-view>
+    <app-serverInfo-view #appServerInfoView [hidden]="!isViewMode"></app-serverInfo-view>
+    <app-serverInfo-add-app #appServerInfoAddApp [hidden]="!isAddAppMode"></app-serverInfo-add-app>
   </mat-drawer>
   <div class="mat-drawer-containers flex flex-col h-screen">
     <mat-toolbar>
@@ -10,10 +11,10 @@
       <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="新增数据">
         <mat-icon>add</mat-icon>
       </button>
-      <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="批量执行">
+      <button mat-icon-button color="primary" (click)="openRunSidenav()" aria-label="批量执行">
         <mat-icon>add_task</mat-icon>
       </button>
-      <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="批量添加任务">
+      <button mat-icon-button color="primary" (click)="openAddSidenav()" aria-label="批量添加任务">
         <mat-icon>app_registration</mat-icon>
       </button>
     </mat-toolbar>

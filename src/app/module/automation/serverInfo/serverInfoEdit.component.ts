@@ -49,7 +49,7 @@ export class ServerInfoEditComponent {
   }
 
   doSomething() {
-    this.parent.closeEditSidenav();
+    this.parent.closeSidenav();
     this.parent.queryData()
     this.dataElement = {...this.defDataElement}
   }

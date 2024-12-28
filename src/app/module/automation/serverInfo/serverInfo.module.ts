@@ -20,13 +20,15 @@ import {FormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
+import {ServerInfoAddAppComponent} from "./serverInfoAddApp.component";
 
 
 @NgModule({
     declarations: [
       ServerInfoComponent,
       ServerInfoEditComponent,
-      ServerInfoViewComponent
+      ServerInfoViewComponent,
+      ServerInfoAddAppComponent
     ],
   imports: [
     CommonModule,

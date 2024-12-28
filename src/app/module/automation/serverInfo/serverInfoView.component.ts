@@ -20,7 +20,7 @@ export class ServerInfoViewComponent {
   }
 
   doSomething() {
-    this.parent.closeEditSidenav();
+    this.parent.closeSidenav();
     this.dataElement = {... this.defDataElement}
   }
 

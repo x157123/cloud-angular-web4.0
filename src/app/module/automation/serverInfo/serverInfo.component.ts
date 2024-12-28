@@ -5,6 +5,7 @@ import {PageEvent} from "@angular/material/paginator";
 import {MatDrawer} from "@angular/material/sidenav";
 import {ServerInfoEditComponent} from "./serverInfoEdit.component";
 import {ServerInfoViewComponent} from "./serverInfoView.component";
+import {ServerInfoAddAppComponent} from "./serverInfoAddApp.component";
 import {AlertService} from "@component/alert/alert.service";
 
 
@@ -27,7 +28,10 @@ export class ServerInfoComponent implements AfterViewInit {
   pageSize: number = 10;
   displayedColumns: string[] = ['id', 'company', 'sourceAccount', 'name', 'ipAddress', 'operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
-  isEditMode = true;
+  isEditMode = false;
+  isViewMode = false;
+  isAddAppMode = false;
+  isRunAppMode = false;
 
   visibilityListData = {'visibility': 'hidden'}
 
@@ -35,6 +39,7 @@ export class ServerInfoComponent implements AfterViewInit {
 
   @ViewChild('appServerInfoEdit', {static: false}) appServerInfoEdit!: ServerInfoEditComponent;
   @ViewChild('appServerInfoView', {static: false}) appServerInfoView!: ServerInfoViewComponent;
+  @ViewChild('appServerInfoAddApp', {static: false}) appServerInfoAddApp!: ServerInfoAddAppComponent;
 
   constructor(private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
@@ -118,32 +123,48 @@ export class ServerInfoComponent implements AfterViewInit {
     this.queryData();
   }
 
+  openRunSidenav(){
+    this.showSidenav(false,false,true,false);
+  }
+
+  openAddSidenav(){
+    this.appServerInfoAddApp.initData();
+    this.showSidenav(false,false,true,false);
+  }
+
   openEditSidenav(id: number) {
-    this.isEditMode = true;
     if (this.drawer) {
       this.appServerInfoEdit.clearData()
       this.appServerInfoEdit.initData(id);
       if (id != null && id > 0) {
         this.appServerInfoEdit.findById(id);
       }
-      this.drawer.open().catch((error) => {
-        console.error('打开抽屉出错：', error);
-      });
+      this.showSidenav(true,false,false,false);
     }
   }
 
   openViewSidenav(id: number) {
-    this.isEditMode = false;
     this.appServerInfoView.clearData();
     if (this.drawer && id != null && id > 0) {
       this.appServerInfoView.findById(id);
+    }
+    this.showSidenav(false,true,false,false);
+  }
+
+
+  showSidenav(isEditMode: boolean,isViewMode: boolean,isAddAppMode: boolean,isRunAppMode: boolean){
+    this.isAddAppMode = isAddAppMode;
+    this.isRunAppMode = isRunAppMode;
+    this.isEditMode = isEditMode;
+    this.isViewMode = isViewMode;
+    if (this.drawer) {
       this.drawer.open().catch((error) => {
         console.error('打开抽屉出错：', error);
       });
     }
   }
 
-  closeEditSidenav() {
+  closeSidenav() {
     if (this.drawer) {
       this.drawer.close().catch((error) => {
         console.error('关闭抽屉出错：', error);
