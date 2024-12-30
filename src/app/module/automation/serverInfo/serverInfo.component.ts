@@ -29,7 +29,7 @@ export class ServerInfoComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id', 'company', 'sourceAccount', 'name', 'ipAddress', 'operate'];
+  displayedColumns: string[] = ['company', 'sourceAccount', 'name', 'ipAddress', 'service', 'operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
   isEditMode = false;
   isViewMode = false;

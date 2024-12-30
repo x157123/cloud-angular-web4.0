@@ -103,14 +103,21 @@
           </ng-container>
 
 
-          <ng-container matColumnDef="operate">
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作</mat-header-cell>
-            <mat-cell *matCellDef="let element">
+          <ng-container matColumnDef="service"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 服务 </mat-header-cell>
+            <mat-cell *matCellDef="let element" >
               <div *ngFor="let app of element.applicationInfoVoList">
                 <a mat-icon-button color="primary" (click)="executionApp(element.id, app.id)" [title]="app.name">
                   <mat-icon>{{ app.icon }}</mat-icon>
                 </a>
               </div>
+            </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="operate">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作</mat-header-cell>
+            <mat-cell *matCellDef="let element">
               <a mat-icon-button color="primary" (click)="openViewSidenav(element.id)" title="查看">
                 <mat-icon>open_in_new</mat-icon>
               </a>

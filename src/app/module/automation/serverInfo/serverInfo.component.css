@@ -6,7 +6,6 @@
   width: 600px;
 }
 
-
 .mat-mdc-table {
   table-layout: fixed;
 }
@@ -17,7 +16,12 @@
   overflow: hidden;
 }
 
-.mat-column-operate {
+.mat-column-service {
   flex: 0 0 420px;
+  white-space: nowrap;
+}
+
+.mat-column-operate {
+  flex: 0 0 120px;
   white-space: nowrap;
 }

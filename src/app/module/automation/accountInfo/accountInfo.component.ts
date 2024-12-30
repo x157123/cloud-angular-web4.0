@@ -25,7 +25,7 @@ export class AccountInfoComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','username','account','region','accountType','isActive','remarks','email','operate'];
+  displayedColumns: string[] = ['username','account','region','accountType','isActive','remarks','email','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
   isEditMode = true;
 

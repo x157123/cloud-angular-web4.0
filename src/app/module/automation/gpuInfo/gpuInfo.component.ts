@@ -25,7 +25,7 @@ export class GpuInfoComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','gpuInfo','operate'];
+  displayedColumns: string[] = ['gpuInfo','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
   isEditMode = true;
 

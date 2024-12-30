@@ -21,3 +21,8 @@
   flex: 0 0 120px;
   white-space: nowrap;
 }
+
+.mat-column-scriptUrl {
+  flex: 0 0 500px;
+  white-space: nowrap;
+}

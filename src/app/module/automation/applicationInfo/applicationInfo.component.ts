@@ -25,7 +25,7 @@ export class ApplicationInfoComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','name','script','scriptUrl','scriptPath','operate'];
+  displayedColumns: string[] = ['name','script','scriptUrl','scriptPath','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
   isEditMode = true;
 
