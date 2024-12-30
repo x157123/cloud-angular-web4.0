@@ -34,12 +34,11 @@ export class ServerInfoEditComponent {
     });
   }
 
-
   fetchAppList(id?: Number) {
     let param = new URLSearchParams();
-    param.set('binding', "0");
     if(id){
       param.set('serverId', String(id));
+      param.set('binding', "0");
     }
     this.httpGlobalTool.post("/api/cloud-automation/applicationInfo/queryPage", param).subscribe({
       next: (res) => {

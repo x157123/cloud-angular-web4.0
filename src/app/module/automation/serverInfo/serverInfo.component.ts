@@ -7,6 +7,9 @@ import {ServerInfoEditComponent} from "./serverInfoEdit.component";
 import {ServerInfoViewComponent} from "./serverInfoView.component";
 import {ServerInfoAddAppComponent} from "./serverInfoAddApp.component";
 import {AlertService} from "@component/alert/alert.service";
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDialogComponent} from '@component/dialog/confirm-dialog.component';
+import {ServerInfoRunAppComponent} from "./serverInfoRunApp.component";
 
 
 export interface Dict {
@@ -40,9 +43,11 @@ export class ServerInfoComponent implements AfterViewInit {
   @ViewChild('appServerInfoEdit', {static: false}) appServerInfoEdit!: ServerInfoEditComponent;
   @ViewChild('appServerInfoView', {static: false}) appServerInfoView!: ServerInfoViewComponent;
   @ViewChild('appServerInfoAddApp', {static: false}) appServerInfoAddApp!: ServerInfoAddAppComponent;
+  @ViewChild('appServerInfoRunApp', {static: false}) appServerInfoRunApp!: ServerInfoRunAppComponent;
 
   constructor(private httpGlobalTool: HttpGlobalTool,
-              private _alertService: AlertService) {
+              private _alertService: AlertService,
+              private dialog: MatDialog) {
   }
 
   ngAfterViewInit(): void {
@@ -79,22 +84,29 @@ export class ServerInfoComponent implements AfterViewInit {
 
   delById(id: number) {
     if (id != null && id > 0) {
-      let param = new URLSearchParams();
-      param.set('ids', String(id));
-      this.httpGlobalTool.post("/api/cloud-automation/serverInfo/removeByIds", param).subscribe({
-        next: (res) => {
-          this._alertService.success("删除成功")
-          this.queryData()
-        },
-        error: (e) => {
-          this._alertService.error(e.error.error)
-        },
-        complete: () => {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        width: '300px',
+        data: {id: id}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) { // 用户点击了“是”
+          let param = new URLSearchParams();
+          param.set('ids', String(id));
+          this.httpGlobalTool.post("/api/cloud-automation/serverInfo/removeByIds", param).subscribe({
+            next: (res) => {
+              this._alertService.success("删除成功")
+              this.queryData()
+            },
+            error: (e) => {
+              this._alertService.error(e.error.error)
+            },
+            complete: () => {
+            }
+          });
         }
       });
     }
   }
-
 
   executionApp(id: string, appId: string) {
     if (id != null) {
@@ -115,7 +127,6 @@ export class ServerInfoComponent implements AfterViewInit {
     }
   }
 
-
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.pageSize = e.pageSize;
@@ -123,23 +134,24 @@ export class ServerInfoComponent implements AfterViewInit {
     this.queryData();
   }
 
-  openRunSidenav(){
-    this.showSidenav(false,false,true,false);
+  openRunSidenav() {
+    this.appServerInfoRunApp.initData();
+    this.showSidenav(false, false, false, true);
   }
 
-  openAddSidenav(){
+  openAddSidenav() {
     this.appServerInfoAddApp.initData();
-    this.showSidenav(false,false,true,false);
+    this.showSidenav(false, false, true, false);
   }
 
   openEditSidenav(id: number) {
+    this.appServerInfoEdit.clearData();
     if (this.drawer) {
-      this.appServerInfoEdit.clearData()
       this.appServerInfoEdit.initData(id);
       if (id != null && id > 0) {
         this.appServerInfoEdit.findById(id);
       }
-      this.showSidenav(true,false,false,false);
+      this.showSidenav(true, false, false, false);
     }
   }
 
@@ -148,11 +160,11 @@ export class ServerInfoComponent implements AfterViewInit {
     if (this.drawer && id != null && id > 0) {
       this.appServerInfoView.findById(id);
     }
-    this.showSidenav(false,true,false,false);
+    this.showSidenav(false, true, false, false);
   }
 
 
-  showSidenav(isEditMode: boolean,isViewMode: boolean,isAddAppMode: boolean,isRunAppMode: boolean){
+  showSidenav(isEditMode: boolean, isViewMode: boolean, isAddAppMode: boolean, isRunAppMode: boolean) {
     this.isAddAppMode = isAddAppMode;
     this.isRunAppMode = isRunAppMode;
     this.isEditMode = isEditMode;

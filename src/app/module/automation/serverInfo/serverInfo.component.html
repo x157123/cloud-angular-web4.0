@@ -3,6 +3,7 @@
     <app-serverInfo-edit #appServerInfoEdit [hidden]="!isEditMode"></app-serverInfo-edit>
     <app-serverInfo-view #appServerInfoView [hidden]="!isViewMode"></app-serverInfo-view>
     <app-serverInfo-add-app #appServerInfoAddApp [hidden]="!isAddAppMode"></app-serverInfo-add-app>
+    <app-serverInfo-run-app #appServerInfoRunApp [hidden]="!isRunAppMode"></app-serverInfo-run-app>
   </mat-drawer>
   <div class="mat-drawer-containers flex flex-col h-screen">
     <mat-toolbar>
@@ -105,6 +106,11 @@
           <ng-container matColumnDef="operate">
             <mat-header-cell mat-header-cell *matHeaderCellDef> 操作</mat-header-cell>
             <mat-cell *matCellDef="let element">
+              <div *ngFor="let app of element.applicationInfoVoList">
+                <a mat-icon-button color="primary" (click)="executionApp(element.id, app.id)" [title]="app.name">
+                  <mat-icon>{{ app.icon }}</mat-icon>
+                </a>
+              </div>
               <a mat-icon-button color="primary" (click)="openViewSidenav(element.id)" title="查看">
                 <mat-icon>open_in_new</mat-icon>
               </a>
@@ -114,11 +120,6 @@
               <a mat-icon-button color="accent" (click)="delById(element.id)" title="删除">
                 <mat-icon>delete</mat-icon>
               </a>
-              <div *ngFor="let app of element.applicationInfoVoList">
-                <a mat-icon-button color="primary" (click)="executionApp(element.id, app.id)" [title]="app.name">
-                  <mat-icon>{{ app.icon }}</mat-icon>
-                </a>
-              </div>
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>

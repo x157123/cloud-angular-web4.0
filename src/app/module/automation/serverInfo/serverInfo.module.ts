@@ -21,6 +21,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
 import {ServerInfoAddAppComponent} from "./serverInfoAddApp.component";
+import {ServerInfoRunAppComponent} from "./serverInfoRunApp.component";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {ServerInfoAddAppComponent} from "./serverInfoAddApp.component";
       ServerInfoComponent,
       ServerInfoEditComponent,
       ServerInfoViewComponent,
-      ServerInfoAddAppComponent
+      ServerInfoAddAppComponent,
+      ServerInfoRunAppComponent
     ],
   imports: [
     CommonModule,
