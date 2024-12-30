@@ -47,6 +47,11 @@ npm install -D tailwindcss postcss autoprefixer
 
 4、创建服务命令 ng g service
 
+## 添加 highcharts图 [官网](https://www.highcharts.com/demo)
+npm install highcharts-angular
+
+npm install highcharts
+
 ## icon
 获取图标[icon](https://fonts.google.com/icons?hl=zh-cn).
 
