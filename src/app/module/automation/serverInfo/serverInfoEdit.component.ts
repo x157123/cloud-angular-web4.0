@@ -83,6 +83,7 @@ export class ServerInfoEditComponent {
   findById(id: Number) {
     this.httpGlobalTool.get("/api/cloud-automation/serverInfo/findById?id=" + id).subscribe({
       next: (res) => {
+        this.initData(id);
         this.dataElement = res.data
         const { accountInfoVoList, applicationInfoVoList } = res.data;
         // 使用 Map 保证 id 唯一
@@ -146,6 +147,7 @@ export class ServerInfoEditComponent {
     sourceAccount: '',
     name: '',
     ipAddress: '',
+    port: 0,
     username: '',
     password: '',
     os: '',
@@ -171,6 +173,7 @@ export interface DataElement {
   sourceAccount: string;
   name: string;
   ipAddress: string;
+  port: number;
   username: string;
   password: string;
   os: string;

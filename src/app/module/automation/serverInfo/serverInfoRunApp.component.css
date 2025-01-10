@@ -1,3 +1,21 @@
 .edit-content .mat-grid-tile mat-form-field {
     width: 100%;
 }
+
+.progress-container {
+  position: relative;
+  width: 100%;
+}
+
+mat-progress-bar {
+  width: 100%;
+}
+
+.progress-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #000; /* 根据需要调整颜色 */
+  font-size: 14px; /* 根据需要调整字体大小 */
+  padding: 4px; /* 添加一定的内边距以防止文字过于靠边 */
+}

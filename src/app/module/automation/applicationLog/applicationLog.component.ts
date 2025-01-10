@@ -25,7 +25,7 @@ export class ApplicationLogComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['id','serverId','applicationId','operationType','description','updateTime','operate'];
+  displayedColumns: string[] = ['id','serverId','applicationId','operationType','description','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
   isEditMode = true;
 

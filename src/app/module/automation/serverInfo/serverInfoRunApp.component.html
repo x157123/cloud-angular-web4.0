@@ -5,11 +5,10 @@
   <div class="flex-1 overflow-y-auto bg-white border-b">
     <div class="p-4">
       <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
-
-        <mat-grid-tile colspan="4" class="title">批量添加应用:</mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">批量执行应用:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
-            <mat-label>关联应用</mat-label>
+            <mat-label>执行应用</mat-label>
             <mat-select [(ngModel)]="appSelectList" multiple>
               @for (app of appList; track app) {
                 <mat-option [value]="app.id">{{app.name}}</mat-option>
@@ -17,14 +16,19 @@
             </mat-select>
           </mat-form-field>
         </mat-grid-tile>
-
       </mat-grid-list>
+      <div class="progress-container">
+        <mat-progress-bar mode="determinate" [value]="proportion"></mat-progress-bar>
+        <div class="progress-info">
+          {{ value }} / {{ total }}
+        </div>
+      </div>
     </div>
   </div>
   <div class="h-12">
     <mat-card-actions align="start">
       <button mat-button (click)="doSomething()">关闭</button>
-      <button mat-button (click)="doSave()">保存</button>
+      <button mat-button (click)="doSave()">执行</button>
     </mat-card-actions>
   </div>
   <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>

@@ -147,7 +147,6 @@ export class ServerInfoComponent implements AfterViewInit {
   openEditSidenav(id: number) {
     this.appServerInfoEdit.clearData();
     if (this.drawer) {
-      this.appServerInfoEdit.initData(id);
       if (id != null && id > 0) {
         this.appServerInfoEdit.findById(id);
       }
