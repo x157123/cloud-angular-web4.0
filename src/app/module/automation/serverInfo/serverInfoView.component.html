@@ -21,17 +21,55 @@
         <mat-grid-tile colspan="4" class="title">磁盘可用大小:</mat-grid-tile>
         <mat-grid-tile colspan="12" class="content">{{ dataElement.diskAvailable }}</mat-grid-tile>
 
-        <mat-grid-tile colspan="4" class="title">服务器位置:</mat-grid-tile>
-        <mat-grid-tile colspan="12" class="content">{{ dataElement.location }}</mat-grid-tile>
-
-        <mat-grid-tile colspan="4" class="title">到期时间:</mat-grid-tile>
-        <mat-grid-tile colspan="12" class="content">{{ dataElement.expiryDate }}</mat-grid-tile>
-
-        <mat-grid-tile colspan="4" class="title">服务器状态:</mat-grid-tile>
-        <mat-grid-tile colspan="12" class="content">{{ dataElement.status }}</mat-grid-tile>
-
       </mat-grid-list>
     </div>
+    <div class="flex-1 edit-content-info-scrollbar">
+      <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="id" sticky >
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 操作记录唯一标识 </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="serverId"  >
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器id </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.serverId}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="applicationId"  >
+          <mat-header-cell mat-header-cell *matHeaderCellDef>
+            <mat-select>
+              @for (food of foods; track food) {
+                <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+              }
+            </mat-select>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.applicationId}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="operationType"  >
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 操作类型 </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.operationType}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description"  >
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 办理记录 </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.description}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="createDate"  >
+          <mat-header-cell mat-header-cell *matHeaderCellDef> 操作时间 </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.createDate}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 15, 20]" [length]="dataLength"
+                   [pageIndex]="pageIndex"
+                   (page)="handlePageEvent($event)"
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
   </div>
   <div class="h-12">
     <mat-card-actions align="start">

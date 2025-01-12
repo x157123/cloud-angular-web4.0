@@ -39,6 +39,11 @@
             <mat-cell *matCellDef="let element" > {{element.description}} </mat-cell>
           </ng-container>
 
+          <ng-container matColumnDef="createDate"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作时间 </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.createDate}} </mat-cell>
+          </ng-container>
+
 
           <ng-container matColumnDef="operate">
             <mat-header-cell mat-header-cell *matHeaderCellDef> 操作</mat-header-cell>
