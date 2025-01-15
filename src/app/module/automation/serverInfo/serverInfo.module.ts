@@ -22,6 +22,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
 import {ServerInfoAddAppComponent} from "./serverInfoAddApp.component";
 import {ServerInfoRunAppComponent} from "./serverInfoRunApp.component";
+import {MatTabsModule} from "@angular/material/tabs";
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import {ServerInfoRunAppComponent} from "./serverInfoRunApp.component";
     MatSelectModule,
     MatListModule,
     RouterModule.forChild(ServerInfoRoutes),
+    MatTabsModule,
   ]
 })
 export class ServerInfoModule {

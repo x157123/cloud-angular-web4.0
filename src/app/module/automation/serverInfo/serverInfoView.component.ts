@@ -17,43 +17,47 @@ export class ServerInfoViewComponent {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['operationType','description','createDate'];
+  displayedColumns: string[] = ['applicationId', 'description', 'createDate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
-  visibilityEditData = { 'visibility': 'hidden'}
+  visibilityEditData = {'visibility': 'hidden'}
 
   show: boolean = true;
 
-  foods: Food[] = [
+  applicationSelectId: string = '0';
+
+  application: ApplicationType[] = [
+    {value: '0', viewValue: '全部'},
     {value: 'steak-0', viewValue: 'Steak'},
     {value: 'pizza-1', viewValue: 'Pizza'},
     {value: 'tacos-2', viewValue: 'Tacos'},
   ];
 
-  constructor(private parent: ServerInfoComponent,private httpGlobalTool: HttpGlobalTool,
+  constructor(private parent: ServerInfoComponent, private httpGlobalTool: HttpGlobalTool,
               private _alertService: AlertService) {
   }
 
   doSomething() {
     this.parent.closeSidenav();
-    this.dataElement = {... this.defDataElement}
+    this.dataElement = {...this.defDataElement}
   }
 
-  clearData(show?:boolean){
+  clearData(show?: boolean) {
     this.dataElement = this.defDataElement
   }
 
-  findById(id:Number){
-    this.httpGlobalTool.get("/api/cloud-automation/serverInfo/findById?id="+id).subscribe({
+  findById(id: Number) {
+    this.applicationSelectId = '0';
+    this.httpGlobalTool.get("/api/cloud-automation/serverInfo/findById?id=" + id).subscribe({
       next: (res) => {
         this.dataElement = res.data
-        this.queryData()
+        this.queryData(id, '0')
       },
       error: (e) => {
         this._alertService.error(e.error.error)
         this.hideProgressBar();
       },
-      complete:()=>{
+      complete: () => {
         this.hideProgressBar();
       }
     });
@@ -63,13 +67,16 @@ export class ServerInfoViewComponent {
     this.pageEvent = e;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.queryData();
   }
 
-  queryData() {
+  queryData(serverId?: Number, type?: string) {
     let param = new URLSearchParams();
     param.set('page', String(this.pageIndex + 1));
     param.set('rows', String(this.pageSize));
+    param.set('serverId', String(serverId));
+    if (type != null && type != '0') {
+      param.set('applicationId', type);
+    }
     this.showProgressBar()
     this.httpGlobalTool.post("/api/cloud-automation/applicationLog/queryPage", param).subscribe({
       next: (res) => {
@@ -86,11 +93,12 @@ export class ServerInfoViewComponent {
     });
   }
 
-  showProgressBar(){
-    this.visibilityEditData = { 'visibility': 'visible'}
+  showProgressBar() {
+    this.visibilityEditData = {'visibility': 'visible'}
   }
-  hideProgressBar(){
-    this.visibilityEditData = { 'visibility': 'hidden'}
+
+  hideProgressBar() {
+    this.visibilityEditData = {'visibility': 'hidden'}
   }
 
   defDataElement: DataElement = {
@@ -147,7 +155,7 @@ export interface PeriodicElement {
   version: string;
 }
 
-interface Food {
+interface ApplicationType {
   value: string;
   viewValue: string;
 }
