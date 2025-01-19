@@ -8,12 +8,14 @@
         <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
           <mat-tab label="系统访问">
             <iframe
+              *ngIf="iframeUrl"
+              [src]="iframeUrl"
               width="800"
               height="500"
-              src="http://192.168.111.130:6080/vnc.html?host=liu&port=6080"
-              style="border: 0"
+              style="border:0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
+              allowfullscreen>
+            </iframe>
           </mat-tab>
           <mat-tab label="系统状态">
             <mat-grid-list cols="16" rowHeight="30px" gutterSize="3px">
@@ -47,15 +49,15 @@
             <mat-cell *matCellDef="let element" > {{element.serverId}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="applicationId"  >
+          <ng-container matColumnDef="applicationName"  >
             <mat-header-cell mat-header-cell *matHeaderCellDef>
-              <mat-select [(ngModel)]="applicationSelectId">
+              <mat-select [(ngModel)]="applicationSelectId" (selectionChange)="queryLog()">
                 @for (app of application; track app) {
                   <mat-option [value]="app.value">{{app.viewValue}}</mat-option>
                 }
               </mat-select>
             </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.applicationId}} </mat-cell>
+            <mat-cell *matCellDef="let element" > {{element.applicationName}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="operationType"  >

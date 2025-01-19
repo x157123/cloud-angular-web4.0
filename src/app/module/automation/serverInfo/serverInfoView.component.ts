@@ -4,6 +4,7 @@ import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 import {PageEvent} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-serverInfo-view',
@@ -17,24 +18,25 @@ export class ServerInfoViewComponent {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['applicationId', 'description', 'createDate'];
+  displayedColumns: string[] = ['applicationName', 'description', 'createDate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   visibilityEditData = {'visibility': 'hidden'}
 
   show: boolean = true;
 
+  iframeUrl: SafeResourceUrl = '';
+
   applicationSelectId: string = '0';
+
+  serverId: Number = 0;
 
   application: ApplicationType[] = [
     {value: '0', viewValue: '全部'},
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
   ];
 
   constructor(private parent: ServerInfoComponent, private httpGlobalTool: HttpGlobalTool,
-              private _alertService: AlertService) {
+              private _alertService: AlertService, private sanitizer: DomSanitizer) {
   }
 
   doSomething() {
@@ -48,10 +50,29 @@ export class ServerInfoViewComponent {
 
   findById(id: Number) {
     this.applicationSelectId = '0';
+    this.serverId = id;
+    this.application = [
+      {value: '0', viewValue: '全部'}
+    ];
     this.httpGlobalTool.get("/api/cloud-automation/serverInfo/findById?id=" + id).subscribe({
       next: (res) => {
-        this.dataElement = res.data
-        this.queryData(id, '0')
+        this.dataElement = res.data;
+        this.queryData(id, '0');
+        const newList = res.data.applicationInfoVoList.map((item: { id: any; name: any; }) => ({
+          value: item.id,
+          viewValue: item.name
+        }));
+        if (this.dataElement.status == '0') {
+          const rawUrl: string = "http://" + this.dataElement.ipAddress + ":6080/vnc.html?host=" + this.dataElement.ipAddress + "&port=6080";
+          this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(rawUrl);
+          // 将新转换得到的数组和初始的 this.application 合并
+          this.application = this.application.concat(newList);
+        } else {
+          const rawUrl: string = "http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080";
+          this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(rawUrl);
+          // 将新转换得到的数组和初始的 this.application 合并
+          this.application = this.application.concat(newList);
+        }
       },
       error: (e) => {
         this._alertService.error(e.error.error)
@@ -67,6 +88,10 @@ export class ServerInfoViewComponent {
     this.pageEvent = e;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
+  }
+
+  queryLog() {
+    this.queryData(this.serverId, this.applicationSelectId);
   }
 
   queryData(serverId?: Number, type?: string) {
