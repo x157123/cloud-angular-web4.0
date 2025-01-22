@@ -39,6 +39,16 @@
             <mat-cell *matCellDef="let element" > {{element.scriptPath}} </mat-cell>
           </ng-container>
 
+          <ng-container matColumnDef="writeUser"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 写入用户 </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.writeUser}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="stopScript"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 停用脚本 </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.stopScript}} </mat-cell>
+          </ng-container>
+
           <ng-container matColumnDef="icon"  >
             <mat-header-cell mat-header-cell *matHeaderCellDef> 图标 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.icon}} </mat-cell>

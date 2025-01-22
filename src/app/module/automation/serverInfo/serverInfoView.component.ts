@@ -50,6 +50,7 @@ export class ServerInfoViewComponent {
 
   findById(id: Number) {
     this.applicationSelectId = '0';
+    this.iframeUrl = '';
     this.serverId = id;
     this.application = [
       {value: '0', viewValue: '全部'}
@@ -65,14 +66,8 @@ export class ServerInfoViewComponent {
         if (this.dataElement.status == '0') {
           const rawUrl: string = "http://" + this.dataElement.ipAddress + ":6080/vnc.html?host=" + this.dataElement.ipAddress + "&port=6080";
           this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(rawUrl);
-          // 将新转换得到的数组和初始的 this.application 合并
-          this.application = this.application.concat(newList);
-        } else {
-          const rawUrl: string = "http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080";
-          this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(rawUrl);
-          // 将新转换得到的数组和初始的 this.application 合并
-          this.application = this.application.concat(newList);
         }
+        this.application = this.application.concat(newList);
       },
       error: (e) => {
         this._alertService.error(e.error.error)

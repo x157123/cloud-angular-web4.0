@@ -137,5 +137,7 @@ export interface PeriodicElement {
   scriptUrl: string;
   scriptPath: string;
   icon: string;
+  stopScript: string;
+  writeUser: number;
   version: string;
 }

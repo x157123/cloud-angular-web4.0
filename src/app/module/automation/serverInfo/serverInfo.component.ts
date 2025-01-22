@@ -214,5 +214,5 @@ export interface ApplicationInfo {
   scriptPath: string;
   icon: string;
   version: string;
-  isActive: boolean;
+  activeState: number;
 }

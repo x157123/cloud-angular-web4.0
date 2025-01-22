@@ -37,6 +37,22 @@
           </mat-form-field>
         </mat-grid-tile>
 
+        <mat-grid-tile colspan="4" class="title">停用脚本:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>停用脚本</mat-label>
+            <input matInput [(ngModel)]="dataElement.stopScript">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">写入用户:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>写入用户</mat-label>
+            <input matInput [(ngModel)]="dataElement.writeUser">
+          </mat-form-field>
+        </mat-grid-tile>
+
         <mat-grid-tile colspan="4" class="title">图标:</mat-grid-tile>
         <mat-grid-tile colspan="12">
           <mat-form-field>
