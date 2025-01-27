@@ -74,7 +74,7 @@ export class ApplicationInfoEditComponent {
     scriptUrl: '',
     scriptPath: '',
     stopScript: '',
-    writeUser: 0,
+    writeUser: '',
     icon: '',
     version: '',
   };
@@ -89,7 +89,7 @@ export interface DataElement {
   scriptUrl: string;
   scriptPath: string;
   stopScript: string;
-  writeUser: number;
+  writeUser: string;
   icon: string;
   version: string;
 }
