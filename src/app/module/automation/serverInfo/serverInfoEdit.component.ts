@@ -150,6 +150,7 @@ export class ServerInfoEditComponent {
     port: 0,
     username: '',
     password: '',
+    rootPassword: '',
     os: '',
     cpuUsage: '',
     memorySize: '',
@@ -176,6 +177,7 @@ export interface DataElement {
   port: number;
   username: string;
   password: string;
+  rootPassword: string;
   os: string;
   cpuUsage: string;
   memorySize: string;
