@@ -4,7 +4,7 @@
     {{ vncPwd }}
     <button mat-button (click)="getVncPwd()">获取密码</button>
   </div>
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar [ngStyle]="visibilityVncData" mode="indeterminate"></mat-progress-bar>
   <div class="flex-1 bg-white border-b">
     <div style="height: 100% " class="flex flex-col h-full">
       <div class="h-[500px]">

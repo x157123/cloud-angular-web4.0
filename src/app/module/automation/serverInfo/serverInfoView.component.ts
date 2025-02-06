@@ -23,6 +23,8 @@ export class ServerInfoViewComponent {
 
   visibilityEditData = {'visibility': 'hidden'}
 
+  visibilityVncData = {'visibility': 'hidden'}
+
   show: boolean = true;
 
   iframeUrl: SafeResourceUrl = '';
