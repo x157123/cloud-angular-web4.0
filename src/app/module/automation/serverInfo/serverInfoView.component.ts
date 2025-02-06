@@ -29,6 +29,8 @@ export class ServerInfoViewComponent {
 
   applicationSelectId: string = '0';
 
+  vncPwd: string = '';
+
   serverId: Number = 0;
 
   application: ApplicationType[] = [
@@ -51,6 +53,7 @@ export class ServerInfoViewComponent {
   findById(id: Number) {
     this.applicationSelectId = '0';
     this.iframeUrl = '';
+    this.vncPwd = '';
     this.serverId = id;
     this.application = [
       {value: '0', viewValue: '全部'}
@@ -102,6 +105,25 @@ export class ServerInfoViewComponent {
       next: (res) => {
         this.dataSource = new MatTableDataSource<PeriodicElement>(res.data.records)
         this.dataLength = res.data.total
+      },
+      error: (e) => {
+        this.hideProgressBar();
+        console.log('error:', e.error)
+      },
+      complete: () => {
+        this.hideProgressBar();
+      }
+    });
+  }
+
+  getVncPwd() {
+    this.vncPwd = '';
+    let param = new URLSearchParams();
+    param.set('id', String(this.serverId));
+    this.showProgressBar()
+    this.httpGlobalTool.post("/api/cloud-automation/serverInfo/resetVncPwd", param).subscribe({
+      next: (res) => {
+        this.vncPwd = res.data
       },
       error: (e) => {
         this.hideProgressBar();
