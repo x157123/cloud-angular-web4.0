@@ -69,7 +69,7 @@ export class ServerInfoViewComponent {
           viewValue: item.name
         }));
         if (this.dataElement.status == '0') {
-          const rawUrl: string = "http://" + this.dataElement.ipAddress + ":6080/vnc.html?host=" + this.dataElement.ipAddress + "&port=6080";
+          const rawUrl: string = "http://" + this.dataElement.ipAddress + ":26380/vnc.html";
           this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(rawUrl);
         }
         this.application = this.application.concat(newList);
