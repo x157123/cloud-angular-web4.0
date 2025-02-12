@@ -68,10 +68,12 @@ export class ServerInfoViewComponent {
           value: item.id,
           viewValue: item.name
         }));
-        if (this.dataElement.status == '0') {
-          const rawUrl: string = "http://" + this.dataElement.ipAddress + ":26380/vnc.html";
-          this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(rawUrl);
-        }
+        // if (this.dataElement.status == '0') {
+        //   const rawUrl: string = "http://" + this.dataElement.ipAddress + ":26380/vnc.html";
+        //   this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(rawUrl);
+        // }
+        const rawUrl: string = "http://" + this.dataElement.ipAddress + ":26380/vnc.html";
+        this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(rawUrl);
         this.application = this.application.concat(newList);
       },
       error: (e) => {

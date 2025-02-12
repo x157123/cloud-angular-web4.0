@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/index',
+        redirectTo: '/automation/serverInfo',
         pathMatch: 'full'
       },
       {
