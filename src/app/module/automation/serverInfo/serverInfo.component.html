@@ -133,7 +133,7 @@
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
     </div>
-    <mat-paginator [pageSizeOptions]="[10, 15, 20]" [length]="dataLength"
+    <mat-paginator [pageSizeOptions]="[20, 50, 100]" [length]="dataLength"
                    [pageIndex]="pageIndex"
                    (page)="handlePageEvent($event)"
                    aria-label="Select page of periodic elements">
