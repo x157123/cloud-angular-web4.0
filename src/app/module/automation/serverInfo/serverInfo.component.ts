@@ -28,7 +28,7 @@ export class ServerInfoComponent implements AfterViewInit {
   pageEvent: PageEvent = new PageEvent();
   dataLength: number = 0;
   pageIndex: number = 0;
-  pageSize: number = 10;
+  pageSize: number = 20;
   displayedColumns: string[] = ['company', 'sourceAccount', 'name', 'ipAddress', 'service', 'operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
   isEditMode = false;
@@ -37,6 +37,13 @@ export class ServerInfoComponent implements AfterViewInit {
   isRunAppMode = false;
 
   visibilityListData = {'visibility': 'hidden'}
+
+
+  appList: { id: string; name: string }[] = []; // 应用用户列表
+  ipAddress: string = '';
+  applicationInfoId: string = '';
+  appState: string = '';
+
 
   @ViewChild('drawer', {static: false}) drawer!: MatDrawer;
 
@@ -51,6 +58,7 @@ export class ServerInfoComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.fetchAppList()
     this.queryData()
   }
 
@@ -62,10 +70,23 @@ export class ServerInfoComponent implements AfterViewInit {
     this.visibilityListData = {'visibility': 'hidden'}
   }
 
+
+  fetchAppList() {
+    let param = new URLSearchParams();
+    this.httpGlobalTool.post("/api/cloud-automation/applicationInfo/findByList", param).subscribe({
+      next: (res) => {
+        this.appList = res.data
+      },
+    });
+  }
+
   queryData() {
     let param = new URLSearchParams();
     param.set('page', String(this.pageIndex + 1));
     param.set('rows', String(this.pageSize));
+    param.set('ipAddress', String(this.ipAddress));
+    param.set('applicationInfoId', String(this.applicationInfoId));
+    param.set('appState', String(this.appState));
     this.showProgressBar()
     this.httpGlobalTool.post("/api/cloud-automation/serverInfo/queryPage", param).subscribe({
       next: (res) => {
@@ -135,7 +156,7 @@ export class ServerInfoComponent implements AfterViewInit {
   }
 
   openRunSidenav() {
-    this.appServerInfoRunApp.initData();
+    this.appServerInfoRunApp.initData(this.appState,this.applicationInfoId,this.ipAddress);
     this.showSidenav(false, false, false, true);
   }
 

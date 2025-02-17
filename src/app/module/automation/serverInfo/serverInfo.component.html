@@ -2,12 +2,23 @@
   <mat-drawer #drawer mode="over" position="end" class="edit-drawer">
     <app-serverInfo-edit #appServerInfoEdit [hidden]="!isEditMode"></app-serverInfo-edit>
     <app-serverInfo-view #appServerInfoView [hidden]="!isViewMode"></app-serverInfo-view>
-    <app-serverInfo-add-app #appServerInfoAddApp [hidden]="!isAddAppMode"></app-serverInfo-add-app>
     <app-serverInfo-run-app #appServerInfoRunApp [hidden]="!isRunAppMode"></app-serverInfo-run-app>
+    <app-serverInfo-add-app #appServerInfoAddApp [hidden]="!isAddAppMode"></app-serverInfo-add-app>
   </mat-drawer>
   <div class="mat-drawer-containers flex flex-col h-screen">
     <mat-toolbar>
-      <input matInput placeholder="查询条件">
+      <mat-select [(ngModel)]="applicationInfoId" placeholder="应用">
+        <mat-option value="0">全部</mat-option>
+        @for (app of appList; track app) {
+          <mat-option [value]="app.id">{{app.name}}</mat-option>
+        }
+      </mat-select>
+      <mat-select [(ngModel)]="appState" placeholder="状态">
+        <mat-option value="">全部</mat-option>
+        <mat-option value="hyperError">hyper异常</mat-option>
+        <mat-option value="hyperNoScore">hyper未获取到积分</mat-option>
+      </mat-select>
+      <input matInput [(ngModel)]="ipAddress" placeholder="查询ip">
       <button mat-raised-button color="primary" (click)="queryData()">查询</button>
       <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="新增数据">
         <mat-icon>add</mat-icon>

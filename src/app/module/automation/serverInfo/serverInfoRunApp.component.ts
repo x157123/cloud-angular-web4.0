@@ -29,6 +29,10 @@ export class ServerInfoRunAppComponent {
 
   startKey: string = '';
 
+  ipAddress: string = '';
+  applicationInfoId: string = '';
+  appState: string = '';
+
   fetchAppList() {
     let param = new URLSearchParams();
     this.httpGlobalTool.post("/api/cloud-automation/applicationInfo/queryPage", param).subscribe({
@@ -73,6 +77,9 @@ export class ServerInfoRunAppComponent {
       this.appSelectList.forEach((app) => {
         param.append("apps", app); // 调整为同名参数
       });
+      param.set('ipAddress', String(this.ipAddress));
+      param.set('applicationInfoId', String(this.applicationInfoId));
+      param.set('appState', String(this.appState));
       param.append("startKey", this.startKey);
       this.httpGlobalTool.post("/api/cloud-automation/serverInfo/runApp", param).subscribe({
         next: (res) => {
@@ -100,7 +107,10 @@ export class ServerInfoRunAppComponent {
     }
   }
 
-  initData() {
+  initData(appState: string, applicationInfoId: string, ipAddress: string) {
+    this.applicationInfoId = applicationInfoId;
+    this.ipAddress = ipAddress;
+    this.appState = appState;
     this.fetchAppList();
   }
 
