@@ -41,6 +41,7 @@ export class ServerInfoComponent implements AfterViewInit {
 
   appList: { id: string; name: string }[] = []; // 应用用户列表
   ipAddress: string = '';
+  sourceAccount: string = '';
   applicationInfoId: string = '';
   appState: string = '';
 
@@ -87,6 +88,7 @@ export class ServerInfoComponent implements AfterViewInit {
     param.set('ipAddress', String(this.ipAddress));
     param.set('applicationInfoId', String(this.applicationInfoId));
     param.set('appState', String(this.appState));
+    param.set('sourceAccount', String(this.sourceAccount));
     this.showProgressBar()
     this.httpGlobalTool.post("/api/cloud-automation/serverInfo/queryPage", param).subscribe({
       next: (res) => {
@@ -156,7 +158,7 @@ export class ServerInfoComponent implements AfterViewInit {
   }
 
   openRunSidenav() {
-    this.appServerInfoRunApp.initData(this.appState,this.applicationInfoId,this.ipAddress);
+    this.appServerInfoRunApp.initData(this.appState, this.applicationInfoId, this.sourceAccount, this.ipAddress);
     this.showSidenav(false, false, false, true);
   }
 

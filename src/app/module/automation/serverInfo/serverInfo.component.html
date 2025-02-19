@@ -18,6 +18,7 @@
         <mat-option value="hyperError">hyper异常</mat-option>
         <mat-option value="hyperNoScore">hyper未获取到积分</mat-option>
       </mat-select>
+      <input matInput [(ngModel)]="sourceAccount" placeholder="来源账号">
       <input matInput [(ngModel)]="ipAddress" placeholder="查询ip">
       <button mat-raised-button color="primary" (click)="queryData()">查询</button>
       <button mat-icon-button color="primary" (click)="openEditSidenav(0)" aria-label="新增数据">

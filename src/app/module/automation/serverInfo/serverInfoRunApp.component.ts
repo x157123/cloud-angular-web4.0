@@ -32,6 +32,7 @@ export class ServerInfoRunAppComponent {
   ipAddress: string = '';
   applicationInfoId: string = '';
   appState: string = '';
+  sourceAccount: string = '';
 
   fetchAppList() {
     let param = new URLSearchParams();
@@ -80,7 +81,9 @@ export class ServerInfoRunAppComponent {
       param.set('ipAddress', String(this.ipAddress));
       param.set('applicationInfoId', String(this.applicationInfoId));
       param.set('appState', String(this.appState));
+      param.set('sourceAccount', String(this.sourceAccount));
       param.append("startKey", this.startKey);
+
       this.httpGlobalTool.post("/api/cloud-automation/serverInfo/runApp", param).subscribe({
         next: (res) => {
           this._alertService.success("批量执行任务成功")
@@ -107,10 +110,11 @@ export class ServerInfoRunAppComponent {
     }
   }
 
-  initData(appState: string, applicationInfoId: string, ipAddress: string) {
+  initData(appState: string, applicationInfoId: string, sourceAccount: string, ipAddress: string) {
     this.applicationInfoId = applicationInfoId;
     this.ipAddress = ipAddress;
     this.appState = appState;
+    this.sourceAccount = sourceAccount;
     this.fetchAppList();
   }
 
