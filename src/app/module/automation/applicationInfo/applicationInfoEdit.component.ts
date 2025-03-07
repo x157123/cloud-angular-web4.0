@@ -70,8 +70,10 @@ export class ApplicationInfoEditComponent {
   defDataElement: DataElement = {
     id: '',
     name: '',
+    vncDisplay: '',
     script: '',
     scriptUrl: '',
+    pythonUrl: '',
     scriptPath: '',
     stopScript: '',
     writeUser: '',
@@ -85,8 +87,10 @@ export class ApplicationInfoEditComponent {
 export interface DataElement {
   id?: string;
   name: string;
+  vncDisplay: string;
   script: string;
   scriptUrl: string;
+  pythonUrl: string;
   scriptPath: string;
   stopScript: string;
   writeUser: string;

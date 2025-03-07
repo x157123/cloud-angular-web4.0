@@ -25,7 +25,7 @@ export class ApplicationInfoComponent implements AfterViewInit {
   dataLength: number = 0;
   pageIndex: number = 0;
   pageSize: number = 10;
-  displayedColumns: string[] = ['name','script','scriptUrl','scriptPath','operate'];
+  displayedColumns: string[] = ['icon','name','vncDisplay','script','scriptUrl','pythonUrl','operate'];
   dataSource = new MatTableDataSource<PeriodicElement>();
   isEditMode = true;
 
@@ -133,8 +133,10 @@ export class ApplicationInfoComponent implements AfterViewInit {
 export interface PeriodicElement {
   id: string;
   name: string;
+  vncDisplay: string;
   script: string;
   scriptUrl: string;
+  pythonUrl: string;
   scriptPath: string;
   icon: string;
   stopScript: string;

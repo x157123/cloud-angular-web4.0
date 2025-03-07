@@ -26,3 +26,23 @@
   flex: 0 0 500px;
   white-space: nowrap;
 }
+
+.mat-column-icon {
+  flex: 0 0 100px;
+  white-space: nowrap;
+}
+
+.mat-column-name {
+  flex: 0 0 200px;
+  white-space: nowrap;
+}
+
+.mat-column-vncDisplay {
+  flex: 0 0 100px;
+  white-space: nowrap;
+}
+
+.mat-column-script {
+  flex: 0 0 120px;
+  white-space: nowrap;
+}

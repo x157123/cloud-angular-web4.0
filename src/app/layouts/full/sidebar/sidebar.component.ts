@@ -60,7 +60,7 @@ const menuItems = [
       {state: false, key: 'applicationInfo',path: 'automation/applicationInfo', name: '应用', type: 'link', icon: 'av_timer'},
       {state: false, key: 'applicationLog',path: 'automation/applicationLog', name: '操作记录表', type: 'link', icon: 'av_timer'},
       {state: false, key: 'emailInfo',path: 'automation/emailInfo', name: '邮箱管理', type: 'link', icon: 'av_timer'},
-      {state: false, key: 'gpuInfo',path: 'automation/gpuInfo', name: '显卡信息', type: 'link', icon: 'av_timer'},
+      // {state: false, key: 'gpuInfo',path: 'automation/gpuInfo', name: '显卡信息', type: 'link', icon: 'av_timer'},
     ]
   }
 ];

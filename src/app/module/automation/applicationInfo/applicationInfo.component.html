@@ -19,9 +19,19 @@
             <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
           </ng-container>
 
+          <ng-container matColumnDef="icon"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 图标 </mat-header-cell>
+            <mat-cell *matCellDef="let element" ><mat-icon>{{ element.icon }}</mat-icon></mat-cell>
+          </ng-container>
+
           <ng-container matColumnDef="name"  >
             <mat-header-cell mat-header-cell *matHeaderCellDef> 应用名称 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="vncDisplay"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 运行窗口 </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.vncDisplay}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="script"  >
@@ -30,13 +40,13 @@
           </ng-container>
 
           <ng-container matColumnDef="scriptUrl"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 脚本地址 </mat-header-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> 启动脚本 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.scriptUrl}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="scriptPath"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器目录 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.scriptPath}} </mat-cell>
+          <ng-container matColumnDef="pythonUrl"  >
+            <mat-header-cell mat-header-cell *matHeaderCellDef> python代码 </mat-header-cell>
+            <mat-cell *matCellDef="let element" > {{element.pythonUrl}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="writeUser"  >
@@ -47,11 +57,6 @@
           <ng-container matColumnDef="stopScript"  >
             <mat-header-cell mat-header-cell *matHeaderCellDef> 停用脚本 </mat-header-cell>
             <mat-cell *matCellDef="let element" > {{element.stopScript}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="icon"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 图标 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.icon}} </mat-cell>
           </ng-container>
 
 
