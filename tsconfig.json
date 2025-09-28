@@ -14,7 +14,7 @@
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
@@ -24,10 +24,18 @@
       "dom"
     ],
     "paths": {
-      "@http/*": ["src/app/utils/*"],
-      "@component/*": ["src/app/component/*"],
-      "@alert/*": ["src/app/module/alert/*"],
-      "@common/*": ["src/app/common/*"]
+      "@http/*": [
+        "src/app/utils/*"
+      ],
+      "@component/*": [
+        "src/app/component/*"
+      ],
+      "@alert/*": [
+        "src/app/module/alert/*"
+      ],
+      "@common/*": [
+        "src/app/common/*"
+      ]
     }
   },
   "angularCompilerOptions": {
