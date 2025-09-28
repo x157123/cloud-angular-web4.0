@@ -1,0 +1,10 @@
+
+.mat-column-applicationName {
+  flex: 0 0 180px;
+  white-space: nowrap;
+}
+
+.mat-column-createDate {
+  flex: 0 0 180px;
+  white-space: nowrap;
+}

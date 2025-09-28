@@ -1,0 +1,88 @@
+<div class="flex flex-col h-screen edit-content">
+  <div class="h-12 edit-content-header">
+    <ng-container *ngIf="show">
+      查看
+    </ng-container>
+    <ng-container *ngIf="!show">
+      新增
+    </ng-container>
+  </div>
+  <mat-divider/>
+  <div class="stepperContainer flex flex-col h-screen">
+    <div class="flex-1">
+      <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
+        <mat-grid-tile colspan="4" class="title">数据库类型:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field>
+          <mat-label>数据库类型</mat-label>
+          <mat-select [(ngModel)]="dataElement.type" [required]="show">
+            <mat-option [value]="option.value" *ngFor="let option of sourceType">{{ option.viewValue }}</mat-option>
+          </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">连接地址:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>连接地址</mat-label>
+            <input matInput [(ngModel)]="dataElement.hostname" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">端口:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>端口</mat-label>
+            <input matInput [(ngModel)]="dataElement.port" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4" class="title">数据库:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>数据库</mat-label>
+            <input matInput [(ngModel)]="dataElement.databaseName" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">用户:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>用户</mat-label>
+            <input matInput [(ngModel)]="dataElement.user" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">密码:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>密码</mat-label>
+            <input matInput [(ngModel)]="dataElement.password" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">表前缀:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>表前缀</mat-label>
+            <input matInput [(ngModel)]="dataElement.tablePrefix" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">备注:</mat-grid-tile>
+        <mat-grid-tile colspan="12" class="content">
+          <mat-form-field class="example-full-width">
+            <mat-label>备注</mat-label>
+            <input matInput [(ngModel)]="dataElement.remark" [readonly]="show">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <mat-divider/>
+    <div class="h-12">
+      <mat-card-actions align="start">
+          <button mat-button (click)="doSomething()">关闭</button>
+          <button mat-button (click)="doTest()" *ngIf="!show">测试</button>
+          <button mat-button (click)="doSave()" *ngIf="!show">保存</button>
+      </mat-card-actions>
+    </div>
+    <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>
+  </div>
+</div>

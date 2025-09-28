@@ -1,0 +1,108 @@
+<div class="edit-content flex flex-col h-full">
+  <div class="h-12 edit-content-header border-b">
+      编辑
+  </div>
+  <div class="flex-1 overflow-y-auto bg-white border-b">
+    <div class="p-4">
+      <mat-grid-list cols="16" rowHeight="60px" gutterSize="5px">
+        <mat-grid-tile colspan="4" class="title">公司:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>公司</mat-label>
+            <input matInput [(ngModel)]="dataElement.company">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">来源账号:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>来源账号</mat-label>
+            <input matInput [(ngModel)]="dataElement.sourceAccount">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">服务器名称:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>服务器名称</mat-label>
+            <input matInput [(ngModel)]="dataElement.name">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">IP地址:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>IP地址（支持IPv4和IPv6）</mat-label>
+            <input matInput [(ngModel)]="dataElement.ipAddress">
+          </mat-form-field>
+        </mat-grid-tile>
+
+
+        <mat-grid-tile colspan="4" class="title">端口:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>端口（默认22）</mat-label>
+            <input matInput [(ngModel)]="dataElement.port">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">服务器用户名:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>服务器用户名</mat-label>
+            <input matInput [(ngModel)]="dataElement.username">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">服务器密码:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>服务器密码</mat-label>
+            <input matInput [(ngModel)]="dataElement.password">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">管理员密码:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>管理员密码</mat-label>
+            <input matInput [(ngModel)]="dataElement.rootPassword">
+          </mat-form-field>
+        </mat-grid-tile>
+
+
+        <mat-grid-tile colspan="4" class="title">关联用户:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>关联账号</mat-label>
+            <mat-select [(ngModel)]="dataElement.accountInfoIds" multiple>
+              @for (user of accountList; track user) {
+                <mat-option [value]="user.id">{{user.username}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="4" class="title">关联应用:</mat-grid-tile>
+        <mat-grid-tile colspan="12">
+          <mat-form-field>
+            <mat-label>关联应用</mat-label>
+            <mat-select [(ngModel)]="dataElement.applicationInfoIds" multiple>
+              @for (app of appList; track app) {
+                <mat-option [value]="app.id">{{app.name}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+    </div>
+  </div>
+  <div class="h-12">
+    <mat-card-actions align="start">
+      <button mat-button (click)="doSomething()">关闭</button>
+      <button mat-button (click)="doSave()">保存</button>
+    </mat-card-actions>
+  </div>
+  <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>
+</div>
