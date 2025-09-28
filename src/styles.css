@@ -1,27 +1,21 @@
-@import 'material-icons/iconfont/material-icons.css'; /* You can add global styles to this file, and also import other style files */
+/* 全局样式文件 - 仅包含必要的第三方库和基础样式 */
 
+/* 第三方库导入 */
+@import 'material-icons/iconfont/material-icons.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+/* Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.mat-mdc-snack-bar-container-error {
-    --mdc-snackbar-container-color: #E53935;
-    --mdc-snackbar-supporting-text-color: rgba(255, 255, 255, 0.87);
-    --mat-snack-bar-button-color: #ff4081;
+/* 基础 HTML 样式 - Angular Material 要求 */
+html, body {
+  height: 100%;
 }
 
-.mat-mdc-snack-bar-container-warning {
-  --mdc-snackbar-container-color: #FDD835;
-  --mdc-snackbar-supporting-text-color: rgb(0 0 0 / 87%);
-  --mat-snack-bar-button-color: #ff4081;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.mat-mdc-snack-bar-container-success {
-  --mdc-snackbar-container-color: #009688;
-  --mdc-snackbar-supporting-text-color: rgb(0 0 0 / 87%);
-  --mat-snack-bar-button-color: #ff4081;
-}
+/* 注意：Material UI 覆盖样式已移至 assets/styles/overrides/_material.scss */
