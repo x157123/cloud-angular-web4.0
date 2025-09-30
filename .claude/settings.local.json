@@ -8,7 +8,10 @@
       "Bash(git commit:*)",
       "Bash(ng update:*)",
       "Bash(npm outdated)",
-      "Bash(npm update:*)"
+      "Bash(npm update:*)",
+      "Bash(npm test:*)",
+      "WebSearch",
+      "WebFetch(domain:angular.dev)"
     ],
     "deny": [],
     "ask": []

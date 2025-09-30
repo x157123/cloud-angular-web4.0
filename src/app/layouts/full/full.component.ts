@@ -1,12 +1,32 @@
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy, AfterViewInit} from '@angular/core';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatBadgeModule} from '@angular/material/badge';
+import {RouterOutlet} from '@angular/router';
+import {AppSidebarComponent} from './sidebar/sidebar.component';
+import {MessageComponent} from './msg/message.component';
 
 /** @title Responsive sidenav */
 @Component({
     selector: 'app-full-layout',
     templateUrl: 'full.component.html',
     styleUrls: ['./full.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+      MatToolbarModule,
+      MatButtonModule,
+      MatIconModule,
+      MatMenuModule,
+      MatSidenavModule,
+      MatBadgeModule,
+      RouterOutlet,
+      AppSidebarComponent,
+      MessageComponent
+    ]
 })
 export class FullComponent implements OnDestroy, AfterViewInit {
 

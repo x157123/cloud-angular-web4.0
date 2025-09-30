@@ -4,7 +4,7 @@ import { AccordionLinkDirective } from './accordionlink.directive';
 
 @Directive({
     selector: '[appAccordionToggle]',
-    standalone: false
+    standalone: true
 })
 export class AccordionAnchorDirective {
 

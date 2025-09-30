@@ -11,7 +11,7 @@ import { AccordionDirective } from './accordion.directive';
 
 @Directive({
     selector: '[appAccordionLink]',
-    standalone: false
+    standalone: true
 })
 export class AccordionLinkDirective implements OnInit, OnDestroy {
   @Input()

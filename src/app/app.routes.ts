@@ -1,12 +1,8 @@
-import { NgModule } from '@angular/core';
-import {
-  RouterModule,
-  Routes,
-} from '@angular/router';
+import { Routes } from '@angular/router';
 import { FullComponent } from './layouts/full/full.component';
-import {profileGuard} from '@common/http/auth.guard';
+import { profileGuard } from '@common/http/auth.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: FullComponent,
@@ -87,15 +83,4 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./module/login/login.module').then(m => m.LoginModule)
   }
-  ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {
-
-
-}
-
-
+];
