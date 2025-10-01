@@ -2,6 +2,16 @@ import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {FlowableTaskComponent} from "./flowableTask.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
+import {CommonModule} from "@angular/common";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import {FormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
+import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 
@@ -9,7 +19,19 @@ import {AlertService} from "@component/alert/alert.service";
     selector: 'app-flowableTask-edit',
     templateUrl: './flowableTaskEdit.component.html',
     styleUrls: ['./flowableTaskEdit.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+        CommonModule,
+        MatGridListModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        FormsModule,
+        MatInputModule,
+        MatCardModule,
+        MatButtonModule,
+        MatProgressBarModule,
+        MatDividerModule
+    ]
 })
 export class FlowableTaskEditComponent {
 

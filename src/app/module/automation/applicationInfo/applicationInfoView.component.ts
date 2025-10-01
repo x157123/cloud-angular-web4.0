@@ -2,12 +2,24 @@ import {Component} from '@angular/core';
 import {ApplicationInfoComponent} from "./applicationInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-applicationInfo-view',
   templateUrl: './applicationInfoView.component.html',
   styleUrls: ['./applicationInfoView.component.css'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatCardModule,
+    MatProgressBarModule
+  ]
 })
 export class ApplicationInfoViewComponent {
 

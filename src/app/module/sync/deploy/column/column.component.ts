@@ -1,15 +1,22 @@
 import {Component, ElementRef, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule} from "@angular/cdk/drag-drop";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {ColumnConfig, Dict, TableConfig} from "../edit.component";
-import {MatSelectChange} from "@angular/material/select";
-import {MatCheckboxChange} from "@angular/material/checkbox";
-import {FormControl} from "@angular/forms";
+import {MatSelectChange, MatSelectModule} from "@angular/material/select";
+import {MatCheckboxChange, MatCheckboxModule} from "@angular/material/checkbox";
+import {FormControl, ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
-import {ConnectionPositionPair, Overlay, OverlayRef} from "@angular/cdk/overlay";
+import {MatAutocompleteSelectedEvent, MatAutocompleteModule} from "@angular/material/autocomplete";
+import {ConnectionPositionPair, Overlay, OverlayRef, OverlayModule} from "@angular/cdk/overlay";
 import {TemplatePortal} from "@angular/cdk/portal";
+import {CommonModule} from '@angular/common';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 interface Table {
   name: string,
@@ -45,7 +52,23 @@ export interface ColumnConfigTmp {
     selector: 'app-column',
     templateUrl: './column.component.html',
     styleUrls: ['./column.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        DragDropModule,
+        MatGridListModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatAutocompleteModule,
+        MatCheckboxModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatButtonModule,
+        OverlayModule
+    ]
 })
 export class ColumnComponent implements OnInit {
 

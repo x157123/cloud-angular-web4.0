@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BoxComponent} from "./box";
+
 @Component({
     selector: 'app-flex',
     templateUrl: './flex.component.html',
     styleUrls: ['./flex.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+        CommonModule,
+        BoxComponent
+    ]
 })
 export class FlexComponent {
   colors = [

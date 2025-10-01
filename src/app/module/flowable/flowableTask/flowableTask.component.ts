@@ -1,10 +1,18 @@
 import {Component, AfterViewInit, ViewChild, OnInit} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
-import {PageEvent} from "@angular/material/paginator";
-import {MatDrawer} from "@angular/material/sidenav";
+import {PageEvent, MatPaginatorModule} from "@angular/material/paginator";
+import {MatDrawer, MatSidenavModule} from "@angular/material/sidenav";
 import {FlowableTaskEditComponent} from "./flowableTaskEdit.component";
 import {AlertService} from "@component/alert/alert.service";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
+import {MatButtonModule} from "@angular/material/button";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {CommonModule} from "@angular/common";
+import {MatIconModule} from "@angular/material/icon";
 
 
 export interface Dict {
@@ -16,7 +24,21 @@ export interface Dict {
     selector: 'app-flowableTask',
     templateUrl: './flowableTask.component.html',
     styleUrls: ['./flowableTask.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+        CommonModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        MatProgressBarModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatIconModule,
+        FlowableTaskEditComponent
+    ]
 })
 export class FlowableTaskComponent implements AfterViewInit {
 

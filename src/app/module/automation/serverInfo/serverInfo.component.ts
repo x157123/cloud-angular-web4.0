@@ -1,8 +1,16 @@
 import {Component, AfterViewInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {MatTableModule, MatTableDataSource} from '@angular/material/table';
+import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
+import {MatSidenavModule, MatDrawer} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
-import {PageEvent} from "@angular/material/paginator";
-import {MatDrawer} from "@angular/material/sidenav";
 import {ServerInfoEditComponent} from "./serverInfoEdit.component";
 import {ServerInfoViewComponent} from "./serverInfoView.component";
 import {ServerInfoAddAppComponent} from "./serverInfoAddApp.component";
@@ -21,7 +29,24 @@ export interface Dict {
   selector: 'app-serverInfo',
   templateUrl: './serverInfo.component.html',
   styleUrls: ['./serverInfo.component.css'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressBarModule,
+    ServerInfoEditComponent,
+    ServerInfoViewComponent,
+    ServerInfoAddAppComponent,
+    ServerInfoRunAppComponent
+  ]
 })
 export class ServerInfoComponent implements AfterViewInit {
 

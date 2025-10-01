@@ -1,11 +1,18 @@
 import {Component, AfterViewInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
-import {PageEvent} from "@angular/material/paginator";
-import {MatDrawer} from "@angular/material/sidenav";
+import {PageEvent, MatPaginatorModule} from "@angular/material/paginator";
+import {MatDrawer, MatSidenavModule} from "@angular/material/sidenav";
 import {ApplicationInfoEditComponent} from "./applicationInfoEdit.component";
 import {ApplicationInfoViewComponent} from "./applicationInfoView.component";
 import {AlertService} from "@component/alert/alert.service";
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {CommonModule} from '@angular/common';
 
 
 export interface Dict {
@@ -17,7 +24,21 @@ export interface Dict {
   selector: 'app-applicationInfo',
   templateUrl: './applicationInfo.component.html',
   styleUrls: ['./applicationInfo.component.css'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressBarModule,
+    ApplicationInfoEditComponent,
+    ApplicationInfoViewComponent
+  ]
 })
 export class ApplicationInfoComponent implements AfterViewInit {
 

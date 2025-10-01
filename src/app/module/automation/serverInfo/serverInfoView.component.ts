@@ -1,16 +1,36 @@
 import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {MatTableModule, MatTableDataSource} from '@angular/material/table';
+import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
+import {MatButtonModule} from '@angular/material/button';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
 import {ServerInfoComponent} from "./serverInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
-import {PageEvent} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-serverInfo-view',
   templateUrl: './serverInfoView.component.html',
   styleUrls: ['./serverInfoView.component.css'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    MatTabsModule,
+    MatGridListModule,
+    MatSelectModule,
+    MatCardModule
+  ]
 })
 export class ServerInfoViewComponent {
 

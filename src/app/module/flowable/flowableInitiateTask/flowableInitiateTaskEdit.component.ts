@@ -2,13 +2,35 @@ import {AfterViewInit, ChangeDetectorRef, Component} from '@angular/core';
 import {FlowableInitiateTaskComponent} from "./flowableInitiateTask.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
+import {CommonModule} from "@angular/common";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
+import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @Component({
     selector: 'app-flowableInitiateTask-edit',
     templateUrl: './flowableInitiateTaskEdit.component.html',
     styleUrls: ['./flowableInitiateTaskEdit.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+        CommonModule,
+        MatGridListModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatSelectModule,
+        MatCardModule,
+        MatButtonModule,
+        MatProgressBarModule,
+        MatDividerModule
+    ]
 })
 export class FlowableInitiateTaskEditComponent implements AfterViewInit {
 

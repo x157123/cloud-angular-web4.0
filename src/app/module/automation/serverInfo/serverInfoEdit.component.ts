@@ -1,4 +1,13 @@
 import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatCardModule} from '@angular/material/card';
 import {ServerInfoComponent} from "./serverInfo.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
@@ -7,7 +16,18 @@ import {AlertService} from "@component/alert/alert.service";
   selector: 'app-serverInfo-edit',
   templateUrl: './serverInfoEdit.component.html',
   styleUrls: ['./serverInfoEdit.component.css'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatProgressBarModule,
+    MatCardModule
+  ]
 })
 export class ServerInfoEditComponent {
 

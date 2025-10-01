@@ -1,10 +1,16 @@
 import {Component, AfterViewInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
-import {PageEvent} from "@angular/material/paginator";
-import {MatDrawer} from "@angular/material/sidenav";
+import {PageEvent, MatPaginatorModule} from "@angular/material/paginator";
+import {MatDrawer, MatSidenavModule} from "@angular/material/sidenav";
 import {EditComponent} from "./edit.component";
 import {AlertService} from "@component/alert/alert.service";
+import {CommonModule} from '@angular/common';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 export interface Dict {
@@ -16,7 +22,19 @@ export interface Dict {
     selector: 'app-index',
     templateUrl: './index.component.html',
     styleUrls: ['./index.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+        CommonModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatProgressBarModule,
+        MatTableModule,
+        MatPaginatorModule,
+        EditComponent
+    ]
 })
 export class IndexComponent implements AfterViewInit {
 

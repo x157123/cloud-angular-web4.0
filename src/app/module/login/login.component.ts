@@ -2,7 +2,10 @@ import {Component} from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
+  CdkDropList,
+  CdkDrag
 } from '@angular/cdk/drag-drop';
+import {CommonModule} from '@angular/common';
 
 export interface ColumnConfig{
   writeColumn: string,
@@ -13,7 +16,12 @@ export interface ColumnConfig{
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      CdkDropList,
+      CdkDrag
+    ]
 })
 export class LoginComponent{
 

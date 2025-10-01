@@ -1,16 +1,34 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {PageEvent} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatDrawer} from "@angular/material/sidenav";
+import {PageEvent, MatPaginatorModule} from "@angular/material/paginator";
+import {MatTableDataSource, MatTableModule} from "@angular/material/table";
+import {MatDrawer, MatSidenavModule} from "@angular/material/sidenav";
 import {EditComponent, TableConfig} from "./edit.component";
 import {AlertService} from "@component/alert/alert.service";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
+import {CommonModule} from '@angular/common';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
     selector: 'app-deploy',
     templateUrl: './deploy.component.html',
     styleUrls: ['./deploy.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+        CommonModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatProgressBarModule,
+        MatTableModule,
+        MatPaginatorModule,
+        EditComponent
+    ]
 })
 export class DeployComponent implements AfterViewInit {
 

@@ -3,6 +3,15 @@ import {Dict, FlowableManageComponent} from "./flowableManage.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
 import {FormControl, Validators} from "@angular/forms";
+import {CommonModule} from "@angular/common";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
+import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 
@@ -10,7 +19,18 @@ import {FormControl, Validators} from "@angular/forms";
     selector: 'app-flowableManage-edit',
     templateUrl: './flowableManageEdit.component.html',
     styleUrls: ['./flowableManageEdit.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+        CommonModule,
+        MatGridListModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatCardModule,
+        MatButtonModule,
+        MatProgressBarModule,
+        MatDividerModule
+    ]
 })
 export class FlowableManageEditComponent {
 

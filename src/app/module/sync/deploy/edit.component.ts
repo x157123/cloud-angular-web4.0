@@ -2,13 +2,22 @@ import {Component, ViewChild} from '@angular/core';
 import {DeployComponent, SyncConfig} from "./deploy.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, Validators, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper'
-import {MatTabGroup} from "@angular/material/tabs";
+import {MatTabGroup, MatTabsModule} from "@angular/material/tabs";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {ColumnComponent} from "./column/column.component";
 import {TableComponent} from "./table/table.component";
-import {MatStepper} from "@angular/material/stepper";
+import {MatStepper, MatStepperModule} from "@angular/material/stepper";
+import {CommonModule} from '@angular/common';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @Component({
@@ -21,7 +30,24 @@ import {MatStepper} from "@angular/material/stepper";
             useValue: { showError: true },
         },
     ],
-    standalone: false
+    standalone: true,
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatStepperModule,
+        MatGridListModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatProgressBarModule,
+        MatTabsModule,
+        MatIconModule,
+        ColumnComponent,
+        TableComponent
+    ]
 })
 export class EditComponent {
 

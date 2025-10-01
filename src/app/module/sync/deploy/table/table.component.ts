@@ -1,11 +1,19 @@
 import {Component} from '@angular/core';
 import {EditComponent, TableConfig} from "../edit.component";
+import {CommonModule} from '@angular/common';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
     selector: 'app-sync-table',
     templateUrl: './table.component.html',
     styleUrls: ['./table.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+        CommonModule,
+        MatExpansionModule,
+        MatButtonModule
+    ]
 })
 export class TableComponent {
 
