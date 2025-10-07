@@ -29,7 +29,7 @@
     <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
     <div class="flex-1 edit-content-info-scrollbar">
       <mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="id">
+        <ng-container matColumnDef="id" sticky>
           <mat-header-cell mat-header-cell *matHeaderCellDef> id</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{ element.id }}</mat-cell>
         </ng-container>

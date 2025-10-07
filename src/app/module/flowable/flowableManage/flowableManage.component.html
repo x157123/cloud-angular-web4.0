@@ -1,8 +1,8 @@
-<mat-drawer-container>
+<mat-drawer-container autosize>
   <mat-drawer #drawer mode="over" position="end" class="edit-drawer">
     <app-flowableManage-edit #appFlowableManageEdit></app-flowableManage-edit>
   </mat-drawer>
-  <mat-drawer-content>
+  <div class="mat-drawer-containers flex flex-col h-screen">
     <mat-toolbar>
       <input matInput ngModel="{{keyword}}" placeholder="查询条件">
       <button mat-raised-button color="primary" (click)="queryData()">查询</button>
@@ -13,7 +13,7 @@
     <mat-progress-bar [ngStyle]="visibilityListData" mode="indeterminate"></mat-progress-bar>
     <div class="flex-1 edit-content-info-scrollbar">
       <mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="id">
+        <ng-container matColumnDef="id" sticky>
           <mat-header-cell mat-header-cell *matHeaderCellDef> id</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{ element.id }}</mat-cell>
         </ng-container>
@@ -56,5 +56,5 @@
                    [pageIndex]="pageIndex"
                    (page)="handlePageEvent($event)">
     </mat-paginator>
-  </mat-drawer-content>>
+  </div>
 </mat-drawer-container>
