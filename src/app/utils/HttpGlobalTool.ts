@@ -23,7 +23,7 @@ export class HttpGlobalTool {
     return this.http.get(url).pipe(
       catchError((e) => {
         console.log(e.error.error)
-        return throwError(e);
+        return throwError(() => e);
       })
     );
   }
@@ -32,7 +32,7 @@ export class HttpGlobalTool {
     return this.http.post(url, param, this.paramCfg).pipe(
       catchError((e) => {
         console.log(e.error.error)
-        return throwError(e);
+        return throwError(() => e);
       })
     );
   }
@@ -41,7 +41,7 @@ export class HttpGlobalTool {
     return this.http.post(url, body, this.bodyCfg).pipe(
       catchError((e) => {
         console.log(e.error.error)
-        return throwError(e);
+        return throwError(() => e);
       })
     );
   }
@@ -50,7 +50,7 @@ export class HttpGlobalTool {
     return this.http.put(url, body).pipe(
       catchError((e) => {
         console.log(e.error.error)
-        return throwError(e);
+        return throwError(() => e);
       })
     );
   }
@@ -59,7 +59,7 @@ export class HttpGlobalTool {
     return this.http.delete(url).pipe(
       catchError((e) => {
         console.log(e.error.error)
-        return throwError(e);
+        return throwError(() => e);
       })
     );
   }
