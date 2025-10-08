@@ -11,15 +11,15 @@
                 <mat-form-field class="mat-form-field-width">
                   <mat-label>{{ formObj.label }}</mat-label>
                   <input matInput [formControlName]="formObj.key" [id]="formObj.key" [type]="formObj.type">
-                  @if (form.get(formObj.key)?.hasError('required')) {
+                  @if (hasError(formObj.key, 'required')) {
                     <mat-error>{{ formObj.type }}必填</mat-error>
                   }
-                  @if (form.get(formObj.key)?.hasError('min')) {
+                  @if (hasError(formObj.key, 'min')) {
                     <mat-error>{{ formObj.label }}
                       长度不能少于{{ formObj.minLength }}
                     </mat-error>
                   }
-                  @if (form.get(formObj.key)?.hasError('max')) {
+                  @if (hasError(formObj.key, 'max')) {
                     <mat-error>{{ formObj.label }}
                       长度不能大于{{ formObj.maxLength }}
                     </mat-error>
@@ -36,23 +36,23 @@
                 <mat-form-field class="mat-form-field-width">
                   <mat-label>{{ formObj.label }}</mat-label>
                   <input matInput [formControlName]="formObj.key" [id]="formObj.key" [type]="formObj.type">
-                  @if (form.get(formObj.key)?.hasError('required')) {
+                  @if (hasError(formObj.key, 'required')) {
                     <mat-error>{{ formObj.label }}必填</mat-error>
                   }
-                  @if (form.get(formObj.key)?.hasError('minlength')) {
+                  @if (hasError(formObj.key, 'minlength')) {
                     <mat-error>{{ formObj.label }}
                       长度不能少于{{ formObj.minLength }}位
                     </mat-error>
                   }
-                  @if (form.get(formObj.key)?.hasError('maxlength')) {
+                  @if (hasError(formObj.key, 'maxlength')) {
                     <mat-error>{{ formObj.label }}
                       长度不能超过{{ formObj.maxLength }}位
                     </mat-error>
                   }
-                  @if (form.get(formObj.key)?.hasError('phone')) {
-                    <mat-error>{{ form.get(formObj.key)?.errors?.['message'] }}</mat-error>
+                  @if (hasError(formObj.key, 'phone')) {
+                    <mat-error>{{ getErrorMessage(formObj.key, 'message') }}</mat-error>
                   }
-                  @if (form.get(formObj.key)?.hasError('email')) {
+                  @if (hasError(formObj.key, 'email')) {
                     <mat-error>请输入有效的邮箱地址</mat-error>
                   }
                 </mat-form-field>
@@ -70,7 +70,7 @@
                       <mat-option [value]="opt.key">{{ opt.value }}</mat-option>
                     }
                   </mat-select>
-                  @if (form.get(formObj.key)?.hasError('required')) {
+                  @if (hasError(formObj.key, 'required')) {
                     <mat-error>{{ formObj.label }}必选</mat-error>
                   }
                 </mat-form-field>
@@ -91,7 +91,7 @@
                   </mat-radio-group>
                 </div>
                 <div class="errorClass" style="height: 21px;">
-                  @if (form.get(formObj.key)?.hasError('required')) {
+                  @if (hasError(formObj.key, 'required')) {
                     <mat-error class="mat-mdc-form-field-subscript-wrapper float-left ml-4">{{ formObj.label }}必选</mat-error>
                   }
                 </div>
@@ -115,7 +115,7 @@
                   }
                 </div>
                 <div style="height: 21px;">
-                  @if (form.get(formObj.key)?.hasError('required')) {
+                  @if (hasError(formObj.key, 'required')) {
                     <mat-error class="mat-mdc-form-field-subscript-wrapper float-left ml-4">{{ formObj.label }}必选</mat-error>
                   }
                 </div>
@@ -130,15 +130,15 @@
                 <mat-form-field class="mat-form-field-width">
                     <textarea matInput [id]="formObj.key" [formControlName]="formObj.key"
                               placeholder="{{ formObj.label }}"></textarea>
-                  @if (form.get(formObj.key)?.hasError('required')) {
+                  @if (hasError(formObj.key, 'required')) {
                     <mat-error>{{ formObj.label }}必填</mat-error>
                   }
-                  @if (form.get(formObj.key)?.hasError('minlength')) {
+                  @if (hasError(formObj.key, 'minlength')) {
                     <mat-error>{{ formObj.label }}
                       不能少于{{ formObj.minLength }}位
                     </mat-error>
                   }
-                  @if (form.get(formObj.key)?.hasError('maxlength')) {
+                  @if (hasError(formObj.key, 'maxlength')) {
                     <mat-error>{{ formObj.label }}
                       不能超过{{ formObj.maxLength }}位
                     </mat-error>

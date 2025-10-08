@@ -175,4 +175,12 @@ export class DynamicFormComponent implements OnInit {
     return control?.value ? control.value.length : 0;
   }
 
+  hasError(key: string, errorCode: string): boolean {
+    return this.form.get(key)?.hasError(errorCode) ?? false;
+  }
+
+  getErrorMessage(key: string, errorCode: string): string {
+    return this.form.get(key)?.errors?.[errorCode] ?? '';
+  }
+
 }
