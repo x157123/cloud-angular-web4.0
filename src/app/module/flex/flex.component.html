@@ -1,3 +1,5 @@
 <div class="parent">
-  <app-box-component *ngFor="let color of colors" [color]="color"></app-box-component>
+  @for (color of colors; track color) {
+    <app-box-component [color]="color"></app-box-component>
+  }
 </div>

@@ -1,11 +1,11 @@
 <div class="flex flex-col h-screen edit-content">
   <div class="h-12">
-    <ng-container *ngIf="show">
+    @if (show) {
       查看
-    </ng-container>
-    <ng-container *ngIf="!show">
+    }
+    @if (!show) {
       新增
-    </ng-container>
+    }
   </div>
   <mat-divider/>
   <mat-stepper class="overflow-auto" #stepper>
@@ -24,7 +24,9 @@
               <mat-form-field>
                 <mat-label>数据库类型</mat-label>
                 <mat-select [required]="show" [(value)]="syncConfig.readConnectType" (selectionChange)="readList($event.value,1)">
-                  <mat-option [value]="option.value" *ngFor="let option of sourceType">{{ option.viewValue }}</mat-option>
+                  @for (option of sourceType; track option.value) {
+                    <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+                  }
                 </mat-select>
               </mat-form-field>
             </mat-grid-tile>
@@ -33,7 +35,9 @@
             <mat-grid-tile colspan="6" class="content">
               <mat-form-field class="example-full-width">
                 <mat-select [required]="show" [(ngModel)]="syncConfig.readConnectId">
-                  <mat-option [value]="option.id" *ngFor="let option of readDb">{{ option.remark }}</mat-option>
+                  @for (option of readDb; track option.id) {
+                    <mat-option [value]="option.id">{{ option.remark }}</mat-option>
+                  }
                 </mat-select>
               </mat-form-field>
             </mat-grid-tile>
@@ -43,7 +47,9 @@
               <mat-form-field>
                 <mat-label>数据库类型</mat-label>
                 <mat-select [required]="show" [(ngModel)]="syncConfig.writeConnectType" (selectionChange)="readList($event.value,2)">
-                  <mat-option [value]="option.value" *ngFor="let option of sourceType">{{ option.viewValue }}</mat-option>
+                  @for (option of sourceType; track option.value) {
+                    <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+                  }
                 </mat-select>
               </mat-form-field>
             </mat-grid-tile>
@@ -52,7 +58,9 @@
             <mat-grid-tile colspan="6" class="content">
               <mat-form-field class="example-full-width">
                 <mat-select [required]="show" [(ngModel)]="syncConfig.writeConnectId">
-                  <mat-option [value]="option.id" *ngFor="let option of writeDb">{{ option.remark }}</mat-option>
+                  @for (option of writeDb; track option.id) {
+                    <mat-option [value]="option.id">{{ option.remark }}</mat-option>
+                  }
                 </mat-select>
               </mat-form-field>
             </mat-grid-tile>

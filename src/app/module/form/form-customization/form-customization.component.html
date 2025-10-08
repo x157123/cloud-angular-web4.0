@@ -8,139 +8,149 @@
                             [cdkDropListData]="formList"
                             class="example-list"
                             (cdkDropListDropped)="drop($event)">
-              <mat-expansion-panel *ngFor="let item of formList; index as i" cdkDrag (opened)="panelOpenState = true"
-                                   (closed)="panelOpenState = false">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    {{formList[i].label}}
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <div class="grid grid-cols-4 gap-4">
-                  <div class="col-span-2 m-1 flex">
-                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">名称：</div>
-                    <div class="grow h-14">
-                      <mat-form-field class="mat-form-field-width">
-                        <input matInput [(ngModel)]="formList[i].label">
-                      </mat-form-field>
+              @for (item of formList; track item.key; let i = $index) {
+                <mat-expansion-panel cdkDrag (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{formList[i].label}}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="grid grid-cols-4 gap-4">
+                    <div class="col-span-2 m-1 flex">
+                      <div class="w-16 shrink-0 h-14 flex items-center justify-end">名称：</div>
+                      <div class="grow h-14">
+                        <mat-form-field class="mat-form-field-width">
+                          <input matInput [(ngModel)]="formList[i].label">
+                        </mat-form-field>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-span-2 m-1 flex">
-                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">主键：</div>
-                    <div class="grow h-14">
-                      <mat-form-field class="mat-form-field-width">
-                        <input matInput [(ngModel)]="formList[i].key">
-                      </mat-form-field>
+                    <div class="col-span-2 m-1 flex">
+                      <div class="w-16 shrink-0 h-14 flex items-center justify-end">主键：</div>
+                      <div class="grow h-14">
+                        <mat-form-field class="mat-form-field-width">
+                          <input matInput [(ngModel)]="formList[i].key">
+                        </mat-form-field>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-span-2 m-1 flex">
-                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">关联项：</div>
-                    <div class="grow h-14">
-                      <mat-form-field class="mat-form-field-width">
-                        <mat-select [(ngModel)]="formList[i].associationKey" (selectionChange)="onSelectionAssociationKey(i)">
-                          <ng-container *ngFor="let itme_t of formList; index as j">
-                            <mat-option [value]="itme_t.key" *ngIf="itme_t.key != formList[i].key && (itme_t.controlType === 'selectBox' || itme_t.controlType === 'radioBox' || itme_t.controlType === 'checkBox')">{{formList[j].label}}</mat-option>
-                          </ng-container>
-                        </mat-select>
-                      </mat-form-field>
+                    <div class="col-span-2 m-1 flex">
+                      <div class="w-16 shrink-0 h-14 flex items-center justify-end">关联项：</div>
+                      <div class="grow h-14">
+                        <mat-form-field class="mat-form-field-width">
+                          <mat-select [(ngModel)]="formList[i].associationKey" (selectionChange)="onSelectionAssociationKey(i)">
+                            @for (itme_t of formList; track itme_t.key; let j = $index) {
+                              @if (itme_t.key != formList[i].key && (itme_t.controlType === 'selectBox' || itme_t.controlType === 'radioBox' || itme_t.controlType === 'checkBox')) {
+                                <mat-option [value]="itme_t.key">{{formList[j].label}}</mat-option>
+                              }
+                            }
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-span-2 m-1 flex">
-                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">关联值：</div>
-                    <div class="grow h-14">
-                      <mat-form-field class="mat-form-field-width">
-                        <mat-select [(ngModel)]="formList[i].associationValue" (selectionChange)="onSelectionAssociationValue(i)">
-                          <mat-option [value]="item.key" *ngFor="let item of formList; index as j">{{formList[j].label}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
+                    <div class="col-span-2 m-1 flex">
+                      <div class="w-16 shrink-0 h-14 flex items-center justify-end">关联值：</div>
+                      <div class="grow h-14">
+                        <mat-form-field class="mat-form-field-width">
+                          <mat-select [(ngModel)]="formList[i].associationValue" (selectionChange)="onSelectionAssociationValue(i)">
+                            @for (assocItem of formList; track assocItem.key; let j = $index) {
+                              <mat-option [value]="assocItem.key">{{formList[j].label}}</mat-option>
+                            }
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-span-2 m-1 flex">
-                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">类型：</div>
-                    <div class="grow h-14">
-                      <mat-form-field class="mat-form-field-width">
-                        <mat-select [(ngModel)]="formList[i].controlType" (selectionChange)="onSelectionChange(i)">
-                          <mat-option value="textBox">文本框</mat-option>
-                          <mat-option value="numberBox">数字框</mat-option>
-                          <mat-option value="selectBox">下拉选择框</mat-option>
-                          <mat-option value="checkBox">多选框</mat-option>
-                          <mat-option value="radioBox">单选框</mat-option>
-                          <mat-option value="textareaBox">文本域</mat-option>
-                        </mat-select>
-                      </mat-form-field>
+                    <div class="col-span-2 m-1 flex">
+                      <div class="w-16 shrink-0 h-14 flex items-center justify-end">类型：</div>
+                      <div class="grow h-14">
+                        <mat-form-field class="mat-form-field-width">
+                          <mat-select [(ngModel)]="formList[i].controlType" (selectionChange)="onSelectionChange(i)">
+                            <mat-option value="textBox">文本框</mat-option>
+                            <mat-option value="numberBox">数字框</mat-option>
+                            <mat-option value="selectBox">下拉选择框</mat-option>
+                            <mat-option value="checkBox">多选框</mat-option>
+                            <mat-option value="radioBox">单选框</mat-option>
+                            <mat-option value="textareaBox">文本域</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-span-2 m-1 flex">
-                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">行宽：</div>
-                    <div class="grow h-14">
-                      <mat-form-field class="mat-form-field-width">
-                        <mat-select [(ngModel)]="formList[i].phonetics">
-                          <mat-option [value]="false">整行一半显示</mat-option>
-                          <mat-option [value]="true">整行显示</mat-option>
-                        </mat-select>
-                      </mat-form-field>
+                    <div class="col-span-2 m-1 flex">
+                      <div class="w-16 shrink-0 h-14 flex items-center justify-end">行宽：</div>
+                      <div class="grow h-14">
+                        <mat-form-field class="mat-form-field-width">
+                          <mat-select [(ngModel)]="formList[i].phonetics">
+                            <mat-option [value]="false">整行一半显示</mat-option>
+                            <mat-option [value]="true">整行显示</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-span-4 m-1 " *ngIf="formList[i].controlType == 'selectBox' || formList[i].controlType == 'checkBox' || formList[i].controlType == 'radioBox'">
-                    <div class="pl-16">
-                      <div *ngFor="let item of formList[i].options; index as k" class="flex">
-                        <div class="w-2/5 flex items-center">
-                          <input matInput [(ngModel)]="item.value">
+                    @if (formList[i].controlType == 'selectBox' || formList[i].controlType == 'checkBox' || formList[i].controlType == 'radioBox') {
+                      <div class="col-span-4 m-1 ">
+                        <div class="pl-16">
+                          @for (optItem of formList[i].options; track $index; let k = $index) {
+                            <div class="flex">
+                              <div class="w-2/5 flex items-center">
+                                <input matInput [(ngModel)]="optItem.value">
+                              </div>
+                              <div class="w-2/5 flex items-center">
+                                <input matInput [(ngModel)]="optItem.key">
+                              </div>
+                              <div class="w-1/5 flex items-center">
+                                <mat-icon class="small-icon cursor-pointer" (click)="removeOption(i,k)">delete</mat-icon>
+                                <mat-icon class="small-icon cursor-pointer" (click)="addOption(i,k)">add</mat-icon>
+                              </div>
+                            </div>
+                          }
                         </div>
-                        <div class="w-2/5 flex items-center">
-                          <input matInput [(ngModel)]="item.key">
-                        </div>
-                        <div class="w-1/5 flex items-center">
-                          <mat-icon class="small-icon cursor-pointer" (click)="removeOption(i,k)">delete</mat-icon>
-                          <mat-icon class="small-icon cursor-pointer" (click)="addOption(i,k)">add</mat-icon>
-                        </div>
+                      </div>
+                    }
+                    <div class="col-span-2 m-1 flex">
+                      <div class="w-16 shrink-0 h-14 flex items-center justify-end">必填：</div>
+                      <div class="grow h-14">
+                        <mat-form-field class="mat-form-field-width">
+                          <mat-select [(ngModel)]="formList[i].required">
+                            <mat-option [value]="false">不必填</mat-option>
+                            <mat-option [value]="true">必填</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-span-2 m-1 flex">
+                      <div class="w-16 shrink-0 h-14 flex items-center justify-end">验证：</div>
+                      <div class="grow h-14">
+                        <mat-form-field class="mat-form-field-width">
+                          <mat-select [(ngModel)]="formList[i].validator">
+                            <mat-option value="">不验证</mat-option>
+                            <mat-option value="email">邮箱</mat-option>
+                            <mat-option value="phone">电话号码</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-span-2 m-1 flex">
+                      <div class="w-16 shrink-0 h-14 flex items-center justify-end">字数：</div>
+                      <div class="grow h-14">
+                        <mat-form-field class="mat-form-field-width">
+                          <input matInput [(ngModel)]="formList[i].minLength">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-span-2 m-1 flex">
+                      <div class="w-16 shrink-0 h-14 flex items-center justify-end">字数：</div>
+                      <div class="grow h-14">
+                        <mat-form-field class="mat-form-field-width">
+                          <input matInput [(ngModel)]="formList[i].maxLength">
+                        </mat-form-field>
                       </div>
                     </div>
                   </div>
-                  <div class="col-span-2 m-1 flex">
-                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">必填：</div>
-                    <div class="grow h-14">
-                      <mat-form-field class="mat-form-field-width">
-                        <mat-select [(ngModel)]="formList[i].required">
-                          <mat-option [value]="false">不必填</mat-option>
-                          <mat-option [value]="true">必填</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="col-span-2 m-1 flex">
-                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">验证：</div>
-                    <div class="grow h-14">
-                      <mat-form-field class="mat-form-field-width">
-                        <mat-select [(ngModel)]="formList[i].validator">
-                          <mat-option value="">不验证</mat-option>
-                          <mat-option value="email">邮箱</mat-option>
-                          <mat-option value="phone">电话号码</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="col-span-2 m-1 flex">
-                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">字数：</div>
-                    <div class="grow h-14">
-                      <mat-form-field class="mat-form-field-width">
-                        <input matInput [(ngModel)]="formList[i].minLength">
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="col-span-2 m-1 flex">
-                    <div class="w-16 shrink-0 h-14 flex items-center justify-end">字数：</div>
-                    <div class="grow h-14">
-                      <mat-form-field class="mat-form-field-width">
-                        <input matInput [(ngModel)]="formList[i].maxLength">
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </div>
-                <mat-action-row>
-                  <button mat-button color="warn" (click)="delForm(i)">删除</button>
-                  <button mat-button color="warn" (click)="addForm(i)">添加</button>
-                </mat-action-row>
-              </mat-expansion-panel>
+                  <mat-action-row>
+                    <button mat-button color="warn" (click)="delForm(i)">删除</button>
+                    <button mat-button color="warn" (click)="addForm(i)">添加</button>
+                  </mat-action-row>
+                </mat-expansion-panel>
+              }
             </mat-accordion>
           </div>
         </div>

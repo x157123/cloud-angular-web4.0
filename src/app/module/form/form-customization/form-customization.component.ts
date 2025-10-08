@@ -2,7 +2,7 @@ import {Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild} from '@angular/core';
 import {MatDrawerContainer, MatDrawerContent} from "@angular/material/sidenav";
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
 import {MatFormField, MatInput} from "@angular/material/input";
-import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Base} from "@component/dynamic-form/elements/base";
 
@@ -25,7 +25,6 @@ import {MatIcon} from "@angular/material/icon";
     CdkDropList,
     CdkDrag,
     MatInput,
-    NgForOf,
     ReactiveFormsModule,
     AsyncPipe,
     DynamicFormComponent,
@@ -38,7 +37,6 @@ import {MatIcon} from "@angular/material/icon";
     MatSelect,
     MatButton,
     MatCardActions,
-    NgIf,
     MatIcon,
   ],
   providers: [ControlService],

@@ -10,15 +10,16 @@
       <div class="h-[500px]">
         <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
           <mat-tab label="系统访问">
-            <iframe
-              *ngIf="iframeUrl"
-              [src]="iframeUrl"
-              width="800"
-              height="500"
-              style="border:0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
+            @if (iframeUrl) {
+              <iframe
+                [src]="iframeUrl"
+                width="800"
+                height="500"
+                style="border:0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            }
           </mat-tab>
           <mat-tab label="系统状态">
             <mat-grid-list cols="16" rowHeight="30px" gutterSize="3px">
@@ -43,43 +44,71 @@
       <div class="flex-1 edit-content-info-scrollbar">
         <mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="id" sticky >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作记录唯一标识 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
+            @if (true) {
+              <mat-header-cell mat-header-cell *matHeaderCellDef> 操作记录唯一标识 </mat-header-cell>
+            }
+            @if (true) {
+              <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
+            }
           </ng-container>
 
           <ng-container matColumnDef="serverId"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器id </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.serverId}} </mat-cell>
+            @if (true) {
+              <mat-header-cell mat-header-cell *matHeaderCellDef> 服务器id </mat-header-cell>
+            }
+            @if (true) {
+              <mat-cell *matCellDef="let element" > {{element.serverId}} </mat-cell>
+            }
           </ng-container>
 
           <ng-container matColumnDef="applicationName"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef>
-              <mat-select [(ngModel)]="applicationSelectId" (selectionChange)="queryLog()">
-                @for (app of application; track app) {
-                  <mat-option [value]="app.value">{{app.viewValue}}</mat-option>
-                }
-              </mat-select>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.applicationName}} </mat-cell>
+            @if (true) {
+              <mat-header-cell mat-header-cell *matHeaderCellDef>
+                <mat-select [(ngModel)]="applicationSelectId" (selectionChange)="queryLog()">
+                  @for (app of application; track app) {
+                    <mat-option [value]="app.value">{{app.viewValue}}</mat-option>
+                  }
+                </mat-select>
+              </mat-header-cell>
+            }
+            @if (true) {
+              <mat-cell *matCellDef="let element" > {{element.applicationName}} </mat-cell>
+            }
           </ng-container>
 
           <ng-container matColumnDef="operationType"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作类型 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.operationType}} </mat-cell>
+            @if (true) {
+              <mat-header-cell mat-header-cell *matHeaderCellDef> 操作类型 </mat-header-cell>
+            }
+            @if (true) {
+              <mat-cell *matCellDef="let element" > {{element.operationType}} </mat-cell>
+            }
           </ng-container>
 
           <ng-container matColumnDef="description"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 办理记录 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.description}} </mat-cell>
+            @if (true) {
+              <mat-header-cell mat-header-cell *matHeaderCellDef> 办理记录 </mat-header-cell>
+            }
+            @if (true) {
+              <mat-cell *matCellDef="let element" > {{element.description}} </mat-cell>
+            }
           </ng-container>
 
           <ng-container matColumnDef="createDate"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 操作时间 </mat-header-cell>
-            <mat-cell *matCellDef="let element" > {{element.createDate}} </mat-cell>
+            @if (true) {
+              <mat-header-cell mat-header-cell *matHeaderCellDef> 操作时间 </mat-header-cell>
+            }
+            @if (true) {
+              <mat-cell *matCellDef="let element" > {{element.createDate}} </mat-cell>
+            }
           </ng-container>
 
-          <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          @if (true) {
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+          }
+          @if (true) {
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          }
         </mat-table>
       </div>
       <mat-paginator [pageSizeOptions]="[10, 15, 20]" [length]="dataLength"

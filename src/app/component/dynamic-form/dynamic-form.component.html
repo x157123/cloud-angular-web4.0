@@ -2,122 +2,156 @@
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="m-5">
       <div class="grid grid-cols-4 gap-4">
-        <ng-container *ngFor="let formObj of formList">
+        @for (formObj of formList; track formObj.key) {
 
-          <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex"
-               *ngIf="formObj.controlType === 'numberBox'">
-            <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
-            <div class="grow h-14">
-              <mat-form-field class="mat-form-field-width">
-                <mat-label>{{ formObj.label }}</mat-label>
-                <input matInput [formControlName]="formObj.key" [id]="formObj.key" [type]="formObj.type">
-                <mat-error *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.type }}必填</mat-error>
-                <mat-error *ngIf="form.get(formObj.key)?.hasError('min')">{{ formObj.label }}
-                  长度不能少于{{ formObj.minLength }}
-                </mat-error>
-                <mat-error *ngIf="form.get(formObj.key)?.hasError('max')">{{ formObj.label }}
-                  长度不能大于{{ formObj.maxLength }}
-                </mat-error>
-              </mat-form-field>
-            </div>
-          </div>
-
-          <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex"
-               *ngIf="formObj.controlType === 'textBox'">
-            <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
-            <div class="grow h-14">
-              <mat-form-field class="mat-form-field-width">
-                <mat-label>{{ formObj.label }}</mat-label>
-                <input matInput [formControlName]="formObj.key" [id]="formObj.key" [type]="formObj.type">
-                <mat-error *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必填</mat-error>
-                <mat-error *ngIf="form.get(formObj.key)?.hasError('minlength')">{{ formObj.label }}
-                  长度不能少于{{ formObj.minLength }}位
-                </mat-error>
-                <mat-error *ngIf="form.get(formObj.key)?.hasError('maxlength')">{{ formObj.label }}
-                  长度不能超过{{ formObj.maxLength }}位
-                </mat-error>
-                <mat-error
-                  *ngIf="form.get(formObj.key)?.hasError('phone')">{{ form.get(formObj.key)?.errors?.['message'] }}
-                </mat-error>
-                <mat-error *ngIf="form.get(formObj.key)?.hasError('email')">请输入有效的邮箱地址</mat-error>
-              </mat-form-field>
-            </div>
-          </div>
-
-          <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex"
-               *ngIf="formObj.controlType === 'selectBox'">
-            <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
-            <div class="grow h-14">
-              <mat-form-field class="mat-form-field-width">
-                <mat-select [id]="formObj.key" [formControlName]="formObj.key">
-                  <mat-option *ngFor="let opt of formObj.options" [value]="opt.key">{{ opt.value }}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必选</mat-error>
-              </mat-form-field>
-            </div>
-          </div>
-
-          <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex"
-               style="height: 56px;" *ngIf="formObj.controlType === 'radioBox'">
-            <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
-            <div class="grow">
-              <div class="flex items-center" style="height: 56px;">
-                <mat-radio-group [formControlName]="formObj.key">
-                  <mat-radio-button [id]="formObj.key" *ngFor="let opt of formObj.options"
-                                    [value]="opt.key">{{ opt.value }}
-                  </mat-radio-button>
-                </mat-radio-group>
-              </div>
-              <div class="errorClass" style="height: 21px;">
-                <mat-error class="mat-mdc-form-field-subscript-wrapper float-left ml-4"
-                           *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必选
-                </mat-error>
+          @if (formObj.controlType === 'numberBox') {
+            <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex">
+              <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
+              <div class="grow h-14">
+                <mat-form-field class="mat-form-field-width">
+                  <mat-label>{{ formObj.label }}</mat-label>
+                  <input matInput [formControlName]="formObj.key" [id]="formObj.key" [type]="formObj.type">
+                  @if (form.get(formObj.key)?.hasError('required')) {
+                    <mat-error>{{ formObj.type }}必填</mat-error>
+                  }
+                  @if (form.get(formObj.key)?.hasError('min')) {
+                    <mat-error>{{ formObj.label }}
+                      长度不能少于{{ formObj.minLength }}
+                    </mat-error>
+                  }
+                  @if (form.get(formObj.key)?.hasError('max')) {
+                    <mat-error>{{ formObj.label }}
+                      长度不能大于{{ formObj.maxLength }}
+                    </mat-error>
+                  }
+                </mat-form-field>
               </div>
             </div>
-          </div>
+          }
 
-          <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex"
-               style="height: 56px;" *ngIf="formObj.controlType === 'checkBox'">
-            <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
-            <div class="grow">
-              <div class="flex items-center" style="height: 56px;">
-                <input [formControlName]="formObj.key" type="hidden">
-                <div *ngFor="let opt of formObj.options; let i = index">
-                  <mat-checkbox [checked]="opt.checked" (change)="onCheckboxChange($event, formObj.key, opt.key)" [value]="opt.key">
-                    {{ opt.value }}
-                  </mat-checkbox>
+          @if (formObj.controlType === 'textBox') {
+            <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex">
+              <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
+              <div class="grow h-14">
+                <mat-form-field class="mat-form-field-width">
+                  <mat-label>{{ formObj.label }}</mat-label>
+                  <input matInput [formControlName]="formObj.key" [id]="formObj.key" [type]="formObj.type">
+                  @if (form.get(formObj.key)?.hasError('required')) {
+                    <mat-error>{{ formObj.label }}必填</mat-error>
+                  }
+                  @if (form.get(formObj.key)?.hasError('minlength')) {
+                    <mat-error>{{ formObj.label }}
+                      长度不能少于{{ formObj.minLength }}位
+                    </mat-error>
+                  }
+                  @if (form.get(formObj.key)?.hasError('maxlength')) {
+                    <mat-error>{{ formObj.label }}
+                      长度不能超过{{ formObj.maxLength }}位
+                    </mat-error>
+                  }
+                  @if (form.get(formObj.key)?.hasError('phone')) {
+                    <mat-error>{{ form.get(formObj.key)?.errors?.['message'] }}</mat-error>
+                  }
+                  @if (form.get(formObj.key)?.hasError('email')) {
+                    <mat-error>请输入有效的邮箱地址</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+            </div>
+          }
+
+          @if (formObj.controlType === 'selectBox') {
+            <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex">
+              <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
+              <div class="grow h-14">
+                <mat-form-field class="mat-form-field-width">
+                  <mat-select [id]="formObj.key" [formControlName]="formObj.key">
+                    @for (opt of formObj.options; track opt.key) {
+                      <mat-option [value]="opt.key">{{ opt.value }}</mat-option>
+                    }
+                  </mat-select>
+                  @if (form.get(formObj.key)?.hasError('required')) {
+                    <mat-error>{{ formObj.label }}必选</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+            </div>
+          }
+
+          @if (formObj.controlType === 'radioBox') {
+            <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex"
+                 style="height: 56px;">
+              <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
+              <div class="grow">
+                <div class="flex items-center" style="height: 56px;">
+                  <mat-radio-group [formControlName]="formObj.key">
+                    @for (opt of formObj.options; track opt.key) {
+                      <mat-radio-button [id]="formObj.key" [value]="opt.key">{{ opt.value }}</mat-radio-button>
+                    }
+                  </mat-radio-group>
+                </div>
+                <div class="errorClass" style="height: 21px;">
+                  @if (form.get(formObj.key)?.hasError('required')) {
+                    <mat-error class="mat-mdc-form-field-subscript-wrapper float-left ml-4">{{ formObj.label }}必选</mat-error>
+                  }
                 </div>
               </div>
-              <div style="height: 21px;">
-                <mat-error class="mat-mdc-form-field-subscript-wrapper float-left ml-4"
-                           *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必选
-                </mat-error>
+            </div>
+          }
+
+          @if (formObj.controlType === 'checkBox') {
+            <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex"
+                 style="height: 56px;">
+              <div class="w-20 shrink-0 h-14 flex items-center justify-end">{{ formObj.label }}：</div>
+              <div class="grow">
+                <div class="flex items-center" style="height: 56px;">
+                  <input [formControlName]="formObj.key" type="hidden">
+                  @for (opt of formObj.options; track $index) {
+                    <div>
+                      <mat-checkbox [checked]="opt.checked" (change)="onCheckboxChange($event, formObj.key, opt.key)" [value]="opt.key">
+                        {{ opt.value }}
+                      </mat-checkbox>
+                    </div>
+                  }
+                </div>
+                <div style="height: 21px;">
+                  @if (form.get(formObj.key)?.hasError('required')) {
+                    <mat-error class="mat-mdc-form-field-subscript-wrapper float-left ml-4">{{ formObj.label }}必选</mat-error>
+                  }
+                </div>
               </div>
             </div>
-          </div>
+          }
 
-          <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex"
-               *ngIf="formObj.controlType === 'textareaBox'">
-            <div class="w-20 shrink-0 flex items-center justify-end">{{ formObj.label }}：</div>
-            <div class="grow">
-              <mat-form-field class="mat-form-field-width">
-                  <textarea matInput [id]="formObj.key" [formControlName]="formObj.key"
-                            placeholder="{{ formObj.label }}"></textarea>
-                <mat-error *ngIf="form.get(formObj.key)?.hasError('required')">{{ formObj.label }}必填</mat-error>
-                <mat-error *ngIf="form.get(formObj.key)?.hasError('minlength')">{{ formObj.label }}
-                  不能少于{{ formObj.minLength }}位
-                </mat-error>
-                <mat-error *ngIf="form.get(formObj.key)?.hasError('maxlength')">{{ formObj.label }}
-                  不能超过{{ formObj.maxLength }}位
-                </mat-error>
-                <mat-hint align="end">{{ getValueLength(formObj.key) }}
-                  / {{ formObj.maxLength }}
-                </mat-hint>
-              </mat-form-field>
+          @if (formObj.controlType === 'textareaBox') {
+            <div [ngClass]="{'col-span-2': !formObj.phonetics, 'col-span-4': formObj.phonetics}" class="m-1 flex">
+              <div class="w-20 shrink-0 flex items-center justify-end">{{ formObj.label }}：</div>
+              <div class="grow">
+                <mat-form-field class="mat-form-field-width">
+                    <textarea matInput [id]="formObj.key" [formControlName]="formObj.key"
+                              placeholder="{{ formObj.label }}"></textarea>
+                  @if (form.get(formObj.key)?.hasError('required')) {
+                    <mat-error>{{ formObj.label }}必填</mat-error>
+                  }
+                  @if (form.get(formObj.key)?.hasError('minlength')) {
+                    <mat-error>{{ formObj.label }}
+                      不能少于{{ formObj.minLength }}位
+                    </mat-error>
+                  }
+                  @if (form.get(formObj.key)?.hasError('maxlength')) {
+                    <mat-error>{{ formObj.label }}
+                      不能超过{{ formObj.maxLength }}位
+                    </mat-error>
+                  }
+                  <mat-hint align="end">{{ getValueLength(formObj.key) }}
+                    / {{ formObj.maxLength }}
+                  </mat-hint>
+                </mat-form-field>
+              </div>
             </div>
-          </div>
+          }
 
-        </ng-container>
+        }
       </div>
     </div>
   </form>

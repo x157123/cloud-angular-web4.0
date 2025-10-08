@@ -1,38 +1,54 @@
 <div class="menu-container">
   <mat-nav-list class="mat-nav-list" appAccordion>
-    <ng-container *ngFor="let menuitem of menus">
-      <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="menuitem.state" *ngIf="menuitem.items && menuitem.items.length <= 0" group="{{menuitem.key}}">
-        <a appAccordionToggle [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
-          <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
-          <span>{{ menuitem.name }}</span>
-        </a>
-      </mat-list-item>
-      <mat-expansion-panel *ngIf="menuitem.items &&  menuitem.items.length > 0" [expanded]="menuitem.state" [class.mat-elevation-z0]="true">
-        <mat-expansion-panel-header>
-          <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
-          <span>{{ menuitem.name }}</span>
-        </mat-expansion-panel-header>
-        <ng-container *ngFor="let menuitem of menuitem.items">
-          <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="menuitem.state" *ngIf="!menuitem.items || menuitem.items.length <= 0" group="{{menuitem.key}}">
-            <a appAccordionToggle [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
+    @for (menuitem of menus; track menuitem.key) {
+      @if (menuitem.items && menuitem.items.length <= 0) {
+        <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="menuitem.state" group="{{menuitem.key}}">
+          @if (menuitem.type === 'link') {
+            <a appAccordionToggle [routerLink]="[menuitem.path]">
               <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
               <span>{{ menuitem.name }}</span>
             </a>
-          </mat-list-item>
-          <mat-expansion-panel *ngIf="menuitem.items &&  menuitem.items.length > 0" [expanded]="menuitem.state"  [class.mat-elevation-z0]="true">
-            <mat-expansion-panel-header>
-              <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
-              <span>{{ menuitem.name }}</span>
-            </mat-expansion-panel-header>
-            <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="menuitem.state" *ngFor="let menuitem of menuitem.items" group="{{menuitem.key}}">
-              <a appAccordionToggle [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
-                <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
-                <span>{{ menuitem.name }}</span>
-              </a>
-            </mat-list-item>
-          </mat-expansion-panel>
-        </ng-container>
-      </mat-expansion-panel>
-    </ng-container>
+          }
+        </mat-list-item>
+      }
+      @if (menuitem.items && menuitem.items.length > 0) {
+        <mat-expansion-panel [expanded]="menuitem.state" [class.mat-elevation-z0]="true">
+          <mat-expansion-panel-header>
+            <mat-icon>{{ menuitem.icon || "av_timer"}}</mat-icon>
+            <span>{{ menuitem.name }}</span>
+          </mat-expansion-panel-header>
+          @for (submenuitem of menuitem.items; track submenuitem.key) {
+            @if (!submenuitem.items || submenuitem.items.length <= 0) {
+              <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="submenuitem.state" group="{{submenuitem.key}}">
+                @if (submenuitem.type === 'link') {
+                  <a appAccordionToggle [routerLink]="[submenuitem.path]">
+                    <mat-icon>{{ submenuitem.icon || "av_timer"}}</mat-icon>
+                    <span>{{ submenuitem.name }}</span>
+                  </a>
+                }
+              </mat-list-item>
+            }
+            @if (submenuitem.items && submenuitem.items.length > 0) {
+              <mat-expansion-panel [expanded]="submenuitem.state" [class.mat-elevation-z0]="true">
+                <mat-expansion-panel-header>
+                  <mat-icon>{{ submenuitem.icon || "av_timer"}}</mat-icon>
+                  <span>{{ submenuitem.name }}</span>
+                </mat-expansion-panel-header>
+                @for (subsubmenuitem of submenuitem.items; track subsubmenuitem.key) {
+                  <mat-list-item class="mdc-list-item" appAccordionLink routerLinkActive="selected" [selected]="subsubmenuitem.state" group="{{subsubmenuitem.key}}">
+                    @if (subsubmenuitem.type === 'link') {
+                      <a appAccordionToggle [routerLink]="[subsubmenuitem.path]">
+                        <mat-icon>{{ subsubmenuitem.icon || "av_timer"}}</mat-icon>
+                        <span>{{ subsubmenuitem.name }}</span>
+                      </a>
+                    }
+                  </mat-list-item>
+                }
+              </mat-expansion-panel>
+            }
+          }
+        </mat-expansion-panel>
+      }
+    }
   </mat-nav-list>
 </div>

@@ -1,11 +1,11 @@
 <div class="edit-content">
   <div class="edit-content-header">
-    <ng-container *ngIf="show">
+    @if (show) {
       查看
-    </ng-container>
-    <ng-container *ngIf="!show">
+    }
+    @if (!show) {
       新增
-    </ng-container>
+    }
   </div>
   <mat-divider/>
   <ng-container>
@@ -17,7 +17,9 @@
           <mat-form-field class="example-full-width">
             <mat-label>状态</mat-label>
             <mat-select [(ngModel)]="dataElement.outcome" [required]="show">
-              <mat-option [value]="option.value" *ngFor="let option of sourceType">{{ option.viewValue }}</mat-option>
+              @for (option of sourceType; track option.value) {
+                <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+              }
             </mat-select>
           </mat-form-field>
         </mat-grid-tile>
@@ -42,7 +44,9 @@
     <div class="edit-content-bottom">
       <mat-card-actions align="start">
           <button mat-button (click)="doSomething()">关闭</button>
-          <button mat-button (click)="doSave()" *ngIf="!show">提交</button>
+          @if (!show) {
+            <button mat-button (click)="doSave()">提交</button>
+          }
       </mat-card-actions>
     </div>
     <mat-progress-bar [ngStyle]="visibilityEditData" mode="indeterminate"></mat-progress-bar>

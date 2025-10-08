@@ -20,7 +20,9 @@
       <mat-form-field class="example-full-width">
         <mat-label>来源表</mat-label>
         <mat-select [(ngModel)]="joinColumn.readTable" (selectionChange)="readTableSelect($event)">
-          <mat-option [value]="option.name" *ngFor="let option of readTables">{{ option.name }}</mat-option>
+          @for (option of readTables; track option.name) {
+            <mat-option [value]="option.name">{{ option.name }}</mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </mat-grid-tile>
@@ -30,9 +32,11 @@
         <mat-label>目标表</mat-label>
         <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="writeTableSelect($event)">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
-            {{option.name}}
-          </mat-option>
+          @for (option of filteredOptions | async; track option.name) {
+            <mat-option [value]="option.name">
+              {{option.name}}
+            </mat-option>
+          }
         </mat-autocomplete>
       </mat-form-field>
     </mat-grid-tile>
@@ -47,9 +51,11 @@
           [cdkDropListData]="joinColumn.read"
           class="example-list"
           (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let item of joinColumn.read; index as i" cdkDrag>
-            <input class="comInput" matInput [(ngModel)]="joinColumn.read[i]" />
-          </div>
+          @for (item of joinColumn.read; track $index; let i = $index) {
+            <div class="example-box" cdkDrag>
+              <input class="comInput" matInput [(ngModel)]="joinColumn.read[i]" />
+            </div>
+          }
         </div>
       </div>
       <div class="example-container">
@@ -58,15 +64,23 @@
           [cdkDropListData]="joinColumn.write"
           class="example-list write-list"
           (cdkDropListDropped)="dropList($event)">
-          <div class="example-box" *ngFor="let item of joinColumn.write; index as i" cdkDrag>
-            <input class="comInput" matInput [(ngModel)]="joinColumn.write[i].writeColumn" />
-            <mat-icon class="small-icon" color="primary" aria-label="主键" *ngIf="joinColumn.write[i].key == 1">key</mat-icon>
-            <mat-icon class="small-icon" color="primary" aria-label="数据转换" *ngIf="joinColumn.write[i].convertFun !=null && joinColumn.write[i].convertFun.length>0">build_circle</mat-icon>
-            <mat-icon class="small-icon" color="primary" aria-label="数据加密" *ngIf="joinColumn.write[i].defaultValue !=null && joinColumn.write[i].defaultValue.length>0">data_saver_on</mat-icon>
-            <button mat-icon-button (click)="displayMenu($event, i)" class="small-icon-button" aria-label="添加操作项">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-          </div>
+          @for (item of joinColumn.write; track $index; let i = $index) {
+            <div class="example-box" cdkDrag>
+              <input class="comInput" matInput [(ngModel)]="joinColumn.write[i].writeColumn" />
+              @if (joinColumn.write[i].key == 1) {
+                <mat-icon class="small-icon" color="primary" aria-label="主键">key</mat-icon>
+              }
+              @if (joinColumn.write[i].convertFun !=null && joinColumn.write[i].convertFun.length>0) {
+                <mat-icon class="small-icon" color="primary" aria-label="数据转换">build_circle</mat-icon>
+              }
+              @if (joinColumn.write[i].defaultValue !=null && joinColumn.write[i].defaultValue.length>0) {
+                <mat-icon class="small-icon" color="primary" aria-label="数据加密">data_saver_on</mat-icon>
+              }
+              <button mat-icon-button (click)="displayMenu($event, i)" class="small-icon-button" aria-label="添加操作项">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            </div>
+          }
         </div>
       </div>
       <div class="example-add">
@@ -96,7 +110,9 @@
             <mat-label>数据转换</mat-label>
             <mat-select [(ngModel)]="columnConfigTmp.convertFun" (selectionChange)="convertSelect($event)">
               <mat-option>--</mat-option>
-              <mat-option [value]="option.value" *ngFor="let option of sourceType">{{ option.viewValue }}</mat-option>
+              @for (option of sourceType; track option.value) {
+                <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+              }
             </mat-select>
           </mat-form-field>
         </mat-grid-tile>

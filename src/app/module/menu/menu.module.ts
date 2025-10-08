@@ -22,11 +22,11 @@ import {MatListModule} from "@angular/material/list";
 
 
 @NgModule({
-    declarations: [
-        MenuComponent,
-        MenuEditComponent
-    ],
+  declarations: [
+  ],
   imports: [
+    MenuComponent,
+    MenuEditComponent,
     CommonModule,
     MatInputModule,
     MatButtonModule,

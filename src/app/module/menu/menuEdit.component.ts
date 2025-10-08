@@ -2,6 +2,15 @@ import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {Dict, MenuComponent} from "./menu.component";
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
 import {AlertService} from "@component/alert/alert.service";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
+import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {CommonModule} from "@angular/common";
 
 
 
@@ -9,6 +18,18 @@ import {AlertService} from "@component/alert/alert.service";
   selector: 'app-menu-edit',
   templateUrl: './menuEdit.component.html',
   styleUrls: ['./menuEdit.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatDividerModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatProgressBarModule
+  ]
 })
 export class MenuEditComponent {
 

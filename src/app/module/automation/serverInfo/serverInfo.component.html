@@ -116,14 +116,20 @@
 
 
           <ng-container matColumnDef="service"  >
-            <mat-header-cell mat-header-cell *matHeaderCellDef> 服务 </mat-header-cell>
-            <mat-cell *matCellDef="let element" >
-              <div *ngFor="let app of element.applicationInfoVoList">
-                <a mat-icon-button color="primary" (click)="executionApp(element.id, app.id)" [title]="app.name">
-                  <mat-icon>{{ app.icon }}</mat-icon>
-                </a>
-              </div>
-            </mat-cell>
+            @if (true) {
+              <mat-header-cell mat-header-cell *matHeaderCellDef> 服务 </mat-header-cell>
+            }
+            @if (true) {
+              <mat-cell *matCellDef="let element" >
+                @for (app of element.applicationInfoVoList; track app.id) {
+                  <div>
+                    <a mat-icon-button color="primary" (click)="executionApp(element.id, app.id)" [title]="app.name">
+                      <mat-icon>{{ app.icon }}</mat-icon>
+                    </a>
+                  </div>
+                }
+              </mat-cell>
+            }
           </ng-container>
 
 
@@ -141,8 +147,12 @@
 <!--              </a>-->
             </mat-cell>
           </ng-container>
-          <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          @if (true) {
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+          }
+          @if (true) {
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          }
         </mat-table>
     </div>
     <mat-paginator [pageSizeOptions]="[20, 50, 100]" [length]="dataLength"

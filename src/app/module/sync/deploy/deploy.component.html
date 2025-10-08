@@ -52,12 +52,16 @@
                 <a mat-icon-button color="primary" (click)="openEditSidenav(element.id)"  title="修改">
                   <mat-icon>edit</mat-icon>
                 </a>
-                <a mat-icon-button color="green" (click)="start(element.id)" *ngIf="element.state == null || element.state != 10"  title="启动">
-                  <mat-icon>play_circle</mat-icon>
-                </a>
-                <a mat-icon-button color="primary" (click)="end(element.id)" *ngIf="element.state == 10"  title="停止">
-                  <mat-icon>stop_circle</mat-icon>
-                </a>
+                @if (element.state == null || element.state != 10) {
+                  <a mat-icon-button color="green" (click)="start(element.id)" title="启动">
+                    <mat-icon>play_circle</mat-icon>
+                  </a>
+                }
+                @if (element.state == 10) {
+                  <a mat-icon-button color="primary" (click)="end(element.id)" title="停止">
+                    <mat-icon>stop_circle</mat-icon>
+                  </a>
+                }
                 <a mat-icon-button color="green" (click)="repeat(element.id)" title="重置">
                   <mat-icon>event_repeat</mat-icon>
                 </a>
@@ -66,8 +70,12 @@
 <!--                </a>-->
               </mat-cell>
             </ng-container>
-            <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            @if (true) {
+              <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+            }
+            @if (true) {
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            }
           </mat-table>
     </div>
     <mat-paginator [pageSizeOptions]="[10, 15, 20]" [length]="dataLength"

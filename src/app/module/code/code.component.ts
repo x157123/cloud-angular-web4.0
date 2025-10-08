@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {MatDrawerContainer, MatDrawerContent} from "@angular/material/sidenav";
 import {MatFormField, MatInput} from "@angular/material/input";
-import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import {DynamicFormComponent} from "@component/dynamic-form/dynamic-form.component";
@@ -30,7 +30,6 @@ import {MatSort} from "@angular/material/sort";
   selector: 'app-form-customization',
   imports: [
     MatInput,
-    NgForOf,
     ReactiveFormsModule,
     MatAccordion,
     MatExpansionPanel,

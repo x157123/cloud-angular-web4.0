@@ -1,10 +1,16 @@
 import {Component, AfterViewInit, ViewChild, OnInit} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {HttpGlobalTool} from "@http/HttpGlobalTool";
-import {PageEvent} from "@angular/material/paginator";
-import {MatDrawer} from "@angular/material/sidenav";
+import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
+import {MatDrawer, MatSidenavModule} from "@angular/material/sidenav";
 import {MenuEditComponent} from "./menuEdit.component";
 import {AlertService} from "@component/alert/alert.service";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {CommonModule} from "@angular/common";
 
 
 export interface Dict {
@@ -16,6 +22,19 @@ export interface Dict {
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MenuEditComponent
+  ]
 })
 export class MenuComponent implements AfterViewInit {
 

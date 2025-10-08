@@ -3,7 +3,6 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {RouterLink, RouterLinkActive} from '@angular/router';
-import {NgFor, NgIf} from '@angular/common';
 import {AccordionDirective, AccordionLinkDirective, AccordionAnchorDirective} from '../../../shared/accordion';
 
 @Component({
@@ -17,8 +16,6 @@ import {AccordionDirective, AccordionLinkDirective, AccordionAnchorDirective} fr
       MatExpansionModule,
       RouterLink,
       RouterLinkActive,
-      NgFor,
-      NgIf,
       AccordionDirective,
       AccordionLinkDirective,
       AccordionAnchorDirective

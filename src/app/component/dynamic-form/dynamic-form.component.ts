@@ -12,12 +12,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule,} from '@angular/forms';
 import {Base} from './elements/base';
 import {ControlService} from './elements/control.service';
 import {TextBox} from "./elements/textbox";
-import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatError, MatFormField, MatLabel, MatHint} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatInput} from "@angular/material/input";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {NgClass} from "@angular/common";
 import {BehaviorSubject} from "rxjs";
 
 @Component({
@@ -35,8 +35,7 @@ import {BehaviorSubject} from "rxjs";
     MatOption,
     MatCheckbox,
     MatInput,
-    NgIf,
-    NgForOf,
+    MatHint,
     NgClass
   ],
   providers: [ControlService],
