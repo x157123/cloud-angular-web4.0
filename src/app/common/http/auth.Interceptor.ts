@@ -3,20 +3,51 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {tap} from 'rxjs/operators';
+import {AuthService} from '../../services/auth.service';
 
+/**
+ * HTTP 拦截器
+ * 1. 为所有请求自动添加 Authorization 头 (Bearer Token)
+ * 2. 处理 401 未授权错误,重定向到 SSO 登录页
+ */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // 获取当前 Token
+    const token = this.authService.getToken();
+
+    // 克隆请求并添加 Authorization 头
+    if (token) {
+      // 排除 SSO 服务器的验证接口 (避免循环依赖)
+      const isSsoVerifyRequest = req.url.includes('/sso/api/verify');
+
+      if (!isSsoVerifyRequest) {
+        req = req.clone({
+          setHeaders: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      }
+    }
+
     return next.handle(req).pipe(
       tap({
         next: data => {},
         error: error => {
+          // 处理 401 未授权错误
           if (error.status === 401) {
-            this.router.navigate(['/login']).then(r => console.log(r));
+            console.warn('401 未授权,重定向到 SSO 登录页');
+            // 清除本地认证信息
+            this.authService.clearAuth();
+            // 重定向到 SSO 登录页
+            this.authService.redirectToLogin();
           }
         },
       })

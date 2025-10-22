@@ -1,5 +1,26 @@
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-  @for (movie of columns; track movie.key) {
-    <div class="example-box" cdkDrag>{{movie.writeColumn}}----{{movie.key}}</div>
-  }
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h1>统一身份认证</h1>
+      <p>Cloud SSO 单点登录系统</p>
+    </div>
+
+    <div class="login-body">
+      @if (redirecting) {
+        <div class="redirecting-message">
+          <div class="spinner"></div>
+          <p>正在跳转到登录页面...</p>
+        </div>
+      } @else {
+        <div class="login-message">
+          <p>即将跳转到统一登录页面</p>
+          <button class="login-btn" (click)="login()">立即登录</button>
+        </div>
+      }
+    </div>
+
+    <div class="login-footer">
+      <p>Cloud SSO &copy; 2024</p>
+    </div>
+  </div>
 </div>

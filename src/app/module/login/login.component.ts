@@ -1,44 +1,57 @@
-import {Component} from '@angular/core';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  CdkDropList,
-  CdkDrag
-} from '@angular/cdk/drag-drop';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {AuthService} from '../../services/auth.service';
 
-export interface ColumnConfig{
-  writeColumn: string,
-  key: boolean,
-}
-
+/**
+ * 登录组件
+ * 由于使用 SSO 统一登录,本组件主要用于:
+ * 1. 显示登录提示信息
+ * 2. 自动重定向到 SSO 登录页
+ */
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
     standalone: true,
     imports: [
-      CommonModule,
-      CdkDropList,
-      CdkDrag
+      CommonModule
     ]
 })
-export class LoginComponent{
+export class LoginComponent implements OnInit {
 
-  columns: ColumnConfig[] = [{
-    writeColumn: "A",
-    key: false,
-  },{
-    writeColumn: "B",
-    key: true,
-  },{
-    writeColumn: "C",
-    key: false,
-  }]
+  redirecting = false;
 
+  constructor(private authService: AuthService) {}
 
+  ngOnInit(): void {
+    // 检查是否已经登录
+    const token = this.authService.getToken();
 
-  drop(event: CdkDragDrop<{writeColumn: string; key: boolean}[]>) {
-    moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
+    if (token) {
+      console.log('用户已登录,Token 已存在');
+      // 可以在这里跳转到首页或其他页面
+      // this.router.navigate(['/']);
+    } else {
+      console.log('用户未登录,准备重定向到 SSO 登录页');
+      // 自动重定向到 SSO 登录页
+      this.redirectToSSO();
+    }
+  }
+
+  /**
+   * 重定向到 SSO 登录页
+   */
+  redirectToSSO(): void {
+    this.redirecting = true;
+    setTimeout(() => {
+      this.authService.redirectToLogin();
+    }, 1000); // 延迟 1 秒,让用户看到提示信息
+  }
+
+  /**
+   * 手动触发登录
+   */
+  login(): void {
+    this.authService.redirectToLogin();
   }
 }
