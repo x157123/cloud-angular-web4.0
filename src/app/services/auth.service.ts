@@ -15,6 +15,7 @@ export class AuthService {
   private readonly SSO_SERVER_URL = environment.sso.serverUrl;
   private readonly TOKEN_KEY = 'sso_token';
   private readonly USER_KEY = 'sso_user';
+  private readonly INVALID_TOKEN_KEY = 'invalid_sso_token'; // 记录无效的 token
 
   constructor(private http: HttpClient) {}
 
@@ -29,14 +30,20 @@ export class AuthService {
     const urlToken = urlParams.get(this.TOKEN_KEY);
 
     if (urlToken) {
+      // 检查这个 token 是否之前被标记为无效
+      const invalidToken = localStorage.getItem(this.INVALID_TOKEN_KEY);
+      if (invalidToken === urlToken) {
+        console.warn('URL 中的 Token 已被标记为无效，清除 URL 参数并重定向');
+        // 清除 URL 中的 token
+        const url = new URL(window.location.href);
+        url.searchParams.delete(this.TOKEN_KEY);
+        window.history.replaceState({}, document.title, url.toString());
+        // 不保存到 localStorage，直接返回 null
+        return null;
+      }
+
       // 保存到 localStorage
       localStorage.setItem(this.TOKEN_KEY, urlToken);
-
-      // 清除 URL 中的 token 参数 (安全考虑)
-      const url = new URL(window.location.href);
-      url.searchParams.delete(this.TOKEN_KEY);
-      window.history.replaceState({}, document.title, url.toString());
-
       return urlToken;
     }
 
@@ -45,12 +52,33 @@ export class AuthService {
   }
 
   /**
+   * 清除 URL 中的 token 参数
+   * 注意: 这个方法应该在路由守卫验证成功后调用,而不是在 getToken 中调用
+   * 避免在路由导航过程中修改 URL 导致路由混乱
+   */
+  clearTokenFromUrl(): void {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has(this.TOKEN_KEY)) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete(this.TOKEN_KEY);
+      window.history.replaceState({}, document.title, url.toString());
+    }
+  }
+
+  /**
    * 验证 Token 是否有效
    */
   async verifyToken(token: string): Promise<boolean> {
     try {
+      // 检查这个 token 是否之前验证失败过
+      const invalidToken = localStorage.getItem(this.INVALID_TOKEN_KEY);
+      if (invalidToken === token) {
+        console.warn('该 Token 之前验证失败过，跳过重复验证');
+        return false;
+      }
+
       const response = await firstValueFrom(
-        this.http.get<any>(`${this.SSO_SERVER_URL}/sso/api/verify?token=${token}`)
+        this.http.get<any>(`${environment.sso.verifyPath}?token=${token}`)
       );
 
       if (response.success && response.data?.valid) {
@@ -62,12 +90,19 @@ export class AuthService {
           };
           localStorage.setItem(this.USER_KEY, JSON.stringify(userInfo));
         }
+        // 清除无效 token 标记
+        localStorage.removeItem(this.INVALID_TOKEN_KEY);
         return true;
       }
 
+      // Token 验证失败，记录这个无效的 token
+      console.warn('Token 验证失败，标记为无效:', token.substring(0, 20) + '...');
+      localStorage.setItem(this.INVALID_TOKEN_KEY, token);
       return false;
     } catch (error) {
-      console.error('Token 验证失败:', error);
+      console.error('Token 验证请求失败:', error);
+      // 网络错误时也标记为无效，避免循环
+      localStorage.setItem(this.INVALID_TOKEN_KEY, token);
       return false;
     }
   }
@@ -113,7 +148,7 @@ export class AuthService {
     url.searchParams.delete(this.TOKEN_KEY);
 
     const cleanUrl = url.toString();
-    const loginUrl = `${this.SSO_SERVER_URL}/sso/login?redirect_url=${encodeURIComponent(cleanUrl)}`;
+    const loginUrl = `${this.SSO_SERVER_URL}${environment.sso.loginPath}?redirect_url=${encodeURIComponent(cleanUrl)}`;
 
     console.log('重定向到 SSO 登录页:', loginUrl);
     window.location.href = loginUrl;
@@ -126,7 +161,7 @@ export class AuthService {
     const targetUrl = redirectUrl || window.location.origin;
     this.clearAuth();
 
-    const logoutUrl = `${this.SSO_SERVER_URL}/sso/logout?redirect_url=${encodeURIComponent(targetUrl)}`;
+    const logoutUrl = `${environment.sso.logoutPath}?redirect_url=${encodeURIComponent(targetUrl)}`;
     window.location.href = logoutUrl;
   }
 
@@ -136,6 +171,7 @@ export class AuthService {
   clearAuth(): void {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
+    localStorage.removeItem(this.INVALID_TOKEN_KEY);
   }
 
   /**
