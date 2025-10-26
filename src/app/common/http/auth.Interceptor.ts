@@ -25,10 +25,13 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // 克隆请求并添加 Authorization 头
     if (token) {
-      // 排除 SSO 服务器的验证接口 (避免循环依赖)
-      const isSsoVerifyRequest = req.url.includes('/sso/api/verify');
+      // 排除 SSO 服务器的验证、登录、登出接口 (这些接口不需要 Authorization 头)
+      const isSsoRequest = req.url.includes('/cloud-auth/sso/api/verify')
+                        || req.url.includes('/cloud-auth/sso/login')
+                        || req.url.includes('/cloud-auth/sso/logout');
 
-      if (!isSsoVerifyRequest) {
+      if (!isSsoRequest) {
+        console.log('为请求添加 Token:', req.url);
         req = req.clone({
           setHeaders: {
             Authorization: `Bearer ${token}`

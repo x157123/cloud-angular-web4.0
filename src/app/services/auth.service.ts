@@ -16,6 +16,8 @@ export class AuthService {
   private readonly TOKEN_KEY = 'sso_token';
   private readonly USER_KEY = 'sso_user';
   private readonly INVALID_TOKEN_KEY = 'invalid_sso_token'; // 记录无效的 token
+  private readonly TOKEN_VERIFY_TIME_KEY = 'sso_token_verify_time'; // 记录上次验证时间
+  private readonly TOKEN_CACHE_DURATION = 5 * 60 * 1000; // Token 缓存时间：5分钟
 
   constructor(private http: HttpClient) {}
 
@@ -66,9 +68,9 @@ export class AuthService {
   }
 
   /**
-   * 验证 Token 是否有效
+   * 验证 Token 是否有效（带缓存机制）
    */
-  async verifyToken(token: string): Promise<boolean> {
+  async verifyToken(token: string, forceVerify: boolean = false): Promise<boolean> {
     try {
       // 检查这个 token 是否之前验证失败过
       const invalidToken = localStorage.getItem(this.INVALID_TOKEN_KEY);
@@ -77,6 +79,23 @@ export class AuthService {
         return false;
       }
 
+      // 如果不是强制验证，检查缓存
+      if (!forceVerify) {
+        const lastVerifyTime = localStorage.getItem(this.TOKEN_VERIFY_TIME_KEY);
+        if (lastVerifyTime) {
+          const timeSinceLastVerify = Date.now() - parseInt(lastVerifyTime);
+          if (timeSinceLastVerify < this.TOKEN_CACHE_DURATION) {
+            console.log(`Token 验证缓存命中，距上次验证 ${Math.round(timeSinceLastVerify / 1000)} 秒`);
+            // 检查本地是否有用户信息
+            const userInfo = this.getUserInfo();
+            if (userInfo?.valid) {
+              return true;
+            }
+          }
+        }
+      }
+
+      console.log('向服务器验证 Token...');
       const response = await firstValueFrom(
         this.http.get<any>(`${environment.sso.verifyPath}?token=${token}`)
       );
@@ -90,6 +109,8 @@ export class AuthService {
           };
           localStorage.setItem(this.USER_KEY, JSON.stringify(userInfo));
         }
+        // 记录验证时间
+        localStorage.setItem(this.TOKEN_VERIFY_TIME_KEY, Date.now().toString());
         // 清除无效 token 标记
         localStorage.removeItem(this.INVALID_TOKEN_KEY);
         return true;
@@ -172,6 +193,7 @@ export class AuthService {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
     localStorage.removeItem(this.INVALID_TOKEN_KEY);
+    localStorage.removeItem(this.TOKEN_VERIFY_TIME_KEY);
   }
 
   /**
