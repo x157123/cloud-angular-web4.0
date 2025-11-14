@@ -1,7 +1,17 @@
+<!-- 编辑器工具栏(可选) -->
+<div class="editor-toolbar">
+  <button mat-raised-button (click)="executeBold()">加粗</button>
+  <button mat-raised-button (click)="executeItalic()">斜体</button>
+  <button mat-raised-button (click)="executeUnderline()">下划线</button>
+  <button mat-raised-button (click)="executeSizeAdd()">增大字体</button>
+  <button mat-raised-button (click)="executeSizeMinus()">减小字体</button>
+  <button mat-raised-button (click)="insertTable(3, 3)">插入表格</button>
+  <button mat-raised-button (click)="print()">打印</button>
+  <button mat-raised-button color="primary" (click)="saveToServer()">保存</button>
+  <button mat-raised-button (click)="clearContent()">清空</button>
+</div>
 
-<mat-form-field class="example-form-field">
-  <mat-label>Clearable input</mat-label>
-  <input matInput type="number">
-</mat-form-field>
-
-<button mat-raised-button color="primary" (click)="queryData()">401错误</button>
+<!-- 编辑器容器 -->
+<div class="editor-container">
+  <div #canvasEditor class="canvas-editor"></div>
+</div>

@@ -55,3 +55,5 @@ npm install highcharts
 ## icon
 获取图标[icon](https://fonts.google.com/icons?hl=zh-cn).
 
+## 表格编辑器
+官网 [github](https://github.com/Hufe921/canvas-editor)

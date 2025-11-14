@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^20.3.2",
     "@angular/platform-browser-dynamic": "^20.3.2",
     "@angular/router": "^20.3.2",
+    "@hufe921/canvas-editor": "^0.9.119",
+    "@hufe921/canvas-editor-plugin-docx": "^0.0.5",
     "bpmn-js": "^17.1.0",
     "highcharts": "^12.1.2",
     "highcharts-angular": "^4.0.1",
